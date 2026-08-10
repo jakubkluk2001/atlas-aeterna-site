@@ -3,6 +3,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
 <BaseLayout title="Atlas Aeterna">
+
   <h1>Atlas Aeterna</h1>
 
   <p>
@@ -12,4 +13,58 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   <p class="muted">
     This website is currently under construction.
   </p>
+
+  <div class="social-links">
+
+    <a
+      href="https://www.tiktok.com/@atlasaeterna"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      TikTok
+    </a>
+
+    <a
+      href="https://www.youtube.com/@AtlasAeterna"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      YouTube
+    </a>
+
+  </div>
+
 </BaseLayout>
+
+
+<style>
+
+  .social-links {
+    display: flex;
+    gap: 20px;
+
+    margin-top: 40px;
+  }
+
+
+  .social-links a {
+    color: #fff;
+    text-decoration: none;
+
+    border: 1px solid #555;
+    border-radius: 4px;
+
+    padding: 12px 20px;
+
+    transition: 0.2s ease;
+  }
+
+
+  .social-links a:hover {
+    border-color: #fff;
+
+    background: #fff;
+    color: #111;
+  }
+
+</style>

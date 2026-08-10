@@ -2,63 +2,153 @@
 const { title = "Atlas Aeterna" } = Astro.props;
 ---
 
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
 
-    <link rel="stylesheet" href="https://use.typekit.net/sng8bvc.css">
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1"
+    />
 
-    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link
+      rel="stylesheet"
+      href="https://use.typekit.net/sng8bvc.css"
+    />
+
+    <link
+      rel="icon"
+      type="image/png"
+      href="/favicon.png"
+    />
 
     <title>{title}</title>
   </head>
 
   <body>
-    <nav>
-      <a href="/">Home</a>
-      <a href="/page2">Page 2</a>
-    </nav>
+
+    <header class="site-header">
+      <nav class="site-nav">
+
+        <a class="site-brand" href="/">
+          Atlas Aeterna
+        </a>
+
+        <div class="nav-links">
+          <a href="/history">History</a>
+          <a href="/geography">Geography</a>
+          <a href="/mysteries">Mysteries</a>
+          <a href="/about">About</a>
+        </div>
+
+      </nav>
+    </header>
 
     <main>
       <slot />
     </main>
+
   </body>
 </html>
 
+
 <style is:global>
+
+  /* ------------------------- */
+  /* GENERAL                   */
+  /* ------------------------- */
+
+  * {
+    box-sizing: border-box;
+  }
+
   body {
     margin: 0;
+
     font-family: trajan-pro-3, serif;
+
     background: #111;
     color: #fff;
   }
 
-  nav {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 30px 30px 0;
+
+  /* ------------------------- */
+  /* NAVIGATION                */
+  /* ------------------------- */
+
+  .site-header {
+    width: 100%;
+
+    border-bottom: 1px solid #222;
   }
 
-  nav a {
-    color: #fff;
-    text-decoration: none;
-    margin-right: 30px;
+  .site-nav {
+    max-width: 1200px;
+
+    margin: 0 auto;
+    padding: 24px 30px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    gap: 40px;
   }
+
+  .site-nav a {
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .site-brand {
+    color: #fff;
+
+    font-size: 20px;
+    font-weight: 600;
+
+    letter-spacing: 0.08em;
+  }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+
+    gap: 35px;
+  }
+
+  .nav-links a {
+    color: #999;
+
+    transition: color 0.2s ease;
+  }
+
+  .nav-links a:hover {
+    color: #fff;
+  }
+
+
+  /* ------------------------- */
+  /* MAIN CONTENT              */
+  /* ------------------------- */
 
   main {
-    max-width: 800px;
+    max-width: 1000px;
+
     margin: 0 auto;
     padding: 80px 30px;
   }
 
   h1 {
-    font-size: 64px;
+    margin-top: 0;
     margin-bottom: 20px;
+
+    font-size: 64px;
   }
 
   p {
     font-size: 20px;
+
     line-height: 1.6;
   }
 
@@ -72,4 +162,40 @@ const { title = "Atlas Aeterna" } = Astro.props;
   select {
     font: inherit;
   }
+
+
+  /* ------------------------- */
+  /* SMALLER SCREENS           */
+  /* ------------------------- */
+
+  @media (max-width: 750px) {
+
+    .site-nav {
+      padding: 20px;
+
+      gap: 20px;
+    }
+
+    .site-brand {
+      font-size: 16px;
+    }
+
+    .nav-links {
+      gap: 18px;
+    }
+
+    .nav-links a {
+      font-size: 14px;
+    }
+
+    main {
+      padding: 50px 20px;
+    }
+
+    h1 {
+      font-size: 42px;
+    }
+
+  }
+
 </style>
