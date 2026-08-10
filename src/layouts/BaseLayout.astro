@@ -435,4 +435,14 @@ const { title = "Atlas Aeterna" } = Astro.props;
 
   }
 
+  /* Make sure mobile menu button stays hidden on desktop */
+
+  @media (min-width: 751px) {
+
+    .site-nav .menu-toggle {
+      display: none;
+    }
+
+  }
+  
 </style>
