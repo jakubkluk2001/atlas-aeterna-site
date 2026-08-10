@@ -2,102 +2,906 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
-<BaseLayout title="Mysteries | Atlas Aeterna">
+<BaseLayout
+  title="Mysteries | Atlas Aeterna"
+  description="Explore the mysteries collection of Atlas Aeterna."
+>
+  <section class="mysteries-page">
+    <!-- -------------------------------- -->
+    <!-- COLLECTION HEADER                -->
+    <!-- -------------------------------- -->
 
-  <h1>Mysteries</h1>
+    <header class="collection-header">
+      <svg
+        class="contour-lines contour-lines--left"
+        viewBox="0 0 620 620"
+        fill="none"
+        aria-hidden="true"
+      >
+        <path d="M-36 448C42 357 98 386 158 314C216 245 221 157 318 112C414 67 499 107 656 -14" />
+        <path d="M-18 485C63 396 128 418 190 346C254 270 263 188 354 143C450 96 529 131 651 39" />
+        <path d="M7 523C85 446 159 453 224 384C294 311 304 225 390 182C476 139 548 155 644 95" />
+        <path d="M48 562C124 504 189 499 260 432C334 363 349 284 426 241C500 200 562 204 637 164" />
+      </svg>
 
-  <div class="case-files">
+      <div class="mystery-object" aria-hidden="true">
+        <span class="mystery-object__halo"></span>
+        <span class="mystery-object__lens"></span>
+        <span class="mystery-object__ring mystery-object__ring--outer"></span>
+        <span class="mystery-object__ring mystery-object__ring--middle"></span>
+        <span class="mystery-object__ring mystery-object__ring--inner"></span>
+        <span class="mystery-object__axis"></span>
+        <span class="mystery-object__node mystery-object__node--one"></span>
+        <span class="mystery-object__node mystery-object__node--two"></span>
+      </div>
 
-    <a class="case-file" href="/mysteries/amber-room">
-      Amber Room
-    </a>
+      <div class="collection-header__content">
+        <h1>Mysteries</h1>
+      </div>
 
-    <a class="case-file" href="/mysteries/atlantis">
-      Atlantis
-    </a>
+      <span class="edge-mark edge-mark--top-left" aria-hidden="true"></span>
+      <span class="edge-mark edge-mark--top-right" aria-hidden="true"></span>
+      <span class="edge-mark edge-mark--bottom-left" aria-hidden="true"></span>
+      <span class="edge-mark edge-mark--bottom-right" aria-hidden="true"></span>
+    </header>
 
-    <a class="case-file" href="/mysteries/el-dorado">
-      El Dorado
-    </a>
 
-    <a class="case-file" href="/mysteries/oak-island">
-      Oak Island
-    </a>
+    <!-- -------------------------------- -->
+    <!-- CASE FILES                       -->
+    <!-- -------------------------------- -->
 
-    <a class="case-file" href="/mysteries/voynich-manuscript">
-      Voynich Manuscript
-    </a>
+    <div class="case-files">
+      <a class="case-file" href="/mysteries/amber-room">
+        <span class="case-file__number" aria-hidden="true">01</span>
+        <span class="case-file__title">Amber Room</span>
+        <span class="case-file__orb" aria-hidden="true"></span>
+        <span class="case-file__arrow" aria-hidden="true">↗</span>
+      </a>
 
-  </div>
+      <a class="case-file" href="/mysteries/atlantis">
+        <span class="case-file__number" aria-hidden="true">02</span>
+        <span class="case-file__title">Atlantis</span>
+        <span class="case-file__orb" aria-hidden="true"></span>
+        <span class="case-file__arrow" aria-hidden="true">↗</span>
+      </a>
 
+      <a class="case-file" href="/mysteries/el-dorado">
+        <span class="case-file__number" aria-hidden="true">03</span>
+        <span class="case-file__title">El Dorado</span>
+        <span class="case-file__orb" aria-hidden="true"></span>
+        <span class="case-file__arrow" aria-hidden="true">↗</span>
+      </a>
+
+      <a class="case-file" href="/mysteries/oak-island">
+        <span class="case-file__number" aria-hidden="true">04</span>
+        <span class="case-file__title">Oak Island</span>
+        <span class="case-file__orb" aria-hidden="true"></span>
+        <span class="case-file__arrow" aria-hidden="true">↗</span>
+      </a>
+
+      <a class="case-file" href="/mysteries/voynich-manuscript">
+        <span class="case-file__number" aria-hidden="true">05</span>
+        <span class="case-file__title">Voynich Manuscript</span>
+        <span class="case-file__orb" aria-hidden="true"></span>
+        <span class="case-file__arrow" aria-hidden="true">↗</span>
+      </a>
+    </div>
+  </section>
 </BaseLayout>
 
 
 <style>
+  .mysteries-page {
+    padding: 18px 0 38px;
+  }
+
+
+  /* ---------------------------------- */
+  /* COLLECTION HEADER                  */
+  /* ---------------------------------- */
+
+  .collection-header {
+    min-height: 390px;
+
+    position: relative;
+    isolation: isolate;
+
+    display: grid;
+    place-items: center;
+
+    overflow: hidden;
+
+    padding:
+      clamp(78px, 9vw, 118px)
+      clamp(24px, 6vw, 78px);
+
+    background:
+      radial-gradient(
+        circle at 8% 7%,
+        rgba(114, 169, 255, 0.29),
+        transparent 34%
+      ),
+      radial-gradient(
+        circle at 91% 10%,
+        rgba(173, 142, 246, 0.30),
+        transparent 36%
+      ),
+      radial-gradient(
+        circle at 50% 112%,
+        rgba(238, 179, 142, 0.21),
+        transparent 41%
+      ),
+      linear-gradient(
+        142deg,
+        rgba(255, 255, 255, 0.76),
+        rgba(247, 247, 254, 0.45) 48%,
+        rgba(255, 249, 246, 0.47)
+      );
+
+    border: 1px solid rgba(255, 255, 255, 0.88);
+    border-radius: clamp(30px, 3.2vw, 46px);
+
+    box-shadow:
+      0 40px 100px rgba(50, 62, 88, 0.12),
+      0 10px 30px rgba(50, 62, 88, 0.06),
+      inset 0 1px 0 rgba(255, 255, 255, 1),
+      inset 0 -1px 0 rgba(58, 69, 94, 0.045);
+
+    backdrop-filter:
+      blur(30px)
+      saturate(155%);
+
+    -webkit-backdrop-filter:
+      blur(30px)
+      saturate(155%);
+
+    text-align: center;
+  }
+
+
+  .collection-header::after {
+    content: "";
+
+    position: absolute;
+    inset: 1px;
+    z-index: 5;
+
+    border-radius: inherit;
+
+    background:
+      linear-gradient(
+        112deg,
+        rgba(255, 255, 255, 0.58),
+        transparent 25%,
+        transparent 72%,
+        rgba(255, 255, 255, 0.20)
+      );
+
+    mask-image:
+      linear-gradient(
+        to bottom,
+        black,
+        transparent 24%,
+        transparent 76%,
+        black
+      );
+
+    -webkit-mask-image:
+      linear-gradient(
+        to bottom,
+        black,
+        transparent 24%,
+        transparent 76%,
+        black
+      );
+
+    opacity: 0.54;
+    pointer-events: none;
+  }
+
+
+  .collection-header__content {
+    position: relative;
+    z-index: 3;
+
+    animation:
+      content-enter
+      0.85s
+      var(--ease-out)
+      both;
+  }
+
+
+  h1 {
+    margin: 0;
+
+    background:
+      linear-gradient(
+        180deg,
+        #171922 0%,
+        #292d39 66%,
+        #414654 100%
+      );
+
+    -webkit-background-clip: text;
+    background-clip: text;
+
+    font-size: clamp(72px, 10.8vw, 150px);
+    line-height: 0.92;
+    letter-spacing: 0.043em;
+
+    -webkit-text-fill-color: transparent;
+
+    filter: drop-shadow(0 2px 0 rgba(255, 255, 255, 0.36));
+  }
+
+
+  .contour-lines {
+    width: min(49vw, 650px);
+
+    position: absolute;
+    left: -17%;
+    bottom: -45%;
+    z-index: -2;
+
+    color: rgba(55, 66, 99, 0.18);
+
+    opacity: 0.42;
+    transform: rotate(9deg);
+    pointer-events: none;
+  }
+
+
+  .contour-lines path {
+    stroke: currentColor;
+    stroke-width: 1.15;
+    vector-effect: non-scaling-stroke;
+  }
+
+
+  /* ---------------------------------- */
+  /* MYSTERY OBJECT                     */
+  /* ---------------------------------- */
+
+  .mystery-object {
+    width: clamp(380px, 47vw, 650px);
+    aspect-ratio: 1;
+
+    position: absolute;
+    top: 46%;
+    right: clamp(-210px, -9vw, -80px);
+    z-index: -1;
+
+    opacity: 0.68;
+
+    filter:
+      drop-shadow(0 35px 42px rgba(59, 66, 101, 0.14));
+
+    transform: translateY(-50%);
+    pointer-events: none;
+
+    animation:
+      object-float
+      10s
+      ease-in-out
+      infinite;
+  }
+
+
+  .mystery-object__halo {
+    position: absolute;
+    inset: 7%;
+
+    display: block;
+
+    border-radius: 50%;
+
+    background:
+      repeating-conic-gradient(
+        from 2deg,
+        rgba(54, 61, 91, 0.25) 0deg 0.65deg,
+        transparent 0.65deg 18deg
+      );
+
+    mask-image:
+      radial-gradient(
+        circle,
+        transparent 0 46%,
+        black 46.5% 47.5%,
+        transparent 48% 100%
+      );
+
+    -webkit-mask-image:
+      radial-gradient(
+        circle,
+        transparent 0 46%,
+        black 46.5% 47.5%,
+        transparent 48% 100%
+      );
+  }
+
+
+  .mystery-object__lens {
+    width: 55%;
+    aspect-ratio: 1;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    display: block;
+    overflow: hidden;
+
+    background:
+      radial-gradient(
+        circle at 29% 22%,
+        rgba(255, 255, 255, 0.97),
+        rgba(255, 255, 255, 0.42) 19%,
+        rgba(181, 157, 231, 0.23) 50%,
+        rgba(139, 149, 207, 0.14) 69%,
+        rgba(236, 180, 148, 0.11) 88%
+      );
+
+    border: 1px solid rgba(255, 255, 255, 0.92);
+    border-radius: 50%;
+
+    box-shadow:
+      inset 19px 23px 35px rgba(255, 255, 255, 0.49),
+      inset -25px -35px 49px rgba(105, 94, 157, 0.17),
+      0 37px 69px rgba(70, 75, 116, 0.15);
+
+    transform: translate(-50%, -50%);
+  }
+
+
+  .mystery-object__lens::before {
+    content: "";
+
+    width: 68%;
+    height: 34%;
+
+    position: absolute;
+    top: 7%;
+    left: 13%;
+
+    border-radius: 50%;
+
+    background:
+      radial-gradient(
+        ellipse,
+        rgba(255, 255, 255, 0.76),
+        transparent 70%
+      );
+
+    filter: blur(7px);
+    transform: rotate(-24deg);
+  }
+
+
+  .mystery-object__lens::after {
+    content: "";
+
+    position: absolute;
+    inset: 29%;
+
+    border: 1px solid rgba(55, 62, 87, 0.18);
+    border-radius: 50%;
+
+    box-shadow:
+      0 0 0 13px rgba(255, 255, 255, 0.08),
+      inset 0 0 20px rgba(66, 54, 105, 0.12);
+  }
+
+
+  .mystery-object__ring {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    display: block;
+
+    border: 1px solid rgba(50, 60, 91, 0.18);
+    border-radius: 50%;
+
+    box-shadow:
+      0 0 18px rgba(255, 255, 255, 0.50),
+      inset 0 0 18px rgba(255, 255, 255, 0.22);
+  }
+
+
+  .mystery-object__ring--outer {
+    width: 93%;
+    height: 35%;
+
+    transform:
+      translate(-50%, -50%)
+      rotate(-18deg);
+  }
+
+
+  .mystery-object__ring--middle {
+    width: 79%;
+    height: 79%;
+
+    border-color: rgba(55, 65, 99, 0.13);
+
+    transform:
+      translate(-50%, -50%)
+      rotate(34deg);
+  }
+
+
+  .mystery-object__ring--inner {
+    width: 40%;
+    height: 91%;
+
+    border-color: rgba(55, 65, 99, 0.15);
+
+    transform:
+      translate(-50%, -50%)
+      rotate(27deg);
+  }
+
+
+  .mystery-object__axis {
+    width: 1px;
+    height: 89%;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    display: block;
+
+    background:
+      linear-gradient(
+        transparent,
+        rgba(46, 53, 83, 0.21) 18%,
+        rgba(46, 53, 83, 0.21) 82%,
+        transparent
+      );
+
+    transform:
+      translate(-50%, -50%)
+      rotate(27deg);
+  }
+
+
+  .mystery-object__node {
+    width: 12px;
+    aspect-ratio: 1;
+
+    position: absolute;
+
+    display: block;
+
+    background:
+      radial-gradient(
+        circle at 32% 26%,
+        white,
+        rgba(221, 205, 249, 0.78) 42%,
+        rgba(107, 88, 154, 0.42)
+      );
+
+    border: 1px solid rgba(255, 255, 255, 0.89);
+    border-radius: 50%;
+
+    box-shadow:
+      0 8px 16px rgba(60, 57, 96, 0.18),
+      inset 0 1px 0 white;
+  }
+
+
+  .mystery-object__node--one {
+    top: 24%;
+    right: 7%;
+  }
+
+
+  .mystery-object__node--two {
+    width: 9px;
+
+    bottom: 18%;
+    left: 15%;
+  }
+
 
   /* ---------------------------------- */
   /* CASE FILE GRID                     */
   /* ---------------------------------- */
 
   .case-files {
-    display: grid;
+    margin-top: 22px;
 
-    grid-template-columns:
-      repeat(3, minmax(0, 1fr));
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
 
     gap: 18px;
-
-    margin-top: 28px;
   }
 
 
-  /* ---------------------------------- */
-  /* CASE FILE                          */
-  /* ---------------------------------- */
-
   .case-file {
-    width: 100%;
-    height: 110px;
+    min-height: 210px;
 
-    padding: 24px;
+    position: relative;
+    isolation: isolate;
+
+    grid-column: span 2;
 
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    justify-content: space-between;
 
-    color: #171719;
+    overflow: hidden;
 
+    padding: 25px;
+
+    color: #1d2029;
     background:
-      rgba(255, 255, 255, 0.72);
+      linear-gradient(
+        145deg,
+        rgba(255, 255, 255, 0.78),
+        rgba(246, 248, 254, 0.48)
+      );
 
-    border:
-      1px solid
-      rgba(20, 20, 25, 0.06);
-
-    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.90);
+    border-radius: 28px;
 
     box-shadow:
-      0 8px 24px
-      rgba(50, 55, 75, 0.05);
+      0 18px 46px rgba(50, 62, 88, 0.08),
+      inset 0 1px 0 rgba(255, 255, 255, 1),
+      inset 0 -1px 0 rgba(55, 65, 88, 0.04);
+
+    backdrop-filter:
+      blur(22px)
+      saturate(150%);
+
+    -webkit-backdrop-filter:
+      blur(22px)
+      saturate(150%);
 
     text-decoration: none;
 
-    line-height: 1.5;
+    transition:
+      color 0.25s ease,
+      transform 0.32s var(--ease-out),
+      box-shadow 0.32s ease;
+  }
+
+
+  .case-file:nth-last-child(-n + 2) {
+    grid-column: span 3;
+  }
+
+
+  .case-file::before {
+    content: "";
+
+    width: 250px;
+    aspect-ratio: 1;
+
+    position: absolute;
+    top: -132px;
+    right: -100px;
+    z-index: -1;
+
+    border-radius: 50%;
+
+    background:
+      radial-gradient(
+        circle,
+        rgba(116, 171, 255, 0.32),
+        transparent 70%
+      );
+
+    opacity: 0.62;
 
     transition:
-      transform 0.2s ease,
-      box-shadow 0.2s ease,
-      background 0.2s ease;
+      opacity 0.3s ease,
+      transform 0.45s var(--ease-out);
+  }
+
+
+  .case-file:nth-child(2)::before {
+    background:
+      radial-gradient(
+        circle,
+        rgba(151, 177, 239, 0.31),
+        transparent 70%
+      );
+  }
+
+
+  .case-file:nth-child(3)::before {
+    background:
+      radial-gradient(
+        circle,
+        rgba(240, 184, 138, 0.36),
+        transparent 70%
+      );
+  }
+
+
+  .case-file:nth-child(4)::before {
+    background:
+      radial-gradient(
+        circle,
+        rgba(135, 174, 231, 0.30),
+        transparent 70%
+      );
+  }
+
+
+  .case-file:nth-child(5)::before {
+    background:
+      radial-gradient(
+        circle,
+        rgba(175, 144, 244, 0.33),
+        transparent 70%
+      );
   }
 
 
   .case-file:hover {
-    background: #ffffff;
+    color: #151821;
 
-    transform: translateY(-3px);
+    transform: translateY(-6px);
 
     box-shadow:
-      0 14px 32px
-      rgba(50, 55, 75, 0.10);
+      0 28px 58px rgba(50, 62, 88, 0.14),
+      inset 0 1px 0 rgba(255, 255, 255, 1),
+      inset 0 -1px 0 rgba(55, 65, 88, 0.04);
+  }
+
+
+  .case-file:hover::before {
+    opacity: 0.88;
+    transform: translate(-12px, 12px) scale(1.08);
+  }
+
+
+  .case-file__number {
+    position: relative;
+    z-index: 2;
+
+    color: #9298a7;
+
+    font-family: var(--font-ui);
+    font-size: 10px;
+    font-weight: 650;
+    letter-spacing: 0.14em;
+  }
+
+
+  .case-file__title {
+    max-width: 80%;
+
+    position: relative;
+    z-index: 2;
+
+    font-family: var(--font-display);
+    font-size: clamp(25px, 2.45vw, 34px);
+    line-height: 1.17;
+    letter-spacing: 0.012em;
+  }
+
+
+  .case-file__arrow {
+    width: 40px;
+    aspect-ratio: 1;
+
+    position: absolute;
+    right: 21px;
+    bottom: 21px;
+    z-index: 3;
+
+    display: grid;
+    place-items: center;
+
+    color: #6e7483;
+    background:
+      linear-gradient(
+        145deg,
+        rgba(255, 255, 255, 0.82),
+        rgba(240, 244, 252, 0.52)
+      );
+
+    border: 1px solid rgba(255, 255, 255, 0.92);
+    border-radius: 50%;
+
+    box-shadow:
+      0 9px 20px rgba(55, 67, 95, 0.11),
+      inset 0 1px 0 rgba(255, 255, 255, 1);
+
+    font-family: var(--font-ui);
+    font-size: 14px;
+
+    transition:
+      color 0.25s ease,
+      transform 0.28s var(--ease-out);
+  }
+
+
+  .case-file:hover .case-file__arrow {
+    color: #242936;
+    transform: translate(2px, -2px);
+  }
+
+
+  .case-file__orb {
+    width: 94px;
+    aspect-ratio: 1;
+
+    position: absolute;
+    top: 16px;
+    right: 13px;
+    z-index: 1;
+
+    display: block;
+
+    background:
+      radial-gradient(
+        circle at 29% 23%,
+        rgba(255, 255, 255, 0.94),
+        rgba(255, 255, 255, 0.40) 22%,
+        rgba(159, 185, 233, 0.20) 58%,
+        rgba(137, 138, 197, 0.11)
+      );
+
+    border: 1px solid rgba(255, 255, 255, 0.85);
+    border-radius: 50%;
+
+    box-shadow:
+      inset 8px 10px 18px rgba(255, 255, 255, 0.48),
+      inset -12px -16px 23px rgba(94, 112, 164, 0.13),
+      0 15px 28px rgba(67, 80, 114, 0.10);
+
+    opacity: 0.58;
+
+    transition:
+      opacity 0.3s ease,
+      transform 0.42s var(--ease-out);
+  }
+
+
+  .case-file__orb::before,
+  .case-file__orb::after {
+    content: "";
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    border: 1px solid rgba(51, 61, 90, 0.17);
+    border-radius: 50%;
+  }
+
+
+  .case-file__orb::before {
+    width: 118%;
+    height: 38%;
+
+    transform:
+      translate(-50%, -50%)
+      rotate(-19deg);
+  }
+
+
+  .case-file__orb::after {
+    width: 42%;
+    height: 118%;
+
+    transform:
+      translate(-50%, -50%)
+      rotate(25deg);
+  }
+
+
+  .case-file:hover .case-file__orb {
+    opacity: 0.82;
+    transform: translate(-5px, 5px) rotate(3deg);
+  }
+
+
+  /* ---------------------------------- */
+  /* EDGE DETAILS                       */
+  /* ---------------------------------- */
+
+  .edge-mark {
+    width: 40px;
+    height: 40px;
+
+    position: absolute;
+    z-index: 4;
+
+    opacity: 0.28;
+    pointer-events: none;
+  }
+
+
+  .edge-mark::before,
+  .edge-mark::after {
+    content: "";
+
+    position: absolute;
+
+    background: rgba(61, 70, 96, 0.27);
+    border-radius: 999px;
+  }
+
+
+  .edge-mark::before {
+    width: 40px;
+    height: 1px;
+  }
+
+
+  .edge-mark::after {
+    width: 1px;
+    height: 40px;
+  }
+
+
+  .edge-mark--top-left {
+    top: 24px;
+    left: 24px;
+  }
+
+
+  .edge-mark--top-right {
+    top: 24px;
+    right: 24px;
+
+    transform: rotate(90deg);
+  }
+
+
+  .edge-mark--bottom-left {
+    bottom: 24px;
+    left: 24px;
+
+    transform: rotate(-90deg);
+  }
+
+
+  .edge-mark--bottom-right {
+    right: 24px;
+    bottom: 24px;
+
+    transform: rotate(180deg);
+  }
+
+
+  /* ---------------------------------- */
+  /* MOTION                             */
+  /* ---------------------------------- */
+
+  @keyframes content-enter {
+    from {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+
+  @keyframes object-float {
+    0%,
+    100% {
+      transform:
+        translateY(calc(-50% - 5px))
+        rotate(-0.5deg);
+    }
+
+    50% {
+      transform:
+        translateY(calc(-50% + 7px))
+        rotate(0.7deg);
+    }
   }
 
 
@@ -105,13 +909,19 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   /* TABLET                             */
   /* ---------------------------------- */
 
-  @media (max-width: 900px) {
-
+  @media (max-width: 920px) {
     .case-files {
-      grid-template-columns:
-        repeat(2, minmax(0, 1fr));
+      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
+    .case-file,
+    .case-file:nth-last-child(-n + 2) {
+      grid-column: auto;
+    }
+
+    .case-file:last-child {
+      grid-column: 1 / -1;
+    }
   }
 
 
@@ -119,21 +929,115 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   /* MOBILE                             */
   /* ---------------------------------- */
 
-  @media (max-width: 600px) {
+  @media (max-width: 620px) {
+    .mysteries-page {
+      padding-top: 0;
+    }
+
+    .collection-header {
+      min-height: 350px;
+
+      padding:
+        78px
+        18px
+        68px;
+
+      border-radius: 30px;
+    }
+
+    h1 {
+      font-size: clamp(60px, 19vw, 88px);
+      letter-spacing: 0.032em;
+    }
+
+    .mystery-object {
+      width: min(125vw, 500px);
+
+      top: 44%;
+      right: -45%;
+
+      opacity: 0.51;
+    }
+
+    .contour-lines {
+      width: 102vw;
+
+      left: -53%;
+      bottom: -25%;
+    }
 
     .case-files {
+      margin-top: 14px;
+
       grid-template-columns: 1fr;
 
       gap: 14px;
     }
 
+    .case-file,
+    .case-file:last-child {
+      min-height: 175px;
 
-    .case-file {
-      height: 96px;
+      grid-column: auto;
 
-      padding: 22px;
+      padding: 23px;
+
+      border-radius: 24px;
     }
 
+    .case-file__title {
+      max-width: 76%;
+
+      font-size: 28px;
+    }
+
+    .case-file__orb {
+      width: 84px;
+    }
+
+    .edge-mark {
+      width: 29px;
+      height: 29px;
+    }
+
+    .edge-mark::before {
+      width: 29px;
+    }
+
+    .edge-mark::after {
+      height: 29px;
+    }
+
+    .edge-mark--top-left,
+    .edge-mark--top-right {
+      top: 17px;
+    }
+
+    .edge-mark--bottom-left,
+    .edge-mark--bottom-right {
+      bottom: 17px;
+    }
+
+    .edge-mark--top-left,
+    .edge-mark--bottom-left {
+      left: 17px;
+    }
+
+    .edge-mark--top-right,
+    .edge-mark--bottom-right {
+      right: 17px;
+    }
   }
 
+
+  @supports not (
+    (backdrop-filter: blur(1px))
+    or
+    (-webkit-backdrop-filter: blur(1px))
+  ) {
+    .collection-header,
+    .case-file {
+      background-color: rgba(249, 250, 255, 0.94);
+    }
+  }
 </style>

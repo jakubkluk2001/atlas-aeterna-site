@@ -2,34 +2,81 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
-<BaseLayout title="About | Atlas Aeterna">
-
+<BaseLayout
+  title="About | Atlas Aeterna"
+  description="Learn about Atlas Aeterna, a growing collection exploring history, geography, mysteries and the stories that connect them."
+>
   <section class="about-page">
+    <!-- -------------------------------- -->
+    <!-- INTRODUCTION                     -->
+    <!-- -------------------------------- -->
 
-    <div class="about-intro">
+    <section class="about-hero">
+      <svg
+        class="contour-lines"
+        viewBox="0 0 620 620"
+        fill="none"
+        aria-hidden="true"
+      >
+        <path d="M-36 448C42 357 98 386 158 314C216 245 221 157 318 112C414 67 499 107 656 -14" />
+        <path d="M-18 485C63 396 128 418 190 346C254 270 263 188 354 143C450 96 529 131 651 39" />
+        <path d="M7 523C85 446 159 453 224 384C294 311 304 225 390 182C476 139 548 155 644 95" />
+        <path d="M48 562C124 504 189 499 260 432C334 363 349 284 426 241C500 200 562 204 637 164" />
+        <path d="M114 601C187 549 246 544 314 485C383 423 400 347 468 304C530 265 582 264 637 241" />
+      </svg>
 
-      <p class="eyebrow">
-        About the project
-      </p>
+      <div class="about-object" aria-hidden="true">
+        <span class="about-object__orbit about-object__orbit--outer"></span>
+        <span class="about-object__orbit about-object__orbit--middle"></span>
+        <span class="about-object__orbit about-object__orbit--inner"></span>
+        <span class="about-object__axis"></span>
 
-      <h1>About Atlas Aeterna</h1>
+        <span class="about-object__sphere">
+          <span class="about-object__latitude about-object__latitude--one"></span>
+          <span class="about-object__latitude about-object__latitude--two"></span>
+          <span class="about-object__meridian"></span>
+        </span>
 
-      <p class="lead">
-        Atlas Aeterna is a growing project dedicated to exploring
-        the stories, places and mysteries that make our world
-        endlessly fascinating.
-      </p>
+        <span class="about-object__node about-object__node--one"></span>
+        <span class="about-object__node about-object__node--two"></span>
+      </div>
 
-    </div>
+      <div class="about-intro">
+        <p class="eyebrow">
+          About the project
+        </p>
 
+        <h1>About Atlas Aeterna</h1>
+
+        <p class="lead">
+          Atlas Aeterna is a growing project dedicated to exploring
+          the stories, places and mysteries that make our world
+          endlessly fascinating.
+        </p>
+      </div>
+
+      <span class="edge-mark edge-mark--top-left" aria-hidden="true"></span>
+      <span class="edge-mark edge-mark--top-right" aria-hidden="true"></span>
+      <span class="edge-mark edge-mark--bottom-left" aria-hidden="true"></span>
+      <span class="edge-mark edge-mark--bottom-right" aria-hidden="true"></span>
+    </section>
+
+
+    <!-- -------------------------------- -->
+    <!-- PROJECT PILLARS                  -->
+    <!-- -------------------------------- -->
 
     <div class="about-grid">
+      <article class="about-card about-card--history">
+        <div class="card-top">
+          <p class="card-label">
+            01
+          </p>
 
-      <article class="about-card">
-
-        <p class="card-label">
-          01
-        </p>
+          <span class="card-symbol" aria-hidden="true">
+            <span></span>
+          </span>
+        </div>
 
         <h2>Explore the Past</h2>
 
@@ -39,15 +86,19 @@ import BaseLayout from "../layouts/BaseLayout.astro";
           the world around us. Atlas Aeterna aims to make those
           stories engaging and accessible.
         </p>
-
       </article>
 
 
-      <article class="about-card">
+      <article class="about-card about-card--geography">
+        <div class="card-top">
+          <p class="card-label">
+            02
+          </p>
 
-        <p class="card-label">
-          02
-        </p>
+          <span class="card-symbol" aria-hidden="true">
+            <span></span>
+          </span>
+        </div>
 
         <h2>Discover the World</h2>
 
@@ -57,15 +108,19 @@ import BaseLayout from "../layouts/BaseLayout.astro";
           environments that have influenced civilisation throughout
           history.
         </p>
-
       </article>
 
 
-      <article class="about-card">
+      <article class="about-card about-card--mysteries">
+        <div class="card-top">
+          <p class="card-label">
+            03
+          </p>
 
-        <p class="card-label">
-          03
-        </p>
+          <span class="card-symbol" aria-hidden="true">
+            <span></span>
+          </span>
+        </div>
 
         <h2>Question the Unknown</h2>
 
@@ -75,16 +130,28 @@ import BaseLayout from "../layouts/BaseLayout.astro";
           remain unanswered. The Mysteries collection is a place to
           explore the evidence, theories and possibilities.
         </p>
-
       </article>
-
     </div>
 
 
+    <!-- -------------------------------- -->
+    <!-- MISSION                          -->
+    <!-- -------------------------------- -->
+
     <section class="mission">
+      <svg
+        class="mission-contours"
+        viewBox="0 0 620 620"
+        fill="none"
+        aria-hidden="true"
+      >
+        <path d="M-36 448C42 357 98 386 158 314C216 245 221 157 318 112C414 67 499 107 656 -14" />
+        <path d="M-18 485C63 396 128 418 190 346C254 270 263 188 354 143C450 96 529 131 651 39" />
+        <path d="M7 523C85 446 159 453 224 384C294 311 304 225 390 182C476 139 548 155 644 95" />
+        <path d="M48 562C124 504 189 499 260 432C334 363 349 284 426 241C500 200 562 204 637 164" />
+      </svg>
 
       <div class="mission-content">
-
         <p class="eyebrow">
           The idea
         </p>
@@ -102,72 +169,474 @@ import BaseLayout from "../layouts/BaseLayout.astro";
           This is only the beginning. New stories, case files and
           ideas will continue to be added as the project grows.
         </p>
-
       </div>
 
+      <div class="mission-object" aria-hidden="true">
+        <span class="mission-object__disc"></span>
+        <span class="mission-object__ring mission-object__ring--one"></span>
+        <span class="mission-object__ring mission-object__ring--two"></span>
+        <span class="mission-object__line"></span>
+        <span class="mission-object__point"></span>
+      </div>
     </section>
-
   </section>
-
 </BaseLayout>
 
 
 <style>
-
-  /* ---------------------------------- */
-  /* ABOUT PAGE                         */
-  /* ---------------------------------- */
-
   .about-page {
-    padding: 50px 0 40px;
+    padding: 18px 0 38px;
   }
 
 
   /* ---------------------------------- */
-  /* INTRO                              */
+  /* INTRODUCTION                       */
   /* ---------------------------------- */
 
-  .about-intro {
-    max-width: 850px;
+  .about-hero {
+    min-height: 520px;
 
-    margin-bottom: 60px;
+    position: relative;
+    isolation: isolate;
+
+    display: flex;
+    align-items: center;
+
+    overflow: hidden;
+
+    padding:
+      clamp(64px, 8vw, 106px)
+      clamp(28px, 7vw, 92px);
+
+    background:
+      radial-gradient(
+        circle at 8% 8%,
+        rgba(116, 171, 255, 0.30),
+        transparent 34%
+      ),
+      radial-gradient(
+        circle at 92% 13%,
+        rgba(176, 145, 246, 0.25),
+        transparent 36%
+      ),
+      radial-gradient(
+        circle at 58% 112%,
+        rgba(240, 180, 139, 0.22),
+        transparent 42%
+      ),
+      linear-gradient(
+        142deg,
+        rgba(255, 255, 255, 0.76),
+        rgba(246, 249, 255, 0.46) 48%,
+        rgba(255, 249, 245, 0.49)
+      );
+
+    border: 1px solid rgba(255, 255, 255, 0.88);
+    border-radius: clamp(30px, 3.2vw, 46px);
+
+    box-shadow:
+      0 40px 100px rgba(50, 62, 88, 0.12),
+      0 10px 30px rgba(50, 62, 88, 0.06),
+      inset 0 1px 0 rgba(255, 255, 255, 1),
+      inset 0 -1px 0 rgba(58, 69, 94, 0.045);
+
+    backdrop-filter:
+      blur(30px)
+      saturate(155%);
+
+    -webkit-backdrop-filter:
+      blur(30px)
+      saturate(155%);
+  }
+
+
+  .about-hero::after {
+    content: "";
+
+    position: absolute;
+    inset: 1px;
+    z-index: 5;
+
+    border-radius: inherit;
+
+    background:
+      linear-gradient(
+        112deg,
+        rgba(255, 255, 255, 0.58),
+        transparent 27%,
+        transparent 72%,
+        rgba(255, 255, 255, 0.18)
+      );
+
+    mask-image:
+      linear-gradient(
+        to bottom,
+        black,
+        transparent 24%,
+        transparent 76%,
+        black
+      );
+
+    -webkit-mask-image:
+      linear-gradient(
+        to bottom,
+        black,
+        transparent 24%,
+        transparent 76%,
+        black
+      );
+
+    opacity: 0.52;
+    pointer-events: none;
+  }
+
+
+  .about-intro {
+    width: min(66%, 800px);
+
+    position: relative;
+    z-index: 3;
+
+    animation:
+      content-enter
+      0.85s
+      var(--ease-out)
+      both;
   }
 
 
   .eyebrow {
-    margin: 0 0 16px;
+    width: fit-content;
 
-    color: #77777c;
+    margin: 0 0 22px;
+    padding: 9px 14px;
 
-    font-size: 12px;
+    color: #666d7d;
+    background:
+      linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.74),
+        rgba(247, 249, 254, 0.43)
+      );
 
-    letter-spacing: 0.16em;
+    border: 1px solid rgba(255, 255, 255, 0.86);
+    border-radius: 999px;
 
+    box-shadow:
+      0 10px 28px rgba(57, 69, 97, 0.08),
+      inset 0 1px 0 rgba(255, 255, 255, 0.98);
+
+    font-family: var(--font-ui);
+    font-size: 10px;
+    font-weight: 650;
+    letter-spacing: 0.15em;
     text-transform: uppercase;
   }
 
 
   h1 {
-    margin-bottom: 24px;
+    margin: 0;
 
-    font-size: clamp(48px, 7vw, 82px);
+    background:
+      linear-gradient(
+        180deg,
+        #171922 0%,
+        #292d39 66%,
+        #414654 100%
+      );
 
-    line-height: 1.05;
+    -webkit-background-clip: text;
+    background-clip: text;
 
-    letter-spacing: 0.02em;
+    font-size: clamp(58px, 7.5vw, 108px);
+    line-height: 0.98;
+    letter-spacing: 0.025em;
+    text-wrap: balance;
+
+    -webkit-text-fill-color: transparent;
   }
 
 
   .lead {
-    max-width: 750px;
+    max-width: 720px;
 
-    margin: 0;
+    margin: 28px 0 0;
 
-    color: #55555a;
+    color: #5e6574;
 
-    font-size: clamp(18px, 2vw, 24px);
+    font-size: clamp(18px, 2vw, 23px);
+    line-height: 1.72;
+    text-wrap: balance;
+  }
 
-    line-height: 1.7;
+
+  .contour-lines {
+    width: min(54vw, 690px);
+
+    position: absolute;
+    right: -14%;
+    bottom: -37%;
+    z-index: -1;
+
+    color: rgba(55, 69, 101, 0.18);
+
+    opacity: 0.45;
+    transform: rotate(-12deg);
+    pointer-events: none;
+  }
+
+
+  .contour-lines path,
+  .mission-contours path {
+    stroke: currentColor;
+    stroke-width: 1.15;
+    vector-effect: non-scaling-stroke;
+  }
+
+
+  /* ---------------------------------- */
+  /* INTRODUCTION OBJECT                */
+  /* ---------------------------------- */
+
+  .about-object {
+    width: clamp(360px, 40vw, 570px);
+    aspect-ratio: 1;
+
+    position: absolute;
+    top: 50%;
+    right: clamp(-170px, -8vw, -52px);
+    z-index: 1;
+
+    opacity: 0.78;
+
+    filter:
+      drop-shadow(0 32px 38px rgba(57, 70, 102, 0.12));
+
+    transform: translateY(-50%);
+    pointer-events: none;
+
+    animation:
+      object-float
+      10s
+      ease-in-out
+      infinite;
+  }
+
+
+  .about-object__sphere {
+    width: 54%;
+    aspect-ratio: 1;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    display: block;
+    overflow: hidden;
+
+    background:
+      radial-gradient(
+        circle at 29% 22%,
+        rgba(255, 255, 255, 0.96),
+        rgba(255, 255, 255, 0.42) 20%,
+        rgba(155, 188, 241, 0.22) 49%,
+        rgba(150, 146, 215, 0.13) 68%,
+        rgba(238, 182, 150, 0.11) 88%
+      );
+
+    border: 1px solid rgba(255, 255, 255, 0.91);
+    border-radius: 50%;
+
+    box-shadow:
+      inset 18px 22px 34px rgba(255, 255, 255, 0.46),
+      inset -24px -34px 48px rgba(101, 124, 180, 0.17),
+      0 34px 65px rgba(73, 88, 124, 0.13);
+
+    transform: translate(-50%, -50%);
+  }
+
+
+  .about-object__sphere::before {
+    content: "";
+
+    width: 66%;
+    height: 34%;
+
+    position: absolute;
+    top: 7%;
+    left: 13%;
+
+    border-radius: 50%;
+
+    background:
+      radial-gradient(
+        ellipse,
+        rgba(255, 255, 255, 0.74),
+        transparent 70%
+      );
+
+    filter: blur(7px);
+    transform: rotate(-24deg);
+  }
+
+
+  .about-object__latitude,
+  .about-object__meridian {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    display: block;
+
+    border: 1px solid rgba(53, 65, 92, 0.15);
+    border-radius: 50%;
+  }
+
+
+  .about-object__latitude {
+    width: 84%;
+    height: 30%;
+  }
+
+
+  .about-object__latitude--one {
+    transform:
+      translate(-50%, -50%)
+      rotate(-7deg);
+  }
+
+
+  .about-object__latitude--two {
+    width: 72%;
+    height: 20%;
+
+    transform:
+      translate(-50%, -50%)
+      rotate(-7deg)
+      translateY(510%);
+  }
+
+
+  .about-object__meridian {
+    width: 38%;
+    height: 86%;
+
+    transform:
+      translate(-50%, -50%)
+      rotate(16deg);
+  }
+
+
+  .about-object__orbit {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    display: block;
+
+    border: 1px solid rgba(50, 63, 94, 0.18);
+    border-radius: 50%;
+
+    box-shadow:
+      0 0 18px rgba(255, 255, 255, 0.50),
+      inset 0 0 18px rgba(255, 255, 255, 0.22);
+  }
+
+
+  .about-object__orbit--outer {
+    width: 92%;
+    height: 35%;
+
+    transform:
+      translate(-50%, -50%)
+      rotate(-18deg);
+  }
+
+
+  .about-object__orbit--middle {
+    width: 79%;
+    height: 79%;
+
+    border-color: rgba(55, 68, 101, 0.13);
+
+    transform:
+      translate(-50%, -50%)
+      rotate(31deg);
+  }
+
+
+  .about-object__orbit--inner {
+    width: 40%;
+    height: 91%;
+
+    border-color: rgba(55, 68, 101, 0.15);
+
+    transform:
+      translate(-50%, -50%)
+      rotate(28deg);
+  }
+
+
+  .about-object__axis {
+    width: 1px;
+    height: 88%;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    display: block;
+
+    background:
+      linear-gradient(
+        transparent,
+        rgba(45, 57, 87, 0.20) 18%,
+        rgba(45, 57, 87, 0.20) 82%,
+        transparent
+      );
+
+    transform:
+      translate(-50%, -50%)
+      rotate(28deg);
+  }
+
+
+  .about-object__node {
+    width: 12px;
+    aspect-ratio: 1;
+
+    position: absolute;
+
+    display: block;
+
+    background:
+      radial-gradient(
+        circle at 32% 26%,
+        white,
+        rgba(200, 217, 250, 0.78) 42%,
+        rgba(91, 111, 160, 0.42)
+      );
+
+    border: 1px solid rgba(255, 255, 255, 0.88);
+    border-radius: 50%;
+
+    box-shadow:
+      0 8px 16px rgba(55, 67, 96, 0.17),
+      inset 0 1px 0 white;
+  }
+
+
+  .about-object__node--one {
+    top: 24%;
+    right: 8%;
+  }
+
+
+  .about-object__node--two {
+    width: 9px;
+
+    bottom: 18%;
+    left: 15%;
   }
 
 
@@ -176,67 +645,227 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   /* ---------------------------------- */
 
   .about-grid {
-    display: grid;
+    margin-top: 22px;
 
-    grid-template-columns:
-      repeat(3, minmax(0, 1fr));
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
 
     gap: 18px;
   }
 
 
   .about-card {
-    min-height: 310px;
+    min-height: 345px;
 
-    padding: 32px;
+    position: relative;
+    isolation: isolate;
+
+    overflow: hidden;
+
+    padding: 30px;
 
     background:
-      rgba(255, 255, 255, 0.72);
+      linear-gradient(
+        145deg,
+        rgba(255, 255, 255, 0.77),
+        rgba(246, 249, 255, 0.48)
+      );
 
-    border:
-      1px solid
-      rgba(20, 20, 25, 0.06);
-
-    border-radius: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.88);
+    border-radius: 28px;
 
     box-shadow:
-      0 10px 30px
-      rgba(50, 55, 75, 0.05);
+      0 18px 46px rgba(50, 62, 88, 0.08),
+      inset 0 1px 0 rgba(255, 255, 255, 1),
+      inset 0 -1px 0 rgba(55, 65, 88, 0.04);
+
+    backdrop-filter:
+      blur(22px)
+      saturate(150%);
+
+    -webkit-backdrop-filter:
+      blur(22px)
+      saturate(150%);
+
+    transition:
+      transform 0.32s var(--ease-out),
+      box-shadow 0.32s ease;
+  }
+
+
+  .about-card::before {
+    content: "";
+
+    width: 230px;
+    aspect-ratio: 1;
+
+    position: absolute;
+    top: -115px;
+    right: -82px;
+    z-index: -1;
+
+    border-radius: 50%;
+
+    filter: blur(2px);
+    opacity: 0.58;
+
+    transition:
+      transform 0.45s var(--ease-out),
+      opacity 0.3s ease;
+  }
+
+
+  .about-card--history::before {
+    background:
+      radial-gradient(
+        circle,
+        rgba(239, 183, 143, 0.34),
+        transparent 70%
+      );
+  }
+
+
+  .about-card--geography::before {
+    background:
+      radial-gradient(
+        circle,
+        rgba(116, 171, 255, 0.34),
+        transparent 70%
+      );
+  }
+
+
+  .about-card--mysteries::before {
+    background:
+      radial-gradient(
+        circle,
+        rgba(173, 145, 244, 0.31),
+        transparent 70%
+      );
+  }
+
+
+  .about-card:hover {
+    transform: translateY(-6px);
+
+    box-shadow:
+      0 28px 58px rgba(50, 62, 88, 0.13),
+      inset 0 1px 0 rgba(255, 255, 255, 1),
+      inset 0 -1px 0 rgba(55, 65, 88, 0.04);
+  }
+
+
+  .about-card:hover::before {
+    opacity: 0.82;
+    transform: translate(-10px, 12px) scale(1.08);
+  }
+
+
+  .card-top {
+    margin-bottom: 62px;
+
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    gap: 20px;
   }
 
 
   .card-label {
-    margin: 0 0 55px;
+    margin: 0;
 
-    color: #9a9a9f;
+    color: #9298a7;
 
-    font-size: 11px;
+    font-family: var(--font-ui);
+    font-size: 10px;
+    font-weight: 650;
+    letter-spacing: 0.14em;
+  }
 
-    letter-spacing: 0.1em;
+
+  .card-symbol {
+    width: 48px;
+    aspect-ratio: 1;
+
+    position: relative;
+
+    display: grid;
+    place-items: center;
+
+    background:
+      linear-gradient(
+        145deg,
+        rgba(255, 255, 255, 0.82),
+        rgba(240, 244, 252, 0.52)
+      );
+
+    border: 1px solid rgba(255, 255, 255, 0.92);
+    border-radius: 50%;
+
+    box-shadow:
+      0 10px 22px rgba(55, 67, 95, 0.11),
+      inset 0 1px 0 rgba(255, 255, 255, 1);
+  }
+
+
+  .card-symbol::before,
+  .card-symbol::after,
+  .card-symbol span {
+    content: "";
+
+    position: absolute;
+
+    display: block;
+
+    border: 1px solid rgba(49, 60, 87, 0.28);
+    border-radius: 50%;
+  }
+
+
+  .card-symbol::before {
+    width: 28px;
+    height: 11px;
+
+    transform: rotate(-24deg);
+  }
+
+
+  .card-symbol::after {
+    width: 11px;
+    height: 28px;
+
+    transform: rotate(18deg);
+  }
+
+
+  .card-symbol span {
+    width: 5px;
+    aspect-ratio: 1;
+
+    background: rgba(44, 51, 70, 0.72);
+    border: 0;
   }
 
 
   .about-card h2 {
-    margin: 0 0 18px;
+    margin: 0 0 17px;
 
-    color: #171719;
+    color: #20232d;
 
-    font-size: 24px;
-
-    font-weight: 400;
-
-    line-height: 1.35;
+    font-size: clamp(24px, 2.3vw, 31px);
+    line-height: 1.24;
   }
 
 
-  .about-card p:last-child {
+  .about-card > p:last-child {
     margin: 0;
 
-    color: #6e6e73;
+    color: #686f7e;
 
+    font-family: var(--font-ui);
     font-size: 14px;
-
-    line-height: 1.8;
+    line-height: 1.82;
   }
 
 
@@ -245,64 +874,357 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   /* ---------------------------------- */
 
   .mission {
-    margin-top: 20px;
-    padding: 70px;
+    min-height: 440px;
+
+    margin-top: 22px;
+    padding:
+      clamp(54px, 7vw, 88px)
+      clamp(30px, 7vw, 88px);
 
     position: relative;
+    isolation: isolate;
+
+    display: flex;
+    align-items: center;
 
     overflow: hidden;
 
     background:
       radial-gradient(
-        circle at 10% 10%,
-        rgba(107, 157, 252, 0.20),
-        transparent 35%
+        circle at 7% 9%,
+        rgba(112, 169, 255, 0.25),
+        transparent 34%
       ),
       radial-gradient(
-        circle at 90% 80%,
-        rgba(166, 135, 244, 0.16),
+        circle at 91% 82%,
+        rgba(172, 143, 244, 0.22),
+        transparent 40%
+      ),
+      radial-gradient(
+        circle at 55% 120%,
+        rgba(241, 181, 139, 0.18),
         transparent 38%
       ),
-      rgba(255, 255, 255, 0.78);
+      linear-gradient(
+        142deg,
+        rgba(255, 255, 255, 0.78),
+        rgba(246, 249, 255, 0.48)
+      );
 
-    border:
-      1px solid
-      rgba(255, 255, 255, 0.9);
-
-    border-radius: 28px;
+    border: 1px solid rgba(255, 255, 255, 0.90);
+    border-radius: clamp(28px, 3vw, 40px);
 
     box-shadow:
-      0 20px 50px
-      rgba(50, 55, 75, 0.06);
+      0 28px 74px rgba(50, 62, 88, 0.10),
+      inset 0 1px 0 rgba(255, 255, 255, 1),
+      inset 0 -1px 0 rgba(55, 65, 88, 0.04);
+
+    backdrop-filter:
+      blur(24px)
+      saturate(155%);
+
+    -webkit-backdrop-filter:
+      blur(24px)
+      saturate(155%);
   }
 
 
   .mission-content {
-    max-width: 760px;
+    width: min(66%, 760px);
+
+    position: relative;
+    z-index: 2;
   }
 
 
   .mission h2 {
     margin: 0 0 22px;
 
-    color: #171719;
+    color: #1d2029;
 
-    font-size: clamp(32px, 4vw, 52px);
-
-    font-weight: 400;
-
-    line-height: 1.2;
+    font-size: clamp(36px, 4.7vw, 62px);
+    line-height: 1.12;
+    letter-spacing: 0.012em;
+    text-wrap: balance;
   }
 
 
   .mission p:not(.eyebrow) {
     max-width: 700px;
 
-    color: #646469;
+    margin: 0 0 16px;
 
+    color: #646b7a;
+
+    font-family: var(--font-ui);
     font-size: 16px;
+    line-height: 1.88;
+  }
 
-    line-height: 1.9;
+
+  .mission p:last-child {
+    margin-bottom: 0;
+  }
+
+
+  .mission-contours {
+    width: min(55vw, 700px);
+
+    position: absolute;
+    right: -15%;
+    bottom: -48%;
+    z-index: -1;
+
+    color: rgba(54, 68, 101, 0.16);
+
+    opacity: 0.52;
+    transform: rotate(4deg);
+    pointer-events: none;
+  }
+
+
+  .mission-object {
+    width: clamp(250px, 28vw, 390px);
+    aspect-ratio: 1;
+
+    position: absolute;
+    top: 50%;
+    right: clamp(-86px, 1vw, 42px);
+    z-index: 1;
+
+    opacity: 0.72;
+
+    filter:
+      drop-shadow(0 30px 42px rgba(54, 69, 103, 0.13));
+
+    transform: translateY(-50%);
+    pointer-events: none;
+  }
+
+
+  .mission-object__disc {
+    width: 58%;
+    aspect-ratio: 1;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    display: block;
+
+    background:
+      radial-gradient(
+        circle at 30% 24%,
+        rgba(255, 255, 255, 0.96),
+        rgba(255, 255, 255, 0.46) 21%,
+        rgba(171, 190, 234, 0.22) 56%,
+        rgba(161, 145, 214, 0.12) 78%,
+        rgba(236, 181, 148, 0.12)
+      );
+
+    border: 1px solid rgba(255, 255, 255, 0.91);
+    border-radius: 50%;
+
+    box-shadow:
+      inset 14px 18px 28px rgba(255, 255, 255, 0.50),
+      inset -20px -28px 38px rgba(98, 119, 169, 0.16),
+      0 28px 52px rgba(68, 82, 117, 0.13);
+
+    transform: translate(-50%, -50%);
+  }
+
+
+  .mission-object__disc::before {
+    content: "";
+
+    position: absolute;
+    inset: 18%;
+
+    border: 1px solid rgba(56, 68, 95, 0.17);
+    border-radius: 50%;
+  }
+
+
+  .mission-object__ring {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    display: block;
+
+    border: 1px solid rgba(53, 66, 96, 0.18);
+    border-radius: 50%;
+  }
+
+
+  .mission-object__ring--one {
+    width: 93%;
+    height: 34%;
+
+    transform:
+      translate(-50%, -50%)
+      rotate(-19deg);
+  }
+
+
+  .mission-object__ring--two {
+    width: 43%;
+    height: 92%;
+
+    transform:
+      translate(-50%, -50%)
+      rotate(24deg);
+  }
+
+
+  .mission-object__line {
+    width: 1px;
+    height: 90%;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    display: block;
+
+    background:
+      linear-gradient(
+        transparent,
+        rgba(51, 63, 92, 0.20) 18%,
+        rgba(51, 63, 92, 0.20) 82%,
+        transparent
+      );
+
+    transform:
+      translate(-50%, -50%)
+      rotate(24deg);
+  }
+
+
+  .mission-object__point {
+    width: 11px;
+    aspect-ratio: 1;
+
+    position: absolute;
+    top: 25%;
+    right: 7%;
+
+    display: block;
+
+    background:
+      radial-gradient(
+        circle at 32% 26%,
+        white,
+        rgba(201, 218, 250, 0.76) 44%,
+        rgba(93, 112, 160, 0.42)
+      );
+
+    border: 1px solid rgba(255, 255, 255, 0.90);
+    border-radius: 50%;
+
+    box-shadow: 0 8px 16px rgba(55, 67, 96, 0.17);
+  }
+
+
+  /* ---------------------------------- */
+  /* EDGE DETAILS                       */
+  /* ---------------------------------- */
+
+  .edge-mark {
+    width: 40px;
+    height: 40px;
+
+    position: absolute;
+    z-index: 4;
+
+    opacity: 0.28;
+    pointer-events: none;
+  }
+
+
+  .edge-mark::before,
+  .edge-mark::after {
+    content: "";
+
+    position: absolute;
+
+    background: rgba(61, 72, 98, 0.27);
+    border-radius: 999px;
+  }
+
+
+  .edge-mark::before {
+    width: 40px;
+    height: 1px;
+  }
+
+
+  .edge-mark::after {
+    width: 1px;
+    height: 40px;
+  }
+
+
+  .edge-mark--top-left {
+    top: 24px;
+    left: 24px;
+  }
+
+
+  .edge-mark--top-right {
+    top: 24px;
+    right: 24px;
+
+    transform: rotate(90deg);
+  }
+
+
+  .edge-mark--bottom-left {
+    bottom: 24px;
+    left: 24px;
+
+    transform: rotate(-90deg);
+  }
+
+
+  .edge-mark--bottom-right {
+    right: 24px;
+    bottom: 24px;
+
+    transform: rotate(180deg);
+  }
+
+
+  /* ---------------------------------- */
+  /* MOTION                             */
+  /* ---------------------------------- */
+
+  @keyframes content-enter {
+    from {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+
+  @keyframes object-float {
+    0%,
+    100% {
+      transform:
+        translateY(calc(-50% - 5px))
+        rotate(-0.5deg);
+    }
+
+    50% {
+      transform:
+        translateY(calc(-50% + 7px))
+        rotate(0.7deg);
+    }
   }
 
 
@@ -310,22 +1232,40 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   /* TABLET                             */
   /* ---------------------------------- */
 
-  @media (max-width: 900px) {
+  @media (max-width: 980px) {
+    .about-hero {
+      min-height: 590px;
+    }
+
+    .about-intro {
+      width: min(74%, 760px);
+    }
+
+    .about-object {
+      right: -190px;
+      opacity: 0.58;
+    }
 
     .about-grid {
       grid-template-columns: 1fr;
     }
 
-
     .about-card {
-      min-height: auto;
+      min-height: 0;
     }
 
-
-    .card-label {
-      margin-bottom: 35px;
+    .card-top {
+      margin-bottom: 42px;
     }
 
+    .mission-content {
+      width: min(72%, 730px);
+    }
+
+    .mission-object {
+      right: -118px;
+      opacity: 0.50;
+    }
   }
 
 
@@ -333,46 +1273,169 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   /* MOBILE                             */
   /* ---------------------------------- */
 
-  @media (max-width: 600px) {
-
+  @media (max-width: 650px) {
     .about-page {
-      padding-top: 30px;
+      padding-top: 0;
     }
 
+    .about-hero {
+      min-height: 620px;
+
+      align-items: flex-end;
+
+      padding:
+        80px
+        22px
+        60px;
+
+      border-radius: 30px;
+    }
 
     .about-intro {
-      margin-bottom: 40px;
+      width: 100%;
     }
 
+    .eyebrow {
+      margin-bottom: 18px;
+
+      font-size: 9px;
+      letter-spacing: 0.13em;
+    }
 
     h1 {
-      font-size: 44px;
-    }
+      max-width: 500px;
 
+      font-size: clamp(50px, 15vw, 72px);
+      line-height: 1;
+    }
 
     .lead {
+      margin-top: 23px;
+
       font-size: 17px;
+      line-height: 1.72;
     }
 
+    .about-object {
+      width: min(126vw, 490px);
+
+      top: 35%;
+      right: -42%;
+
+      opacity: 0.48;
+    }
+
+    .contour-lines {
+      width: 105vw;
+
+      right: -52%;
+      bottom: -16%;
+    }
+
+    .about-grid {
+      margin-top: 14px;
+      gap: 14px;
+    }
 
     .about-card {
-      padding: 26px;
+      padding: 25px;
 
-      border-radius: 20px;
+      border-radius: 24px;
     }
 
+    .card-top {
+      margin-bottom: 34px;
+    }
+
+    .about-card h2 {
+      font-size: 26px;
+    }
 
     .mission {
-      padding: 40px 26px;
+      min-height: 540px;
 
-      border-radius: 22px;
+      margin-top: 14px;
+      padding: 48px 25px;
+
+      align-items: flex-end;
+
+      border-radius: 28px;
     }
 
+    .mission-content {
+      width: 100%;
+    }
 
     .mission h2 {
-      font-size: 32px;
+      font-size: 38px;
     }
 
+    .mission p:not(.eyebrow) {
+      font-size: 15px;
+      line-height: 1.82;
+    }
+
+    .mission-object {
+      width: min(92vw, 360px);
+
+      top: 26%;
+      right: -25%;
+
+      opacity: 0.46;
+    }
+
+    .mission-contours {
+      width: 110vw;
+
+      right: -54%;
+      bottom: -22%;
+    }
+
+    .edge-mark {
+      width: 29px;
+      height: 29px;
+    }
+
+    .edge-mark::before {
+      width: 29px;
+    }
+
+    .edge-mark::after {
+      height: 29px;
+    }
+
+    .edge-mark--top-left,
+    .edge-mark--top-right {
+      top: 17px;
+    }
+
+    .edge-mark--bottom-left,
+    .edge-mark--bottom-right {
+      bottom: 17px;
+    }
+
+    .edge-mark--top-left,
+    .edge-mark--bottom-left {
+      left: 17px;
+    }
+
+    .edge-mark--top-right,
+    .edge-mark--bottom-right {
+      right: 17px;
+    }
   }
 
+
+  @supports not (
+    (backdrop-filter: blur(1px))
+    or
+    (-webkit-backdrop-filter: blur(1px))
+  ) {
+    .about-hero,
+    .about-card,
+    .mission,
+    .eyebrow {
+      background-color: rgba(249, 251, 255, 0.94);
+    }
+  }
 </style>
