@@ -6,22 +6,6 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
   <section class="hero">
 
-    <div
-      class="ambient-light light-blue"
-      aria-hidden="true"
-    ></div>
-
-    <div
-      class="ambient-light light-purple"
-      aria-hidden="true"
-    ></div>
-
-    <div
-      class="ambient-light light-peach"
-      aria-hidden="true"
-    ></div>
-
-
     <div class="hero-content">
 
       <p class="eyebrow">
@@ -53,7 +37,13 @@ import BaseLayout from "../layouts/BaseLayout.astro";
           rel="noopener noreferrer"
         >
           <span>TikTok</span>
-          <span class="arrow" aria-hidden="true">↗</span>
+
+          <span
+            class="arrow"
+            aria-hidden="true"
+          >
+            ↗
+          </span>
         </a>
 
 
@@ -63,7 +53,13 @@ import BaseLayout from "../layouts/BaseLayout.astro";
           rel="noopener noreferrer"
         >
           <span>YouTube</span>
-          <span class="arrow" aria-hidden="true">↗</span>
+
+          <span
+            class="arrow"
+            aria-hidden="true"
+          >
+            ↗
+          </span>
         </a>
 
       </div>
@@ -95,21 +91,33 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     align-items: center;
     justify-content: center;
 
-    overflow: hidden;
-
-    -webkit-mask-image: -webkit-radial-gradient(white, black);
-    transform: translateZ(0);
-
     padding: 90px 40px;
 
     background:
+      radial-gradient(
+        circle at 8% 5%,
+        rgba(102, 157, 255, 0.34),
+        transparent 36%
+      ),
+      radial-gradient(
+        circle at 92% 8%,
+        rgba(175, 139, 255, 0.28),
+        transparent 38%
+      ),
+      radial-gradient(
+        circle at 50% 105%,
+        rgba(255, 183, 127, 0.28),
+        transparent 42%
+      ),
       linear-gradient(
         145deg,
-        rgba(255, 255, 255, 0.95),
-        rgba(255, 255, 255, 0.72)
+        rgba(255, 255, 255, 0.97),
+        rgba(255, 255, 255, 0.76)
       );
 
-    border: 1px solid rgba(255, 255, 255, 0.9);
+    background-clip: padding-box;
+
+    border: 1px solid rgba(255, 255, 255, 0.92);
     border-radius: 36px;
 
     box-shadow:
@@ -118,99 +126,6 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       inset 0 1px 0 rgba(255, 255, 255, 1);
 
     text-align: center;
-
-    isolation: isolate;
-  }
-
-
-  /* very subtle highlight across top */
-
-  .hero::before {
-    content: "";
-
-    position: absolute;
-    inset: 0;
-
-    z-index: -1;
-
-    background:
-      linear-gradient(
-        180deg,
-        rgba(255, 255, 255, 0.72),
-        transparent 32%
-      );
-
-    pointer-events: none;
-  }
-
-
-  /* ---------------------------------- */
-  /* AMBIENT COLOUR                     */
-  /* ---------------------------------- */
-
-  .ambient-light {
-    position: absolute;
-
-    border-radius: 50%;
-
-    filter: blur(20px);
-
-    pointer-events: none;
-
-    z-index: -1;
-  }
-
-
-  .light-blue {
-    width: 520px;
-    height: 520px;
-
-    top: -220px;
-    left: -100px;
-
-    background:
-      radial-gradient(
-        circle,
-        rgba(102, 157, 255, 0.38),
-        rgba(102, 157, 255, 0.10) 45%,
-        transparent 70%
-      );
-  }
-
-
-  .light-purple {
-    width: 560px;
-    height: 560px;
-
-    top: -190px;
-    right: -160px;
-
-    background:
-      radial-gradient(
-        circle,
-        rgba(175, 139, 255, 0.32),
-        rgba(175, 139, 255, 0.09) 45%,
-        transparent 70%
-      );
-  }
-
-
-  .light-peach {
-    width: 600px;
-    height: 600px;
-
-    bottom: -340px;
-    left: 50%;
-
-    transform: translateX(-50%);
-
-    background:
-      radial-gradient(
-        circle,
-        rgba(255, 183, 127, 0.30),
-        rgba(255, 183, 127, 0.08) 45%,
-        transparent 70%
-      );
   }
 
 
@@ -223,8 +138,6 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     max-width: 900px;
 
     position: relative;
-
-    z-index: 2;
 
     animation:
       hero-enter
@@ -242,9 +155,14 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     font-size: 13px;
 
     letter-spacing: 0.18em;
+
     text-transform: uppercase;
   }
 
+
+  /* ---------------------------------- */
+  /* TITLE                              */
+  /* ---------------------------------- */
 
   h1 {
     margin: 0;
@@ -262,6 +180,10 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     text-wrap: balance;
   }
 
+
+  /* ---------------------------------- */
+  /* TAGLINE                            */
+  /* ---------------------------------- */
 
   .tagline {
     margin: 34px 0 0;
@@ -288,7 +210,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
 
   /* ---------------------------------- */
-  /* SOCIAL BUTTONS                     */
+  /* SOCIAL LINKS                       */
   /* ---------------------------------- */
 
   .social-links {
@@ -379,7 +301,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
 
   /* ---------------------------------- */
-  /* ANIMATION                          */
+  /* ENTRANCE ANIMATION                 */
   /* ---------------------------------- */
 
   @keyframes hero-enter {
@@ -407,11 +329,39 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   @media (max-width: 750px) {
 
     .hero {
-      min-height: calc(100vh - 110px);
+      min-height: calc(100svh - 110px);
 
       padding: 70px 20px;
 
       border-radius: 24px;
+
+      background:
+        radial-gradient(
+          circle at 0% 5%,
+          rgba(102, 157, 255, 0.30),
+          transparent 42%
+        ),
+        radial-gradient(
+          circle at 100% 15%,
+          rgba(175, 139, 255, 0.24),
+          transparent 44%
+        ),
+        radial-gradient(
+          circle at 50% 100%,
+          rgba(255, 183, 127, 0.24),
+          transparent 48%
+        ),
+        linear-gradient(
+          145deg,
+          rgba(255, 255, 255, 0.97),
+          rgba(255, 255, 255, 0.78)
+        );
+    }
+
+
+    .hero-content {
+      width: 100%;
+      max-width: 100%;
     }
 
 
@@ -420,16 +370,18 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
       font-size: 10px;
 
-      letter-spacing: 0.13em;
+      letter-spacing: 0.11em;
 
       line-height: 1.8;
     }
 
 
     h1 {
-      font-size: clamp(48px, 14vw, 68px);
+      font-size: clamp(44px, 13vw, 68px);
 
       line-height: 1.06;
+
+      letter-spacing: 0.025em;
     }
 
 
@@ -448,6 +400,8 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
 
     .social-links {
+      width: 100%;
+
       margin-top: 32px;
 
       flex-direction: column;
@@ -457,32 +411,6 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
     .social-links a {
       width: min(100%, 260px);
-    }
-
-
-    .light-blue {
-      width: 340px;
-      height: 340px;
-
-      top: -120px;
-      left: -150px;
-    }
-
-
-    .light-purple {
-      width: 380px;
-      height: 380px;
-
-      top: 10px;
-      right: -210px;
-    }
-
-
-    .light-peach {
-      width: 420px;
-      height: 420px;
-
-      bottom: -250px;
     }
 
   }
