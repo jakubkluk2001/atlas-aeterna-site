@@ -208,18 +208,18 @@ const pathname = Astro.url.pathname;
   /* ---------------------------------- */
 
   :root {
-    --background: #0c0d0d;
-    --surface: #121313;
-    --surface-light: #181918;
+    --background: #121311;
+    --surface: #181816;
+    --surface-light: #20201d;
 
-    --text: #e6e0d4;
-    --text-muted: #8d8a82;
+    --text: #eee8dc;
+    --text-muted: #aaa59b;
 
-    --accent: #a68a5b;
-    --accent-light: #c1a878;
+    --accent: #b49763;
+    --accent-light: #d0b47c;
 
-    --border: #292a28;
-    --border-subtle: #1c1d1c;
+    --border: #35332e;
+    --border-subtle: #242420;
   }
 
 
@@ -248,15 +248,20 @@ const pathname = Astro.url.pathname;
 
     background:
       radial-gradient(
-        circle at 50% -20%,
-        rgba(166, 138, 91, 0.08),
-        transparent 45%
+        circle at 50% 22%,
+        rgba(180, 151, 99, 0.14),
+        transparent 34%
+      ),
+      radial-gradient(
+        circle at 50% 55%,
+        rgba(116, 102, 76, 0.07),
+        transparent 50%
       ),
       linear-gradient(
         180deg,
-        #101111 0%,
-        var(--background) 45%,
-        #090a0a 100%
+        #1a1a18 0%,
+        #151613 45%,
+        #10110f 100%
       );
 
     color: var(--text);

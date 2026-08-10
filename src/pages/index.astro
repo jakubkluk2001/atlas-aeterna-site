@@ -4,67 +4,423 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
 <BaseLayout title="Atlas Aeterna">
 
-  <h1>Atlas Aeterna</h1>
+  <section class="hero">
 
-  <p>
-    Welcome to Atlas Aeterna.
-  </p>
+    <div class="cartographic-globe" aria-hidden="true">
+      <div class="globe-latitude latitude-one"></div>
+      <div class="globe-latitude latitude-two"></div>
+      <div class="globe-latitude latitude-three"></div>
 
-  <p class="muted">
-    This website is currently under construction.
-  </p>
+      <div class="globe-longitude longitude-one"></div>
+      <div class="globe-longitude longitude-two"></div>
+      <div class="globe-longitude longitude-three"></div>
 
-  <div class="social-links">
+      <div class="globe-axis"></div>
+    </div>
 
-    <a
-      href="https://www.tiktok.com/@atlasaeterna"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      TikTok
-    </a>
+    <div class="hero-content">
 
-    <a
-      href="https://www.youtube.com/@AtlasAeterna"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      YouTube
-    </a>
+      <p class="eyebrow">
+        History · Geography · Mysteries
+      </p>
 
-  </div>
+      <h1>Atlas Aeterna</h1>
+
+      <div class="title-divider" aria-hidden="true">
+        <span></span>
+        <div>◇</div>
+        <span></span>
+      </div>
+
+      <p class="intro">
+        Exploring the stories, places and unanswered
+        questions of our world.
+      </p>
+
+      <p class="muted">
+        This website is currently under construction.
+      </p>
+
+      <div class="social-links">
+
+        <a
+          href="https://www.tiktok.com/@atlasaeterna"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          TikTok
+        </a>
+
+        <a
+          href="https://www.youtube.com/@AtlasAeterna"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          YouTube
+        </a>
+
+      </div>
+
+    </div>
+
+  </section>
 
 </BaseLayout>
 
-
 <style>
 
-  .social-links {
-    display: flex;
-    gap: 20px;
+  /* ---------------------------------- */
+  /* HERO                               */
+  /* ---------------------------------- */
 
-    margin-top: 40px;
+  .hero {
+    min-height: 650px;
+
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+
+    text-align: center;
   }
 
+  .hero-content {
+    position: relative;
+    z-index: 2;
+
+    max-width: 800px;
+
+    padding: 60px 20px;
+  }
+
+  /* ---------------------------------- */
+  /* SMALL TEXT ABOVE TITLE             */
+  /* ---------------------------------- */
+
+  .eyebrow {
+    margin: 0 0 24px;
+
+    color: var(--accent);
+
+    font-size: 13px;
+
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+  }
+
+  /* ---------------------------------- */
+  /* MAIN TITLE                         */
+  /* ---------------------------------- */
+
+  h1 {
+    margin-bottom: 28px;
+
+    font-size: clamp(52px, 8vw, 92px);
+
+    font-weight: 400;
+
+    letter-spacing: 0.08em;
+
+    text-shadow:
+      0 0 40px rgba(166, 138, 91, 0.08);
+  }
+
+  /* ---------------------------------- */
+  /* DECORATIVE DIVIDER                 */
+  /* ---------------------------------- */
+
+  .title-divider {
+    width: min(360px, 70vw);
+
+    margin: 0 auto 32px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 14px;
+
+    color: var(--accent);
+  }
+
+  .title-divider span {
+    height: 1px;
+    flex: 1;
+
+    background:
+      linear-gradient(
+        to right,
+        transparent,
+        var(--accent)
+      );
+
+    opacity: 0.55;
+  }
+
+  .title-divider span:last-child {
+    background:
+      linear-gradient(
+        to left,
+        transparent,
+        var(--accent)
+      );
+  }
+
+  .title-divider div {
+    font-size: 11px;
+  }
+
+  /* ---------------------------------- */
+  /* INTRO TEXT                         */
+  /* ---------------------------------- */
+
+  .intro {
+    max-width: 620px;
+
+    margin: 0 auto;
+
+    color: var(--text);
+
+    font-size: 18px;
+
+    line-height: 1.9;
+  }
+
+  .muted {
+    margin: 16px auto 0;
+
+    font-size: 14px;
+
+    letter-spacing: 0.04em;
+  }
+
+  /* ---------------------------------- */
+  /* SOCIAL LINKS                       */
+  /* ---------------------------------- */
+
+  .social-links {
+    margin-top: 38px;
+
+    display: flex;
+    justify-content: center;
+
+    gap: 14px;
+  }
 
   .social-links a {
-    color: #fff;
+    min-width: 120px;
+
+    padding: 13px 22px;
+
+    color: var(--text);
+
+    border: 1px solid var(--border);
+
+    background: rgba(18, 19, 19, 0.65);
+
     text-decoration: none;
 
-    border: 1px solid #555;
-    border-radius: 4px;
+    font-size: 13px;
 
-    padding: 12px 20px;
+    letter-spacing: 0.06em;
 
-    transition: 0.2s ease;
+    transition:
+      color 0.2s ease,
+      border-color 0.2s ease,
+      background 0.2s ease,
+      transform 0.2s ease;
   }
 
-
   .social-links a:hover {
-    border-color: #fff;
+    color: var(--accent-light);
 
-    background: #fff;
-    color: #111;
+    border-color: var(--accent);
+
+    background: rgba(166, 138, 91, 0.06);
+
+    transform: translateY(-2px);
+  }
+
+  /* ---------------------------------- */
+  /* CARTOGRAPHIC GLOBE                 */
+  /* ---------------------------------- */
+
+  .cartographic-globe {
+    width: 620px;
+    height: 620px;
+
+    position: absolute;
+
+    top: 50%;
+    left: 50%;
+
+    transform:
+      translate(-50%, -50%)
+      rotate(-8deg);
+
+    border: 1px solid rgba(166, 138, 91, 0.16);
+    border-radius: 50%;
+
+    opacity: 0.9;
+
+    pointer-events: none;
+  }
+
+  /* subtle glow behind globe */
+
+  .cartographic-globe::before {
+    content: "";
+
+    position: absolute;
+    inset: -120px;
+
+    border-radius: 50%;
+
+    background:
+      radial-gradient(
+        circle,
+        rgba(180, 151, 99, 0.11),
+        rgba(180, 151, 99, 0.035) 38%,
+        transparent 68%
+      );
+  }
+
+  /* inner globe ring */
+
+  .cartographic-globe::after {
+    content: "";
+
+    position: absolute;
+    inset: 45px;
+
+    border: 1px solid rgba(180, 151, 99, 0.13);
+    border-radius: 50%;
+  }
+
+  /* LATITUDE LINES */
+
+  .globe-latitude {
+    position: absolute;
+
+    left: 10%;
+    right: 10%;
+
+    border: 1px solid rgba(180, 151, 99, 0.20);
+    border-radius: 50%;
+  }
+
+  .latitude-one {
+    height: 105px;
+
+    top: 20%;
+  }
+
+  .latitude-two {
+    height: 145px;
+
+    top: 38%;
+  }
+
+  .latitude-three {
+    height: 105px;
+
+    top: 62%;
+  }
+
+  /* LONGITUDE LINES */
+
+  .globe-longitude {
+    position: absolute;
+
+    top: 6%;
+    bottom: 6%;
+
+    left: 50%;
+
+    width: 180px;
+
+    transform: translateX(-50%);
+
+    border: 1px solid rgba(180, 151, 99, 0.20);
+    border-radius: 50%;
+  }
+
+  .longitude-one {
+    width: 210px;
+  }
+
+  .longitude-two {
+    width: 390px;
+  }
+
+  .longitude-three {
+    width: 520px;
+  }
+
+  /* SLANTED AXIS */
+
+  .globe-axis {
+    width: 1px;
+    height: 112%;
+
+    position: absolute;
+
+    top: -6%;
+    left: 50%;
+
+    background:
+      linear-gradient(
+        to bottom,
+        transparent,
+        rgba(180, 151, 99, 0.24),
+        transparent
+      );
+
+    transform: rotate(18deg);
+  }
+
+  /* ---------------------------------- */
+  /* MOBILE                             */
+  /* ---------------------------------- */
+
+  @media (max-width: 750px) {
+
+    .hero {
+      min-height: 600px;
+    }
+
+    .hero-content {
+      padding: 40px 0;
+    }
+
+    .eyebrow {
+      font-size: 11px;
+
+      line-height: 1.8;
+    }
+
+    h1 {
+      font-size: clamp(42px, 13vw, 58px);
+
+      letter-spacing: 0.04em;
+    }
+
+    .intro {
+      font-size: 16px;
+    }
+
+    .cartographic-globe {
+      width: 480px;
+      height: 480px;
+    }
+
+    .social-links {
+      flex-wrap: wrap;
+    }
+
   }
 
 </style>
