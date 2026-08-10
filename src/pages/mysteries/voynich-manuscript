@@ -1,0 +1,9 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="Voynich Manuscript | Atlas Aeterna">
+
+  <h1>Voynich Manuscript</h1>
+
+</BaseLayout>
