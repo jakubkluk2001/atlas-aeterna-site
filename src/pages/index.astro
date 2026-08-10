@@ -6,131 +6,636 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   title="Atlas Aeterna | History, Geography & Mysteries"
   description="Explore history, geography, mysteries, legendary places and the stories that connect them all with Atlas Aeterna."
 >
+  <section class="hero" data-liquid-hero>
+    <div class="hero-refraction" aria-hidden="true"></div>
 
-  <section class="hero">
+    <svg
+      class="contour-map contour-map--left"
+      viewBox="0 0 520 520"
+      fill="none"
+      aria-hidden="true"
+    >
+      <path d="M-24 396C42 320 88 344 138 284C186 226 190 150 270 112C350 74 420 107 552 6" />
+      <path d="M-10 426C58 352 112 370 164 309C218 246 224 174 300 137C380 98 447 126 548 51" />
+      <path d="M10 458C76 394 138 400 192 343C250 282 258 210 330 174C402 138 462 151 542 101" />
+      <path d="M44 490C108 442 162 438 222 382C284 324 295 257 360 221C422 187 474 191 536 157" />
+      <path d="M99 522C160 478 209 474 266 424C324 372 338 309 394 273C446 240 489 239 535 220" />
+    </svg>
+
+    <svg
+      class="contour-map contour-map--right"
+      viewBox="0 0 520 520"
+      fill="none"
+      aria-hidden="true"
+    >
+      <path d="M-24 396C42 320 88 344 138 284C186 226 190 150 270 112C350 74 420 107 552 6" />
+      <path d="M-10 426C58 352 112 370 164 309C218 246 224 174 300 137C380 98 447 126 548 51" />
+      <path d="M10 458C76 394 138 400 192 343C250 282 258 210 330 174C402 138 462 151 542 101" />
+      <path d="M44 490C108 442 162 438 222 382C284 324 295 257 360 221C422 187 474 191 536 157" />
+      <path d="M99 522C160 478 209 474 266 424C324 372 338 309 394 273C446 240 489 239 535 220" />
+    </svg>
+
+    <div class="atlas-object" aria-hidden="true">
+      <div class="atlas-object__motion">
+        <span class="axis-line"></span>
+        <span class="orbit orbit--outer"></span>
+        <span class="orbit orbit--middle"></span>
+        <span class="orbit orbit--inner"></span>
+
+        <span class="orbit-node orbit-node--one"></span>
+        <span class="orbit-node orbit-node--two"></span>
+
+        <span class="glass-sphere">
+          <span class="sphere-latitude sphere-latitude--one"></span>
+          <span class="sphere-latitude sphere-latitude--two"></span>
+          <span class="sphere-meridian"></span>
+        </span>
+      </div>
+    </div>
 
     <div class="hero-content">
-
-      <p class="eyebrow">
-        History · Geography · Mysteries
+      <p
+        class="eyebrow"
+        aria-label="History, Geography and Mysteries"
+      >
+        <span>History</span>
+        <i aria-hidden="true"></i>
+        <span>Geography</span>
+        <i aria-hidden="true"></i>
+        <span>Mysteries</span>
       </p>
 
-
       <h1>
-        Atlas Aeterna
+        Atlas <span>Aeterna</span>
       </h1>
-
 
       <p class="tagline">
         Explore the world differently.
       </p>
-
 
       <p class="intro">
         History, geography, mysteries and the stories
         that connect them all.
       </p>
 
-
-      <div class="social-links">
-
-        <a
-          href="https://www.tiktok.com/@atlasaeterna"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <span>TikTok</span>
-
-          <span
-            class="arrow"
-            aria-hidden="true"
+      <div class="hero-actions">
+        <div class="social-links">
+          <a
+            href="https://www.tiktok.com/@atlasaeterna"
+            target="_blank"
+            rel="noopener noreferrer"
           >
-            ↗
-          </span>
-        </a>
+            <span>TikTok</span>
 
+            <span class="arrow" aria-hidden="true">
+              ↗
+            </span>
+          </a>
 
-        <a
-          href="https://www.youtube.com/@AtlasAeterna"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <span>YouTube</span>
-
-          <span
-            class="arrow"
-            aria-hidden="true"
+          <a
+            href="https://www.youtube.com/@AtlasAeterna"
+            target="_blank"
+            rel="noopener noreferrer"
           >
-            ↗
-          </span>
-        </a>
+            <span>YouTube</span>
 
+            <span class="arrow" aria-hidden="true">
+              ↗
+            </span>
+          </a>
+        </div>
       </div>
-
-
-      <p class="construction">
-        Atlas Aeterna is currently under construction.
-      </p>
-
     </div>
 
+    <span class="edge-mark edge-mark--top-left" aria-hidden="true"></span>
+    <span class="edge-mark edge-mark--top-right" aria-hidden="true"></span>
+    <span class="edge-mark edge-mark--bottom-left" aria-hidden="true"></span>
+    <span class="edge-mark edge-mark--bottom-right" aria-hidden="true"></span>
   </section>
-
 </BaseLayout>
 
+<script>
+  const hero = document.querySelector("[data-liquid-hero]");
+
+  const canUsePointerEffect =
+    window.matchMedia("(pointer: fine)").matches &&
+    !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  if (hero instanceof HTMLElement && canUsePointerEffect) {
+    let animationFrame = 0;
+
+    const resetPointer = () => {
+      hero.style.setProperty("--pointer-x", "50%");
+      hero.style.setProperty("--pointer-y", "38%");
+      hero.style.setProperty("--tilt-x", "0deg");
+      hero.style.setProperty("--tilt-y", "0deg");
+    };
+
+    hero.addEventListener("pointermove", (event) => {
+      window.cancelAnimationFrame(animationFrame);
+
+      animationFrame = window.requestAnimationFrame(() => {
+        const bounds = hero.getBoundingClientRect();
+        const x = (event.clientX - bounds.left) / bounds.width;
+        const y = (event.clientY - bounds.top) / bounds.height;
+
+        hero.style.setProperty(
+          "--pointer-x",
+          `${Math.round(x * 100)}%`
+        );
+
+        hero.style.setProperty(
+          "--pointer-y",
+          `${Math.round(y * 100)}%`
+        );
+
+        hero.style.setProperty(
+          "--tilt-x",
+          `${((x - 0.5) * 5).toFixed(2)}deg`
+        );
+
+        hero.style.setProperty(
+          "--tilt-y",
+          `${((0.5 - y) * 4).toFixed(2)}deg`
+        );
+      });
+    });
+
+    hero.addEventListener("pointerleave", resetPointer);
+  }
+</script>
 
 <style>
-
-  /* ---------------------------------- */
-  /* HERO                               */
-  /* ---------------------------------- */
-
   .hero {
-    min-height: calc(100vh - 150px);
+    --pointer-x: 50%;
+    --pointer-y: 38%;
+    --tilt-x: 0deg;
+    --tilt-y: 0deg;
+
+    min-height: min(800px, calc(100svh - 122px));
 
     position: relative;
+    isolation: isolate;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: grid;
+    place-items: center;
 
-    padding: 90px 40px;
+    overflow: hidden;
+
+    padding:
+      clamp(92px, 10vw, 142px)
+      clamp(22px, 5vw, 76px)
+      clamp(82px, 9vw, 124px);
 
     background:
       radial-gradient(
-        circle at 8% 5%,
-        rgba(102, 157, 255, 0.34),
-        transparent 36%
-      ),
-      radial-gradient(
-        circle at 92% 8%,
-        rgba(175, 139, 255, 0.28),
-        transparent 38%
-      ),
-      radial-gradient(
-        circle at 50% 105%,
-        rgba(255, 183, 127, 0.28),
-        transparent 42%
+        820px circle at var(--pointer-x) var(--pointer-y),
+        rgba(255, 255, 255, 0.68),
+        transparent 58%
       ),
       linear-gradient(
-        145deg,
-        rgba(255, 255, 255, 0.97),
-        rgba(255, 255, 255, 0.76)
+        142deg,
+        rgba(255, 255, 255, 0.72),
+        rgba(247, 249, 255, 0.44) 42%,
+        rgba(255, 249, 245, 0.46)
       );
 
-    background-clip: padding-box;
-
-    border: 1px solid rgba(255, 255, 255, 0.92);
-    border-radius: 36px;
+    border: 1px solid rgba(255, 255, 255, 0.84);
+    border-radius: clamp(30px, 3.2vw, 48px);
 
     box-shadow:
-      0 30px 80px rgba(46, 55, 80, 0.10),
-      0 8px 24px rgba(46, 55, 80, 0.05),
-      inset 0 1px 0 rgba(255, 255, 255, 1);
+      0 44px 110px rgba(50, 62, 88, 0.13),
+      0 12px 34px rgba(50, 62, 88, 0.07),
+      inset 0 1px 0 rgba(255, 255, 255, 1),
+      inset 0 -1px 0 rgba(58, 69, 94, 0.045);
+
+    backdrop-filter:
+      blur(30px)
+      saturate(155%);
+
+    -webkit-backdrop-filter:
+      blur(30px)
+      saturate(155%);
 
     text-align: center;
   }
 
+  .hero::before {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+    z-index: -5;
+
+    background:
+      radial-gradient(
+        circle at 10% 6%,
+        rgba(112, 170, 255, 0.34),
+        transparent 31%
+      ),
+      radial-gradient(
+        circle at 92% 8%,
+        rgba(177, 144, 248, 0.29),
+        transparent 33%
+      ),
+      radial-gradient(
+        circle at 50% 110%,
+        rgba(244, 180, 133, 0.28),
+        transparent 40%
+      );
+
+    pointer-events: none;
+  }
+
+  .hero::after {
+    content: "";
+
+    position: absolute;
+    inset: 1px;
+    z-index: 10;
+
+    border-radius: inherit;
+
+    background:
+      linear-gradient(
+        112deg,
+        rgba(255, 255, 255, 0.58),
+        transparent 25%,
+        transparent 72%,
+        rgba(255, 255, 255, 0.22)
+      );
+
+    mask-image:
+      linear-gradient(
+        to bottom,
+        black,
+        transparent 24%,
+        transparent 76%,
+        black
+      );
+
+    -webkit-mask-image:
+      linear-gradient(
+        to bottom,
+        black,
+        transparent 24%,
+        transparent 76%,
+        black
+      );
+
+    opacity: 0.56;
+    pointer-events: none;
+  }
+
+  .hero-refraction {
+    width: min(88vw, 1160px);
+    height: min(64vw, 620px);
+
+    position: absolute;
+    top: -39%;
+    left: 50%;
+    z-index: -4;
+
+    border: 1px solid rgba(255, 255, 255, 0.44);
+    border-radius: 50%;
+
+    background:
+      linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.42),
+        transparent 58%
+      );
+
+    filter: blur(1px);
+
+    transform: translateX(-50%);
+    pointer-events: none;
+  }
+
+  /* ---------------------------------- */
+  /* CARTOGRAPHIC LINEWORK              */
+  /* ---------------------------------- */
+
+  .contour-map {
+    width: min(42vw, 570px);
+
+    position: absolute;
+    z-index: -3;
+
+    color: rgba(54, 68, 101, 0.20);
+
+    opacity: 0.48;
+    pointer-events: none;
+  }
+
+  .contour-map path {
+    stroke: currentColor;
+    stroke-width: 1.15;
+    vector-effect: non-scaling-stroke;
+  }
+
+  .contour-map--left {
+    bottom: -19%;
+    left: -12%;
+
+    transform: rotate(8deg);
+  }
+
+  .contour-map--right {
+    top: -22%;
+    right: -14%;
+
+    opacity: 0.30;
+
+    transform:
+      rotate(188deg)
+      scale(0.86);
+  }
+
+  /* ---------------------------------- */
+  /* GLASS ARMILLARY OBJECT             */
+  /* ---------------------------------- */
+
+  .atlas-object {
+    width: clamp(390px, 49vw, 690px);
+    aspect-ratio: 1;
+
+    position: absolute;
+    top: 47%;
+    left: 50%;
+    z-index: -2;
+
+    perspective: 1200px;
+
+    opacity: 0.78;
+
+    filter:
+      drop-shadow(0 34px 36px rgba(57, 70, 102, 0.12));
+
+    transform:
+      translate(-50%, -50%)
+      rotateX(var(--tilt-y))
+      rotateY(var(--tilt-x));
+
+    transition: transform 0.45s var(--ease-out);
+    pointer-events: none;
+  }
+
+  .atlas-object__motion {
+    width: 100%;
+    height: 100%;
+
+    position: relative;
+
+    transform-style: preserve-3d;
+
+    animation:
+      object-float
+      10s
+      ease-in-out
+      infinite;
+  }
+
+  .glass-sphere {
+    width: 57%;
+    aspect-ratio: 1;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    overflow: hidden;
+
+    background:
+      radial-gradient(
+        circle at 30% 24%,
+        rgba(255, 255, 255, 0.95),
+        rgba(255, 255, 255, 0.44) 18%,
+        rgba(162, 189, 238, 0.22) 48%,
+        rgba(145, 148, 214, 0.14) 66%,
+        rgba(239, 183, 151, 0.12) 86%
+      );
+
+    border: 1px solid rgba(255, 255, 255, 0.88);
+    border-radius: 50%;
+
+    box-shadow:
+      inset 18px 22px 34px rgba(255, 255, 255, 0.46),
+      inset -24px -34px 48px rgba(101, 124, 180, 0.17),
+      inset 0 -3px 10px rgba(235, 170, 132, 0.12),
+      0 36px 66px rgba(73, 88, 124, 0.13),
+      0 10px 24px rgba(73, 88, 124, 0.07);
+
+    backdrop-filter:
+      blur(10px)
+      saturate(145%);
+
+    -webkit-backdrop-filter:
+      blur(10px)
+      saturate(145%);
+
+    transform:
+      translate(-50%, -50%)
+      translateZ(24px);
+  }
+
+  .glass-sphere::before {
+    content: "";
+
+    width: 68%;
+    height: 34%;
+
+    position: absolute;
+    top: 7%;
+    left: 13%;
+
+    border-radius: 50%;
+
+    background:
+      radial-gradient(
+        ellipse,
+        rgba(255, 255, 255, 0.72),
+        transparent 70%
+      );
+
+    filter: blur(7px);
+
+    transform: rotate(-24deg);
+  }
+
+  .glass-sphere::after {
+    content: "";
+
+    width: 54%;
+    aspect-ratio: 1;
+
+    position: absolute;
+    right: -4%;
+    bottom: -12%;
+
+    border-radius: 50%;
+
+    background:
+      radial-gradient(
+        circle,
+        rgba(240, 176, 137, 0.25),
+        transparent 70%
+      );
+
+    filter: blur(5px);
+  }
+
+  .sphere-latitude,
+  .sphere-meridian {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    display: block;
+
+    border: 1px solid rgba(53, 65, 92, 0.15);
+    border-radius: 50%;
+  }
+
+  .sphere-latitude {
+    width: 84%;
+    height: 30%;
+  }
+
+  .sphere-latitude--one {
+    transform:
+      translate(-50%, -50%)
+      rotate(-7deg);
+  }
+
+  .sphere-latitude--two {
+    width: 72%;
+    height: 20%;
+
+    transform:
+      translate(-50%, -50%)
+      rotate(-7deg)
+      translateY(520%);
+  }
+
+  .sphere-meridian {
+    width: 38%;
+    height: 86%;
+
+    transform:
+      translate(-50%, -50%)
+      rotate(16deg);
+  }
+
+  .orbit {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    display: block;
+
+    border: 1px solid rgba(50, 63, 94, 0.19);
+    border-radius: 50%;
+
+    box-shadow:
+      0 0 18px rgba(255, 255, 255, 0.52),
+      inset 0 0 18px rgba(255, 255, 255, 0.22);
+  }
+
+  .orbit--outer {
+    width: 92%;
+    height: 35%;
+
+    transform:
+      translate(-50%, -50%)
+      rotate(-18deg)
+      translateZ(6px);
+  }
+
+  .orbit--middle {
+    width: 80%;
+    height: 80%;
+
+    border-color: rgba(55, 68, 101, 0.14);
+
+    transform:
+      translate(-50%, -50%)
+      rotateX(68deg)
+      rotateZ(26deg)
+      translateZ(-8px);
+  }
+
+  .orbit--inner {
+    width: 42%;
+    height: 92%;
+
+    border-color: rgba(55, 68, 101, 0.15);
+
+    transform:
+      translate(-50%, -50%)
+      rotate(28deg)
+      translateZ(12px);
+  }
+
+  .axis-line {
+    width: 1px;
+    height: 90%;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    display: block;
+
+    background:
+      linear-gradient(
+        transparent,
+        rgba(45, 57, 87, 0.21) 18%,
+        rgba(45, 57, 87, 0.21) 82%,
+        transparent
+      );
+
+    transform:
+      translate(-50%, -50%)
+      rotate(28deg)
+      translateZ(18px);
+  }
+
+  .orbit-node {
+    width: 13px;
+    aspect-ratio: 1;
+
+    position: absolute;
+
+    display: block;
+
+    background:
+      radial-gradient(
+        circle at 32% 26%,
+        white,
+        rgba(200, 217, 250, 0.78) 42%,
+        rgba(91, 111, 160, 0.42)
+      );
+
+    border: 1px solid rgba(255, 255, 255, 0.86);
+    border-radius: 50%;
+
+    box-shadow:
+      0 8px 16px rgba(55, 67, 96, 0.17),
+      inset 0 1px 0 white;
+  }
+
+  .orbit-node--one {
+    top: 25%;
+    right: 9%;
+  }
+
+  .orbit-node--two {
+    bottom: 19%;
+    left: 16%;
+
+    width: 9px;
+  }
 
   /* ---------------------------------- */
   /* HERO CONTENT                       */
@@ -138,284 +643,538 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
   .hero-content {
     width: 100%;
-    max-width: 900px;
+    max-width: 1050px;
 
     position: relative;
+    z-index: 3;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
     animation:
       hero-enter
-      0.8s
-      cubic-bezier(0.22, 1, 0.36, 1)
+      0.9s
+      var(--ease-out)
       both;
   }
 
-
   .eyebrow {
-    margin: 0 0 24px;
+    margin: 0 0 27px;
+    padding: 10px 16px;
 
-    color: #77777c;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 
-    font-size: 13px;
+    gap: 10px;
 
-    letter-spacing: 0.18em;
+    color: #666d7d;
+    background:
+      linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.70),
+        rgba(247, 249, 254, 0.42)
+      );
 
+    border: 1px solid rgba(255, 255, 255, 0.82);
+    border-radius: 999px;
+
+    box-shadow:
+      0 10px 28px rgba(57, 69, 97, 0.09),
+      inset 0 1px 0 rgba(255, 255, 255, 0.96);
+
+    backdrop-filter:
+      blur(18px)
+      saturate(150%);
+
+    -webkit-backdrop-filter:
+      blur(18px)
+      saturate(150%);
+
+    font-size: 10px;
+    font-weight: 650;
+    letter-spacing: 0.15em;
     text-transform: uppercase;
   }
 
+  .eyebrow i {
+    width: 3px;
+    aspect-ratio: 1;
 
-  /* ---------------------------------- */
-  /* TITLE                              */
-  /* ---------------------------------- */
+    display: block;
+
+    background: rgba(77, 87, 111, 0.42);
+    border-radius: 50%;
+  }
 
   h1 {
     margin: 0;
 
-    color: #151517;
+    color: #171922;
 
-    font-size: clamp(58px, 8vw, 108px);
+    background:
+      linear-gradient(
+        180deg,
+        #171922 0%,
+        #292d39 64%,
+        #3b404e 100%
+      );
 
-    font-weight: 400;
+    -webkit-background-clip: text;
+    background-clip: text;
 
-    line-height: 1;
+    font-size: clamp(60px, 8.8vw, 130px);
+    line-height: 0.94;
+    letter-spacing: 0.045em;
+    text-wrap: balance;
 
-    letter-spacing: 0.035em;
+    -webkit-text-fill-color: transparent;
 
+    filter: drop-shadow(0 2px 0 rgba(255, 255, 255, 0.34));
+  }
+
+  .tagline {
+    margin: 31px 0 0;
+
+    color: #2d313d;
+
+    font-family: var(--font-display);
+    font-size: clamp(20px, 2.2vw, 29px);
+    line-height: 1.35;
+    letter-spacing: 0.055em;
+  }
+
+  .intro {
+    max-width: 610px;
+
+    margin: 14px auto 0;
+
+    color: #747a89;
+
+    font-size: clamp(14px, 1.3vw, 16px);
+    line-height: 1.75;
     text-wrap: balance;
   }
 
-
   /* ---------------------------------- */
-  /* TAGLINE                            */
-  /* ---------------------------------- */
-
-  .tagline {
-    margin: 34px 0 0;
-
-    color: #202024;
-
-    font-size: clamp(22px, 3vw, 34px);
-
-    line-height: 1.3;
-  }
-
-
-  .intro {
-    max-width: 650px;
-
-    margin: 18px auto 0;
-
-    color: #737378;
-
-    font-size: 17px;
-
-    line-height: 1.8;
-  }
-
-
-  /* ---------------------------------- */
-  /* SOCIAL LINKS                       */
+  /* ACTIONS                            */
   /* ---------------------------------- */
 
-  .social-links {
+  .hero-actions {
     margin-top: 38px;
-
-    display: flex;
-    justify-content: center;
-
-    gap: 12px;
-  }
-
-
-  .social-links a {
-    min-width: 145px;
-
-    padding: 15px 20px;
 
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-wrap: wrap;
+
+    gap: 13px;
+  }
+
+  .social-links {
+    display: flex;
+    justify-content: center;
+
+    gap: 9px;
+  }
+
+  .social-links a {
+    min-width: 132px;
+    min-height: 49px;
+
+    padding: 13px 18px;
+
+    position: relative;
+    isolation: isolate;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
 
     gap: 9px;
 
-    color: #202024;
+    color: #292d39;
+    background:
+      linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.82),
+        rgba(243, 246, 252, 0.55)
+      );
 
-    background: rgba(255, 255, 255, 0.82);
-
-    border: 1px solid rgba(20, 20, 25, 0.07);
+    border: 1px solid rgba(255, 255, 255, 0.92);
     border-radius: 999px;
 
     box-shadow:
-      0 8px 22px rgba(50, 55, 75, 0.08),
-      inset 0 1px 0 rgba(255, 255, 255, 0.9);
+      0 12px 28px rgba(55, 67, 95, 0.11),
+      inset 0 1px 0 rgba(255, 255, 255, 1),
+      inset 0 -1px 0 rgba(48, 58, 80, 0.04);
+
+    backdrop-filter:
+      blur(20px)
+      saturate(160%);
+
+    -webkit-backdrop-filter:
+      blur(20px)
+      saturate(160%);
 
     text-decoration: none;
 
-    font-size: 14px;
+    font-size: 12px;
+    font-weight: 650;
+    letter-spacing: 0.075em;
+    text-transform: uppercase;
 
     transition:
-      transform 0.25s ease,
-      box-shadow 0.25s ease,
-      background 0.25s ease;
+      color 0.25s ease,
+      transform 0.28s var(--ease-out),
+      box-shadow 0.28s ease;
   }
 
+  .social-links a::before {
+    content: "";
+
+    width: 78px;
+    height: 100px;
+
+    position: absolute;
+    top: -68px;
+    left: -26px;
+    z-index: -1;
+
+    border-radius: 50%;
+
+    background: rgba(255, 255, 255, 0.70);
+    filter: blur(6px);
+
+    transform: rotate(20deg);
+
+    transition:
+      transform 0.45s var(--ease-out),
+      opacity 0.3s ease;
+  }
 
   .social-links a:hover {
-    background: #ffffff;
+    color: #171922;
 
     transform: translateY(-3px);
 
     box-shadow:
-      0 14px 30px rgba(50, 55, 75, 0.13),
-      inset 0 1px 0 rgba(255, 255, 255, 1);
+      0 18px 36px rgba(55, 67, 95, 0.16),
+      inset 0 1px 0 rgba(255, 255, 255, 1),
+      inset 0 -1px 0 rgba(48, 58, 80, 0.04);
   }
 
+  .social-links a:hover::before {
+    opacity: 0.88;
+
+    transform:
+      translateX(88px)
+      rotate(20deg);
+  }
 
   .arrow {
     display: inline-block;
 
-    color: #77777c;
+    color: #717788;
 
-    font-size: 15px;
+    font-size: 14px;
 
-    transition:
-      transform 0.25s ease;
+    transition: transform 0.25s var(--ease-out);
   }
-
 
   .social-links a:hover .arrow {
-    transform:
-      translate(2px, -2px);
+    transform: translate(2px, -2px);
   }
 
-
   /* ---------------------------------- */
-  /* CONSTRUCTION NOTE                  */
+  /* EDGE DETAILS                       */
   /* ---------------------------------- */
 
-  .construction {
-    margin: 30px 0 0;
+  .edge-mark {
+    width: 44px;
+    height: 44px;
 
-    color: #99999e;
+    position: absolute;
+    z-index: 4;
 
-    font-size: 11px;
+    opacity: 0.30;
 
-    letter-spacing: 0.08em;
+    pointer-events: none;
   }
 
+  .edge-mark::before,
+  .edge-mark::after {
+    content: "";
+
+    position: absolute;
+
+    background: rgba(62, 73, 99, 0.28);
+    border-radius: 999px;
+  }
+
+  .edge-mark::before {
+    width: 44px;
+    height: 1px;
+  }
+
+  .edge-mark::after {
+    width: 1px;
+    height: 44px;
+  }
+
+  .edge-mark--top-left {
+    top: 24px;
+    left: 24px;
+  }
+
+  .edge-mark--top-right {
+    top: 24px;
+    right: 24px;
+
+    transform: rotate(90deg);
+  }
+
+  .edge-mark--bottom-left {
+    bottom: 24px;
+    left: 24px;
+
+    transform: rotate(-90deg);
+  }
+
+  .edge-mark--bottom-right {
+    right: 24px;
+    bottom: 24px;
+
+    transform: rotate(180deg);
+  }
 
   /* ---------------------------------- */
-  /* ENTRANCE ANIMATION                 */
+  /* MOTION                             */
   /* ---------------------------------- */
 
   @keyframes hero-enter {
-
     from {
       opacity: 0;
 
-      transform: translateY(14px);
+      transform:
+        translateY(18px)
+        scale(0.992);
     }
-
 
     to {
       opacity: 1;
 
-      transform: translateY(0);
+      transform:
+        translateY(0)
+        scale(1);
     }
-
   }
 
+  @keyframes object-float {
+    0%,
+    100% {
+      transform:
+        translate3d(0, -4px, 0)
+        rotate(-0.6deg);
+    }
+
+    50% {
+      transform:
+        translate3d(0, 8px, 0)
+        rotate(0.8deg);
+    }
+  }
+
+  /* ---------------------------------- */
+  /* TABLET                             */
+  /* ---------------------------------- */
+
+  @media (max-width: 900px) {
+    .hero {
+      min-height: min(760px, calc(100svh - 106px));
+    }
+
+    .atlas-object {
+      width: clamp(400px, 68vw, 610px);
+    }
+  }
 
   /* ---------------------------------- */
   /* MOBILE                             */
   /* ---------------------------------- */
 
-  @media (max-width: 750px) {
-
+  @media (max-width: 620px) {
     .hero {
-      min-height: calc(100svh - 110px);
+      min-height: calc(100svh - 93px);
 
-      padding: 70px 20px;
+      padding:
+        82px
+        18px
+        70px;
 
-      border-radius: 24px;
-
-      background:
-        radial-gradient(
-          circle at 0% 5%,
-          rgba(102, 157, 255, 0.30),
-          transparent 42%
-        ),
-        radial-gradient(
-          circle at 100% 15%,
-          rgba(175, 139, 255, 0.24),
-          transparent 44%
-        ),
-        radial-gradient(
-          circle at 50% 100%,
-          rgba(255, 183, 127, 0.24),
-          transparent 48%
-        ),
-        linear-gradient(
-          145deg,
-          rgba(255, 255, 255, 0.97),
-          rgba(255, 255, 255, 0.78)
-        );
+      border-radius: 30px;
     }
 
-
-    .hero-content {
-      width: 100%;
-      max-width: 100%;
+    .hero-refraction {
+      top: -15%;
     }
 
+    .contour-map {
+      width: 82vw;
+    }
+
+    .contour-map--left {
+      bottom: -8%;
+      left: -42%;
+    }
+
+    .contour-map--right {
+      top: -9%;
+      right: -46%;
+    }
+
+    .atlas-object {
+      width: min(118vw, 510px);
+
+      top: 43%;
+
+      opacity: 0.58;
+    }
 
     .eyebrow {
-      margin-bottom: 20px;
+      max-width: 100%;
 
-      font-size: 10px;
+      margin-bottom: 24px;
+      padding: 9px 13px;
 
-      letter-spacing: 0.11em;
+      gap: 7px;
 
-      line-height: 1.8;
+      font-size: 8px;
+      letter-spacing: 0.105em;
     }
-
 
     h1 {
-      font-size: clamp(44px, 13vw, 68px);
+      max-width: 100%;
 
-      line-height: 1.06;
-
-      letter-spacing: 0.025em;
+      font-size: clamp(54px, 17vw, 78px);
+      line-height: 0.94;
+      letter-spacing: 0.035em;
     }
 
+    h1 span {
+      display: block;
+    }
 
     .tagline {
+      max-width: 320px;
+
       margin-top: 28px;
 
-      font-size: 22px;
+      font-size: 20px;
+      line-height: 1.45;
     }
-
 
     .intro {
-      max-width: 440px;
+      max-width: 340px;
+
+      margin-top: 12px;
 
       font-size: 14px;
+      line-height: 1.7;
     }
 
+    .hero-actions {
+      width: 100%;
+
+      margin-top: 31px;
+
+      flex-direction: column;
+    }
 
     .social-links {
       width: 100%;
-
-      margin-top: 32px;
-
-      flex-direction: column;
-      align-items: center;
     }
-
 
     .social-links a {
-      width: min(100%, 260px);
+      min-width: 0;
+      width: 50%;
     }
 
+    .edge-mark {
+      width: 30px;
+      height: 30px;
+    }
+
+    .edge-mark::before {
+      width: 30px;
+    }
+
+    .edge-mark::after {
+      height: 30px;
+    }
+
+    .edge-mark--top-left,
+    .edge-mark--top-right {
+      top: 17px;
+    }
+
+    .edge-mark--bottom-left,
+    .edge-mark--bottom-right {
+      bottom: 17px;
+    }
+
+    .edge-mark--top-left,
+    .edge-mark--bottom-left {
+      left: 17px;
+    }
+
+    .edge-mark--top-right,
+    .edge-mark--bottom-right {
+      right: 17px;
+    }
   }
 
+  @media (max-width: 380px) {
+    .hero {
+      padding-inline: 14px;
+    }
+
+    .eyebrow {
+      gap: 6px;
+      letter-spacing: 0.08em;
+    }
+
+    .social-links {
+      flex-direction: column;
+    }
+
+    .social-links a {
+      width: 100%;
+    }
+  }
+
+  /* ---------------------------------- */
+  /* FALLBACKS                          */
+  /* ---------------------------------- */
+
+  @supports not (
+    (backdrop-filter: blur(1px))
+    or
+    (-webkit-backdrop-filter: blur(1px))
+  ) {
+    .hero,
+    .eyebrow,
+    .social-links a {
+      background-color: rgba(250, 251, 255, 0.92);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .atlas-object {
+      transition: none;
+    }
+  }
 </style>
