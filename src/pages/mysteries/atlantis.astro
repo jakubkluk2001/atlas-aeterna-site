@@ -2,6 +2,32 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 ---
 
-<BaseLayout title="Atlantis | Atlas Aeterna">
-  <h1>Atlantis</h1>
+<BaseLayout title="Mystery Case | Atlas Aeterna">
+  <section class="placeholder">
+    <h1>Case File in Development</h1>
+    <p>This mystery is currently being developed.</p>
+  </section>
 </BaseLayout>
+
+<style>
+  .placeholder {
+    min-height: 60vh;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+  }
+
+  .placeholder h1 {
+    margin-bottom: 14px;
+
+    font-size: clamp(36px, 6vw, 64px);
+  }
+
+  .placeholder p {
+    margin: 0;
+  }
+</style>
