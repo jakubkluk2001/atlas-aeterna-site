@@ -4,6 +4,10 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 
 <BaseLayout title="El Dorado | Atlas Aeterna">
 
+  <!-- -------------------------------- -->
+  <!-- CASE HEADER                      -->
+  <!-- -------------------------------- -->
+
   <section class="case-header">
 
     <h1>El Dorado</h1>
@@ -18,12 +22,57 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
   </section>
 
 
+  <!-- -------------------------------- -->
+  <!-- LOCATION                         -->
+  <!-- -------------------------------- -->
+
+  <section class="map-section">
+
+    <h2>Location</h2>
+
+    <figure class="map-card">
+
+      <div class="map-visual">
+
+        <img
+          class="map-image"
+          src="/maps/south-america.svg"
+          alt="Map of South America"
+          loading="lazy"
+        />
+
+        <div
+          class="map-marker"
+          aria-hidden="true"
+        >
+          <span class="marker-area"></span>
+        </div>
+
+      </div>
+
+
+      <figcaption class="map-caption">
+        Approximate region associated with the origins of the
+        El Dorado legend in northern South America.
+      </figcaption>
+
+    </figure>
+
+  </section>
+
+
+  <!-- -------------------------------- -->
+  <!-- TIMELINE                         -->
+  <!-- -------------------------------- -->
+
   <section class="timeline-section">
 
     <h2>Timeline</h2>
 
 
     <div class="timeline">
+
+      <!-- TIMELINE EVENT 1 -->
 
       <article class="timeline-item">
 
@@ -47,6 +96,8 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
       </article>
 
 
+      <!-- TIMELINE EVENT 2 -->
+
       <article class="timeline-item">
 
         <div class="timeline-marker"></div>
@@ -68,6 +119,8 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 
       </article>
 
+
+      <!-- TIMELINE EVENT 3 -->
 
       <article class="timeline-item">
 
@@ -140,6 +193,148 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 
 
   /* ---------------------------------- */
+  /* MAP SECTION                        */
+  /* ---------------------------------- */
+
+  .map-section {
+    max-width: 900px;
+
+    padding: 20px 0 60px;
+  }
+
+
+  .map-section h2 {
+    margin: 0 0 30px;
+
+    color: #171719;
+
+    font-size: 36px;
+    font-weight: 400;
+  }
+
+
+  /* ---------------------------------- */
+  /* MAP CARD                           */
+  /* ---------------------------------- */
+
+  .map-card {
+    width: 100%;
+
+    margin: 0;
+    padding: 45px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    gap: 30px;
+
+    background:
+      rgba(255, 255, 255, 0.72);
+
+    border:
+      1px solid
+      rgba(20, 20, 25, 0.06);
+
+    border-radius: 24px;
+
+    box-shadow:
+      0 10px 30px
+      rgba(50, 55, 75, 0.05);
+  }
+
+
+  /* ---------------------------------- */
+  /* MAP VISUAL                         */
+  /* ---------------------------------- */
+
+  .map-visual {
+    width: 100%;
+    max-width: 500px;
+
+    position: relative;
+  }
+
+
+  .map-image {
+    width: 100%;
+    max-height: 520px;
+
+    display: block;
+
+    object-fit: contain;
+
+    opacity: 0.9;
+  }
+
+
+  /* ---------------------------------- */
+  /* APPROXIMATE REGION                 */
+  /* ---------------------------------- */
+
+  .map-marker {
+    width: 90px;
+    height: 90px;
+
+    position: absolute;
+
+    top: 16%;
+    left: 32%;
+
+    transform: translate(-50%, -50%);
+
+    pointer-events: none;
+  }
+
+
+  .marker-area {
+    width: 90px;
+    height: 90px;
+
+    position: absolute;
+
+    top: 50%;
+    left: 50%;
+
+    transform: translate(-50%, -50%);
+
+    background:
+      rgba(107, 157, 252, 0.16);
+
+    border:
+      1px solid
+      rgba(95, 131, 220, 0.20);
+
+    border-radius: 50%;
+
+    box-shadow:
+      0 0 30px
+      rgba(107, 157, 252, 0.16);
+  }
+
+
+  /* ---------------------------------- */
+  /* MAP CAPTION                        */
+  /* ---------------------------------- */
+
+  .map-caption {
+    max-width: 600px;
+
+    margin: 0;
+
+    color: #85858a;
+
+    font-size: 12px;
+
+    line-height: 1.7;
+
+    letter-spacing: 0.03em;
+
+    text-align: center;
+  }
+
+
+  /* ---------------------------------- */
   /* TIMELINE SECTION                   */
   /* ---------------------------------- */
 
@@ -197,7 +392,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 
 
   /* ---------------------------------- */
-  /* INDIVIDUAL EVENT                   */
+  /* INDIVIDUAL TIMELINE EVENT          */
   /* ---------------------------------- */
 
   .timeline-item {
@@ -212,7 +407,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
   }
 
 
-  /* DOT ON TIMELINE */
+  /* TIMELINE DOT */
 
   .timeline-marker {
     width: 16px;
@@ -317,6 +512,8 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 
   @media (max-width: 600px) {
 
+    /* HEADER */
+
     .case-header {
       padding: 50px 0 40px;
     }
@@ -331,8 +528,47 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 
     .case-intro {
       font-size: 16px;
+
+      line-height: 1.8;
     }
 
+
+    /* MAP */
+
+    .map-section {
+      padding: 10px 0 50px;
+    }
+
+
+    .map-section h2 {
+      margin-bottom: 24px;
+
+      font-size: 30px;
+    }
+
+
+    .map-card {
+      padding: 28px 20px;
+
+      gap: 24px;
+
+      border-radius: 20px;
+    }
+
+
+    .map-image {
+      max-height: 400px;
+    }
+
+
+    .map-caption {
+      max-width: 320px;
+
+      font-size: 11px;
+    }
+
+
+    /* TIMELINE */
 
     .timeline-section {
       padding-top: 20px;
