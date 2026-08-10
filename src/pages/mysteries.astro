@@ -1,10 +1,133 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+
+type CaseAccent =
+  | "gold"
+  | "amber"
+  | "blue"
+  | "teal"
+  | "violet"
+  | "rose"
+  | "ice"
+  | "sage";
+
+interface MysteryCase {
+  title: string;
+  slug: string;
+  accent: CaseAccent;
+}
+
+/*
+  Add future cases here by copying one object and changing its
+  title, slug and accent. The grid and numbering update automatically.
+*/
+const caseFiles: MysteryCase[] = [
+  {
+    title: "Alexander the Great’s Tomb",
+    slug: "alexander-the-greats-tomb",
+    accent: "gold"
+  },
+  {
+    title: "Amber Room",
+    slug: "amber-room",
+    accent: "amber"
+  },
+  {
+    title: "Ark of the Covenant",
+    slug: "ark-of-the-covenant",
+    accent: "violet"
+  },
+  {
+    title: "Atlantis",
+    slug: "atlantis",
+    accent: "teal"
+  },
+  {
+    title: "Bermuda Triangle",
+    slug: "bermuda-triangle",
+    accent: "blue"
+  },
+  {
+    title: "Curse of Tutankhamun",
+    slug: "curse-of-tutankhamun",
+    accent: "amber"
+  },
+  {
+    title: "D. B. Cooper",
+    slug: "d-b-cooper",
+    accent: "ice"
+  },
+  {
+    title: "Dragons",
+    slug: "dragons",
+    accent: "rose"
+  },
+  {
+    title: "El Dorado",
+    slug: "el-dorado",
+    accent: "gold"
+  },
+  {
+    title: "Flor de la Mar",
+    slug: "flor-de-la-mar",
+    accent: "blue"
+  },
+  {
+    title: "Flying Dutchman",
+    slug: "flying-dutchman",
+    accent: "teal"
+  },
+  {
+    title: "Holy Grail",
+    slug: "holy-grail",
+    accent: "gold"
+  },
+  {
+    title: "Knights Templar Treasure",
+    slug: "knights-templar-treasure",
+    accent: "rose"
+  },
+  {
+    title: "Lost City of Z",
+    slug: "lost-city-of-z",
+    accent: "sage"
+  },
+  {
+    title: "Nazi Gold Train",
+    slug: "nazi-gold-train",
+    accent: "amber"
+  },
+  {
+    title: "Oak Island",
+    slug: "oak-island",
+    accent: "blue"
+  },
+  {
+    title: "Roswell Incident",
+    slug: "roswell-incident",
+    accent: "violet"
+  },
+  {
+    title: "Sea Peoples",
+    slug: "sea-peoples",
+    accent: "teal"
+  },
+  {
+    title: "Voynich Manuscript",
+    slug: "voynich-manuscript",
+    accent: "violet"
+  },
+  {
+    title: "Woman in White",
+    slug: "woman-in-white",
+    accent: "ice"
+  }
+];
 ---
 
 <BaseLayout
   title="Mysteries | Atlas Aeterna"
-  description="Explore the mysteries collection of Atlas Aeterna."
+  description="Explore lost treasures, legendary places, unexplained events and enduring mysteries with Atlas Aeterna."
 >
   <section class="mysteries-page">
     <!-- -------------------------------- -->
@@ -51,40 +174,26 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     <!-- -------------------------------- -->
 
     <div class="case-files">
-      <a class="case-file" href="/mysteries/amber-room">
-        <span class="case-file__number" aria-hidden="true">01</span>
-        <span class="case-file__title">Amber Room</span>
-        <span class="case-file__orb" aria-hidden="true"></span>
-        <span class="case-file__arrow" aria-hidden="true">↗</span>
-      </a>
+      {
+        caseFiles.map((caseFile, index) => (
+          <a
+            class={`case-file case-file--${caseFile.accent}`}
+            href={`/mysteries/${caseFile.slug}`}
+            aria-label={`Open the ${caseFile.title} case file`}
+          >
+            <span class="case-file__number" aria-hidden="true">
+              {String(index + 1).padStart(2, "0")}
+            </span>
 
-      <a class="case-file" href="/mysteries/atlantis">
-        <span class="case-file__number" aria-hidden="true">02</span>
-        <span class="case-file__title">Atlantis</span>
-        <span class="case-file__orb" aria-hidden="true"></span>
-        <span class="case-file__arrow" aria-hidden="true">↗</span>
-      </a>
+            <span class="case-file__title">
+              {caseFile.title}
+            </span>
 
-      <a class="case-file" href="/mysteries/el-dorado">
-        <span class="case-file__number" aria-hidden="true">03</span>
-        <span class="case-file__title">El Dorado</span>
-        <span class="case-file__orb" aria-hidden="true"></span>
-        <span class="case-file__arrow" aria-hidden="true">↗</span>
-      </a>
-
-      <a class="case-file" href="/mysteries/oak-island">
-        <span class="case-file__number" aria-hidden="true">04</span>
-        <span class="case-file__title">Oak Island</span>
-        <span class="case-file__orb" aria-hidden="true"></span>
-        <span class="case-file__arrow" aria-hidden="true">↗</span>
-      </a>
-
-      <a class="case-file" href="/mysteries/voynich-manuscript">
-        <span class="case-file__number" aria-hidden="true">05</span>
-        <span class="case-file__title">Voynich Manuscript</span>
-        <span class="case-file__orb" aria-hidden="true"></span>
-        <span class="case-file__arrow" aria-hidden="true">↗</span>
-      </a>
+            <span class="case-file__orb" aria-hidden="true"></span>
+            <span class="case-file__arrow" aria-hidden="true">↗</span>
+          </a>
+        ))
+      }
     </div>
   </section>
 </BaseLayout>
@@ -521,7 +630,11 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
 
   .case-file {
-    min-height: 210px;
+    --case-accent: 124, 169, 238;
+    --case-accent-deep: 83, 119, 184;
+    --case-label: #7287aa;
+
+    min-height: 220px;
 
     position: relative;
     isolation: isolate;
@@ -569,7 +682,12 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   }
 
 
-  .case-file:nth-last-child(-n + 2) {
+  /*
+    The grid repeats a 3-card row followed by a 2-card row.
+    Colour is not tied to position; each case owns its accent class.
+  */
+  .case-file:nth-child(5n + 4),
+  .case-file:nth-child(5n + 5) {
     grid-column: span 3;
   }
 
@@ -590,11 +708,11 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     background:
       radial-gradient(
         circle,
-        rgba(116, 171, 255, 0.32),
+        rgba(var(--case-accent), 0.36),
         transparent 70%
       );
 
-    opacity: 0.62;
+    opacity: 0.64;
 
     transition:
       opacity 0.3s ease,
@@ -602,43 +720,61 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   }
 
 
-  .case-file:nth-child(2)::before {
-    background:
-      radial-gradient(
-        circle,
-        rgba(151, 177, 239, 0.31),
-        transparent 70%
-      );
+  /* PERMANENT CASE ACCENT FAMILIES */
+
+  .case-file--gold {
+    --case-accent: 226, 180, 111;
+    --case-accent-deep: 169, 120, 57;
+    --case-label: #98733e;
   }
 
 
-  .case-file:nth-child(3)::before {
-    background:
-      radial-gradient(
-        circle,
-        rgba(240, 184, 138, 0.36),
-        transparent 70%
-      );
+  .case-file--amber {
+    --case-accent: 229, 166, 127;
+    --case-accent-deep: 176, 112, 76;
+    --case-label: #9d6e51;
   }
 
 
-  .case-file:nth-child(4)::before {
-    background:
-      radial-gradient(
-        circle,
-        rgba(135, 174, 231, 0.30),
-        transparent 70%
-      );
+  .case-file--blue {
+    --case-accent: 124, 169, 238;
+    --case-accent-deep: 76, 116, 181;
+    --case-label: #6d83aa;
   }
 
 
-  .case-file:nth-child(5)::before {
-    background:
-      radial-gradient(
-        circle,
-        rgba(175, 144, 244, 0.33),
-        transparent 70%
-      );
+  .case-file--teal {
+    --case-accent: 131, 196, 193;
+    --case-accent-deep: 65, 133, 132;
+    --case-label: #5d8887;
+  }
+
+
+  .case-file--violet {
+    --case-accent: 165, 139, 221;
+    --case-accent-deep: 112, 84, 169;
+    --case-label: #7d6c9e;
+  }
+
+
+  .case-file--rose {
+    --case-accent: 211, 154, 168;
+    --case-accent-deep: 153, 91, 108;
+    --case-label: #936977;
+  }
+
+
+  .case-file--ice {
+    --case-accent: 183, 209, 233;
+    --case-accent-deep: 108, 143, 177;
+    --case-label: #71889e;
+  }
+
+
+  .case-file--sage {
+    --case-accent: 159, 189, 170;
+    --case-accent-deep: 91, 134, 106;
+    --case-label: #6c8875;
   }
 
 
@@ -649,6 +785,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
     box-shadow:
       0 28px 58px rgba(50, 62, 88, 0.14),
+      0 18px 42px rgba(var(--case-accent), 0.09),
       inset 0 1px 0 rgba(255, 255, 255, 1),
       inset 0 -1px 0 rgba(55, 65, 88, 0.04);
   }
@@ -664,7 +801,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     position: relative;
     z-index: 2;
 
-    color: #9298a7;
+    color: var(--case-label);
 
     font-family: var(--font-ui);
     font-size: 10px;
@@ -674,7 +811,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
 
   .case-file__title {
-    max-width: 80%;
+    max-width: calc(100% - 66px);
 
     position: relative;
     z-index: 2;
@@ -683,6 +820,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     font-size: clamp(25px, 2.45vw, 34px);
     line-height: 1.17;
     letter-spacing: 0.012em;
+    text-wrap: balance;
   }
 
 
@@ -742,19 +880,19 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     background:
       radial-gradient(
         circle at 29% 23%,
-        rgba(255, 255, 255, 0.94),
-        rgba(255, 255, 255, 0.40) 22%,
-        rgba(159, 185, 233, 0.20) 58%,
-        rgba(137, 138, 197, 0.11)
+        rgba(255, 255, 255, 0.96),
+        rgba(255, 255, 255, 0.42) 22%,
+        rgba(var(--case-accent), 0.24) 58%,
+        rgba(var(--case-accent-deep), 0.12)
       );
 
-    border: 1px solid rgba(255, 255, 255, 0.85);
+    border: 1px solid rgba(255, 255, 255, 0.86);
     border-radius: 50%;
 
     box-shadow:
-      inset 8px 10px 18px rgba(255, 255, 255, 0.48),
-      inset -12px -16px 23px rgba(94, 112, 164, 0.13),
-      0 15px 28px rgba(67, 80, 114, 0.10);
+      inset 8px 10px 18px rgba(255, 255, 255, 0.50),
+      inset -12px -16px 23px rgba(var(--case-accent-deep), 0.14),
+      0 15px 28px rgba(var(--case-accent-deep), 0.11);
 
     opacity: 0.58;
 
@@ -772,7 +910,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     top: 50%;
     left: 50%;
 
-    border: 1px solid rgba(51, 61, 90, 0.17);
+    border: 1px solid rgba(var(--case-accent-deep), 0.22);
     border-radius: 50%;
   }
 
@@ -915,12 +1053,9 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     }
 
     .case-file,
-    .case-file:nth-last-child(-n + 2) {
+    .case-file:nth-child(5n + 4),
+    .case-file:nth-child(5n + 5) {
       grid-column: auto;
-    }
-
-    .case-file:last-child {
-      grid-column: 1 / -1;
     }
   }
 
@@ -947,7 +1082,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
     h1 {
       max-width: 100%;
-      
+
       font-size: clamp(42px, 14vw, 72px);
       line-height: 0.96;
       letter-spacing: 0.026em;
@@ -978,8 +1113,9 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     }
 
     .case-file,
-    .case-file:last-child {
-      min-height: 175px;
+    .case-file:nth-child(5n + 4),
+    .case-file:nth-child(5n + 5) {
+      min-height: 180px;
 
       grid-column: auto;
 
@@ -989,9 +1125,9 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     }
 
     .case-file__title {
-      max-width: 76%;
+      max-width: calc(100% - 62px);
 
-      font-size: 28px;
+      font-size: clamp(25px, 7.4vw, 28px);
     }
 
     .case-file__orb {
