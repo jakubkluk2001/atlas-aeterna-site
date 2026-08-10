@@ -15,7 +15,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     <a class="case-file" href="/mysteries/atlantis">
       Atlantis
     </a>
-    
+
     <a class="case-file" href="/mysteries/el-dorado">
       El Dorado
     </a>
@@ -32,60 +32,106 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
 </BaseLayout>
 
+
 <style>
+
+  /* ---------------------------------- */
+  /* CASE FILE GRID                     */
+  /* ---------------------------------- */
 
   .case-files {
     display: grid;
 
     grid-template-columns:
-      repeat(
-        auto-fit,
-        minmax(220px, 1fr)
-      );
+      repeat(3, minmax(0, 1fr));
 
-    gap: 16px;
+    gap: 18px;
 
-    margin-top: 20px;
+    margin-top: 28px;
   }
 
 
-  .case-file {
-    min-width: 0;
+  /* ---------------------------------- */
+  /* CASE FILE                          */
+  /* ---------------------------------- */
 
-    padding: 22px 28px;
+  .case-file {
+    width: 100%;
+    height: 110px;
+
+    padding: 24px;
 
     display: flex;
     align-items: center;
 
     color: #171719;
-    background: #ffffff;
 
-    border: 1px solid rgba(20, 20, 25, 0.08);
-    border-radius: 18px;
+    background:
+      rgba(255, 255, 255, 0.72);
+
+    border:
+      1px solid
+      rgba(20, 20, 25, 0.06);
+
+    border-radius: 20px;
 
     box-shadow:
-      0 8px 24px rgba(50, 55, 75, 0.06);
+      0 8px 24px
+      rgba(50, 55, 75, 0.05);
 
     text-decoration: none;
 
+    line-height: 1.5;
+
     transition:
       transform 0.2s ease,
-      box-shadow 0.2s ease;
+      box-shadow 0.2s ease,
+      background 0.2s ease;
   }
 
 
   .case-file:hover {
-    transform: translateY(-2px);
+    background: #ffffff;
+
+    transform: translateY(-3px);
 
     box-shadow:
-      0 12px 30px rgba(50, 55, 75, 0.10);
+      0 14px 32px
+      rgba(50, 55, 75, 0.10);
   }
 
 
-  @media (max-width: 500px) {
+  /* ---------------------------------- */
+  /* TABLET                             */
+  /* ---------------------------------- */
+
+  @media (max-width: 900px) {
+
+    .case-files {
+      grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+    }
+
+  }
+
+
+  /* ---------------------------------- */
+  /* MOBILE                             */
+  /* ---------------------------------- */
+
+  @media (max-width: 600px) {
 
     .case-files {
       grid-template-columns: 1fr;
+
+      gap: 14px;
+    }
+
+
+    .case-file {
+      height: 96px;
+
+      padding: 22px;
     }
 
   }
