@@ -3,5 +3,376 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
 <BaseLayout title="About | Atlas Aeterna">
-  <h1>About</h1>
+
+  <section class="about-page">
+
+    <div class="about-intro">
+
+      <p class="eyebrow">
+        About the project
+      </p>
+
+      <h1>About Atlas Aeterna</h1>
+
+      <p class="lead">
+        Atlas Aeterna is a growing project dedicated to exploring
+        the stories, places and mysteries that make our world
+        endlessly fascinating.
+      </p>
+
+    </div>
+
+
+    <div class="about-grid">
+
+      <article class="about-card">
+
+        <p class="card-label">
+          01
+        </p>
+
+        <h2>Explore the Past</h2>
+
+        <p>
+          History is filled with remarkable people, lost places,
+          extraordinary events and stories that continue to shape
+          the world around us. Atlas Aeterna aims to make those
+          stories engaging and accessible.
+        </p>
+
+      </article>
+
+
+      <article class="about-card">
+
+        <p class="card-label">
+          02
+        </p>
+
+        <h2>Discover the World</h2>
+
+        <p>
+          Geography is about more than borders on a map. It is the
+          connection between people, landscapes, cultures and the
+          environments that have influenced civilisation throughout
+          history.
+        </p>
+
+      </article>
+
+
+      <article class="about-card">
+
+        <p class="card-label">
+          03
+        </p>
+
+        <h2>Question the Unknown</h2>
+
+        <p>
+          From lost treasures and unexplained disappearances to
+          undeciphered texts and historical legends, some questions
+          remain unanswered. The Mysteries collection is a place to
+          explore the evidence, theories and possibilities.
+        </p>
+
+      </article>
+
+    </div>
+
+
+    <section class="mission">
+
+      <div class="mission-content">
+
+        <p class="eyebrow">
+          The idea
+        </p>
+
+        <h2>A place built for curiosity.</h2>
+
+        <p>
+          Atlas Aeterna is being built as an evolving collection of
+          history, geography and mystery. The goal is to create
+          something that encourages curiosity, exploration and a
+          deeper interest in the world around us.
+        </p>
+
+        <p>
+          This is only the beginning. New stories, case files and
+          ideas will continue to be added as the project grows.
+        </p>
+
+      </div>
+
+    </section>
+
+  </section>
+
 </BaseLayout>
+
+
+<style>
+
+  /* ---------------------------------- */
+  /* ABOUT PAGE                         */
+  /* ---------------------------------- */
+
+  .about-page {
+    padding: 50px 0 40px;
+  }
+
+
+  /* ---------------------------------- */
+  /* INTRO                              */
+  /* ---------------------------------- */
+
+  .about-intro {
+    max-width: 850px;
+
+    margin-bottom: 60px;
+  }
+
+
+  .eyebrow {
+    margin: 0 0 16px;
+
+    color: #77777c;
+
+    font-size: 12px;
+
+    letter-spacing: 0.16em;
+
+    text-transform: uppercase;
+  }
+
+
+  h1 {
+    margin-bottom: 24px;
+
+    font-size: clamp(48px, 7vw, 82px);
+
+    line-height: 1.05;
+
+    letter-spacing: 0.02em;
+  }
+
+
+  .lead {
+    max-width: 750px;
+
+    margin: 0;
+
+    color: #55555a;
+
+    font-size: clamp(18px, 2vw, 24px);
+
+    line-height: 1.7;
+  }
+
+
+  /* ---------------------------------- */
+  /* CARDS                              */
+  /* ---------------------------------- */
+
+  .about-grid {
+    display: grid;
+
+    grid-template-columns:
+      repeat(3, minmax(0, 1fr));
+
+    gap: 18px;
+  }
+
+
+  .about-card {
+    min-height: 310px;
+
+    padding: 32px;
+
+    background:
+      rgba(255, 255, 255, 0.72);
+
+    border:
+      1px solid
+      rgba(20, 20, 25, 0.06);
+
+    border-radius: 24px;
+
+    box-shadow:
+      0 10px 30px
+      rgba(50, 55, 75, 0.05);
+  }
+
+
+  .card-label {
+    margin: 0 0 55px;
+
+    color: #9a9a9f;
+
+    font-size: 11px;
+
+    letter-spacing: 0.1em;
+  }
+
+
+  .about-card h2 {
+    margin: 0 0 18px;
+
+    color: #171719;
+
+    font-size: 24px;
+
+    font-weight: 400;
+
+    line-height: 1.35;
+  }
+
+
+  .about-card p:last-child {
+    margin: 0;
+
+    color: #6e6e73;
+
+    font-size: 14px;
+
+    line-height: 1.8;
+  }
+
+
+  /* ---------------------------------- */
+  /* MISSION                            */
+  /* ---------------------------------- */
+
+  .mission {
+    margin-top: 20px;
+    padding: 70px;
+
+    position: relative;
+
+    overflow: hidden;
+
+    background:
+      radial-gradient(
+        circle at 10% 10%,
+        rgba(107, 157, 252, 0.20),
+        transparent 35%
+      ),
+      radial-gradient(
+        circle at 90% 80%,
+        rgba(166, 135, 244, 0.16),
+        transparent 38%
+      ),
+      rgba(255, 255, 255, 0.78);
+
+    border:
+      1px solid
+      rgba(255, 255, 255, 0.9);
+
+    border-radius: 28px;
+
+    box-shadow:
+      0 20px 50px
+      rgba(50, 55, 75, 0.06);
+  }
+
+
+  .mission-content {
+    max-width: 760px;
+  }
+
+
+  .mission h2 {
+    margin: 0 0 22px;
+
+    color: #171719;
+
+    font-size: clamp(32px, 4vw, 52px);
+
+    font-weight: 400;
+
+    line-height: 1.2;
+  }
+
+
+  .mission p:not(.eyebrow) {
+    max-width: 700px;
+
+    color: #646469;
+
+    font-size: 16px;
+
+    line-height: 1.9;
+  }
+
+
+  /* ---------------------------------- */
+  /* TABLET                             */
+  /* ---------------------------------- */
+
+  @media (max-width: 900px) {
+
+    .about-grid {
+      grid-template-columns: 1fr;
+    }
+
+
+    .about-card {
+      min-height: auto;
+    }
+
+
+    .card-label {
+      margin-bottom: 35px;
+    }
+
+  }
+
+
+  /* ---------------------------------- */
+  /* MOBILE                             */
+  /* ---------------------------------- */
+
+  @media (max-width: 600px) {
+
+    .about-page {
+      padding-top: 30px;
+    }
+
+
+    .about-intro {
+      margin-bottom: 40px;
+    }
+
+
+    h1 {
+      font-size: 44px;
+    }
+
+
+    .lead {
+      font-size: 17px;
+    }
+
+
+    .about-card {
+      padding: 26px;
+
+      border-radius: 20px;
+    }
+
+
+    .mission {
+      padding: 40px 26px;
+
+      border-radius: 22px;
+    }
+
+
+    .mission h2 {
+      font-size: 32px;
+    }
+
+  }
+
+</style>

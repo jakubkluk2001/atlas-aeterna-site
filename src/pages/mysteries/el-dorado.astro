@@ -4,6 +4,380 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 
 <BaseLayout title="El Dorado | Atlas Aeterna">
 
-  <h1>El Dorado</h1>
+  <section class="case-header">
+
+    <h1>El Dorado</h1>
+
+    <p class="case-intro">
+      El Dorado is one of history's most enduring legends — a story
+      of extraordinary wealth that inspired explorers to search the
+      landscapes of South America for a place they believed could hold
+      unimaginable riches.
+    </p>
+
+  </section>
+
+
+  <section class="timeline-section">
+
+    <h2>Timeline</h2>
+
+
+    <div class="timeline">
+
+      <article class="timeline-item">
+
+        <div class="timeline-marker"></div>
+
+        <div class="timeline-content">
+
+          <p class="timeline-date">
+            16th Century
+          </p>
+
+          <h3>The Legend Emerges</h3>
+
+          <p>
+            Early stories of extraordinary wealth begin to capture
+            the attention of European explorers in South America.
+          </p>
+
+        </div>
+
+      </article>
+
+
+      <article class="timeline-item">
+
+        <div class="timeline-marker"></div>
+
+        <div class="timeline-content">
+
+          <p class="timeline-date">
+            Age of Exploration
+          </p>
+
+          <h3>The Search for El Dorado</h3>
+
+          <p>
+            Expeditions travel across vast areas of South America
+            in search of the legendary source of the stories.
+          </p>
+
+        </div>
+
+      </article>
+
+
+      <article class="timeline-item">
+
+        <div class="timeline-marker"></div>
+
+        <div class="timeline-content">
+
+          <p class="timeline-date">
+            Modern Era
+          </p>
+
+          <h3>A Changing Understanding</h3>
+
+          <p>
+            Historical and archaeological research continues to
+            reshape how the origins of the El Dorado legend are
+            understood.
+          </p>
+
+        </div>
+
+      </article>
+
+    </div>
+
+  </section>
 
 </BaseLayout>
+
+
+<style>
+
+  /* ---------------------------------- */
+  /* CASE HEADER                        */
+  /* ---------------------------------- */
+
+  .case-header {
+    max-width: 900px;
+
+    padding: 70px 0 60px;
+  }
+
+
+  h1 {
+    margin: 0 0 30px;
+
+    color: #171719;
+
+    font-size: clamp(56px, 8vw, 96px);
+
+    font-weight: 400;
+
+    line-height: 1.05;
+
+    letter-spacing: 0.02em;
+  }
+
+
+  .case-intro {
+    max-width: 760px;
+
+    margin: 0;
+
+    color: #626267;
+
+    font-size: clamp(18px, 2vw, 22px);
+
+    line-height: 1.8;
+  }
+
+
+  /* ---------------------------------- */
+  /* TIMELINE SECTION                   */
+  /* ---------------------------------- */
+
+  .timeline-section {
+    max-width: 900px;
+
+    padding: 30px 0 80px;
+  }
+
+
+  .timeline-section h2 {
+    margin: 0 0 40px;
+
+    color: #171719;
+
+    font-size: 36px;
+    font-weight: 400;
+  }
+
+
+  /* ---------------------------------- */
+  /* TIMELINE                           */
+  /* ---------------------------------- */
+
+  .timeline {
+    position: relative;
+
+    padding-left: 38px;
+  }
+
+
+  /* VERTICAL LINE */
+
+  .timeline::before {
+    content: "";
+
+    position: absolute;
+
+    top: 8px;
+    bottom: 8px;
+    left: 7px;
+
+    width: 2px;
+
+    background:
+      linear-gradient(
+        to bottom,
+        rgba(107, 157, 252, 0.55),
+        rgba(166, 135, 244, 0.35),
+        rgba(242, 185, 141, 0.35)
+      );
+
+    border-radius: 999px;
+  }
+
+
+  /* ---------------------------------- */
+  /* INDIVIDUAL EVENT                   */
+  /* ---------------------------------- */
+
+  .timeline-item {
+    position: relative;
+
+    margin-bottom: 24px;
+  }
+
+
+  .timeline-item:last-child {
+    margin-bottom: 0;
+  }
+
+
+  /* DOT ON TIMELINE */
+
+  .timeline-marker {
+    width: 16px;
+    height: 16px;
+
+    position: absolute;
+
+    top: 30px;
+    left: -38px;
+
+    background: #ffffff;
+
+    border: 4px solid #8ba8ee;
+    border-radius: 50%;
+
+    box-shadow:
+      0 3px 10px
+      rgba(70, 90, 140, 0.15);
+  }
+
+
+  /* EVENT CARD */
+
+  .timeline-content {
+    padding: 26px 30px;
+
+    background:
+      rgba(255, 255, 255, 0.75);
+
+    border:
+      1px solid
+      rgba(20, 20, 25, 0.06);
+
+    border-radius: 20px;
+
+    box-shadow:
+      0 10px 30px
+      rgba(50, 55, 75, 0.05);
+
+    transition:
+      transform 0.2s ease,
+      box-shadow 0.2s ease;
+  }
+
+
+  .timeline-content:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+      0 14px 34px
+      rgba(50, 55, 75, 0.09);
+  }
+
+
+  /* DATE */
+
+  .timeline-date {
+    margin: 0 0 12px;
+
+    color: #8297c9;
+
+    font-size: 11px;
+
+    letter-spacing: 0.12em;
+
+    text-transform: uppercase;
+  }
+
+
+  /* EVENT TITLE */
+
+  .timeline-content h3 {
+    margin: 0 0 12px;
+
+    color: #171719;
+
+    font-size: 20px;
+    font-weight: 400;
+
+    line-height: 1.4;
+  }
+
+
+  /* EVENT DESCRIPTION */
+
+  .timeline-content p:last-child {
+    max-width: 680px;
+
+    margin: 0;
+
+    color: #6e6e73;
+
+    font-size: 14px;
+
+    line-height: 1.8;
+  }
+
+
+  /* ---------------------------------- */
+  /* MOBILE                             */
+  /* ---------------------------------- */
+
+  @media (max-width: 600px) {
+
+    .case-header {
+      padding: 50px 0 40px;
+    }
+
+
+    h1 {
+      margin-bottom: 24px;
+
+      font-size: 48px;
+    }
+
+
+    .case-intro {
+      font-size: 16px;
+    }
+
+
+    .timeline-section {
+      padding-top: 20px;
+    }
+
+
+    .timeline-section h2 {
+      margin-bottom: 30px;
+
+      font-size: 30px;
+    }
+
+
+    .timeline {
+      padding-left: 30px;
+    }
+
+
+    .timeline::before {
+      left: 6px;
+    }
+
+
+    .timeline-marker {
+      width: 14px;
+      height: 14px;
+
+      top: 26px;
+      left: -30px;
+
+      border-width: 3px;
+    }
+
+
+    .timeline-content {
+      padding: 22px;
+
+      border-radius: 18px;
+    }
+
+
+    .timeline-content h3 {
+      font-size: 18px;
+    }
+
+  }
+
+</style>
