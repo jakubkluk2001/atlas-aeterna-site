@@ -3,5 +3,83 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
 <BaseLayout title="Mysteries | Atlas Aeterna">
+
   <h1>Mysteries</h1>
+
+  <div class="case-files">
+
+    <a class="case-file" href="/mysteries/el-dorado">
+      El Dorado
+    </a>
+
+    <a class="case-file" href="/mysteries/oak-island">
+      Oak Island
+    </a>
+
+    <a class="case-file" href="/mysteries/atlantis">
+      Atlantis
+    </a>
+
+  </div>
+
 </BaseLayout>
+
+<style>
+
+  .case-files {
+    display: grid;
+
+    grid-template-columns:
+      repeat(
+        auto-fit,
+        minmax(220px, 1fr)
+      );
+
+    gap: 16px;
+
+    margin-top: 20px;
+  }
+
+
+  .case-file {
+    min-width: 0;
+
+    padding: 22px 28px;
+
+    display: flex;
+    align-items: center;
+
+    color: #171719;
+    background: #ffffff;
+
+    border: 1px solid rgba(20, 20, 25, 0.08);
+    border-radius: 18px;
+
+    box-shadow:
+      0 8px 24px rgba(50, 55, 75, 0.06);
+
+    text-decoration: none;
+
+    transition:
+      transform 0.2s ease,
+      box-shadow 0.2s ease;
+  }
+
+
+  .case-file:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+      0 12px 30px rgba(50, 55, 75, 0.10);
+  }
+
+
+  @media (max-width: 500px) {
+
+    .case-files {
+      grid-template-columns: 1fr;
+    }
+
+  }
+
+</style>
