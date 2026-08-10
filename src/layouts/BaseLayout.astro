@@ -1,7 +1,15 @@
 ---
-const { title = "Atlas Aeterna" } = Astro.props;
+const {
+  title = "Atlas Aeterna",
+  description = "Explore history, geography, mysteries and legendary places with Atlas Aeterna."
+} = Astro.props;
 
 const pathname = Astro.url.pathname;
+
+const canonicalURL = new URL(
+  pathname,
+  Astro.site
+).href;
 
 const isActive = (path: string) => {
   if (path === "/") {
@@ -34,6 +42,8 @@ const isActive = (path: string) => {
     />
 
     <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL} />
   </head>
 
   <body>
