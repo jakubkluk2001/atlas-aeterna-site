@@ -45,10 +45,9 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
         <h1>El Dorado</h1>
 
         <p class="case-intro">
-          El Dorado is one of history's most enduring legends — a story
-          of extraordinary wealth that inspired explorers to search the
-          landscapes of South America for a place they believed could hold
-          unimaginable riches.
+          El Dorado is one of history’s most enduring legends, a 
+          tale of gold, discovery and a hidden land of extraordinary 
+          wealth somewhere in the vast landscapes of South America.
         </p>
       </div>
 
@@ -94,8 +93,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
         </div>
 
         <figcaption class="map-caption">
-          Approximate region associated with the origins of the
-          El Dorado legend in northern South America.
+          Approximate region associated with the origins of the El Dorado legend in present-day Colombia.
         </figcaption>
       </figure>
     </section>
@@ -121,14 +119,14 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 
             <div class="timeline-content">
               <p class="timeline-date">
-                16th Century
+                Before European Contact
               </p>
 
-              <h3>The Legend Emerges</h3>
+              <h3>The Sacred Lake</h3>
 
               <p>
-                Early stories of extraordinary wealth begin to capture
-                the attention of European explorers in South America.
+                Lake Guatavita formed part of a sacred Muisca landscape where ritual offerings were made, traditions that would 
+                later become closely connected with the legend of El Dorado.
               </p>
             </div>
           </article>
@@ -141,14 +139,14 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 
             <div class="timeline-content">
               <p class="timeline-date">
-                Age of Exploration
+                1537
               </p>
 
-              <h3>The Search for El Dorado</h3>
+              <h3>The Spanish Encounter the Muisca</h3>
 
               <p>
-                Expeditions travel across vast areas of South America
-                in search of the legendary source of the stories.
+                Gonzalo Jiménez de Quesada and his expedition enter Muisca territory, beginning Spanish contact with the 
+                culture and region that would become central to the El Dorado legend.
               </p>
             </div>
           </article>
@@ -161,15 +159,114 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 
             <div class="timeline-content">
               <p class="timeline-date">
-                Modern Era
+                1562
               </p>
 
-              <h3>A Changing Understanding</h3>
+              <h3>The Search Turns to Guatavita</h3>
 
               <p>
-                Historical and archaeological research continues to
-                reshape how the origins of the El Dorado legend are
-                understood.
+                Antonio de Sepúlveda receives royal permission to recover the riches believed to lie beneath Lake Guatavita, 
+                beginning an ambitious effort to uncover its hidden offerings.
+              </p>
+            </div>
+          </article>
+
+
+          <!-- EVENT 4 -->
+
+          <article class="timeline-item">
+            <div class="timeline-marker" aria-hidden="true"></div>
+
+            <div class="timeline-content">
+              <p class="timeline-date">
+                1590–1595
+              </p>
+
+              <h3>The Legend Moves East</h3>
+
+              <p>
+                Spanish expeditions push the search for El Dorado into Guiana and the Orinoco, where the legend becomes 
+                increasingly associated with Manoa, a great city or kingdom of extraordinary wealth.
+              </p>
+            </div>
+          </article>
+
+
+          <!-- EVENT 5 -->
+
+          <article class="timeline-item">
+            <div class="timeline-marker" aria-hidden="true"></div>
+
+            <div class="timeline-content">
+              <p class="timeline-date">
+                1595–1618
+              </p>
+
+              <h3>Raleigh’s Search for El Dorado</h3>
+
+              <p>
+                Walter Raleigh leads two expeditions into Guiana in pursuit of El Dorado, exploring the Orinoco and searching for 
+                the great golden city of Manoa. His final expedition ends in disaster.
+              </p>
+            </div>
+          </article>
+
+
+          <!-- EVENT 6 -->
+
+          <article class="timeline-item">
+            <div class="timeline-marker" aria-hidden="true"></div>
+
+            <div class="timeline-content">
+              <p class="timeline-date">
+                1911–1912
+              </p>
+
+              <h3>Guatavita Is Drained</h3>
+
+              <p>
+                An ambitious British operation lowers the lake in search of its legendary treasure, revealing the difficult mud-
+                covered floor beneath the waters.
+              </p>
+            </div>
+          </article>
+
+
+          <!-- EVENT 7 -->
+
+          <article class="timeline-item">
+            <div class="timeline-marker" aria-hidden="true"></div>
+
+            <div class="timeline-content">
+              <p class="timeline-date">
+                1969
+              </p>
+
+              <h3>A Legend Cast in Gold</h3>
+
+              <p>
+                A remarkable gold raft is discovered in a cave near Pasca, Cundinamarca. The Muisca votive piece depicts a 
+                ceremonial scene closely associated with the traditions surrounding El Dorado.
+              </p>
+            </div>
+          </article>
+
+
+          <!-- EVENT 8 -->
+
+          <article class="timeline-item">
+            <div class="timeline-marker" aria-hidden="true"></div>
+
+            <div class="timeline-content">
+              <p class="timeline-date">
+                2009
+              </p>
+
+              <h3>Archaeology Returns to Guatavita</h3>
+
+              <p>
+                An archaeological survey around Lake Guatavita uncovers evidence of a Muisca shrine and ritual offerings, 
+                revealing more about the sacred landscape at the heart of the El Dorado legend.
               </p>
             </div>
           </article>
@@ -960,8 +1057,8 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 
     position: absolute;
 
-    top: 47%;
-    left: 27%;
+    top: 47.5%;
+    left: 27.5%;
 
     transform: translate(-50%, -50%);
     pointer-events: none;
@@ -1180,7 +1277,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
   }
 
 
-  .timeline-item:nth-child(2) .timeline-marker {
+  .timeline-item:nth-child(3n + 2) .timeline-marker {
     background:
       radial-gradient(
         circle at 31% 26%,
@@ -1196,7 +1293,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
   }
 
 
-  .timeline-item:nth-child(3) .timeline-marker {
+  .timeline-item:nth-child(3n) .timeline-marker {
     background:
       radial-gradient(
         circle at 31% 26%,
@@ -1265,7 +1362,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
   }
 
 
-  .timeline-item:nth-child(2) .timeline-content::before {
+  .timeline-item:nth-child(3n + 2) .timeline-content::before {
     background:
       radial-gradient(
         circle,
@@ -1275,7 +1372,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
   }
 
 
-  .timeline-item:nth-child(3) .timeline-content::before {
+  .timeline-item:nth-child(3n) .timeline-content::before {
     background:
       radial-gradient(
         circle,
@@ -1313,12 +1410,12 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
   }
 
 
-  .timeline-item:nth-child(2) .timeline-date {
+  .timeline-item:nth-child(3n + 2) .timeline-date {
     color: #967fbd;
   }
 
 
-  .timeline-item:nth-child(3) .timeline-date {
+  .timeline-item:nth-child(3n) .timeline-date {
     color: #ae7f47;
   }
 
