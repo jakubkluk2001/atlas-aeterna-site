@@ -1,4 +1,7 @@
 ---
+import Analytics from '@vercel/analytics/astro';
+import SpeedInsights from '@vercel/speed-insights/astro';
+
 interface Props {
   title?: string;
   description?: string;
@@ -57,6 +60,8 @@ const isActive = (path: string) => {
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalURL} />
+
+    <Analytics />
   </head>
 
   <body>
@@ -210,6 +215,8 @@ const isActive = (path: string) => {
         });
       }
     </script>
+
+    <SpeedInsights />
   </body>
 </html>
 
