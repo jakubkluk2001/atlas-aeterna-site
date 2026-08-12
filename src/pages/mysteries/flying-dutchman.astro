@@ -79,7 +79,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
               class="map-image"
               src="/blank-map-world.svg"
               alt="World map showing the approximate region around the Cape of Good Hope associated with the Flying Dutchman legend"
-              loading="lazy"
+              loading="eager"
             />
 
             <div
@@ -1664,22 +1664,12 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
     }
 
     .map-viewport {
-      aspect-ratio: 16 / 9;
+      /* Keep the same crop proportions as the desktop map. */
+      aspect-ratio: 16 / 8.5;
 
       border-radius: 17px;
     }
 
-    /*
-      Mobile needs a slightly wider view and a separate
-      position because the map viewport is a different shape.
-      These values keep southern Africa and the marker visible.
-    */
-    .map-world {
-      width: 210%;
-
-      left: -60%;
-      top: -88%;
-    }
 
     .map-grid {
       background-size: 34px 34px;
