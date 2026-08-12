@@ -78,7 +78,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
             <img
               class="map-image"
               src="/blank-map-world.svg"
-              alt="World map showing the approximate region associated with El Dorado"
+              alt="World map showing the approximate region around the Cape of Good Hope associated with the Flying Dutchman legend"
               loading="lazy"
             />
 
@@ -1610,9 +1610,9 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
     h1 {
       max-width: 100%;
       
-      font-size: clamp(44px, 14vw, 72px);
+      font-size: clamp(36px, 11vw, 56px);
       line-height: 0.96;
-      letter-spacing: 0.028em;
+      letter-spacing: 0.020em;
     }
 
     .case-intro {
@@ -1667,6 +1667,18 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
       aspect-ratio: 16 / 9;
 
       border-radius: 17px;
+    }
+
+    /*
+      Mobile needs a slightly wider view and a separate
+      position because the map viewport is a different shape.
+      These values keep southern Africa and the marker visible.
+    */
+    .map-world {
+      width: 210%;
+
+      left: -60%;
+      top: -88%;
     }
 
     .map-grid {

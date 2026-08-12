@@ -1662,7 +1662,8 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
     }
 
     .map-viewport {
-      aspect-ratio: 16 / 9;
+      /* Match the desktop proportions so the map crop does not shift. */
+      aspect-ratio: 16 / 8.5;
 
       border-radius: 17px;
     }
