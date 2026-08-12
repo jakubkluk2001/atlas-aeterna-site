@@ -1,9 +1,18 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 
+const evidenceStatuses = {
+  strong: "Strong Evidence",
+  supporting: "Supporting Evidence",
+  inconclusive: "Inconclusive",
+  disputed: "Disputed",
+  against: "Evidence Against",
+  unsupported: "Unsupported",
+} as const;
+
 type EvidenceFit = "cover" | "contain";
 type EvidenceTone = "blue" | "gold" | "violet" | "neutral";
-type EvidenceStatusTone = "strong" | "supporting" | "indirect" | "unsupported";
+type EvidenceStatusTone = keyof typeof evidenceStatuses;
 
 interface EvidenceItem {
   id: string;
@@ -11,10 +20,7 @@ interface EvidenceItem {
   type: string;
   title: string;
   description: string;
-  status: {
-    label: string;
-    tone: EvidenceStatusTone;
-  };
+  status: EvidenceStatusTone;
   image: string | null;
   alt: string;
   fit: EvidenceFit;
@@ -29,6 +35,9 @@ interface EvidenceItem {
   Evidence visuals use a standard 4:3 frame with `cover` as the default.
   Change an individual item to `contain` only if cropping removes important detail.
   The fallback panel is the finished visual treatment for evidence without an image.
+
+  Available evidence statuses are fixed in `evidenceStatuses` above so every
+  mystery uses the same labels. Their colours are defined in the evidence CSS.
 */
 
 const featuredEvidence: EvidenceItem = {
@@ -37,11 +46,8 @@ const featuredEvidence: EvidenceItem = {
   type: "Archaeological object",
   title: "The Muisca Raft",
   description:
-    "Discovered near Pasca in 1969, the gold votive object depicts a central figure aboard a raft surrounded by attendants. It gives material form to the ceremonial tradition most closely associated with the origins of El Dorado.",
-  status: {
-    label: "Strong support",
-    tone: "strong",
-  },
+    "Discovered near Pasca in 1969, the gold-alloy votive object depicts a central figure aboard a raft surrounded by attendants. It gives material form to the ceremonial tradition most closely associated with the origins of El Dorado.",
+  status: "strong",
   image: "/images/mysteries/el-dorado/muisca-raft.webp",
   alt: "Gold Muisca votive raft depicting a central figure surrounded by attendants",
   fit: "cover",
@@ -49,7 +55,7 @@ const featuredEvidence: EvidenceItem = {
   meta: [
     { label: "Discovered", value: "1969" },
     { label: "Found near", value: "Pasca, Colombia" },
-    { label: "Form", value: "Gold votive object" },
+    { label: "Form", value: "Gold-alloy votive object" },
   ],
 };
 
@@ -60,11 +66,8 @@ const supportingEvidence: EvidenceItem[] = [
     type: "Location",
     title: "Lake Guatavita",
     description:
-      "Lake Guatavita formed part of a sacred Muisca landscape where ritual offerings were made. Its significance grounds the legend in a real place, even though the later idea of a hidden golden city reaches far beyond it.",
-    status: {
-      label: "Supporting",
-      tone: "supporting",
-    },
+      "Lake Guatavita formed part of a sacred Muisca landscape where ritual offerings were made. The lake supports the ceremonial origin of the legend, but its existence alone does not establish the later story of a hidden golden city.",
+    status: "supporting",
     image: "/images/mysteries/el-dorado/lake-guatavita.webp",
     alt: "Aerial view of Lake Guatavita in Colombia",
     fit: "cover",
@@ -82,10 +85,7 @@ const supportingEvidence: EvidenceItem[] = [
     title: "Muisca Votive Offerings",
     description:
       "Other Muisca votive objects show that the raft was not an isolated piece. Gold-alloy offerings belonged to a wider ceremonial tradition connected with sacred places and acts of deposition.",
-    status: {
-      label: "Supporting",
-      tone: "supporting",
-    },
+    status: "supporting",
     image: "/images/mysteries/el-dorado/muisca-votive-offerings.webp",
     alt: "A group of small Muisca gold-alloy votive figures",
     fit: "cover",
@@ -102,11 +102,8 @@ const supportingEvidence: EvidenceItem[] = [
     type: "Historical record",
     title: "The Written Accounts",
     description:
-      "Colonial-era accounts preserved stories of a gilded ruler and offerings at a sacred lake, but they were recorded through European retelling. They help trace how the legend spread while remaining indirect evidence.",
-    status: {
-      label: "Indirect",
-      tone: "indirect",
-    },
+      "Colonial-era accounts preserved stories of a gilded ruler and offerings at a sacred lake. They support the ceremonial tradition behind El Dorado, although their later European retelling means they are contextual rather than decisive evidence.",
+    status: "supporting",
     image: "/images/mysteries/el-dorado/written-accounts.webp",
     alt: "Detail from an early historical manuscript associated with accounts of El Dorado",
     fit: "cover",
@@ -114,20 +111,71 @@ const supportingEvidence: EvidenceItem[] = [
     meta: [
       { label: "Period", value: "Colonial era" },
       { label: "Form", value: "Written testimony" },
-      { label: "Limit", value: "Indirect retelling" },
+      { label: "Limit", value: "Later retelling" },
+    ],
+  },
+  {
+    id: "guatavita-finds",
+    number: "05",
+    type: "Recovered material",
+    title: "Finds from Guatavita",
+    description:
+      "Searches of Lake Guatavita recovered objects associated with Muisca offering practices, but nothing approaching the immense treasure imagined by later expeditions. The finds support ritual deposition without resolving the legend's larger claims.",
+    status: "inconclusive",
+    image: "/images/mysteries/el-dorado/finds-from-guatavita.webp",
+    alt: "Historic artefacts associated with searches of Lake Guatavita",
+    fit: "cover",
+    tone: "blue",
+    meta: [
+      { label: "Result", value: "Offerings recovered" },
+      { label: "Supports", value: "Ritual deposition" },
+      { label: "Does not show", value: "Legendary treasure" },
+    ],
+  },
+  {
+    id: "gilded-chief-ceremony",
+    number: "06",
+    type: "Historical interpretation",
+    title: "The Gilded Chief Ceremony",
+    description:
+      "The famous image of a newly invested ruler covered in gold dust and entering the lake comes principally through colonial accounts. It may preserve an older Muisca tradition, but the ceremony's exact form and details cannot be independently confirmed.",
+    status: "disputed",
+    image: "/images/mysteries/el-dorado/gilded-chief-ceremony.webp",
+    alt: "Historical depiction of the gilded chief ceremony associated with El Dorado",
+    fit: "cover",
+    tone: "gold",
+    meta: [
+      { label: "Source", value: "Colonial accounts" },
+      { label: "Claim", value: "Gilded ruler ritual" },
+      { label: "Limit", value: "Exact form uncertain" },
+    ],
+  },
+  {
+    id: "lake-parime-manoa",
+    number: "07",
+    type: "Cartographic claim",
+    title: "Lake Parime & Manoa",
+    description:
+      "European maps placed Manoa beside a vast Lake Parime in Guiana, turning El Dorado into a fixed geographical destination. Later exploration failed to confirm that landscape as mapped, weakening this eastern golden-city version of the legend.",
+    status: "against",
+    image: "/images/mysteries/el-dorado/lake-parime-manoa.webp",
+    alt: "Historical map showing Lake Parime and the supposed city of Manoa",
+    fit: "cover",
+    tone: "violet",
+    meta: [
+      { label: "Region", value: "Guiana" },
+      { label: "Claim", value: "Manoa by Lake Parime" },
+      { label: "Outcome", value: "Geography not confirmed" },
     ],
   },
   {
     id: "golden-city",
-    number: "05",
+    number: "08",
     type: "Absence of evidence",
     title: "The Golden City",
     description:
       "No archaeological discovery has established the vast golden city or kingdom later pursued across South America. This is where the surviving evidence ends and the expanded European legend begins.",
-    status: {
-      label: "Unsupported",
-      tone: "unsupported",
-    },
+    status: "unsupported",
     image: null,
     alt: "",
     fit: "cover",
@@ -429,12 +477,12 @@ const supportingEvidence: EvidenceItem[] = [
         <header class="evidence-overview">
           <div class="evidence-overview__intro">
             <p class="evidence-overline">The surviving record</p>
-            <h3>A real ritual behind a larger legend</h3>
+            <h3>One defining artefact behind a larger legend</h3>
           </div>
 
           <div class="evidence-overview__aside">
             <p class="evidence-summary">
-              The evidence supports a real Muisca ceremonial tradition of sacred waters and gold offerings. It does not establish the later European vision of a hidden golden city.
+              The Muisca Raft is the strongest surviving material link between El Dorado and a real ceremonial tradition. The surrounding evidence supports that origin, while the later golden-city story becomes increasingly uncertain.
             </p>
           </div>
         </header>
@@ -482,10 +530,10 @@ const supportingEvidence: EvidenceItem[] = [
               <span
                 class:list={[
                   "evidence-status",
-                  `evidence-status--${featuredEvidence.status.tone}`,
+                  `evidence-status--${featuredEvidence.status}`,
                 ]}
               >
-                {featuredEvidence.status.label}
+                {evidenceStatuses[featuredEvidence.status]}
               </span>
             </div>
 
@@ -552,10 +600,10 @@ const supportingEvidence: EvidenceItem[] = [
                   <span
                     class:list={[
                       "evidence-status",
-                      `evidence-status--${item.status.tone}`,
+                      `evidence-status--${item.status}`,
                     ]}
                   >
-                    {item.status.label}
+                    {evidenceStatuses[item.status]}
                   </span>
                 </div>
 
@@ -2009,6 +2057,15 @@ const supportingEvidence: EvidenceItem[] = [
   }
 
 
+  /* Keep an odd final card at the same width as the others and centre it. */
+  .evidence-card:last-child:nth-child(odd):not(:only-child) {
+    width: calc((100% - 18px) / 2);
+
+    grid-column: 1 / -1;
+    justify-self: center;
+  }
+
+
   .evidence-card__body {
     min-width: 0;
     flex: 1;
@@ -2339,6 +2396,12 @@ const supportingEvidence: EvidenceItem[] = [
 
 
   .evidence-status {
+    --status-color: #606775;
+    --status-background: rgba(255, 255, 255, 0.52);
+    --status-border: rgba(255, 255, 255, 0.82);
+    --status-dot: #9aa0ad;
+    --status-glow: rgba(154, 160, 173, 0.10);
+
     display: inline-flex;
     align-items: center;
 
@@ -2346,10 +2409,10 @@ const supportingEvidence: EvidenceItem[] = [
 
     padding: 7px 10px;
 
-    color: #606775;
-    background: rgba(255, 255, 255, 0.52);
+    color: var(--status-color);
+    background: var(--status-background);
 
-    border: 1px solid rgba(255, 255, 255, 0.82);
+    border: 1px solid var(--status-border);
     border-radius: 999px;
 
     box-shadow:
@@ -2374,36 +2437,65 @@ const supportingEvidence: EvidenceItem[] = [
 
     display: block;
 
-    background: #9aa0ad;
+    background: var(--status-dot);
     border-radius: 50%;
 
-    box-shadow: 0 0 0 3px rgba(154, 160, 173, 0.10);
+    box-shadow: 0 0 0 3px var(--status-glow);
   }
 
 
-  .evidence-status--strong::before {
-    background: #bd8847;
-    box-shadow: 0 0 0 3px rgba(189, 136, 71, 0.11);
+  .evidence-status--strong {
+    --status-color: #5578b8;
+    --status-background: rgba(111, 151, 220, 0.11);
+    --status-border: rgba(111, 151, 220, 0.19);
+    --status-dot: #668bd0;
+    --status-glow: rgba(102, 139, 208, 0.13);
   }
 
 
-  .evidence-status--supporting::before {
-    background: #789bdb;
-    box-shadow: 0 0 0 3px rgba(120, 155, 219, 0.11);
+  .evidence-status--supporting {
+    --status-color: #846ba8;
+    --status-background: rgba(154, 126, 197, 0.10);
+    --status-border: rgba(154, 126, 197, 0.18);
+    --status-dot: #9277bb;
+    --status-glow: rgba(146, 119, 187, 0.13);
   }
 
 
-  .evidence-status--indirect::before {
-    background: #9a80c2;
-    box-shadow: 0 0 0 3px rgba(154, 128, 194, 0.11);
+  .evidence-status--inconclusive {
+    --status-color: #70798a;
+    --status-background: rgba(135, 145, 163, 0.095);
+    --status-border: rgba(135, 145, 163, 0.17);
+    --status-dot: #8791a3;
+    --status-glow: rgba(135, 145, 163, 0.12);
   }
 
 
-  .evidence-status--unsupported::before {
-    background: #858b98;
-    box-shadow: 0 0 0 3px rgba(133, 139, 152, 0.10);
+  .evidence-status--disputed {
+    --status-color: #9e7138;
+    --status-background: rgba(210, 163, 96, 0.115);
+    --status-border: rgba(199, 145, 76, 0.20);
+    --status-dot: #c08a47;
+    --status-glow: rgba(192, 138, 71, 0.13);
   }
 
+
+  .evidence-status--against {
+    --status-color: #9d6259;
+    --status-background: rgba(194, 117, 104, 0.105);
+    --status-border: rgba(186, 116, 104, 0.18);
+    --status-dot: #ba7468;
+    --status-glow: rgba(186, 116, 104, 0.13);
+  }
+
+
+  .evidence-status--unsupported {
+    --status-color: #626873;
+    --status-background: rgba(112, 119, 132, 0.09);
+    --status-border: rgba(112, 119, 132, 0.16);
+    --status-dot: #777e8a;
+    --status-glow: rgba(119, 126, 138, 0.12);
+  }
 
   .evidence-featured__content h3,
   .evidence-card h3 {
@@ -2866,6 +2958,10 @@ const supportingEvidence: EvidenceItem[] = [
       grid-template-columns: 1fr;
 
       gap: 15px;
+    }
+
+    .evidence-card:last-child:nth-child(odd):not(:only-child) {
+      width: 100%;
     }
 
     .evidence-card {
