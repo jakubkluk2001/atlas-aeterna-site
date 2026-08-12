@@ -2,32 +2,1774 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 ---
 
-<BaseLayout title="Mystery Case | Atlas Aeterna">
-  <section class="placeholder">
-    <h1>Case File in Development</h1>
-    <p>This mystery is currently being developed.</p>
-  </section>
+<BaseLayout
+  title="Flying Dutchman | Atlas Aeterna"
+  description="Explore the Flying Dutchman, the legendary ghost ship associated with the Cape of Good Hope, and the history and folklore behind its enduring mystery."
+>
+  <article class="case-page">
+    <!-- -------------------------------- -->
+    <!-- CASE HEADER                      -->
+    <!-- -------------------------------- -->
+
+    <section class="case-header">
+      <svg
+        class="header-contours"
+        viewBox="0 0 620 620"
+        fill="none"
+        aria-hidden="true"
+      >
+        <path d="M-36 448C42 357 98 386 158 314C216 245 221 157 318 112C414 67 499 107 656 -14" />
+        <path d="M-18 485C63 396 128 418 190 346C254 270 263 188 354 143C450 96 529 131 651 39" />
+        <path d="M7 523C85 446 159 453 224 384C294 311 304 225 390 182C476 139 548 155 644 95" />
+        <path d="M48 562C124 504 189 499 260 432C334 363 349 284 426 241C500 200 562 204 637 164" />
+        <path d="M114 601C187 549 246 544 314 485C383 423 400 347 468 304C530 265 582 264 637 241" />
+      </svg>
+
+      <div class="case-object" aria-hidden="true">
+        <span class="case-object__orbit case-object__orbit--outer"></span>
+        <span class="case-object__orbit case-object__orbit--middle"></span>
+        <span class="case-object__orbit case-object__orbit--inner"></span>
+        <span class="case-object__axis"></span>
+
+        <span class="case-object__sphere">
+          <span class="case-object__latitude case-object__latitude--one"></span>
+          <span class="case-object__latitude case-object__latitude--two"></span>
+          <span class="case-object__meridian"></span>
+        </span>
+
+        <span class="case-object__node case-object__node--one"></span>
+        <span class="case-object__node case-object__node--two"></span>
+      </div>
+
+      <div class="case-header__content">
+        <h1>Flying Dutchman</h1>
+
+        <p class="case-intro">
+          The Flying Dutchman is one of maritime folklore’s most enduring 
+          legends, a phantom ship said to wander the seas without rest, most 
+          famously associated with the waters around the Cape of Good Hope.
+        </p>
+      </div>
+
+      <span class="edge-mark edge-mark--top-left" aria-hidden="true"></span>
+      <span class="edge-mark edge-mark--top-right" aria-hidden="true"></span>
+      <span class="edge-mark edge-mark--bottom-left" aria-hidden="true"></span>
+      <span class="edge-mark edge-mark--bottom-right" aria-hidden="true"></span>
+    </section>
+
+
+    <!-- -------------------------------- -->
+    <!-- LOCATION                         -->
+    <!-- -------------------------------- -->
+
+    <section class="content-section map-section">
+      <div class="section-heading">
+        <span class="section-number" aria-hidden="true">01</span>
+        <h2>Location</h2>
+        <span class="section-rule" aria-hidden="true"></span>
+      </div>
+
+      <figure class="map-card">
+        <div class="map-viewport">
+          <span class="map-grid" aria-hidden="true"></span>
+          <span class="map-compass" aria-hidden="true"></span>
+
+          <div class="map-world">
+            <img
+              class="map-image"
+              src="/blank-map-world.svg"
+              alt="World map showing the approximate region associated with El Dorado"
+              loading="lazy"
+            />
+
+            <div
+              class="map-marker"
+              aria-hidden="true"
+            >
+              <span class="marker-area"></span>
+              <span class="marker-core"></span>
+            </div>
+          </div>
+        </div>
+
+        <figcaption class="map-caption">
+          Approximate region associated with the Flying Dutchman legend in the waters around the Cape of Good Hope.
+        </figcaption>
+      </figure>
+    </section>
+
+
+    <!-- -------------------------------- -->
+    <!-- TIMELINE                         -->
+    <!-- -------------------------------- -->
+
+    <section class="content-section timeline-section">
+      <div class="section-heading">
+        <span class="section-number" aria-hidden="true">02</span>
+        <h2>Timeline</h2>
+        <span class="section-rule" aria-hidden="true"></span>
+      </div>
+
+      <div class="timeline-shell">
+        <div class="timeline">
+          <!-- EVENT 1 -->
+
+          <article class="timeline-item">
+            <div class="timeline-marker" aria-hidden="true"></div>
+
+            <div class="timeline-content">
+              <p class="timeline-date">
+                1790
+              </p>
+
+              <h3>The Flying Dutchman Appears in Print</h3>
+
+              <p>
+                John MacDonald records sailors claiming to see the Flying Dutchman near the Cape of Good Hope, providing the 
+                earliest known surviving printed reference to a legend already circulating at sea.
+              </p>
+            </div>
+          </article>
+
+
+          <!-- EVENT 2 -->
+
+          <article class="timeline-item">
+            <div class="timeline-marker" aria-hidden="true"></div>
+
+            <div class="timeline-content">
+              <p class="timeline-date">
+                1795
+              </p>
+
+              <h3>The Legend Takes Shape</h3>
+
+              <p>
+                A Voyage to New South Wales gives the Flying Dutchman a more developed story, describing a Dutch warship 
+                lost off the Cape whose apparition was later seen during another violent storm, before the tale spread among 
+                sailors.
+              </p>
+            </div>
+          </article>
+
+
+          <!-- EVENT 3 -->
+
+          <article class="timeline-item">
+            <div class="timeline-marker" aria-hidden="true"></div>
+
+            <div class="timeline-content">
+              <p class="timeline-date">
+                1803–1813
+              </p>
+
+              <h3>The Dutchman’s Doom Deepens</h3>
+
+              <p>
+                John Leyden describes a crew condemned to wander the seas after a terrible crime and pestilence, while Walter 
+                Scott later links the phantom ship with murder, piracy and an ominous fate.
+              </p>
+            </div>
+          </article>
+
+
+          <!-- EVENT 4 -->
+
+          <article class="timeline-item">
+            <div class="timeline-marker" aria-hidden="true"></div>
+
+            <div class="timeline-content">
+              <p class="timeline-date">
+                1821
+              </p>
+
+              <h3>The Legend Finds Its Captain</h3>
+
+              <p>
+                John Howison’s Vanderdecken’s Message Home introduces Captain Vanderdecken, who vows to continue 
+                battling the winds around the Cape until Judgement Day, giving the legend one of its most enduring forms.
+              </p>
+            </div>
+          </article>
+
+
+          <!-- EVENT 5 -->
+
+          <article class="timeline-item">
+            <div class="timeline-marker" aria-hidden="true"></div>
+
+            <div class="timeline-content">
+              <p class="timeline-date">
+                1834
+              </p>
+
+              <h3>Love Offers an Escape</h3>
+
+              <p>
+                Heinrich Heine’s retelling gives the Dutchman a chance of redemption, allowing him ashore once every seven 
+                years to seek a woman whose unwavering love and faithfulness could free him from his curse.
+              </p>
+            </div>
+          </article>
+
+
+          <!-- EVENT 6 -->
+
+          <article class="timeline-item">
+            <div class="timeline-marker" aria-hidden="true"></div>
+
+            <div class="timeline-content">
+              <p class="timeline-date">
+                1837–1839
+              </p>
+
+              <h3>A Son Searches for the Dutchman</h3>
+
+              <p>
+                Frederick Marryat’s The Phantom Ship follows Philip Vanderdecken on a far-reaching voyage to find the spectral 
+                ship commanded by his father and discover a way to release him from his curse.
+              </p>
+            </div>
+          </article>
+
+
+          <!-- EVENT 7 -->
+
+          <article class="timeline-item">
+            <div class="timeline-marker" aria-hidden="true"></div>
+
+            <div class="timeline-content">
+              <p class="timeline-date">
+                1843
+              </p>
+
+              <h3>The Dutchman Takes the Stage</h3>
+
+              <p>
+                Richard Wagner’s Der fliegende Holländer premieres in Dresden, transforming the legend into an operatic drama 
+                centred on the cursed captain and Senta, whose faithful love offers him redemption.
+              </p>
+            </div>
+          </article>
+
+
+          <!-- EVENT 8 -->
+
+          <article class="timeline-item">
+            <div class="timeline-marker" aria-hidden="true"></div>
+
+            <div class="timeline-content">
+              <p class="timeline-date">
+                1881
+              </p>
+
+              <h3>A Phantom Ship Appears</h3>
+
+              <p>
+                Thirteen people aboard HMS Inconstant, including the future King George V, witness a glowing apparition 
+                resembling a brig off south-eastern Australia. Moments later no vessel can be found, while nearby ships also 
+                report seeing the strange red light.
+              </p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+  </article>
 </BaseLayout>
 
+
 <style>
-  .placeholder {
-    min-height: 60vh;
+  .case-page {
+    --case-blue: #84a9ee;
+    --case-gold: #d9ad72;
+    --case-violet: #a58bd9;
+
+    padding: 18px 0 38px;
+  }
+
+
+  /* ---------------------------------- */
+  /* CASE HEADER                        */
+  /* ---------------------------------- */
+
+  .case-header {
+    min-height: 540px;
+
+    position: relative;
+    isolation: isolate;
+
+    display: flex;
+    align-items: center;
+
+    overflow: hidden;
+
+    padding:
+      clamp(68px, 8vw, 108px)
+      clamp(28px, 7vw, 92px);
+
+    background:
+      radial-gradient(
+        circle at 8% 7%,
+        rgba(116, 171, 255, 0.28),
+        transparent 34%
+      ),
+      radial-gradient(
+        circle at 91% 8%,
+        rgba(230, 176, 112, 0.30),
+        transparent 37%
+      ),
+      radial-gradient(
+        circle at 60% 112%,
+        rgba(171, 143, 224, 0.20),
+        transparent 41%
+      ),
+      linear-gradient(
+        142deg,
+        rgba(255, 255, 255, 0.77),
+        rgba(247, 249, 255, 0.46) 46%,
+        rgba(255, 248, 241, 0.50)
+      );
+
+    border: 1px solid rgba(255, 255, 255, 0.89);
+    border-radius: clamp(30px, 3.2vw, 48px);
+
+    box-shadow:
+      0 44px 110px rgba(50, 62, 88, 0.13),
+      0 12px 34px rgba(50, 62, 88, 0.07),
+      inset 0 1px 0 rgba(255, 255, 255, 1),
+      inset 0 -1px 0 rgba(58, 69, 94, 0.045);
+
+    backdrop-filter:
+      blur(30px)
+      saturate(155%);
+
+    -webkit-backdrop-filter:
+      blur(30px)
+      saturate(155%);
+  }
+
+
+  .case-header::after {
+    content: "";
+
+    position: absolute;
+    inset: 1px;
+    z-index: 5;
+
+    border-radius: inherit;
+
+    background:
+      linear-gradient(
+        112deg,
+        rgba(255, 255, 255, 0.59),
+        transparent 26%,
+        transparent 72%,
+        rgba(255, 255, 255, 0.20)
+      );
+
+    mask-image:
+      linear-gradient(
+        to bottom,
+        black,
+        transparent 24%,
+        transparent 76%,
+        black
+      );
+
+    -webkit-mask-image:
+      linear-gradient(
+        to bottom,
+        black,
+        transparent 24%,
+        transparent 76%,
+        black
+      );
+
+    opacity: 0.54;
+    pointer-events: none;
+  }
+
+
+  .case-header__content {
+    width: min(67%, 820px);
+
+    position: relative;
+    z-index: 3;
+
+    animation:
+      content-enter
+      0.85s
+      var(--ease-out)
+      both;
+  }
+
+
+  h1 {
+    margin: 0;
+
+    background:
+      linear-gradient(
+        180deg,
+        #171922 0%,
+        #292d39 66%,
+        #454a57 100%
+      );
+
+    -webkit-background-clip: text;
+    background-clip: text;
+
+    font-size: clamp(60px, 7.8vw, 108px);
+    line-height: 0.94;
+    letter-spacing: 0.038em;
+    text-wrap: balance;
+
+    -webkit-text-fill-color: transparent;
+
+    filter: drop-shadow(0 2px 0 rgba(255, 255, 255, 0.36));
+  }
+
+
+  .case-intro {
+    max-width: 760px;
+
+    margin: 29px 0 0;
+
+    color: #606775;
+
+    font-family: var(--font-ui);
+    font-size: clamp(18px, 1.9vw, 22px);
+    line-height: 1.78;
+    text-wrap: balance;
+  }
+
+
+  .header-contours {
+    width: min(53vw, 690px);
+
+    position: absolute;
+    right: -15%;
+    bottom: -43%;
+    z-index: -2;
+
+    color: rgba(87, 70, 52, 0.16);
+
+    opacity: 0.48;
+    transform: rotate(-11deg);
+    pointer-events: none;
+  }
+
+
+  .header-contours path {
+    stroke: currentColor;
+    stroke-width: 1.15;
+    vector-effect: non-scaling-stroke;
+  }
+
+
+  /* ---------------------------------- */
+  /* CASE OBJECT                        */
+  /* ---------------------------------- */
+
+  .case-object {
+    width: clamp(380px, 42vw, 610px);
+    aspect-ratio: 1;
+
+    position: absolute;
+    top: 49%;
+    right: clamp(-175px, -6vw, -34px);
+    z-index: 1;
+
+    opacity: 0.80;
+
+    filter:
+      drop-shadow(0 34px 40px rgba(83, 67, 49, 0.14));
+
+    transform: translateY(-50%);
+    pointer-events: none;
+
+    animation:
+      object-float
+      10s
+      ease-in-out
+      infinite;
+  }
+
+
+  .case-object__sphere {
+    width: 56%;
+    aspect-ratio: 1;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    display: block;
+    overflow: hidden;
+
+    background:
+      radial-gradient(
+        circle at 29% 22%,
+        rgba(255, 255, 255, 0.98),
+        rgba(255, 255, 255, 0.44) 19%,
+        rgba(240, 205, 156, 0.27) 48%,
+        rgba(195, 157, 111, 0.16) 67%,
+        rgba(144, 155, 205, 0.12) 88%
+      );
+
+    border: 1px solid rgba(255, 255, 255, 0.92);
+    border-radius: 50%;
+
+    box-shadow:
+      inset 19px 23px 35px rgba(255, 255, 255, 0.50),
+      inset -25px -35px 49px rgba(150, 112, 68, 0.17),
+      0 37px 69px rgba(100, 79, 55, 0.15);
+
+    transform: translate(-50%, -50%);
+  }
+
+
+  .case-object__sphere::before {
+    content: "";
+
+    width: 68%;
+    height: 34%;
+
+    position: absolute;
+    top: 7%;
+    left: 13%;
+
+    border-radius: 50%;
+
+    background:
+      radial-gradient(
+        ellipse,
+        rgba(255, 255, 255, 0.78),
+        transparent 70%
+      );
+
+    filter: blur(7px);
+    transform: rotate(-24deg);
+  }
+
+
+  .case-object__sphere::after {
+    content: "";
+
+    width: 56%;
+    aspect-ratio: 1;
+
+    position: absolute;
+    right: -5%;
+    bottom: -14%;
+
+    border-radius: 50%;
+
+    background:
+      radial-gradient(
+        circle,
+        rgba(220, 157, 88, 0.26),
+        transparent 70%
+      );
+
+    filter: blur(5px);
+  }
+
+
+  .case-object__latitude,
+  .case-object__meridian {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    display: block;
+
+    border: 1px solid rgba(82, 61, 41, 0.17);
+    border-radius: 50%;
+  }
+
+
+  .case-object__latitude {
+    width: 84%;
+    height: 30%;
+  }
+
+
+  .case-object__latitude--one {
+    transform:
+      translate(-50%, -50%)
+      rotate(-7deg);
+  }
+
+
+  .case-object__latitude--two {
+    width: 72%;
+    height: 20%;
+
+    transform:
+      translate(-50%, -50%)
+      rotate(-7deg)
+      translateY(510%);
+  }
+
+
+  .case-object__meridian {
+    width: 38%;
+    height: 86%;
+
+    transform:
+      translate(-50%, -50%)
+      rotate(16deg);
+  }
+
+
+  .case-object__orbit {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    display: block;
+
+    border: 1px solid rgba(83, 63, 44, 0.19);
+    border-radius: 50%;
+
+    box-shadow:
+      0 0 18px rgba(255, 255, 255, 0.52),
+      inset 0 0 18px rgba(255, 255, 255, 0.22);
+  }
+
+
+  .case-object__orbit--outer {
+    width: 93%;
+    height: 35%;
+
+    transform:
+      translate(-50%, -50%)
+      rotate(-18deg);
+  }
+
+
+  .case-object__orbit--middle {
+    width: 80%;
+    height: 80%;
+
+    border-color: rgba(86, 68, 49, 0.14);
+
+    transform:
+      translate(-50%, -50%)
+      rotate(31deg);
+  }
+
+
+  .case-object__orbit--inner {
+    width: 41%;
+    height: 92%;
+
+    border-color: rgba(86, 68, 49, 0.16);
+
+    transform:
+      translate(-50%, -50%)
+      rotate(28deg);
+  }
+
+
+  .case-object__axis {
+    width: 1px;
+    height: 90%;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    display: block;
+
+    background:
+      linear-gradient(
+        transparent,
+        rgba(80, 61, 44, 0.22) 18%,
+        rgba(80, 61, 44, 0.22) 82%,
+        transparent
+      );
+
+    transform:
+      translate(-50%, -50%)
+      rotate(28deg);
+  }
+
+
+  .case-object__node {
+    width: 13px;
+    aspect-ratio: 1;
+
+    position: absolute;
+
+    display: block;
+
+    background:
+      radial-gradient(
+        circle at 32% 26%,
+        white,
+        rgba(247, 220, 178, 0.81) 42%,
+        rgba(143, 102, 62, 0.44)
+      );
+
+    border: 1px solid rgba(255, 255, 255, 0.90);
+    border-radius: 50%;
+
+    box-shadow:
+      0 8px 16px rgba(92, 69, 46, 0.18),
+      inset 0 1px 0 white;
+  }
+
+
+  .case-object__node--one {
+    top: 24%;
+    right: 7%;
+  }
+
+
+  .case-object__node--two {
+    width: 9px;
+
+    bottom: 18%;
+    left: 15%;
+  }
+
+
+  /* ---------------------------------- */
+  /* CONTENT SECTIONS                   */
+  /* ---------------------------------- */
+
+  .content-section {
+    width: min(100%, 1080px);
+
+    margin: 0 auto;
+    padding: 74px 0 8px;
+  }
+
+
+  .section-heading {
+    margin-bottom: 28px;
+
+    display: grid;
+    grid-template-columns: auto auto 1fr;
+    align-items: center;
+
+    gap: 15px;
+  }
+
+
+  .section-number {
+    width: 34px;
+    aspect-ratio: 1;
+
+    display: grid;
+    place-items: center;
+
+    color: #7b8291;
+    background:
+      linear-gradient(
+        145deg,
+        rgba(255, 255, 255, 0.80),
+        rgba(241, 245, 252, 0.53)
+      );
+
+    border: 1px solid rgba(255, 255, 255, 0.91);
+    border-radius: 50%;
+
+    box-shadow:
+      0 8px 18px rgba(55, 67, 95, 0.10),
+      inset 0 1px 0 rgba(255, 255, 255, 1);
+
+    font-family: var(--font-ui);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+  }
+
+
+  .section-heading h2 {
+    margin: 0;
+
+    color: #1d2029;
+
+    font-size: clamp(33px, 4vw, 48px);
+    line-height: 1.12;
+    letter-spacing: 0.012em;
+  }
+
+
+  .section-rule {
+    height: 1px;
+
+    display: block;
+
+    background:
+      linear-gradient(
+        to right,
+        rgba(65, 76, 102, 0.16),
+        transparent
+      );
+  }
+
+
+  /* ---------------------------------- */
+  /* MAP CARD                           */
+  /* ---------------------------------- */
+
+  .map-card {
+    width: 100%;
+
+    margin: 0;
+    padding: clamp(18px, 2.6vw, 30px);
+
+    position: relative;
+    isolation: isolate;
 
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
 
+    gap: 23px;
+
+    background:
+      radial-gradient(
+        circle at 8% 3%,
+        rgba(117, 171, 255, 0.16),
+        transparent 30%
+      ),
+      radial-gradient(
+        circle at 93% 96%,
+        rgba(230, 175, 111, 0.16),
+        transparent 32%
+      ),
+      linear-gradient(
+        145deg,
+        rgba(255, 255, 255, 0.79),
+        rgba(246, 249, 255, 0.50)
+      );
+
+    border: 1px solid rgba(255, 255, 255, 0.91);
+    border-radius: clamp(24px, 2.7vw, 34px);
+
+    box-shadow:
+      0 24px 60px rgba(50, 62, 88, 0.10),
+      inset 0 1px 0 rgba(255, 255, 255, 1),
+      inset 0 -1px 0 rgba(55, 65, 88, 0.04);
+
+    backdrop-filter:
+      blur(24px)
+      saturate(150%);
+
+    -webkit-backdrop-filter:
+      blur(24px)
+      saturate(150%);
+  }
+
+
+  .map-card::before {
+    content: "";
+
+    position: absolute;
+    inset: 1px;
+    z-index: -1;
+
+    border-radius: inherit;
+
+    background:
+      linear-gradient(
+        112deg,
+        rgba(255, 255, 255, 0.54),
+        transparent 28%,
+        transparent 74%,
+        rgba(255, 255, 255, 0.17)
+      );
+
+    opacity: 0.55;
+    pointer-events: none;
+  }
+
+
+  .map-viewport {
+    width: 100%;
+
+    position: relative;
+    isolation: isolate;
+
+    aspect-ratio: 16 / 8.5;
+
+    overflow: hidden;
+
+    background:
+      radial-gradient(
+        circle at 18% 10%,
+        rgba(121, 172, 248, 0.12),
+        transparent 36%
+      ),
+      radial-gradient(
+        circle at 88% 92%,
+        rgba(221, 170, 110, 0.12),
+        transparent 38%
+      ),
+      linear-gradient(
+        145deg,
+        rgba(239, 244, 251, 0.74),
+        rgba(250, 247, 244, 0.70)
+      );
+
+    border: 1px solid rgba(255, 255, 255, 0.82);
+    border-radius: clamp(18px, 2vw, 25px);
+
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.92),
+      inset 0 0 42px rgba(86, 102, 137, 0.06);
+  }
+
+
+  .map-grid {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+
+    display: block;
+
+    opacity: 0.18;
+
+    background-image:
+      linear-gradient(
+        rgba(62, 74, 100, 0.13) 1px,
+        transparent 1px
+      ),
+      linear-gradient(
+        90deg,
+        rgba(62, 74, 100, 0.13) 1px,
+        transparent 1px
+      );
+
+    background-size: 54px 54px;
+
+    mask-image:
+      radial-gradient(
+        circle at 50% 50%,
+        black,
+        transparent 78%
+      );
+
+    -webkit-mask-image:
+      radial-gradient(
+        circle at 50% 50%,
+        black,
+        transparent 78%
+      );
+
+    pointer-events: none;
+  }
+
+
+  .map-compass {
+    width: clamp(54px, 7vw, 82px);
+    aspect-ratio: 1;
+
+    position: absolute;
+    right: clamp(15px, 2.6vw, 30px);
+    bottom: clamp(15px, 2.6vw, 30px);
+    z-index: 3;
+
+    display: block;
+
+    border: 1px solid rgba(71, 78, 96, 0.20);
+    border-radius: 50%;
+
+    opacity: 0.38;
+    pointer-events: none;
+  }
+
+
+  .map-compass::before,
+  .map-compass::after {
+    content: "";
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    background: rgba(71, 78, 96, 0.24);
+
+    transform: translate(-50%, -50%);
+  }
+
+
+  .map-compass::before {
+    width: 1px;
+    height: 72%;
+  }
+
+
+  .map-compass::after {
+    width: 72%;
+    height: 1px;
+  }
+
+
+  /*
+    THIS IS THE ZOOMED WORLD MAP.
+
+    width controls the zoom.
+
+    left moves the world map
+    horizontally.
+
+    top moves the world map
+    vertically.
+  */
+
+  .map-world {
+    width: 275%;
+
+    position: absolute;
+    z-index: 1;
+
+    left: -90%;
+    top: -120%;
+  }
+
+
+  .map-image {
+    width: 125%;
+
+    display: block;
+
+    opacity: 0.78;
+
+    filter:
+      grayscale(100%)
+      contrast(1.04)
+      sepia(8%);
+  }
+
+
+  /*
+    These percentages are positions on
+    the FULL WORLD MAP rather than
+    positions inside the visible card.
+  */
+
+  .map-marker {
+    width: 5%;
+    aspect-ratio: 1;
+
+    position: absolute;
+
+    top: 71.5%;
+    left: 52.3%;
+
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+  }
+
+
+  .marker-area {
+    position: absolute;
+    inset: 0;
+
+    display: block;
+
+    background: rgba(222, 171, 99, 0.20);
+
+    border: 1px solid rgba(199, 142, 70, 0.23);
+    border-radius: 50%;
+
+    box-shadow:
+      0 0 0 8px rgba(228, 183, 119, 0.06),
+      0 10px 30px rgba(150, 101, 49, 0.16),
+      inset 0 1px 0 rgba(255, 255, 255, 0.48);
+
+    backdrop-filter: blur(0.7px);
+    -webkit-backdrop-filter: blur(0.7px);
+
+    animation:
+      marker-pulse
+      3.4s
+      ease-in-out
+      infinite;
+  }
+
+
+  .marker-core {
+    width: 14%;
+    aspect-ratio: 1;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    display: block;
+
+    background: rgba(130, 88, 44, 0.70);
+    border-radius: 50%;
+
+    box-shadow:
+      0 0 0 5px rgba(255, 255, 255, 0.26),
+      0 4px 12px rgba(105, 69, 36, 0.22);
+
+    transform: translate(-50%, -50%);
+  }
+
+
+  .map-caption {
+    max-width: 640px;
+
+    margin: 0 auto;
+
+    color: #858b99;
+
+    font-family: var(--font-ui);
+    font-size: 12px;
+    line-height: 1.72;
+    letter-spacing: 0.025em;
     text-align: center;
   }
 
-  .placeholder h1 {
-    margin-bottom: 14px;
 
-    font-size: clamp(36px, 6vw, 64px);
+  /* ---------------------------------- */
+  /* TIMELINE                           */
+  /* ---------------------------------- */
+
+  .timeline-section {
+    padding-bottom: 22px;
   }
 
-  .placeholder p {
+
+  .timeline-shell {
+    position: relative;
+    isolation: isolate;
+
+    overflow: hidden;
+
+    padding:
+      clamp(25px, 4vw, 46px)
+      clamp(20px, 4vw, 44px);
+
+    background:
+      radial-gradient(
+        circle at 7% 4%,
+        rgba(118, 171, 249, 0.15),
+        transparent 31%
+      ),
+      radial-gradient(
+        circle at 94% 98%,
+        rgba(228, 174, 109, 0.15),
+        transparent 32%
+      ),
+      linear-gradient(
+        145deg,
+        rgba(255, 255, 255, 0.78),
+        rgba(246, 249, 255, 0.48)
+      );
+
+    border: 1px solid rgba(255, 255, 255, 0.91);
+    border-radius: clamp(24px, 2.7vw, 34px);
+
+    box-shadow:
+      0 24px 60px rgba(50, 62, 88, 0.10),
+      inset 0 1px 0 rgba(255, 255, 255, 1),
+      inset 0 -1px 0 rgba(55, 65, 88, 0.04);
+
+    backdrop-filter:
+      blur(24px)
+      saturate(150%);
+
+    -webkit-backdrop-filter:
+      blur(24px)
+      saturate(150%);
+  }
+
+
+  .timeline-shell::before {
+    content: "";
+
+    width: 360px;
+    aspect-ratio: 1;
+
+    position: absolute;
+    right: -190px;
+    bottom: -210px;
+    z-index: -1;
+
+    border: 1px solid rgba(92, 71, 49, 0.12);
+    border-radius: 50%;
+
+    box-shadow:
+      0 0 0 42px rgba(255, 255, 255, 0.06),
+      0 0 0 84px rgba(92, 71, 49, 0.025);
+
+    pointer-events: none;
+  }
+
+
+  .timeline {
+    max-width: 900px;
+
+    position: relative;
+
+    padding-left: 44px;
+  }
+
+
+  .timeline::before {
+    content: "";
+
+    position: absolute;
+
+    top: 13px;
+    bottom: 13px;
+    left: 8px;
+
+    width: 2px;
+
+    background:
+      linear-gradient(
+        to bottom,
+        rgba(120, 167, 238, 0.64),
+        rgba(169, 140, 217, 0.45),
+        rgba(218, 168, 101, 0.50)
+      );
+
+    border-radius: 999px;
+
+    box-shadow: 0 0 16px rgba(123, 148, 205, 0.16);
+  }
+
+
+  .timeline-item {
+    position: relative;
+
+    margin-bottom: 17px;
+  }
+
+
+  .timeline-item:last-child {
+    margin-bottom: 0;
+  }
+
+
+  .timeline-marker {
+    width: 18px;
+    aspect-ratio: 1;
+
+    position: absolute;
+
+    top: 31px;
+    left: -44px;
+
+    background:
+      radial-gradient(
+        circle at 31% 26%,
+        white,
+        rgba(213, 225, 249, 0.92) 45%,
+        rgba(115, 150, 219, 0.72)
+      );
+
+    border: 1px solid rgba(255, 255, 255, 0.94);
+    border-radius: 50%;
+
+    box-shadow:
+      0 0 0 5px rgba(125, 161, 230, 0.11),
+      0 8px 18px rgba(69, 87, 128, 0.18),
+      inset 0 1px 0 rgba(255, 255, 255, 1);
+  }
+
+
+  .timeline-item:nth-child(3n + 2) .timeline-marker {
+    background:
+      radial-gradient(
+        circle at 31% 26%,
+        white,
+        rgba(226, 216, 244, 0.92) 45%,
+        rgba(159, 131, 207, 0.72)
+      );
+
+    box-shadow:
+      0 0 0 5px rgba(162, 137, 211, 0.10),
+      0 8px 18px rgba(88, 73, 119, 0.17),
+      inset 0 1px 0 rgba(255, 255, 255, 1);
+  }
+
+
+  .timeline-item:nth-child(3n) .timeline-marker {
+    background:
+      radial-gradient(
+        circle at 31% 26%,
+        white,
+        rgba(245, 224, 192, 0.92) 45%,
+        rgba(202, 148, 78, 0.72)
+      );
+
+    box-shadow:
+      0 0 0 5px rgba(211, 161, 93, 0.10),
+      0 8px 18px rgba(117, 82, 43, 0.17),
+      inset 0 1px 0 rgba(255, 255, 255, 1);
+  }
+
+
+  .timeline-content {
+    position: relative;
+    isolation: isolate;
+
+    overflow: hidden;
+
+    padding: 26px 30px;
+
+    background:
+      linear-gradient(
+        145deg,
+        rgba(255, 255, 255, 0.79),
+        rgba(246, 249, 255, 0.52)
+      );
+
+    border: 1px solid rgba(255, 255, 255, 0.90);
+    border-radius: 22px;
+
+    box-shadow:
+      0 13px 32px rgba(50, 62, 88, 0.075),
+      inset 0 1px 0 rgba(255, 255, 255, 1),
+      inset 0 -1px 0 rgba(55, 65, 88, 0.035);
+
+    transition:
+      transform 0.30s var(--ease-out),
+      box-shadow 0.30s ease;
+  }
+
+
+  .timeline-content::before {
+    content: "";
+
+    width: 150px;
+    height: 180px;
+
+    position: absolute;
+    top: -130px;
+    right: -48px;
+    z-index: -1;
+
+    border-radius: 50%;
+
+    background:
+      radial-gradient(
+        circle,
+        rgba(121, 170, 245, 0.18),
+        transparent 70%
+      );
+
+    transition: transform 0.42s var(--ease-out);
+  }
+
+
+  .timeline-item:nth-child(3n + 2) .timeline-content::before {
+    background:
+      radial-gradient(
+        circle,
+        rgba(170, 141, 218, 0.17),
+        transparent 70%
+      );
+  }
+
+
+  .timeline-item:nth-child(3n) .timeline-content::before {
+    background:
+      radial-gradient(
+        circle,
+        rgba(222, 170, 99, 0.18),
+        transparent 70%
+      );
+  }
+
+
+  .timeline-content:hover {
+    transform: translateY(-3px);
+
+    box-shadow:
+      0 20px 42px rgba(50, 62, 88, 0.12),
+      inset 0 1px 0 rgba(255, 255, 255, 1),
+      inset 0 -1px 0 rgba(55, 65, 88, 0.035);
+  }
+
+
+  .timeline-content:hover::before {
+    transform: translate(-8px, 9px) scale(1.08);
+  }
+
+
+  .timeline-date {
+    margin: 0 0 11px;
+
+    color: #7d94c5;
+
+    font-family: var(--font-ui);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+
+  .timeline-item:nth-child(3n + 2) .timeline-date {
+    color: #967fbd;
+  }
+
+
+  .timeline-item:nth-child(3n) .timeline-date {
+    color: #ae7f47;
+  }
+
+
+  .timeline-content h3 {
+    margin: 0 0 11px;
+
+    color: #1e212b;
+
+    font-size: clamp(21px, 2.4vw, 28px);
+    line-height: 1.3;
+  }
+
+
+  .timeline-content p:last-child {
+    max-width: 700px;
+
     margin: 0;
+
+    color: #69707f;
+
+    font-family: var(--font-ui);
+    font-size: 14px;
+    line-height: 1.82;
+  }
+
+
+  /* ---------------------------------- */
+  /* EDGE DETAILS                       */
+  /* ---------------------------------- */
+
+  .edge-mark {
+    width: 40px;
+    height: 40px;
+
+    position: absolute;
+    z-index: 4;
+
+    opacity: 0.28;
+    pointer-events: none;
+  }
+
+
+  .edge-mark::before,
+  .edge-mark::after {
+    content: "";
+
+    position: absolute;
+
+    background: rgba(78, 67, 55, 0.27);
+    border-radius: 999px;
+  }
+
+
+  .edge-mark::before {
+    width: 40px;
+    height: 1px;
+  }
+
+
+  .edge-mark::after {
+    width: 1px;
+    height: 40px;
+  }
+
+
+  .edge-mark--top-left {
+    top: 24px;
+    left: 24px;
+  }
+
+
+  .edge-mark--top-right {
+    top: 24px;
+    right: 24px;
+
+    transform: rotate(90deg);
+  }
+
+
+  .edge-mark--bottom-left {
+    bottom: 24px;
+    left: 24px;
+
+    transform: rotate(-90deg);
+  }
+
+
+  .edge-mark--bottom-right {
+    right: 24px;
+    bottom: 24px;
+
+    transform: rotate(180deg);
+  }
+
+
+  /* ---------------------------------- */
+  /* MOTION                             */
+  /* ---------------------------------- */
+
+  @keyframes content-enter {
+    from {
+      opacity: 0;
+      transform: translateY(17px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+
+  @keyframes object-float {
+    0%,
+    100% {
+      transform:
+        translateY(calc(-50% - 5px))
+        rotate(-0.5deg);
+    }
+
+    50% {
+      transform:
+        translateY(calc(-50% + 7px))
+        rotate(0.7deg);
+    }
+  }
+
+
+  @keyframes marker-pulse {
+    0%,
+    100% {
+      opacity: 0.80;
+      transform: scale(0.94);
+    }
+
+    50% {
+      opacity: 1;
+      transform: scale(1.04);
+    }
+  }
+
+
+  /* ---------------------------------- */
+  /* TABLET                             */
+  /* ---------------------------------- */
+
+  @media (max-width: 980px) {
+    .case-header {
+      min-height: 590px;
+    }
+
+    .case-header__content {
+      width: min(74%, 800px);
+    }
+
+    .case-object {
+      right: -205px;
+      opacity: 0.61;
+    }
+  }
+
+
+  /* ---------------------------------- */
+  /* MOBILE                             */
+  /* ---------------------------------- */
+
+  @media (max-width: 650px) {
+    .case-page {
+      padding-top: 0;
+    }
+
+    .case-header {
+      min-height: 620px;
+
+      align-items: flex-end;
+
+      padding:
+        82px
+        22px
+        60px;
+
+      border-radius: 30px;
+    }
+
+    .case-header__content {
+      width: 100%;
+    }
+
+    h1 {
+      max-width: 100%;
+      
+      font-size: clamp(44px, 14vw, 72px);
+      line-height: 0.96;
+      letter-spacing: 0.028em;
+    }
+
+    .case-intro {
+      margin-top: 24px;
+
+      font-size: 16px;
+      line-height: 1.76;
+    }
+
+    .case-object {
+      width: min(126vw, 510px);
+
+      top: 34%;
+      right: -43%;
+
+      opacity: 0.52;
+    }
+
+    .header-contours {
+      width: 108vw;
+
+      right: -54%;
+      bottom: -14%;
+    }
+
+    .content-section {
+      padding-top: 54px;
+    }
+
+    .section-heading {
+      margin-bottom: 21px;
+
+      gap: 11px;
+    }
+
+    .section-number {
+      width: 30px;
+    }
+
+    .section-heading h2 {
+      font-size: 32px;
+    }
+
+    .map-card {
+      padding: 15px;
+      gap: 18px;
+
+      border-radius: 24px;
+    }
+
+    .map-viewport {
+      aspect-ratio: 16 / 9;
+
+      border-radius: 17px;
+    }
+
+    .map-grid {
+      background-size: 34px 34px;
+    }
+
+    .map-compass {
+      width: 48px;
+    }
+
+    .map-caption {
+      max-width: 330px;
+
+      padding: 0 5px 2px;
+
+      font-size: 11px;
+    }
+
+    .timeline-shell {
+      padding: 23px 17px;
+
+      border-radius: 24px;
+    }
+
+    .timeline {
+      padding-left: 32px;
+    }
+
+    .timeline::before {
+      left: 6px;
+    }
+
+    .timeline-marker {
+      width: 15px;
+
+      top: 27px;
+      left: -32px;
+
+      box-shadow:
+        0 0 0 4px rgba(125, 161, 230, 0.10),
+        0 7px 15px rgba(69, 87, 128, 0.17),
+        inset 0 1px 0 rgba(255, 255, 255, 1);
+    }
+
+    .timeline-content {
+      padding: 22px 20px;
+
+      border-radius: 19px;
+    }
+
+    .timeline-content h3 {
+      font-size: 20px;
+    }
+
+    .timeline-content p:last-child {
+      font-size: 13px;
+    }
+
+    .edge-mark {
+      width: 29px;
+      height: 29px;
+    }
+
+    .edge-mark::before {
+      width: 29px;
+    }
+
+    .edge-mark::after {
+      height: 29px;
+    }
+
+    .edge-mark--top-left,
+    .edge-mark--top-right {
+      top: 17px;
+    }
+
+    .edge-mark--bottom-left,
+    .edge-mark--bottom-right {
+      bottom: 17px;
+    }
+
+    .edge-mark--top-left,
+    .edge-mark--bottom-left {
+      left: 17px;
+    }
+
+    .edge-mark--top-right,
+    .edge-mark--bottom-right {
+      right: 17px;
+    }
+  }
+
+
+  @supports not (
+    (backdrop-filter: blur(1px))
+    or
+    (-webkit-backdrop-filter: blur(1px))
+  ) {
+    .case-header,
+    .map-card,
+    .timeline-shell,
+    .timeline-content {
+      background-color: rgba(250, 250, 249, 0.94);
+    }
   }
 </style>
