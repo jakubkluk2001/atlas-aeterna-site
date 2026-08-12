@@ -26,9 +26,9 @@ interface EvidenceItem {
 }
 
 /*
-  Add licensed image paths when the final assets are ready.
-  Use `contain` for objects and documents, and `cover` for places or scenes.
-  The 4:3 fallback panels keep every evidence card aligned until then.
+  Evidence visuals use a standard 4:3 frame with `cover` as the default.
+  Change an individual item to `contain` only if cropping removes important detail.
+  The fallback panel is the finished visual treatment for evidence without an image.
 */
 
 const featuredEvidence: EvidenceItem = {
@@ -42,9 +42,9 @@ const featuredEvidence: EvidenceItem = {
     label: "Strong support",
     tone: "strong",
   },
-  image: null, // "/images/mysteries/el-dorado/evidence/muisca-raft.webp"
+  image: "/images/mysteries/el-dorado/muisca-raft.webp",
   alt: "Gold Muisca votive raft depicting a central figure surrounded by attendants",
-  fit: "contain",
+  fit: "cover",
   tone: "gold",
   meta: [
     { label: "Discovered", value: "1969" },
@@ -65,7 +65,7 @@ const supportingEvidence: EvidenceItem[] = [
       label: "Supporting",
       tone: "supporting",
     },
-    image: null, // "/images/mysteries/el-dorado/evidence/lake-guatavita.webp"
+    image: "/images/mysteries/el-dorado/lake-guatavita.webp",
     alt: "Aerial view of Lake Guatavita in Colombia",
     fit: "cover",
     tone: "blue",
@@ -86,9 +86,9 @@ const supportingEvidence: EvidenceItem[] = [
       label: "Supporting",
       tone: "supporting",
     },
-    image: null, // "/images/mysteries/el-dorado/evidence/votive-offerings.webp"
+    image: "/images/mysteries/el-dorado/muisca-votive-offerings.webp",
     alt: "A group of small Muisca gold-alloy votive figures",
-    fit: "contain",
+    fit: "cover",
     tone: "gold",
     meta: [
       { label: "Form", value: "Votive objects" },
@@ -107,9 +107,9 @@ const supportingEvidence: EvidenceItem[] = [
       label: "Indirect",
       tone: "indirect",
     },
-    image: null, // "/images/mysteries/el-dorado/evidence/written-accounts.webp"
+    image: "/images/mysteries/el-dorado/written-accounts.webp",
     alt: "Detail from an early historical manuscript associated with accounts of El Dorado",
-    fit: "contain",
+    fit: "cover",
     tone: "violet",
     meta: [
       { label: "Period", value: "Colonial era" },
@@ -436,21 +436,6 @@ const supportingEvidence: EvidenceItem[] = [
             <p class="evidence-summary">
               The evidence supports a real Muisca ceremonial tradition of sacred waters and gold offerings. It does not establish the later European vision of a hidden golden city.
             </p>
-
-            <div
-              class="evidence-count"
-              aria-label={`One featured item and ${supportingEvidence.length} related evidence items`}
-            >
-              <span>
-                <strong>01</strong>
-                Featured
-              </span>
-
-              <span>
-                <strong>{String(supportingEvidence.length).padStart(2, "0")}</strong>
-                Related
-              </span>
-            </div>
           </div>
         </header>
 
@@ -1907,42 +1892,6 @@ const supportingEvidence: EvidenceItem[] = [
   }
 
 
-  .evidence-count {
-    margin-top: 19px;
-
-    display: flex;
-    align-items: center;
-
-    gap: 24px;
-  }
-
-
-  .evidence-count span {
-    display: grid;
-    grid-template-columns: auto auto;
-    align-items: baseline;
-
-    gap: 8px;
-
-    color: #858b99;
-
-    font-family: var(--font-ui);
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 0.11em;
-    text-transform: uppercase;
-  }
-
-
-  .evidence-count strong {
-    color: #2f3441;
-
-    font-family: var(--font-display);
-    font-size: 20px;
-    font-weight: 400;
-    letter-spacing: 0.03em;
-  }
-
 
   .evidence-featured {
     margin-top: clamp(25px, 3.5vw, 38px);
@@ -2904,10 +2853,6 @@ const supportingEvidence: EvidenceItem[] = [
 
     .evidence-summary {
       font-size: 13px;
-    }
-
-    .evidence-count {
-      gap: 18px;
     }
 
     .evidence-featured {
