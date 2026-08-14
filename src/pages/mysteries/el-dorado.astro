@@ -374,6 +374,424 @@ const workingTheories: TheoryItem[] = [
   },
 ];
 
+
+const caseSections = [
+  { number: "00", label: "Overview", id: "overview" },
+  { number: "01", label: "Location", id: "location" },
+  { number: "02", label: "Timeline", id: "timeline" },
+  { number: "03", label: "Evidence", id: "evidence" },
+  { number: "04", label: "Working Theories", id: "working-theories" },
+  { number: "05", label: "The Search", id: "the-search" },
+  { number: "06", label: "The Muisca World", id: "muisca-world" },
+] as const;
+
+/*
+  Shared Search outcome vocabulary.
+
+  Keep all six outcomes here even when an individual case uses only a subset.
+  That lets new records — including future or still-active searches — use the
+  same component and visual language without extending the system later.
+
+  partial: something relevant was found, but the main objective remains unresolved
+  noDiscovery: the principal target was not found
+  abandoned: the attempt ended before its objective could be resolved
+  disputed: a claimed result remains contested
+  successful: the stated search objective was verified or recovered
+  ongoing: the search is active and has not yet reached a final outcome
+*/
+const searchStatuses = {
+  partial: {
+    label: "Partial Result",
+    className: "partial",
+  },
+  noDiscovery: {
+    label: "No Discovery",
+    className: "no-discovery",
+  },
+  abandoned: {
+    label: "Search Abandoned",
+    className: "abandoned",
+  },
+  disputed: {
+    label: "Disputed Result",
+    className: "disputed",
+  },
+  successful: {
+    label: "Successful",
+    className: "successful",
+  },
+  ongoing: {
+    label: "Ongoing",
+    className: "ongoing",
+  },
+} as const;
+
+type SearchStatusTone = keyof typeof searchStatuses;
+type SearchTone = "gold" | "blue" | "violet" | "neutral";
+type SearchNodePlacement = "above" | "below" | "left" | "right";
+
+interface SearchRecord {
+  id: string;
+  number: string;
+  date: string;
+  context: string;
+  title: string;
+  description: string;
+  status: SearchStatusTone;
+  tone: SearchTone;
+  details: Array<{
+    label: string;
+    value: string;
+  }>;
+  changed: string;
+}
+
+interface SearchRouteNode {
+  number: string;
+  label: string;
+  date: string;
+  href: string;
+  x: string;
+  y: string;
+  tone: SearchTone;
+  placement: SearchNodePlacement;
+}
+
+/*
+  The Search is built as a reusable record system rather than a fixed map.
+  Each mystery can replace the contextual visual while retaining the same
+  Objective / Method / Outcome / What changed structure below.
+*/
+
+const searchRecords: SearchRecord[] = [
+  {
+    id: "guatavita-drainages",
+    number: "01",
+    date: "1545–1580",
+    context: "Lake Guatavita · Early Spanish treasure searches",
+    title: "The First Guatavita Drainages",
+    description:
+      "Early searchers treated Lake Guatavita itself as a recoverable treasure site. Hernán Pérez de Quesada and Lázaro Fonte made an early attempt to lower the water; after royal authorisation in 1572, Antonio de Sepúlveda later cut a major drain into the rim. Objects were recovered, but not the immense hoard the legend had come to promise.",
+    status: "partial",
+    tone: "gold",
+    details: [
+      {
+        label: "Objective",
+        value: "The offerings believed to lie beneath Lake Guatavita",
+      },
+      {
+        label: "Method",
+        value: "Manual drainage followed by a large cut through the lake rim",
+      },
+      {
+        label: "Outcome",
+        value: "Gold and other material reported; no legendary hoard uncovered",
+      },
+    ],
+    changed:
+      "The finds strengthened the case for real ritual deposition while separating that evidence from the much larger treasure imagined by searchers.",
+  },
+  {
+    id: "ursua-aguirre",
+    number: "02",
+    date: "1560–1561",
+    context: "Amazon Basin · Pedro de Ursúa and Lope de Aguirre",
+    title: "The Search for El Dorado and Omagua",
+    description:
+      "Pedro de Ursúa led a river expedition in pursuit of El Dorado and the reputedly wealthy land of Omagua. Mutiny overtook the mission, Ursúa was killed and Lope de Aguirre eventually seized control; the search ended as a violent rebellion rather than an exploration.",
+    status: "abandoned",
+    tone: "violet",
+    details: [
+      {
+        label: "Objective",
+        value: "El Dorado and the wealthy inland society described as Omagua",
+      },
+      {
+        label: "Method",
+        value: "A large river expedition through the Marañón and Amazon basin",
+      },
+      {
+        label: "Outcome",
+        value: "Leadership destroyed by mutiny; the original search abandoned",
+      },
+    ],
+    changed:
+      "The expedition shows how El Dorado had already merged with reports from deep Amazonia, far beyond the Muisca setting in which the legend began.",
+  },
+  {
+    id: "quesada-llanos",
+    number: "03",
+    date: "1569–1572",
+    context: "Eastern Llanos · Gonzalo Jiménez de Quesada",
+    title: "Quesada’s Final Expedition",
+    description:
+      "Decades after first entering Muisca territory, Gonzalo Jiménez de Quesada led a costly expedition east into the llanos. It returned in 1572 after extreme losses and without a place that could be identified as El Dorado.",
+    status: "noDiscovery",
+    tone: "blue",
+    details: [
+      {
+        label: "Objective",
+        value: "El Dorado beyond the eastern ranges of the Andes",
+      },
+      {
+        label: "Method",
+        value: "A multi-year overland march through the llanos toward the Orinoco",
+      },
+      {
+        label: "Outcome",
+        value: "A small remnant returned; no destination or treasure was found",
+      },
+    ],
+    changed:
+      "The attempt carried the search east of the Andes toward the Orinoco basin, but its failure did little to narrow the legend’s uncertain geography.",
+  },
+  {
+    id: "berrio-orinoco",
+    number: "04",
+    date: "1584–1595",
+    context: "Meta and Orinoco regions · Antonio de Berrío",
+    title: "Berrío’s Three Expeditions",
+    description:
+      "Antonio de Berrío mounted three expeditions while following reports of a rich country beyond the Orinoco. He did not locate Manoa, but his routes, inquiries and conviction shifted the centre of the search decisively toward Guiana.",
+    status: "noDiscovery",
+    tone: "blue",
+    details: [
+      {
+        label: "Objective",
+        value: "El Dorado or Manoa beyond the Orinoco",
+      },
+      {
+        label: "Method",
+        value: "Repeated overland and river exploration supported by local testimony",
+      },
+      {
+        label: "Outcome",
+        value: "Routes and reports gathered; no city or kingdom confirmed",
+      },
+    ],
+    changed:
+      "Guiana and the Orinoco replaced the Colombian highlands as the principal theatre of the later El Dorado search.",
+  },
+  {
+    id: "raleigh-guiana",
+    number: "05",
+    date: "1595 & 1617–1618",
+    context: "Orinoco and Guiana · Walter Raleigh",
+    title: "Raleigh’s Guiana Expeditions",
+    description:
+      "Raleigh explored the Orinoco in 1595 and followed the voyage with The Discoverie of Guiana, presenting Manoa as a great golden empire. A second venture in 1617–1618 ended after an attack on the Spanish settlement of Santo Tomé; neither expedition verified the city.",
+    status: "noDiscovery",
+    tone: "violet",
+    details: [
+      {
+        label: "Objective",
+        value: "Manoa, identified with the great El Dorado of Guiana",
+      },
+      {
+        label: "Method",
+        value: "River exploration, collected testimony and a renewed expedition",
+      },
+      {
+        label: "Outcome",
+        value: "No Manoa found; the second venture ended in political disaster",
+      },
+    ],
+    changed:
+      "Raleigh’s published account gave Manoa a durable name, geography and audience within English and European versions of the legend.",
+  },
+  {
+    id: "industrial-guatavita",
+    number: "06",
+    date: "1909–1912",
+    context: "Lake Guatavita · British industrial drainage",
+    title: "The Industrial Attempt",
+    description:
+      "A British company drove a tunnel beneath Lake Guatavita to drain it on an industrial scale. By 1912 much of the water had been removed, but the exposed mud hardened and frustrated excavation; material was recovered, not the expected treasure.",
+    status: "partial",
+    tone: "neutral",
+    details: [
+      {
+        label: "Objective",
+        value: "The accumulated offerings believed to cover the lakebed",
+      },
+      {
+        label: "Method",
+        value: "An engineered drainage tunnel followed by lakebed excavation",
+      },
+      {
+        label: "Outcome",
+        value: "The lake was largely drained; limited material, no great treasure",
+      },
+    ],
+    changed:
+      "Modern engineering reached the same broad result as the colonial attempts: evidence of activity at the lake, but no legendary hoard.",
+  },
+];
+
+const searchRoute: SearchRouteNode[] = [
+  {
+    number: "01",
+    label: "Guatavita",
+    date: "1545–1580",
+    href: "#search-guatavita-drainages",
+    x: "10%",
+    y: "73.5%",
+    tone: "gold",
+    placement: "right",
+  },
+  {
+    number: "02",
+    label: "Omagua",
+    date: "1560–1561",
+    href: "#search-ursua-aguirre",
+    x: "31.25%",
+    y: "38.2%",
+    tone: "violet",
+    placement: "above",
+  },
+  {
+    number: "03",
+    label: "The Llanos",
+    date: "1569–1572",
+    href: "#search-quesada-llanos",
+    x: "48.75%",
+    y: "64.7%",
+    tone: "blue",
+    placement: "below",
+  },
+  {
+    number: "04",
+    label: "The Orinoco",
+    date: "1584–1595",
+    href: "#search-berrio-orinoco",
+    x: "65%",
+    y: "25%",
+    tone: "blue",
+    placement: "above",
+  },
+  {
+    number: "05",
+    label: "Manoa",
+    date: "1595–1618",
+    href: "#search-raleigh-guiana",
+    x: "81.25%",
+    y: "48.5%",
+    tone: "violet",
+    placement: "below",
+  },
+  {
+    number: "06",
+    label: "Guatavita",
+    date: "1909–1912",
+    href: "#search-industrial-guatavita",
+    x: "92.5%",
+    y: "77.9%",
+    tone: "neutral",
+    placement: "left",
+  },
+];
+
+
+type CulturalContextTone = "gold" | "blue" | "violet" | "neutral";
+
+interface CulturalContextTopic {
+  id: string;
+  number: string;
+  eyebrow: string;
+  title: string;
+  description: string;
+  tone: CulturalContextTone;
+  details: Array<{
+    label: string;
+    value: string;
+  }>;
+}
+
+/*
+  Cultural Context is another variable-length reusable module. The hero image
+  can be a photograph, reconstruction or object composition, while the topic
+  cards explain only the parts of that culture that materially clarify the case.
+*/
+const muiscaWorldTopics: CulturalContextTopic[] = [
+  {
+    id: "gold-offering",
+    number: "01",
+    eyebrow: "Material and meaning",
+    title: "Gold & Offering",
+    description:
+      "Tunjos and other metal objects were made for ceremonial use and could be deposited as offerings. Their value lay in what they represented and accomplished within ritual, not only in the quantity of gold they contained.",
+    tone: "gold",
+    details: [
+      {
+        label: "Common forms",
+        value: "Votive figures, containers and ceremonial ornaments",
+      },
+      {
+        label: "Primary role",
+        value: "Offering, petition and ritual action",
+      },
+    ],
+  },
+  {
+    id: "sacred-landscape",
+    number: "02",
+    eyebrow: "Place and belief",
+    title: "Sacred Landscape",
+    description:
+      "Lake Guatavita belonged to a wider ritual geography. Lakes, caves and highland places could receive offerings and connect communities, leaders and the non-human world.",
+    tone: "blue",
+    details: [
+      {
+        label: "El Dorado link",
+        value: "Guatavita became the best-known Muisca shrine",
+      },
+      {
+        label: "Wider context",
+        value: "One sacred place within a much larger ceremonial landscape",
+      },
+    ],
+  },
+  {
+    id: "wealth-exchange",
+    number: "03",
+    eyebrow: "Resources and trade",
+    title: "Wealth & Exchange",
+    description:
+      "The highland Muisca were accomplished goldworkers despite having little local gold. Much of the metal arrived through exchange from lower regions, within networks that also moved salt, emeralds and other goods.",
+    tone: "violet",
+    details: [
+      {
+        label: "Regional strengths",
+        value: "Agriculture, salt, emeralds and skilled production",
+      },
+      {
+        label: "Gold supply",
+        value: "Much of the metal reached the highlands through exchange",
+      },
+    ],
+  },
+  {
+    id: "power-ritual",
+    number: "04",
+    eyebrow: "Authority and ceremony",
+    title: "Power & Ritual",
+    description:
+      "Muisca society was organised through interrelated chiefdoms rather than one unified empire. Chiefs and religious specialists used ceremony, gatherings and offerings to express authority and bind people to places and obligations.",
+    tone: "neutral",
+    details: [
+      {
+        label: "Political form",
+        value: "Regional and local chiefdoms with overlapping relationships",
+      },
+      {
+        label: "Why it matters",
+        value: "The legendary ruler belongs to a political and ceremonial world",
+      },
+    ],
+  },
+];
+
+
 ---
 
 <BaseLayout
@@ -385,7 +803,7 @@ const workingTheories: TheoryItem[] = [
     <!-- CASE HEADER                      -->
     <!-- -------------------------------- -->
 
-    <section class="case-header">
+    <section id="overview" class="case-header">
       <svg
         class="header-contours"
         viewBox="0 0 620 620"
@@ -431,12 +849,34 @@ const workingTheories: TheoryItem[] = [
       <span class="edge-mark edge-mark--bottom-right" aria-hidden="true"></span>
     </section>
 
+    <nav class="case-index" aria-label="Case file sections" data-case-index>
+      <div class="case-index__identity">
+        <span class="case-index__eyebrow">Case index</span>
+        <span class="case-index__hint">Jump to section</span>
+      </div>
+
+      <div class="case-index__scroller">
+        <div class="case-index__links">
+          {caseSections.map((section, index) => (
+            <a
+              href={`#${section.id}`}
+              data-case-index-link={section.id}
+              aria-current={index === 0 ? "location" : undefined}
+            >
+              <span>{section.number}</span>
+              <span>{section.label}</span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </nav>
+
 
     <!-- -------------------------------- -->
     <!-- LOCATION                         -->
     <!-- -------------------------------- -->
 
-    <section class="content-section map-section">
+    <section id="location" class="content-section map-section">
       <div class="section-heading">
         <span class="section-number" aria-hidden="true">01</span>
         <h2>Location</h2>
@@ -477,7 +917,7 @@ const workingTheories: TheoryItem[] = [
     <!-- TIMELINE                         -->
     <!-- -------------------------------- -->
 
-    <section class="content-section timeline-section">
+    <section id="timeline" class="content-section timeline-section">
       <div class="section-heading">
         <span class="section-number" aria-hidden="true">02</span>
         <h2>Timeline</h2>
@@ -533,7 +973,7 @@ const workingTheories: TheoryItem[] = [
 
             <div class="timeline-content">
               <p class="timeline-date">
-                1562
+                1572
               </p>
 
               <h3>The Search Turns to Guatavita</h3>
@@ -653,7 +1093,7 @@ const workingTheories: TheoryItem[] = [
     <!-- EVIDENCE                         -->
     <!-- -------------------------------- -->
 
-    <section class="content-section evidence-section">
+    <section id="evidence" class="content-section evidence-section">
       <div class="section-heading">
         <span class="section-number" aria-hidden="true">03</span>
         <h2>Evidence</h2>
@@ -819,7 +1259,7 @@ const workingTheories: TheoryItem[] = [
     <!-- WORKING THEORIES                 -->
     <!-- -------------------------------- -->
 
-    <section class="content-section theories-section">
+    <section id="working-theories" class="content-section theories-section">
       <div class="section-heading">
         <span class="section-number" aria-hidden="true">04</span>
         <h2>Working Theories</h2>
@@ -924,7 +1364,358 @@ const workingTheories: TheoryItem[] = [
       </div>
     </section>
 
+    <!-- -------------------------------- -->
+    <!-- THE SEARCH                       -->
+    <!-- -------------------------------- -->
+
+    <section id="the-search" class="content-section search-section">
+      <div class="section-heading">
+        <span class="section-number" aria-hidden="true">05</span>
+        <h2>The Search</h2>
+        <span class="section-rule" aria-hidden="true"></span>
+      </div>
+
+      <div class="search-shell">
+        <header class="search-overview">
+          <div class="search-overview__intro">
+            <p class="search-overline">Attempts to resolve the case</p>
+            <h3>What happened when people went looking?</h3>
+          </div>
+
+          <div class="search-overview__aside">
+            <p class="search-summary">
+              El Dorado was pursued through lake drainage, overland marches and river expeditions. These records focus on the attempts that materially changed where the legend was placed, what searchers expected to find or how the evidence was understood.
+            </p>
+          </div>
+        </header>
+
+        <div class="search-dashboard">
+          <div class="search-dashboard__brief">
+            <p class="search-dashboard__overline">The search field</p>
+            <h3>A target that moved when each attempt failed</h3>
+
+            <p class="search-dashboard__copy">
+              The pursuit began at a sacred lake, spread through Amazonia and the eastern plains, gathered around the Orinoco and Manoa, then returned to Guatavita with industrial machinery.
+            </p>
+
+            <dl class="search-stats">
+              <div>
+                <dt>Selected attempts</dt>
+                <dd>{String(searchRecords.length).padStart(2, "0")}</dd>
+              </div>
+
+              <div>
+                <dt>Centuries represented</dt>
+                <dd>04</dd>
+              </div>
+
+              <div>
+                <dt>Primary methods</dt>
+                <dd>03</dd>
+              </div>
+            </dl>
+          </div>
+
+          <figure class="search-plot-frame">
+            <div class="search-plot">
+              <span class="search-plot__grid" aria-hidden="true"></span>
+
+              <svg
+                class="search-plot__routes"
+                viewBox="0 0 800 340"
+                preserveAspectRatio="none"
+                aria-hidden="true"
+              >
+                <path
+                  class="search-plot__contour search-plot__contour--one"
+                  d="M-12 302C82 239 142 278 211 212C284 143 326 84 421 88C520 92 568 155 663 129C723 113 770 75 820 62"
+                />
+                <path
+                  class="search-plot__contour search-plot__contour--two"
+                  d="M-30 328C77 270 153 307 230 247C311 183 354 128 445 131C544 134 596 189 684 165C745 149 786 116 829 101"
+                />
+                <path
+                  class="search-plot__contour search-plot__contour--three"
+                  d="M-18 185C86 119 160 140 223 92C298 35 381 16 459 48C542 82 602 71 674 33C729 4 775 3 822 21"
+                />
+
+                <path
+                  class="search-plot__route-glow"
+                  d="M80 250C145 230 185 135 250 130S330 215 390 220S465 95 520 85S590 160 650 165S700 245 740 265"
+                />
+                <path
+                  class="search-plot__route"
+                  d="M80 250C145 230 185 135 250 130S330 215 390 220S465 95 520 85S590 160 650 165S700 245 740 265"
+                />
+              </svg>
+
+              <span class="search-plot__region search-plot__region--west" aria-hidden="true">
+                Colombian highlands
+              </span>
+              <span class="search-plot__region search-plot__region--centre" aria-hidden="true">
+                Amazonia & llanos
+              </span>
+              <span class="search-plot__region search-plot__region--east" aria-hidden="true">
+                Orinoco & Guiana
+              </span>
+
+              {searchRoute.map((node) => (
+                <a
+                  class:list={[
+                    "search-plot__node",
+                    `search-plot__node--${node.tone}`,
+                    `search-plot__node--${node.placement}`,
+                  ]}
+                  style={`--node-x: ${node.x}; --node-y: ${node.y};`}
+                  href={node.href}
+                  aria-label={`${node.number}: ${node.label}, ${node.date}`}
+                >
+                  <span class="search-plot__point" aria-hidden="true">
+                    {node.number}
+                  </span>
+
+                  <span class="search-plot__label">
+                    <strong>{node.label}</strong>
+                    <span>{node.date}</span>
+                  </span>
+                </a>
+              ))}
+            </div>
+
+            <figcaption>
+              A schematic record of the search’s changing focus, arranged chronologically rather than as a precise route map.
+            </figcaption>
+          </figure>
+        </div>
+
+        <div class="search-records__heading">
+          <p>Major search records</p>
+          <span>Objective · Method · Outcome · What changed</span>
+        </div>
+
+        <div class="search-records">
+          {searchRecords.map((record) => (
+            <article
+              id={`search-${record.id}`}
+              class:list={[
+                "search-record",
+                `search-record--${record.tone}`,
+              ]}
+              aria-labelledby={`search-title-${record.id}`}
+            >
+              <div class="search-record__index">
+                <span class="search-record__number" aria-hidden="true">
+                  {record.number}
+                </span>
+
+                <p class="search-record__date">{record.date}</p>
+
+                <span
+                  class:list={[
+                    "search-status",
+                    `search-status--${searchStatuses[record.status].className}`,
+                  ]}
+                >
+                  {searchStatuses[record.status].label}
+                </span>
+              </div>
+
+              <div class="search-record__story">
+                <p class="search-record__context">{record.context}</p>
+
+                <h3 id={`search-title-${record.id}`}>
+                  {record.title}
+                </h3>
+
+                <p class="search-record__description">
+                  {record.description}
+                </p>
+              </div>
+
+              <div class="search-record__report">
+                <dl class="search-record__details">
+                  {record.details.map((detail) => (
+                    <div>
+                      <dt>{detail.label}</dt>
+                      <dd>{detail.value}</dd>
+                    </div>
+                  ))}
+                </dl>
+
+                <div class="search-record__changed">
+                  <p>What changed</p>
+                  <p>{record.changed}</p>
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- -------------------------------- -->
+    <!-- THE MUISCA WORLD                  -->
+    <!-- -------------------------------- -->
+
+    <section id="muisca-world" class="content-section culture-section">
+      <div class="section-heading">
+        <span class="section-number" aria-hidden="true">06</span>
+        <h2>The Muisca World</h2>
+        <span class="section-rule" aria-hidden="true"></span>
+      </div>
+
+      <div class="culture-shell">
+        <header class="culture-overview">
+          <div class="culture-overview__intro">
+            <p class="culture-overline">The culture beneath the legend</p>
+            <h3>Gold meant something very different here</h3>
+          </div>
+
+          <div class="culture-overview__aside">
+            <p class="culture-summary">
+              The Muisca were not a hidden golden empire but a network of highland chiefdoms. Their metalwork, sacred places, exchange systems and political ceremonies formed the real cultural world from which El Dorado was later reconstructed.
+            </p>
+          </div>
+        </header>
+
+        <div class="culture-feature">
+          <figure class="culture-hero">
+            <div class="culture-hero__visual">
+              <span class="culture-hero__grid" aria-hidden="true"></span>
+
+              <img
+                src="/images/mysteries/el-dorado/muisca-world.webp"
+                alt="Composite view of Muisca votive figures and ceremonial metalwork"
+                loading="lazy"
+                decoding="async"
+                onerror="this.hidden = true"
+              />
+
+              <span class="culture-hero__label">Material culture</span>
+              <span class="culture-hero__number" aria-hidden="true">06</span>
+            </div>
+
+            <!-- Add object-level image credits here when the final composite is ready. -->
+            <figcaption>
+              Votive figures and ceremonial objects reveal a broader ritual world than the single image of a gilded ruler.
+            </figcaption>
+          </figure>
+
+          <aside class="culture-reading">
+            <p class="culture-reading__overline">Read the objects differently</p>
+            <h3>Not treasure waiting to be taken</h3>
+
+            <p class="culture-reading__copy">
+              Muisca goldwork could be created expressly for offering. Once placed in a sacred setting, an object participated in ritual relationships rather than simply functioning as portable wealth.
+            </p>
+
+            <ul class="culture-reading__points">
+              <li>Metalwork carried social, political and spiritual meaning.</li>
+              <li>Offerings were deliberately placed beyond ordinary circulation.</li>
+              <li>An object’s purpose mattered as much as its raw material.</li>
+            </ul>
+          </aside>
+        </div>
+
+        <div class="culture-topics" aria-label="Key aspects of the Muisca world">
+          {muiscaWorldTopics.map((topic) => (
+            <article
+              class:list={[
+                "culture-topic",
+                `culture-topic--${topic.tone}`,
+              ]}
+              aria-labelledby={`culture-title-${topic.id}`}
+            >
+              <div class="culture-topic__header">
+                <p class="culture-topic__label">
+                  <span>{topic.number}</span>
+                  <span class="culture-topic__rule" aria-hidden="true"></span>
+                  {topic.eyebrow}
+                </p>
+
+                <span class="culture-topic__node" aria-hidden="true"></span>
+              </div>
+
+              <h3 id={`culture-title-${topic.id}`}>{topic.title}</h3>
+
+              <p class="culture-topic__description">
+                {topic.description}
+              </p>
+
+              <dl class="culture-topic__details">
+                {topic.details.map((detail) => (
+                  <div>
+                    <dt>{detail.label}</dt>
+                    <dd>{detail.value}</dd>
+                  </div>
+                ))}
+              </dl>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
   </article>
+
+  <script>
+    const caseIndex = document.querySelector("[data-case-index]");
+
+    if (caseIndex instanceof HTMLElement) {
+      const links = Array.from(
+        caseIndex.querySelectorAll("[data-case-index-link]")
+      ).filter((link) => link instanceof HTMLAnchorElement);
+
+      const sections = links
+        .map((link) => {
+          const id = link.dataset.caseIndexLink;
+          return id ? document.getElementById(id) : null;
+        })
+        .filter((section) => section instanceof HTMLElement);
+
+      const setActiveSection = (id: string) => {
+        links.forEach((link) => {
+          const isActive = link.dataset.caseIndexLink === id;
+
+          if (isActive) {
+            link.setAttribute("aria-current", "location");
+            link.scrollIntoView({
+              behavior: "smooth",
+              block: "nearest",
+              inline: "center",
+            });
+          } else {
+            link.removeAttribute("aria-current");
+          }
+        });
+      };
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          const visible = entries
+            .filter((entry) => entry.isIntersecting)
+            .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+
+          if (visible instanceof IntersectionObserverEntry) {
+            setActiveSection(visible.target.id);
+          }
+        },
+        {
+          rootMargin: "-24% 0px -66% 0px",
+          threshold: [0, 0.05, 0.15, 0.35],
+        }
+      );
+
+      sections.forEach((section) => observer.observe(section));
+
+      links.forEach((link) => {
+        link.addEventListener("click", () => {
+          const id = link.dataset.caseIndexLink;
+          if (id) setActiveSection(id);
+        });
+      });
+    }
+  </script>
 </BaseLayout>
 
 
@@ -1386,6 +2177,209 @@ const workingTheories: TheoryItem[] = [
 
 
   /* ---------------------------------- */
+  /* CASE INDEX                         */
+  /* ---------------------------------- */
+
+  .case-index {
+    width: min(100%, 1120px);
+
+    margin: 24px auto -18px;
+    padding: 9px 10px 9px 16px;
+
+    position: sticky;
+    top: 86px;
+    z-index: 45;
+
+    display: flex;
+    align-items: center;
+
+    gap: 14px;
+
+    background:
+      linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.82),
+        rgba(245, 248, 253, 0.64)
+      );
+
+    border: 1px solid rgba(255, 255, 255, 0.90);
+    border-radius: 999px;
+
+    box-shadow:
+      0 16px 38px rgba(48, 59, 83, 0.105),
+      inset 0 1px 0 rgba(255, 255, 255, 1),
+      inset 0 -1px 0 rgba(55, 65, 88, 0.035);
+
+    backdrop-filter:
+      blur(26px)
+      saturate(175%);
+
+    -webkit-backdrop-filter:
+      blur(26px)
+      saturate(175%);
+  }
+
+
+  .case-index__identity {
+    flex: 0 0 auto;
+
+    padding-right: 15px;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 2px;
+
+    border-right: 1px solid rgba(65, 75, 99, 0.10);
+  }
+
+
+  .case-index__eyebrow,
+  .case-index__hint {
+    white-space: nowrap;
+
+    font-family: var(--font-ui);
+    text-transform: uppercase;
+  }
+
+
+  .case-index__eyebrow {
+    color: #5d6472;
+
+    font-size: 8px;
+    font-weight: 750;
+    letter-spacing: 0.15em;
+  }
+
+
+  .case-index__hint {
+    color: #989eaa;
+
+    font-size: 7px;
+    font-weight: 650;
+    letter-spacing: 0.10em;
+  }
+
+
+  .case-index__scroller {
+    min-width: 0;
+    flex: 1;
+
+    overflow-x: auto;
+    overscroll-behavior-inline: contain;
+
+    scrollbar-width: none;
+
+    mask-image:
+      linear-gradient(
+        to right,
+        transparent,
+        black 12px,
+        black calc(100% - 12px),
+        transparent
+      );
+
+    -webkit-mask-image:
+      linear-gradient(
+        to right,
+        transparent,
+        black 12px,
+        black calc(100% - 12px),
+        transparent
+      );
+  }
+
+
+  .case-index__scroller::-webkit-scrollbar {
+    display: none;
+  }
+
+
+  .case-index__links {
+    width: max-content;
+    min-width: 100%;
+
+    padding: 0 5px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 5px;
+  }
+
+
+  .case-index__links a {
+    display: inline-flex;
+    align-items: center;
+
+    gap: 8px;
+
+    padding: 10px 12px;
+
+    color: #6e7481;
+    background: transparent;
+
+    border: 1px solid transparent;
+    border-radius: 999px;
+
+    font-family: var(--font-ui);
+    font-size: 9px;
+    font-weight: 650;
+    letter-spacing: 0.055em;
+    line-height: 1;
+    text-decoration: none;
+    white-space: nowrap;
+
+    transition:
+      color 0.22s ease,
+      background 0.22s ease,
+      border-color 0.22s ease,
+      box-shadow 0.22s ease,
+      transform 0.22s var(--ease-out);
+  }
+
+
+  .case-index__links a > span:first-child {
+    color: #9b7a4f;
+
+    font-size: 7px;
+    font-weight: 750;
+    letter-spacing: 0.08em;
+  }
+
+
+  .case-index__links a:hover {
+    color: #292e3a;
+    background: rgba(255, 255, 255, 0.52);
+    border-color: rgba(255, 255, 255, 0.78);
+
+    transform: translateY(-1px);
+  }
+
+
+  .case-index__links a[aria-current="location"] {
+    color: #292e3a;
+    background:
+      linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.93),
+        rgba(242, 245, 251, 0.70)
+      );
+
+    border-color: rgba(255, 255, 255, 0.96);
+
+    box-shadow:
+      0 7px 17px rgba(54, 65, 91, 0.10),
+      inset 0 1px 0 rgba(255, 255, 255, 1);
+  }
+
+
+  .case-index__links a[aria-current="location"] > span:first-child {
+    color: #8a6334;
+  }
+
+
+  /* ---------------------------------- */
   /* CONTENT SECTIONS                   */
   /* ---------------------------------- */
 
@@ -1394,6 +2388,13 @@ const workingTheories: TheoryItem[] = [
 
     margin: 0 auto;
     padding: 74px 0 8px;
+
+    scroll-margin-top: 158px;
+  }
+
+
+  .case-header {
+    scroll-margin-top: 118px;
   }
 
 
@@ -3589,7 +4590,7 @@ const workingTheories: TheoryItem[] = [
 
   .evidence-featured__content h3,
   .evidence-card h3 {
-    scroll-margin-top: 112px;
+    scroll-margin-top: 158px;
   }
 
 
@@ -3695,6 +4696,2107 @@ const workingTheories: TheoryItem[] = [
     }
 
     .theory-details dd {
+      text-align: left;
+    }
+  }
+
+
+  /* ---------------------------------- */
+  /* THE SEARCH                         */
+  /* ---------------------------------- */
+
+  .search-section {
+    padding-bottom: 22px;
+  }
+
+
+  .search-shell {
+    position: relative;
+    isolation: isolate;
+
+    overflow: hidden;
+
+    padding:
+      clamp(25px, 4vw, 46px)
+      clamp(20px, 4vw, 44px);
+
+    background:
+      radial-gradient(
+        circle at 7% 5%,
+        rgba(116, 166, 235, 0.14),
+        transparent 31%
+      ),
+      radial-gradient(
+        circle at 94% 6%,
+        rgba(218, 167, 99, 0.15),
+        transparent 31%
+      ),
+      radial-gradient(
+        circle at 89% 96%,
+        rgba(165, 139, 217, 0.12),
+        transparent 34%
+      ),
+      linear-gradient(
+        145deg,
+        rgba(255, 255, 255, 0.79),
+        rgba(246, 249, 255, 0.49)
+      );
+
+    border: 1px solid rgba(255, 255, 255, 0.91);
+    border-radius: clamp(24px, 2.7vw, 34px);
+
+    box-shadow:
+      0 24px 60px rgba(50, 62, 88, 0.10),
+      inset 0 1px 0 rgba(255, 255, 255, 1),
+      inset 0 -1px 0 rgba(55, 65, 88, 0.04);
+
+    backdrop-filter:
+      blur(24px)
+      saturate(150%);
+
+    -webkit-backdrop-filter:
+      blur(24px)
+      saturate(150%);
+  }
+
+
+  .search-shell::before {
+    content: "";
+
+    width: 460px;
+    aspect-ratio: 1;
+
+    position: absolute;
+    right: -275px;
+    top: 148px;
+    z-index: -1;
+
+    border: 1px solid rgba(75, 84, 106, 0.095);
+    border-radius: 50%;
+
+    box-shadow:
+      0 0 0 58px rgba(255, 255, 255, 0.045),
+      0 0 0 116px rgba(75, 84, 106, 0.020);
+
+    pointer-events: none;
+  }
+
+
+  .search-overview {
+    position: relative;
+    z-index: 1;
+
+    display: grid;
+    grid-template-columns:
+      minmax(0, 1fr)
+      minmax(310px, 0.82fr);
+    align-items: end;
+
+    gap: clamp(24px, 4vw, 56px);
+
+    padding:
+      2px
+      4px
+      clamp(26px, 3.5vw, 38px);
+
+    border-bottom: 1px solid rgba(66, 76, 99, 0.10);
+  }
+
+
+  .search-overline,
+  .search-dashboard__overline {
+    margin: 0 0 10px;
+
+    color: #7c7595;
+
+    font-family: var(--font-ui);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+
+  .search-overview h3 {
+    max-width: 650px;
+
+    margin: 0;
+
+    color: #1d2029;
+
+    font-size: clamp(25px, 3.1vw, 38px);
+    line-height: 1.25;
+  }
+
+
+  .search-overview__aside {
+    min-width: 0;
+  }
+
+
+  .search-summary {
+    margin: 0;
+
+    color: #69707f;
+
+    font-family: var(--font-ui);
+    font-size: 14px;
+    line-height: 1.80;
+  }
+
+
+  .search-dashboard {
+    position: relative;
+    z-index: 1;
+
+    margin-top: clamp(25px, 3.5vw, 38px);
+    padding: clamp(18px, 2.7vw, 28px);
+
+    display: grid;
+    grid-template-columns:
+      minmax(275px, 0.72fr)
+      minmax(0, 1.28fr);
+    align-items: stretch;
+
+    gap: clamp(22px, 3.5vw, 40px);
+
+    background:
+      linear-gradient(
+        145deg,
+        rgba(255, 255, 255, 0.82),
+        rgba(247, 248, 252, 0.55)
+      );
+
+    border: 1px solid rgba(255, 255, 255, 0.91);
+    border-radius: clamp(22px, 2.5vw, 30px);
+
+    box-shadow:
+      0 18px 42px rgba(50, 62, 88, 0.086),
+      inset 0 1px 0 rgba(255, 255, 255, 1),
+      inset 0 -1px 0 rgba(55, 65, 88, 0.035);
+  }
+
+
+  .search-dashboard__brief {
+    min-width: 0;
+
+    padding:
+      clamp(8px, 1.5vw, 15px)
+      0
+      clamp(6px, 1vw, 10px)
+      clamp(3px, 0.7vw, 7px);
+
+    display: flex;
+    flex-direction: column;
+  }
+
+
+  .search-dashboard__overline {
+    color: #92784f;
+  }
+
+
+  .search-dashboard__brief h3 {
+    margin: 0;
+
+    color: #1d2029;
+
+    font-size: clamp(27px, 3.4vw, 40px);
+    line-height: 1.20;
+  }
+
+
+  .search-dashboard__copy {
+    margin: 17px 0 0;
+
+    color: #69707f;
+
+    font-family: var(--font-ui);
+    font-size: 14px;
+    line-height: 1.82;
+  }
+
+
+  .search-stats {
+    margin: auto 0 0;
+    padding: clamp(23px, 3vw, 32px) 0 0;
+
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+
+    border-top: 1px solid rgba(65, 75, 99, 0.10);
+  }
+
+
+  .search-stats div {
+    min-width: 0;
+
+    padding: 0 13px;
+
+    border-left: 1px solid rgba(65, 75, 99, 0.085);
+  }
+
+
+  .search-stats div:first-child {
+    padding-left: 0;
+    border-left: 0;
+  }
+
+
+  .search-stats div:last-child {
+    padding-right: 0;
+  }
+
+
+  .search-stats dt {
+    color: #9298a5;
+
+    font-family: var(--font-ui);
+    font-size: 7px;
+    font-weight: 700;
+    letter-spacing: 0.11em;
+    line-height: 1.45;
+    text-transform: uppercase;
+  }
+
+
+  .search-stats dd {
+    margin: 7px 0 0;
+
+    color: #444a58;
+
+    font-family: var(--font-display);
+    font-size: clamp(22px, 2.7vw, 31px);
+    line-height: 1;
+  }
+
+
+  .search-plot-frame {
+    min-width: 0;
+
+    margin: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 11px;
+  }
+
+
+  .search-plot {
+    min-height: 338px;
+
+    position: relative;
+    isolation: isolate;
+
+    overflow: hidden;
+
+    background:
+      radial-gradient(
+        circle at 17% 78%,
+        rgba(218, 167, 99, 0.15),
+        transparent 27%
+      ),
+      radial-gradient(
+        circle at 78% 24%,
+        rgba(116, 166, 235, 0.15),
+        transparent 31%
+      ),
+      linear-gradient(
+        145deg,
+        rgba(237, 242, 250, 0.86),
+        rgba(248, 246, 243, 0.76)
+      );
+
+    border: 1px solid rgba(255, 255, 255, 0.88);
+    border-radius: clamp(18px, 2vw, 24px);
+
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.96),
+      inset 0 0 46px rgba(82, 96, 127, 0.055);
+  }
+
+
+  .search-plot::after {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+    z-index: 5;
+
+    background:
+      linear-gradient(
+        116deg,
+        rgba(255, 255, 255, 0.42),
+        transparent 23%,
+        transparent 73%,
+        rgba(255, 255, 255, 0.15)
+      );
+
+    pointer-events: none;
+  }
+
+
+  .search-plot__grid {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+
+    display: block;
+
+    opacity: 0.20;
+
+    background-image:
+      linear-gradient(
+        rgba(65, 76, 102, 0.13) 1px,
+        transparent 1px
+      ),
+      linear-gradient(
+        90deg,
+        rgba(65, 76, 102, 0.13) 1px,
+        transparent 1px
+      );
+
+    background-size: 42px 42px;
+
+    mask-image:
+      radial-gradient(
+        circle at 50% 50%,
+        black,
+        transparent 82%
+      );
+
+    -webkit-mask-image:
+      radial-gradient(
+        circle at 50% 50%,
+        black,
+        transparent 82%
+      );
+
+    pointer-events: none;
+  }
+
+
+  .search-plot__routes {
+    width: 100%;
+    height: 100%;
+
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+
+    overflow: visible;
+
+    pointer-events: none;
+  }
+
+
+  .search-plot__contour {
+    fill: none;
+    stroke: rgba(78, 86, 106, 0.10);
+    stroke-width: 1.1;
+    vector-effect: non-scaling-stroke;
+  }
+
+
+  .search-plot__contour--two {
+    opacity: 0.75;
+  }
+
+
+  .search-plot__contour--three {
+    opacity: 0.58;
+  }
+
+
+  .search-plot__route-glow,
+  .search-plot__route {
+    fill: none;
+    vector-effect: non-scaling-stroke;
+  }
+
+
+  .search-plot__route-glow {
+    stroke: rgba(119, 143, 193, 0.13);
+    stroke-width: 8;
+    filter: blur(3px);
+  }
+
+
+  .search-plot__route {
+    stroke: rgba(104, 122, 160, 0.42);
+    stroke-width: 1.6;
+    stroke-linecap: round;
+    stroke-dasharray: 5 6;
+  }
+
+
+  .search-plot__region {
+    position: absolute;
+    z-index: 1;
+
+    color: rgba(62, 69, 86, 0.20);
+
+    font-family: var(--font-ui);
+    font-size: 7px;
+    font-weight: 750;
+    letter-spacing: 0.17em;
+    text-transform: uppercase;
+
+    pointer-events: none;
+  }
+
+
+  .search-plot__region--west {
+    left: 5%;
+    top: 10%;
+  }
+
+
+  .search-plot__region--centre {
+    left: 39%;
+    bottom: 9%;
+  }
+
+
+  .search-plot__region--east {
+    right: 5%;
+    top: 9%;
+  }
+
+
+  .search-plot__node {
+    --search-node-accent: #858b99;
+    --search-node-rgb: 133, 139, 153;
+
+    position: absolute;
+    left: var(--node-x);
+    top: var(--node-y);
+    z-index: 4;
+
+    color: #4f5664;
+
+    text-decoration: none;
+
+    transform: translate(-50%, -50%);
+  }
+
+
+  .search-plot__point {
+    width: 27px;
+    aspect-ratio: 1;
+
+    display: grid;
+    place-items: center;
+
+    color: var(--search-node-accent);
+    background:
+      radial-gradient(
+        circle at 31% 26%,
+        white,
+        rgba(var(--search-node-rgb), 0.24) 48%,
+        rgba(var(--search-node-rgb), 0.54)
+      );
+
+    border: 1px solid rgba(255, 255, 255, 0.96);
+    border-radius: 50%;
+
+    box-shadow:
+      0 0 0 6px rgba(var(--search-node-rgb), 0.065),
+      0 9px 19px rgba(62, 75, 105, 0.17),
+      inset 0 1px 0 white;
+
+    font-family: var(--font-ui);
+    font-size: 6px;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+
+    transition:
+      transform 0.24s var(--ease-out),
+      box-shadow 0.24s ease;
+  }
+
+
+  .search-plot__label {
+    width: max-content;
+    max-width: 126px;
+
+    position: absolute;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 3px;
+
+    pointer-events: none;
+  }
+
+
+  .search-plot__label strong {
+    color: #3f4552;
+
+    font-family: var(--font-ui);
+    font-size: 9px;
+    font-weight: 750;
+    letter-spacing: 0.055em;
+    line-height: 1.25;
+  }
+
+
+  .search-plot__label span {
+    color: #9298a5;
+
+    font-family: var(--font-ui);
+    font-size: 7px;
+    font-weight: 650;
+    letter-spacing: 0.07em;
+    line-height: 1.3;
+  }
+
+
+  .search-plot__node--above .search-plot__label {
+    left: 50%;
+    bottom: calc(100% + 13px);
+
+    text-align: center;
+
+    transform: translateX(-50%);
+  }
+
+
+  .search-plot__node--below .search-plot__label {
+    left: 50%;
+    top: calc(100% + 13px);
+
+    text-align: center;
+
+    transform: translateX(-50%);
+  }
+
+
+  .search-plot__node--left .search-plot__label {
+    right: calc(100% + 13px);
+    top: 50%;
+
+    text-align: right;
+
+    transform: translateY(-50%);
+  }
+
+
+  .search-plot__node--right .search-plot__label {
+    left: calc(100% + 13px);
+    top: 50%;
+
+    text-align: left;
+
+    transform: translateY(-50%);
+  }
+
+
+  .search-plot__node:hover .search-plot__point,
+  .search-plot__node:focus-visible .search-plot__point {
+    transform: scale(1.08);
+
+    box-shadow:
+      0 0 0 8px rgba(var(--search-node-rgb), 0.085),
+      0 12px 23px rgba(62, 75, 105, 0.20),
+      inset 0 1px 0 white;
+  }
+
+
+  .search-plot__node--gold {
+    --search-node-accent: #a9793d;
+    --search-node-rgb: 190, 143, 80;
+  }
+
+
+  .search-plot__node--blue {
+    --search-node-accent: #6383bb;
+    --search-node-rgb: 104, 140, 201;
+  }
+
+
+  .search-plot__node--violet {
+    --search-node-accent: #8069a6;
+    --search-node-rgb: 143, 116, 184;
+  }
+
+
+  .search-plot__node--neutral {
+    --search-node-accent: #737a87;
+    --search-node-rgb: 125, 132, 146;
+  }
+
+
+  .search-plot-frame figcaption {
+    margin: 0;
+
+    color: #949aa6;
+
+    font-family: var(--font-ui);
+    font-size: 9px;
+    line-height: 1.55;
+    text-align: center;
+  }
+
+
+  .search-records__heading {
+    position: relative;
+    z-index: 1;
+
+    margin-top: clamp(30px, 4vw, 46px);
+    padding: 0 4px 15px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+
+    gap: 8px 18px;
+
+    border-bottom: 1px solid rgba(65, 75, 99, 0.11);
+  }
+
+
+  .search-records__heading p,
+  .search-records__heading span {
+    margin: 0;
+
+    font-family: var(--font-ui);
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: 0.13em;
+    line-height: 1.45;
+    text-transform: uppercase;
+  }
+
+
+  .search-records__heading p {
+    color: #6d7482;
+  }
+
+
+  .search-records__heading span {
+    color: #9aa0ac;
+  }
+
+
+  .search-records {
+    position: relative;
+    z-index: 1;
+  }
+
+
+  .search-record {
+    --search-accent: #858b99;
+    --search-accent-rgb: 133, 139, 153;
+    --search-accent-soft: rgba(133, 139, 153, 0.075);
+
+    min-width: 0;
+
+    position: relative;
+
+    padding:
+      clamp(27px, 3.7vw, 42px)
+      4px;
+
+    display: grid;
+    grid-template-columns:
+      minmax(105px, 0.34fr)
+      minmax(0, 0.92fr)
+      minmax(330px, 1.08fr);
+    align-items: start;
+
+    gap: clamp(24px, 4vw, 52px);
+
+    border-bottom: 1px solid rgba(65, 75, 99, 0.095);
+
+    scroll-margin-top: 158px;
+  }
+
+
+  .search-record:last-child {
+    padding-bottom: 2px;
+    border-bottom: 0;
+  }
+
+
+  .search-record::before {
+    content: "";
+
+    position: absolute;
+    inset: 9px -12px;
+    z-index: -1;
+
+    background:
+      radial-gradient(
+        circle at 94% 8%,
+        var(--search-accent-soft),
+        transparent 31%
+      );
+
+    border-radius: 25px;
+
+    opacity: 0;
+
+    transition: opacity 0.28s ease;
+  }
+
+
+  .search-record:hover::before {
+    opacity: 1;
+  }
+
+
+  .search-record--gold {
+    --search-accent: #a9783e;
+    --search-accent-rgb: 190, 142, 78;
+    --search-accent-soft: rgba(211, 162, 94, 0.10);
+  }
+
+
+  .search-record--blue {
+    --search-accent: #6483ba;
+    --search-accent-rgb: 100, 131, 186;
+    --search-accent-soft: rgba(105, 145, 209, 0.09);
+  }
+
+
+  .search-record--violet {
+    --search-accent: #826ca6;
+    --search-accent-rgb: 130, 108, 166;
+    --search-accent-soft: rgba(152, 126, 194, 0.09);
+  }
+
+
+  .search-record--neutral {
+    --search-accent: #747b88;
+    --search-accent-rgb: 116, 123, 136;
+    --search-accent-soft: rgba(116, 123, 136, 0.075);
+  }
+
+
+  .search-record__index,
+  .search-record__story,
+  .search-record__report {
+    min-width: 0;
+  }
+
+
+  .search-record__index {
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    gap: 10px;
+  }
+
+
+  .search-record__number {
+    color: rgba(var(--search-accent-rgb), 0.75);
+
+    font-family: var(--font-display);
+    font-size: clamp(39px, 4.8vw, 56px);
+    line-height: 0.92;
+    letter-spacing: -0.045em;
+  }
+
+
+  .search-record__date {
+    margin: 0;
+
+    color: #7c8391;
+
+    font-family: var(--font-ui);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.10em;
+    line-height: 1.45;
+    text-transform: uppercase;
+  }
+
+
+  .search-status {
+    --status-color: #606775;
+    --status-background: rgba(255, 255, 255, 0.52);
+    --status-border: rgba(255, 255, 255, 0.82);
+    --status-dot: #9aa0ad;
+    --status-glow: rgba(154, 160, 173, 0.10);
+
+    display: inline-flex;
+    align-items: center;
+
+    gap: 7px;
+
+    padding: 7px 9px;
+
+    color: var(--status-color);
+    background: var(--status-background);
+
+    border: 1px solid var(--status-border);
+    border-radius: 999px;
+
+    box-shadow:
+      0 6px 14px rgba(52, 62, 85, 0.055),
+      inset 0 1px 0 rgba(255, 255, 255, 0.86);
+
+    font-family: var(--font-ui);
+    font-size: 7px;
+    font-weight: 700;
+    letter-spacing: 0.085em;
+    line-height: 1;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+
+  .search-status::before {
+    content: "";
+
+    width: 6px;
+    aspect-ratio: 1;
+
+    display: block;
+
+    background: var(--status-dot);
+    border-radius: 50%;
+
+    box-shadow: 0 0 0 3px var(--status-glow);
+  }
+
+
+  .search-status--partial {
+    --status-color: #8d6738;
+    --status-background: rgba(210, 163, 96, 0.11);
+    --status-border: rgba(199, 145, 76, 0.19);
+    --status-dot: #b88344;
+    --status-glow: rgba(184, 131, 68, 0.13);
+  }
+
+
+  .search-status--abandoned {
+    --status-color: #94615d;
+    --status-background: rgba(190, 116, 108, 0.10);
+    --status-border: rgba(184, 111, 103, 0.17);
+    --status-dot: #b27068;
+    --status-glow: rgba(178, 112, 104, 0.12);
+  }
+
+
+  .search-status--no-discovery {
+    --status-color: #666d79;
+    --status-background: rgba(116, 124, 139, 0.085);
+    --status-border: rgba(116, 124, 139, 0.15);
+    --status-dot: #7c8491;
+    --status-glow: rgba(124, 132, 145, 0.11);
+  }
+
+
+  .search-status--disputed {
+    --status-color: #7f68a0;
+    --status-background: rgba(154, 126, 197, 0.10);
+    --status-border: rgba(154, 126, 197, 0.18);
+    --status-dot: #9277bb;
+    --status-glow: rgba(146, 119, 187, 0.13);
+  }
+
+
+  .search-status--successful {
+    --status-color: #4f796b;
+    --status-background: rgba(99, 154, 134, 0.105);
+    --status-border: rgba(99, 154, 134, 0.18);
+    --status-dot: #659886;
+    --status-glow: rgba(101, 152, 134, 0.13);
+  }
+
+
+  .search-status--ongoing {
+    --status-color: #5578b8;
+    --status-background: rgba(111, 151, 220, 0.11);
+    --status-border: rgba(111, 151, 220, 0.19);
+    --status-dot: #668bd0;
+    --status-glow: rgba(102, 139, 208, 0.13);
+  }
+
+
+  .search-record__context {
+    margin: 0 0 11px;
+
+    color: var(--search-accent);
+
+    font-family: var(--font-ui);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.11em;
+    line-height: 1.55;
+    text-transform: uppercase;
+  }
+
+
+  .search-record__story h3 {
+    margin: 0;
+
+    color: #1e212b;
+
+    font-size: clamp(27px, 3.4vw, 40px);
+    line-height: 1.18;
+  }
+
+
+  .search-record__description {
+    margin: 16px 0 0;
+
+    color: #69707f;
+
+    font-family: var(--font-ui);
+    font-size: 14px;
+    line-height: 1.84;
+  }
+
+
+  .search-record__report {
+    padding: clamp(18px, 2.4vw, 25px);
+
+    background:
+      linear-gradient(
+        145deg,
+        rgba(255, 255, 255, 0.68),
+        rgba(245, 247, 251, 0.47)
+      );
+
+    border: 1px solid rgba(255, 255, 255, 0.82);
+    border-radius: 21px;
+
+    box-shadow:
+      0 11px 28px rgba(50, 62, 88, 0.058),
+      inset 0 1px 0 rgba(255, 255, 255, 0.94);
+  }
+
+
+  .search-record__details {
+    margin: 0;
+    padding: 0;
+  }
+
+
+  .search-record__details div {
+    display: grid;
+    grid-template-columns: minmax(76px, 0.62fr) minmax(0, 1.38fr);
+    align-items: baseline;
+
+    gap: 14px;
+
+    padding: 9px 0;
+
+    border-bottom: 1px solid rgba(65, 75, 99, 0.065);
+  }
+
+
+  .search-record__details div:first-child {
+    padding-top: 0;
+  }
+
+
+  .search-record__details div:last-child {
+    padding-bottom: 0;
+    border-bottom: 0;
+  }
+
+
+  .search-record__details dt,
+  .search-record__changed > p:first-child {
+    color: #9298a5;
+
+    font-family: var(--font-ui);
+    font-size: 7px;
+    font-weight: 700;
+    letter-spacing: 0.11em;
+    line-height: 1.45;
+    text-transform: uppercase;
+  }
+
+
+  .search-record__details dd {
+    margin: 0;
+
+    color: #4f5563;
+
+    font-family: var(--font-ui);
+    font-size: 10px;
+    font-weight: 600;
+    line-height: 1.60;
+    text-align: right;
+  }
+
+
+  .search-record__changed {
+    margin-top: 16px;
+    padding: 16px 17px;
+
+    background: rgba(var(--search-accent-rgb), 0.065);
+
+    border: 1px solid rgba(var(--search-accent-rgb), 0.10);
+    border-radius: 15px;
+  }
+
+
+  .search-record__changed > p:first-child {
+    margin: 0 0 7px;
+
+    color: var(--search-accent);
+  }
+
+
+  .search-record__changed > p:last-child {
+    margin: 0;
+
+    color: #555c69;
+
+    font-family: var(--font-ui);
+    font-size: 11px;
+    font-weight: 600;
+    line-height: 1.66;
+  }
+
+
+  @media (max-width: 900px) {
+    .search-dashboard {
+      grid-template-columns: 1fr;
+    }
+
+    .search-dashboard__brief {
+      padding-right: 4px;
+    }
+
+    .search-stats {
+      margin-top: 27px;
+    }
+
+    .search-record {
+      grid-template-columns:
+        minmax(95px, 0.28fr)
+        minmax(0, 1fr);
+    }
+
+    .search-record__report {
+      grid-column: 2;
+    }
+  }
+
+
+  @media (max-width: 650px) {
+    .search-shell {
+      padding: 22px 15px;
+
+      border-radius: 24px;
+    }
+
+    .search-overview {
+      grid-template-columns: 1fr;
+
+      gap: 18px;
+
+      padding:
+        1px
+        3px
+        25px;
+    }
+
+    .search-overview h3 {
+      font-size: 26px;
+    }
+
+    .search-summary {
+      font-size: 13px;
+    }
+
+    .search-dashboard {
+      padding: 14px;
+      gap: 22px;
+
+      border-radius: 22px;
+    }
+
+    .search-dashboard__brief {
+      padding: 8px 5px 2px;
+    }
+
+    .search-dashboard__brief h3 {
+      font-size: 29px;
+    }
+
+    .search-dashboard__copy {
+      font-size: 13px;
+    }
+
+    .search-stats {
+      grid-template-columns: 1fr;
+
+      gap: 0;
+
+      padding-top: 12px;
+    }
+
+    .search-stats div {
+      padding: 10px 0;
+
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      align-items: baseline;
+
+      gap: 16px;
+
+      border-left: 0;
+      border-bottom: 1px solid rgba(65, 75, 99, 0.065);
+    }
+
+    .search-stats div:first-child {
+      padding-top: 0;
+    }
+
+    .search-stats div:last-child {
+      padding-bottom: 0;
+      border-bottom: 0;
+    }
+
+    .search-stats dd {
+      margin: 0;
+
+      font-size: 23px;
+    }
+
+    .search-plot {
+      min-height: auto;
+
+      padding: 19px;
+
+      display: grid;
+
+      gap: 12px;
+    }
+
+    .search-plot__routes,
+    .search-plot__region {
+      display: none;
+    }
+
+    .search-plot__grid {
+      background-size: 34px 34px;
+    }
+
+    .search-plot__node {
+      width: 100%;
+
+      position: relative;
+      left: auto;
+      top: auto;
+
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr);
+      align-items: center;
+
+      gap: 13px;
+
+      padding: 11px 12px;
+
+      background: rgba(255, 255, 255, 0.43);
+
+      border: 1px solid rgba(255, 255, 255, 0.68);
+      border-radius: 16px;
+
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.84);
+
+      transform: none;
+    }
+
+    .search-plot__point {
+      width: 29px;
+    }
+
+    .search-plot__label,
+    .search-plot__node--above .search-plot__label,
+    .search-plot__node--below .search-plot__label,
+    .search-plot__node--left .search-plot__label,
+    .search-plot__node--right .search-plot__label {
+      width: auto;
+      max-width: none;
+
+      position: static;
+
+      text-align: left;
+
+      transform: none;
+    }
+
+    .search-plot__label strong {
+      font-size: 10px;
+    }
+
+    .search-records__heading {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+
+    .search-record {
+      padding: 26px 3px;
+
+      grid-template-columns: 1fr;
+
+      gap: 19px;
+    }
+
+    .search-record__index {
+      flex-direction: row;
+      align-items: center;
+      flex-wrap: wrap;
+
+      gap: 10px 12px;
+    }
+
+    .search-record__number {
+      font-size: 40px;
+    }
+
+    .search-record__date {
+      margin-right: auto;
+    }
+
+    .search-record__story h3 {
+      font-size: 29px;
+    }
+
+    .search-record__description {
+      font-size: 13px;
+    }
+
+    .search-record__report {
+      grid-column: auto;
+
+      padding: 17px;
+
+      border-radius: 19px;
+    }
+
+    .search-record__details div {
+      grid-template-columns: 1fr;
+
+      gap: 4px;
+    }
+
+    .search-record__details dd {
+      text-align: left;
+    }
+  }
+
+
+
+  /* ---------------------------------- */
+  /* THE MUISCA WORLD                   */
+  /* ---------------------------------- */
+
+  .culture-section {
+    padding-bottom: 22px;
+  }
+
+
+  .culture-shell {
+    position: relative;
+    isolation: isolate;
+
+    overflow: hidden;
+
+    padding:
+      clamp(25px, 4vw, 46px)
+      clamp(20px, 4vw, 44px);
+
+    background:
+      radial-gradient(
+        circle at 6% 4%,
+        rgba(218, 166, 94, 0.16),
+        transparent 31%
+      ),
+      radial-gradient(
+        circle at 94% 8%,
+        rgba(118, 169, 239, 0.13),
+        transparent 31%
+      ),
+      radial-gradient(
+        circle at 88% 96%,
+        rgba(165, 139, 217, 0.12),
+        transparent 34%
+      ),
+      linear-gradient(
+        145deg,
+        rgba(255, 255, 255, 0.79),
+        rgba(246, 249, 255, 0.49)
+      );
+
+    border: 1px solid rgba(255, 255, 255, 0.91);
+    border-radius: clamp(24px, 2.7vw, 34px);
+
+    box-shadow:
+      0 24px 60px rgba(50, 62, 88, 0.10),
+      inset 0 1px 0 rgba(255, 255, 255, 1),
+      inset 0 -1px 0 rgba(55, 65, 88, 0.04);
+
+    backdrop-filter:
+      blur(24px)
+      saturate(150%);
+
+    -webkit-backdrop-filter:
+      blur(24px)
+      saturate(150%);
+  }
+
+
+  .culture-shell::before {
+    content: "";
+
+    width: 440px;
+    aspect-ratio: 1;
+
+    position: absolute;
+    right: -258px;
+    top: 126px;
+    z-index: -1;
+
+    border: 1px solid rgba(87, 70, 51, 0.095);
+    border-radius: 50%;
+
+    box-shadow:
+      0 0 0 54px rgba(255, 255, 255, 0.045),
+      0 0 0 108px rgba(87, 70, 51, 0.020);
+
+    pointer-events: none;
+  }
+
+
+  .culture-overview {
+    position: relative;
+    z-index: 1;
+
+    display: grid;
+    grid-template-columns:
+      minmax(0, 1fr)
+      minmax(310px, 0.82fr);
+    align-items: end;
+
+    gap: clamp(24px, 4vw, 56px);
+
+    padding:
+      2px
+      4px
+      clamp(26px, 3.5vw, 38px);
+
+    border-bottom: 1px solid rgba(66, 76, 99, 0.10);
+  }
+
+
+  .culture-overline,
+  .culture-reading__overline {
+    margin: 0 0 10px;
+
+    color: #92784f;
+
+    font-family: var(--font-ui);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+
+  .culture-overview h3 {
+    max-width: 650px;
+
+    margin: 0;
+
+    color: #1d2029;
+
+    font-size: clamp(25px, 3.1vw, 38px);
+    line-height: 1.25;
+  }
+
+
+  .culture-overview__aside {
+    min-width: 0;
+  }
+
+
+  .culture-summary {
+    margin: 0;
+
+    color: #69707f;
+
+    font-family: var(--font-ui);
+    font-size: 14px;
+    line-height: 1.80;
+  }
+
+
+  .culture-feature {
+    position: relative;
+    z-index: 1;
+
+    margin-top: clamp(25px, 3.5vw, 38px);
+    padding: clamp(17px, 2.4vw, 27px);
+
+    display: grid;
+    grid-template-columns:
+      minmax(0, 1.22fr)
+      minmax(285px, 0.78fr);
+    align-items: stretch;
+
+    gap: clamp(24px, 3.5vw, 42px);
+
+    background:
+      linear-gradient(
+        145deg,
+        rgba(255, 255, 255, 0.82),
+        rgba(247, 248, 252, 0.55)
+      );
+
+    border: 1px solid rgba(255, 255, 255, 0.91);
+    border-radius: clamp(22px, 2.5vw, 30px);
+
+    box-shadow:
+      0 18px 42px rgba(50, 62, 88, 0.086),
+      inset 0 1px 0 rgba(255, 255, 255, 1),
+      inset 0 -1px 0 rgba(55, 65, 88, 0.035);
+  }
+
+
+  .culture-hero {
+    min-width: 0;
+
+    margin: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 11px;
+  }
+
+
+  .culture-hero__visual {
+    width: 100%;
+    aspect-ratio: 3 / 2;
+
+    position: relative;
+    isolation: isolate;
+
+    overflow: hidden;
+
+    background:
+      radial-gradient(
+        circle at 22% 16%,
+        rgba(255, 255, 255, 0.70),
+        transparent 30%
+      ),
+      radial-gradient(
+        circle at 78% 78%,
+        rgba(218, 164, 91, 0.22),
+        transparent 42%
+      ),
+      linear-gradient(
+        145deg,
+        rgba(229, 235, 246, 0.92),
+        rgba(244, 239, 233, 0.82)
+      );
+
+    border: 1px solid rgba(255, 255, 255, 0.88);
+    border-radius: clamp(18px, 2vw, 24px);
+
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.96),
+      inset 0 0 46px rgba(82, 96, 127, 0.055);
+  }
+
+
+  .culture-hero__visual::after {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+
+    background:
+      linear-gradient(
+        116deg,
+        rgba(255, 255, 255, 0.38),
+        transparent 24%,
+        transparent 70%,
+        rgba(255, 255, 255, 0.12)
+      ),
+      linear-gradient(
+        to top,
+        rgba(28, 31, 39, 0.20),
+        transparent 34%
+      );
+
+    pointer-events: none;
+  }
+
+
+  .culture-hero__visual img {
+    width: 100%;
+    height: 100%;
+
+    position: relative;
+    z-index: 1;
+
+    display: block;
+
+    object-fit: cover;
+  }
+
+
+  .culture-hero__grid {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+
+    display: block;
+
+    opacity: 0.12;
+
+    background-image:
+      linear-gradient(
+        rgba(255, 255, 255, 0.34) 1px,
+        transparent 1px
+      ),
+      linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0.34) 1px,
+        transparent 1px
+      );
+
+    background-size: 48px 48px;
+
+    mask-image:
+      linear-gradient(
+        to bottom,
+        transparent,
+        black 28%,
+        black 78%,
+        transparent
+      );
+
+    -webkit-mask-image:
+      linear-gradient(
+        to bottom,
+        transparent,
+        black 28%,
+        black 78%,
+        transparent
+      );
+
+    pointer-events: none;
+  }
+
+
+  .culture-hero__label {
+    position: absolute;
+    top: 17px;
+    left: 17px;
+    z-index: 4;
+
+    padding: 8px 10px;
+
+    color: rgba(255, 255, 255, 0.90);
+    background: rgba(28, 31, 39, 0.24);
+
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    border-radius: 999px;
+
+    box-shadow:
+      0 8px 18px rgba(30, 34, 46, 0.12),
+      inset 0 1px 0 rgba(255, 255, 255, 0.20);
+
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+
+    font-family: var(--font-ui);
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: 0.13em;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+
+
+  .culture-hero__number {
+    position: absolute;
+    right: 18px;
+    bottom: -15px;
+    z-index: 4;
+
+    color: rgba(255, 255, 255, 0.28);
+
+    font-family: var(--font-display);
+    font-size: clamp(88px, 11vw, 140px);
+    line-height: 1;
+    letter-spacing: -0.055em;
+
+    text-shadow: 0 10px 28px rgba(28, 31, 39, 0.10);
+
+    pointer-events: none;
+  }
+
+
+  .culture-hero figcaption {
+    margin: 0;
+
+    color: #949aa6;
+
+    font-family: var(--font-ui);
+    font-size: 9px;
+    line-height: 1.55;
+    text-align: center;
+  }
+
+
+  .culture-reading {
+    min-width: 0;
+
+    padding:
+      clamp(12px, 2vw, 22px)
+      clamp(3px, 0.8vw, 8px)
+      clamp(7px, 1vw, 12px);
+
+    display: flex;
+    flex-direction: column;
+  }
+
+
+  .culture-reading h3 {
+    margin: 0;
+
+    color: #1d2029;
+
+    font-size: clamp(29px, 3.7vw, 44px);
+    line-height: 1.18;
+  }
+
+
+  .culture-reading__copy {
+    margin: 17px 0 0;
+
+    color: #69707f;
+
+    font-family: var(--font-ui);
+    font-size: 14px;
+    line-height: 1.82;
+  }
+
+
+  .culture-reading__points {
+    margin: auto 0 0;
+    padding: clamp(22px, 3vw, 31px) 0 0;
+
+    list-style: none;
+
+    border-top: 1px solid rgba(65, 75, 99, 0.10);
+  }
+
+
+  .culture-reading__points li {
+    position: relative;
+
+    padding: 11px 0 11px 21px;
+
+    color: #555c69;
+
+    border-bottom: 1px solid rgba(65, 75, 99, 0.065);
+
+    font-family: var(--font-ui);
+    font-size: 11px;
+    font-weight: 600;
+    line-height: 1.65;
+  }
+
+
+  .culture-reading__points li:last-child {
+    padding-bottom: 0;
+    border-bottom: 0;
+  }
+
+
+  .culture-reading__points li::before {
+    content: "";
+
+    width: 7px;
+    aspect-ratio: 1;
+
+    position: absolute;
+    top: 17px;
+    left: 1px;
+
+    background:
+      radial-gradient(
+        circle at 32% 26%,
+        white,
+        rgba(217, 172, 108, 0.82) 48%,
+        rgba(163, 115, 59, 0.72)
+      );
+
+    border: 1px solid rgba(255, 255, 255, 0.94);
+    border-radius: 50%;
+
+    box-shadow:
+      0 0 0 4px rgba(205, 154, 87, 0.075),
+      0 5px 12px rgba(105, 76, 44, 0.13);
+  }
+
+
+  .culture-topics {
+    position: relative;
+    z-index: 1;
+
+    margin-top: 18px;
+
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    gap: 18px;
+  }
+
+
+  .culture-topic {
+    --culture-accent: #858b99;
+    --culture-accent-rgb: 133, 139, 153;
+    --culture-accent-soft: rgba(133, 139, 153, 0.075);
+
+    min-width: 0;
+
+    position: relative;
+    isolation: isolate;
+
+    overflow: hidden;
+
+    padding: clamp(23px, 3vw, 32px);
+
+    background:
+      radial-gradient(
+        circle at 96% 2%,
+        var(--culture-accent-soft),
+        transparent 34%
+      ),
+      linear-gradient(
+        145deg,
+        rgba(255, 255, 255, 0.79),
+        rgba(246, 249, 255, 0.52)
+      );
+
+    border: 1px solid rgba(255, 255, 255, 0.90);
+    border-radius: 24px;
+
+    box-shadow:
+      0 14px 34px rgba(50, 62, 88, 0.078),
+      inset 0 1px 0 rgba(255, 255, 255, 1),
+      inset 0 -1px 0 rgba(55, 65, 88, 0.035);
+
+    transition:
+      transform 0.30s var(--ease-out),
+      box-shadow 0.30s ease;
+  }
+
+
+  .culture-topic:hover {
+    transform: translateY(-3px);
+
+    box-shadow:
+      0 21px 44px rgba(50, 62, 88, 0.115),
+      inset 0 1px 0 rgba(255, 255, 255, 1),
+      inset 0 -1px 0 rgba(55, 65, 88, 0.035);
+  }
+
+
+  .culture-topic--gold {
+    --culture-accent: #a9783e;
+    --culture-accent-rgb: 190, 142, 78;
+    --culture-accent-soft: rgba(211, 162, 94, 0.12);
+  }
+
+
+  .culture-topic--blue {
+    --culture-accent: #6483ba;
+    --culture-accent-rgb: 100, 131, 186;
+    --culture-accent-soft: rgba(105, 145, 209, 0.10);
+  }
+
+
+  .culture-topic--violet {
+    --culture-accent: #826ca6;
+    --culture-accent-rgb: 130, 108, 166;
+    --culture-accent-soft: rgba(152, 126, 194, 0.10);
+  }
+
+
+  .culture-topic--neutral {
+    --culture-accent: #747b88;
+    --culture-accent-rgb: 116, 123, 136;
+    --culture-accent-soft: rgba(116, 123, 136, 0.085);
+  }
+
+
+  .culture-topic__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 16px;
+  }
+
+
+  .culture-topic__label {
+    min-width: 0;
+
+    margin: 0;
+
+    display: inline-flex;
+    align-items: center;
+
+    gap: 9px;
+
+    color: #81768b;
+
+    font-family: var(--font-ui);
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    line-height: 1.5;
+    text-transform: uppercase;
+  }
+
+
+  .culture-topic__label > span:first-child {
+    color: var(--culture-accent);
+  }
+
+
+  .culture-topic__rule {
+    width: 22px;
+    height: 1px;
+
+    display: block;
+
+    background:
+      linear-gradient(
+        to right,
+        rgba(var(--culture-accent-rgb), 0.42),
+        transparent
+      );
+  }
+
+
+  .culture-topic__node {
+    width: 9px;
+    aspect-ratio: 1;
+    flex: 0 0 9px;
+
+    display: block;
+
+    background:
+      radial-gradient(
+        circle at 32% 26%,
+        white,
+        rgba(var(--culture-accent-rgb), 0.34) 48%,
+        var(--culture-accent)
+      );
+
+    border: 1px solid rgba(255, 255, 255, 0.94);
+    border-radius: 50%;
+
+    box-shadow:
+      0 0 0 4px rgba(var(--culture-accent-rgb), 0.065),
+      0 6px 13px rgba(69, 79, 105, 0.13);
+  }
+
+
+  .culture-topic h3 {
+    margin: 19px 0 0;
+
+    color: #1e212b;
+
+    font-size: clamp(25px, 3vw, 35px);
+    line-height: 1.22;
+  }
+
+
+  .culture-topic__description {
+    margin: 13px 0 0;
+
+    color: #69707f;
+
+    font-family: var(--font-ui);
+    font-size: 13px;
+    line-height: 1.82;
+  }
+
+
+  .culture-topic__details {
+    margin: 22px 0 0;
+    padding: 12px 0 0;
+
+    border-top: 1px solid rgba(65, 75, 99, 0.10);
+  }
+
+
+  .culture-topic__details div {
+    display: grid;
+    grid-template-columns: minmax(92px, 0.66fr) minmax(0, 1.34fr);
+    align-items: baseline;
+
+    gap: 14px;
+
+    padding: 8px 0;
+
+    border-bottom: 1px solid rgba(65, 75, 99, 0.065);
+  }
+
+
+  .culture-topic__details div:last-child {
+    padding-bottom: 0;
+    border-bottom: 0;
+  }
+
+
+  .culture-topic__details dt {
+    color: #9298a5;
+
+    font-family: var(--font-ui);
+    font-size: 7px;
+    font-weight: 700;
+    letter-spacing: 0.11em;
+    line-height: 1.45;
+    text-transform: uppercase;
+  }
+
+
+  .culture-topic__details dd {
+    margin: 0;
+
+    color: #4f5563;
+
+    font-family: var(--font-ui);
+    font-size: 10px;
+    font-weight: 600;
+    line-height: 1.60;
+    text-align: right;
+  }
+
+
+  @media (max-width: 900px) {
+    .culture-feature {
+      grid-template-columns: 1fr;
+    }
+
+    .culture-reading {
+      padding: 4px 5px 7px;
+    }
+
+    .culture-reading__points {
+      margin-top: 27px;
+    }
+  }
+
+
+  @media (max-width: 650px) {
+    .culture-shell {
+      padding: 22px 15px;
+
+      border-radius: 24px;
+    }
+
+    .culture-overview {
+      grid-template-columns: 1fr;
+
+      gap: 18px;
+
+      padding:
+        1px
+        3px
+        25px;
+    }
+
+    .culture-overview h3 {
+      font-size: 26px;
+    }
+
+    .culture-summary {
+      font-size: 13px;
+    }
+
+    .culture-feature {
+      padding: 14px;
+      gap: 21px;
+
+      border-radius: 22px;
+    }
+
+    .culture-hero__visual {
+      border-radius: 18px;
+    }
+
+    .culture-hero__grid {
+      background-size: 34px 34px;
+    }
+
+    .culture-hero__label {
+      top: 12px;
+      left: 12px;
+    }
+
+    .culture-hero__number {
+      right: 12px;
+      bottom: -8px;
+
+      font-size: 78px;
+    }
+
+    .culture-reading {
+      padding: 5px 5px 3px;
+    }
+
+    .culture-reading h3 {
+      font-size: 29px;
+    }
+
+    .culture-reading__copy {
+      font-size: 13px;
+    }
+
+    .culture-topics {
+      grid-template-columns: 1fr;
+
+      gap: 15px;
+    }
+
+    .culture-topic {
+      padding: 22px 18px;
+
+      border-radius: 22px;
+    }
+
+    .culture-topic h3 {
+      font-size: 27px;
+    }
+
+    .culture-topic__description {
+      font-size: 13px;
+    }
+
+    .culture-topic__details div {
+      grid-template-columns: 1fr;
+
+      gap: 4px;
+    }
+
+    .culture-topic__details dd {
       text-align: left;
     }
   }
@@ -3858,6 +6960,40 @@ const workingTheories: TheoryItem[] = [
   @media (max-width: 650px) {
     .case-page {
       padding-top: 0;
+    }
+
+    .case-index {
+      margin-top: 15px;
+      margin-bottom: -18px;
+      padding: 8px;
+
+      top: 76px;
+
+      gap: 7px;
+
+      border-radius: 22px;
+    }
+
+    .case-index__identity {
+      padding: 0 8px 0 4px;
+    }
+
+    .case-index__hint {
+      display: none;
+    }
+
+    .case-index__links a {
+      padding: 10px 11px;
+
+      font-size: 8px;
+    }
+
+    .content-section {
+      scroll-margin-top: 145px;
+    }
+
+    .case-header {
+      scroll-margin-top: 100px;
     }
 
     .case-header {
@@ -4148,6 +7284,7 @@ const workingTheories: TheoryItem[] = [
     (-webkit-backdrop-filter: blur(1px))
   ) {
     .case-header,
+    .case-index,
     .map-card,
     .timeline-shell,
     .timeline-content,
@@ -4155,7 +7292,14 @@ const workingTheories: TheoryItem[] = [
     .evidence-featured,
     .evidence-card,
     .theories-shell,
-    .theory-card {
+    .theory-card,
+    .search-shell,
+    .search-dashboard,
+    .search-plot,
+    .search-record__report,
+    .culture-shell,
+    .culture-feature,
+    .culture-topic {
       background-color: rgba(250, 250, 249, 0.94);
     }
   }
