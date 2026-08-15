@@ -384,6 +384,7 @@ const caseSections = [
   { number: "05", label: "The Search", id: "the-search" },
   { number: "06", label: "The Muisca World", id: "muisca-world" },
   { number: "07", label: "The Accounts", id: "the-accounts" },
+  { number: "08", label: "Key Figures", id: "key-figures" },
 ] as const;
 
 /*
@@ -466,8 +467,38 @@ interface SearchRouteNode {
 
 const searchRecords: SearchRecord[] = [
   {
-    id: "guatavita-drainages",
+    id: "pizarro-canela",
     number: "01",
+    date: "1541–1542",
+    context: "East of Quito · Gonzalo Pizarro and Francisco de Orellana",
+    title: "Pizarro’s Eastern Expedition",
+    description:
+      "Gonzalo Pizarro led a vast expedition east from Quito. Contemporary narratives place the Province of Cinnamon at its initial centre; in his 1542 letter Pizarro also described reports of the rich, populous country around the ‘Lake of El Dorado’ as a reason for the venture. Hunger, disease and terrain devastated the force, while Francisco de Orellana’s separated party continued down the Amazon.",
+    status: "noDiscovery",
+    tone: "gold",
+    details: [
+      {
+        label: "Objective",
+        value:
+          "The Province of Cinnamon and the rich country reported around the Lake of El Dorado",
+      },
+      {
+        label: "Method",
+        value:
+          "A large overland expedition east from Quito, followed by river travel",
+      },
+      {
+        label: "Outcome",
+        value:
+          "No reported destination found; the force fragmented after catastrophic losses",
+      },
+    ],
+    changed:
+      "The expedition carried the search into the Amazonian interior and led indirectly to Orellana’s recorded descent of the Amazon to the Atlantic.",
+  },
+  {
+    id: "guatavita-drainages",
+    number: "02",
     date: "1545–1580",
     context: "Lake Guatavita · Early Spanish treasure searches",
     title: "The First Guatavita Drainages",
@@ -494,7 +525,7 @@ const searchRecords: SearchRecord[] = [
   },
   {
     id: "ursua-aguirre",
-    number: "02",
+    number: "03",
     date: "1560–1561",
     context: "Amazon Basin · Pedro de Ursúa and Lope de Aguirre",
     title: "The Search for El Dorado and Omagua",
@@ -521,7 +552,7 @@ const searchRecords: SearchRecord[] = [
   },
   {
     id: "quesada-llanos",
-    number: "03",
+    number: "04",
     date: "1569–1572",
     context: "Eastern Llanos · Gonzalo Jiménez de Quesada",
     title: "Quesada’s Final Expedition",
@@ -548,12 +579,12 @@ const searchRecords: SearchRecord[] = [
   },
   {
     id: "berrio-orinoco",
-    number: "04",
-    date: "1584–1595",
+    number: "05",
+    date: "1584–1591",
     context: "Meta and Orinoco regions · Antonio de Berrío",
     title: "Berrío’s Three Expeditions",
     description:
-      "Antonio de Berrío mounted three expeditions while following reports of a rich country beyond the Orinoco. He did not locate Manoa, but his routes, inquiries and conviction shifted the centre of the search decisively toward Guiana.",
+      "Antonio de Berrío mounted three expeditions between 1584 and 1591 while following reports of a rich country beyond the Orinoco. He did not locate Manoa, but his routes, inquiries and conviction shifted the centre of the search decisively toward Guiana.",
     status: "noDiscovery",
     tone: "blue",
     details: [
@@ -575,7 +606,7 @@ const searchRecords: SearchRecord[] = [
   },
   {
     id: "raleigh-guiana",
-    number: "05",
+    number: "06",
     date: "1595 & 1617–1618",
     context: "Orinoco and Guiana · Walter Raleigh",
     title: "Raleigh’s Guiana Expeditions",
@@ -602,7 +633,7 @@ const searchRecords: SearchRecord[] = [
   },
   {
     id: "industrial-guatavita",
-    number: "06",
+    number: "07",
     date: "1909–1912",
     context: "Lake Guatavita · British industrial drainage",
     title: "The Industrial Attempt",
@@ -632,60 +663,70 @@ const searchRecords: SearchRecord[] = [
 const searchRoute: SearchRouteNode[] = [
   {
     number: "01",
-    label: "Guatavita",
-    date: "1545–1580",
-    href: "#search-guatavita-drainages",
-    x: "10%",
-    y: "73.5%",
+    label: "Quito & Canela",
+    date: "1541–1542",
+    href: "#search-pizarro-canela",
+    x: "7.5%",
+    y: "47.1%",
     tone: "gold",
     placement: "right",
   },
   {
     number: "02",
+    label: "Guatavita",
+    date: "1545–1580",
+    href: "#search-guatavita-drainages",
+    x: "21%",
+    y: "75.9%",
+    tone: "gold",
+    placement: "right",
+  },
+  {
+    number: "03",
     label: "Omagua",
     date: "1560–1561",
     href: "#search-ursua-aguirre",
-    x: "31.25%",
-    y: "38.2%",
+    x: "35%",
+    y: "34.1%",
     tone: "violet",
     placement: "above",
   },
   {
-    number: "03",
+    number: "04",
     label: "The Llanos",
     date: "1569–1572",
     href: "#search-quesada-llanos",
-    x: "48.75%",
-    y: "64.7%",
+    x: "51%",
+    y: "67.1%",
     tone: "blue",
     placement: "below",
   },
   {
-    number: "04",
+    number: "05",
     label: "The Orinoco",
-    date: "1584–1595",
+    date: "1584–1591",
     href: "#search-berrio-orinoco",
-    x: "65%",
+    x: "66.5%",
     y: "25%",
     tone: "blue",
     placement: "above",
   },
   {
-    number: "05",
+    number: "06",
     label: "Manoa",
     date: "1595–1618",
     href: "#search-raleigh-guiana",
-    x: "81.25%",
+    x: "81%",
     y: "48.5%",
     tone: "violet",
     placement: "below",
   },
   {
-    number: "06",
+    number: "07",
     label: "Guatavita",
     date: "1909–1912",
     href: "#search-industrial-guatavita",
-    x: "92.5%",
+    x: "93%",
     y: "77.9%",
     tone: "neutral",
     placement: "left",
@@ -825,7 +866,7 @@ const historicalAccounts: HistoricalAccount[] = [
   {
     id: "oviedo",
     number: "01",
-    date: "1541",
+    date: "c. 1541",
     author: "Gonzalo Fernández de Oviedo",
     work: "Historia general y natural de las Indias",
     sourceType: "Early recorded report",
@@ -996,6 +1037,520 @@ const historicalAccounts: HistoricalAccount[] = [
 
 
 
+type FigureCategory = "search" | "chronicler" | "later";
+type FigureTone = "gold" | "blue" | "violet" | "neutral";
+
+interface FigureReference {
+  label: string;
+  href: string;
+}
+
+interface KeyFigure {
+  id: string;
+  number: string;
+  name: string;
+  dates: string;
+  role: string;
+  category: FigureCategory;
+  tone: FigureTone;
+  image: string | null;
+  alt: string;
+  initials: string;
+  summary: string;
+  profile: string;
+  details: Array<{
+    label: string;
+    value: string;
+  }>;
+  references: FigureReference[];
+}
+
+const figureFilters = [
+  { id: "all", label: "All figures", count: 15 },
+  { id: "search", label: "Search & encounter", count: 9 },
+  { id: "chronicler", label: "Chroniclers", count: 4 },
+  { id: "later", label: "Later investigation", count: 2 },
+] as const;
+
+/*
+  Key Figures is a compact reference gallery rather than another narrative chapter.
+  The roster is intentionally curated at fifteen people. Portraits use a shared 4:5
+  frame; a designed fallback remains in place when no suitable image is available.
+
+  Final portrait files should be exported as WebP at 1200 × 1500 px and placed in:
+  /public/images/mysteries/el-dorado/key-figures/
+
+  Add creator, collection and licence credits to the future Archive/Sources data once
+  the final image versions have been selected.
+*/
+const keyFigures: KeyFigure[] = [
+  {
+    id: "sebastian-de-belalcazar",
+    number: "01",
+    name: "Sebastián de Belalcázar",
+    dates: "c. 1490–1551",
+    role: "Conquistador & explorer",
+    category: "search",
+    tone: "gold",
+    image:
+      "/images/mysteries/el-dorado/key-figures/sebastian-de-belalcazar.webp",
+    alt: "Portrait of Sebastián de Belalcázar",
+    initials: "SB",
+    summary:
+      "Later chroniclers place Belalcázar close to the early reports of a ruler covered in gold and to the adoption of the name El Dorado.",
+    profile:
+      "Accounts by Juan de Castellanos and Fray Pedro Simón associate Belalcázar with information heard in the Quito and New Granada sphere about a gold-covered cacique. He did not claim to have seen the ruler or a golden city; his importance lies in the early transmission and naming of the tradition within Spanish exploration.",
+    details: [
+      {
+        label: "Place in the case",
+        value: "Early recipient and transmitter of the gilded-ruler report",
+      },
+      {
+        label: "Associated region",
+        value: "Quito, Popayán and the northern Andes",
+      },
+    ],
+    references: [
+      { label: "Castellanos account", href: "#account-castellanos" },
+      { label: "Simón account", href: "#account-simon" },
+    ],
+  },
+  {
+    id: "gonzalo-jimenez-de-quesada",
+    number: "02",
+    name: "Gonzalo Jiménez de Quesada",
+    dates: "c. 1506–1579",
+    role: "Lawyer, conquistador & explorer",
+    category: "search",
+    tone: "blue",
+    image:
+      "/images/mysteries/el-dorado/key-figures/gonzalo-jimenez-de-quesada.webp",
+    alt: "Portrait of Gonzalo Jiménez de Quesada",
+    initials: "GQ",
+    summary:
+      "Led the expedition that entered Muisca territory in 1537 and, decades later, mounted a costly search for El Dorado in the eastern llanos.",
+    profile:
+      "Quesada’s arrival in Muisca territory placed Spanish forces inside the cultural landscape most closely associated with the origins of El Dorado. In 1569 he led a second, very different venture east across the llanos toward the Orinoco; the expedition returned in 1572 after severe losses and without locating the sought destination.",
+    details: [
+      {
+        label: "Place in the case",
+        value: "Encounter with the Muisca and leader of a later eastern search",
+      },
+      {
+        label: "Associated region",
+        value: "New Granada, the eastern llanos and upper Orinoco",
+      },
+    ],
+    references: [
+      { label: "Timeline", href: "#timeline" },
+      { label: "Final expedition", href: "#search-quesada-llanos" },
+    ],
+  },
+  {
+    id: "gonzalo-pizarro",
+    number: "03",
+    name: "Gonzalo Pizarro",
+    dates: "1510–1548",
+    role: "Conquistador & expedition leader",
+    category: "search",
+    tone: "gold",
+    image:
+      "/images/mysteries/el-dorado/key-figures/gonzalo-pizarro.webp",
+    alt: "Portrait of Gonzalo Pizarro",
+    initials: "GP",
+    summary:
+      "Led the vast 1541 expedition east from Quito toward the Province of Cinnamon and reports concerning the Lake of El Dorado.",
+    profile:
+      "Pizarro’s force crossed the Andes into the Amazonian interior following intertwined reports of cinnamon, populous lands and El Dorado. Hunger, disease and terrain devastated the expedition. Francisco de Orellana’s separated party continued downstream, turning the failed search into the first recorded European navigation of the Amazon to the Atlantic.",
+    details: [
+      {
+        label: "Place in the case",
+        value: "Leader of one of the earliest great eastern expeditions",
+      },
+      {
+        label: "Associated region",
+        value: "Quito, the Napo basin and Amazonian interior",
+      },
+    ],
+    references: [
+      { label: "Eastern expedition", href: "#search-pizarro-canela" },
+      { label: "The Search", href: "#the-search" },
+    ],
+  },
+  {
+    id: "francisco-de-orellana",
+    number: "04",
+    name: "Francisco de Orellana",
+    dates: "1511–1546",
+    role: "Explorer & expedition commander",
+    category: "search",
+    tone: "blue",
+    image:
+      "/images/mysteries/el-dorado/key-figures/francisco-de-orellana.webp",
+    alt: "Portrait of Francisco de Orellana",
+    initials: "FO",
+    summary:
+      "A lieutenant in Pizarro’s eastern expedition whose separated party continued downstream and completed the first recorded European navigation of the Amazon.",
+    profile:
+      "Orellana did not begin the journey as the independent leader of an El Dorado expedition. He was sent downriver from Pizarro’s starving force in search of provisions and was unable to return upstream. His subsequent passage to the Atlantic became one of the most consequential outcomes of the wider search for rich eastern lands.",
+    details: [
+      {
+        label: "Place in the case",
+        value: "The Amazon journey produced by Pizarro’s failed eastern search",
+      },
+      {
+        label: "Associated region",
+        value: "Napo, Marañón and Amazon rivers",
+      },
+    ],
+    references: [
+      { label: "Pizarro expedition", href: "#search-pizarro-canela" },
+      { label: "The Search", href: "#the-search" },
+    ],
+  },
+  {
+    id: "antonio-de-sepulveda",
+    number: "05",
+    name: "Antonio de Sepúlveda",
+    dates: "fl. 1572–1580",
+    role: "Treasure seeker",
+    category: "search",
+    tone: "gold",
+    image:
+      "/images/mysteries/el-dorado/key-figures/antonio-de-sepulveda.webp",
+    alt: "Portrait associated with Antonio de Sepúlveda",
+    initials: "AS",
+    summary:
+      "Received royal authorisation in 1572 to recover gold, silver and precious stones from Lake Guatavita and later cut a major drain into its rim.",
+    profile:
+      "Sepúlveda represents the moment when El Dorado was treated as a recoverable treasure beneath a specific sacred lake. His capitulation authorised extraction from Guatavita, and the later works lowered the water and reportedly produced objects. They did not reveal the immense hoard searchers expected.",
+    details: [
+      {
+        label: "Place in the case",
+        value: "Royally authorised attempt to recover the treasure of Guatavita",
+      },
+      {
+        label: "Associated location",
+        value: "Lake Guatavita",
+      },
+    ],
+    references: [
+      { label: "Timeline", href: "#timeline" },
+      { label: "Guatavita drainages", href: "#search-guatavita-drainages" },
+    ],
+  },
+  {
+    id: "pedro-de-ursua",
+    number: "06",
+    name: "Pedro de Ursúa",
+    dates: "c. 1526–1561",
+    role: "Conquistador & expedition leader",
+    category: "search",
+    tone: "violet",
+    image:
+      "/images/mysteries/el-dorado/key-figures/pedro-de-ursua.webp",
+    alt: "Portrait of Pedro de Ursúa",
+    initials: "PU",
+    summary:
+      "Led the 1560 river expedition launched in search of El Dorado and Omagua before being killed during a mutiny.",
+    profile:
+      "Ursúa assembled a large expedition to pursue El Dorado and the reputedly wealthy land of Omagua through the Amazon basin. Internal resentment quickly overtook the mission. He was assassinated near the beginning of 1561, after which the original search collapsed into rebellion.",
+    details: [
+      {
+        label: "Place in the case",
+        value: "Commander of the El Dorado and Omagua expedition",
+      },
+      {
+        label: "Associated region",
+        value: "Marañón and Amazon basin",
+      },
+    ],
+    references: [
+      { label: "Ursúa & Aguirre", href: "#search-ursua-aguirre" },
+      { label: "The Search", href: "#the-search" },
+    ],
+  },
+  {
+    id: "lope-de-aguirre",
+    number: "07",
+    name: "Lope de Aguirre",
+    dates: "c. 1511–1561",
+    role: "Soldier, mutineer & rebel",
+    category: "search",
+    tone: "violet",
+    image:
+      "/images/mysteries/el-dorado/key-figures/lope-de-aguirre.webp",
+    alt: "Portrait of Lope de Aguirre",
+    initials: "LA",
+    summary:
+      "Seized control after the murder of Ursúa and transformed the expedition for El Dorado and Omagua into a violent rebellion against the Spanish Crown.",
+    profile:
+      "Aguirre’s importance to El Dorado is not that he advanced the search, but that he redirected one of its largest expeditions. After joining the mutiny and taking power, he abandoned the original objective, descended toward the Atlantic and declared rebellion against Philip II.",
+    details: [
+      {
+        label: "Place in the case",
+        value: "Figure who ended the expedition’s original purpose through mutiny",
+      },
+      {
+        label: "Associated region",
+        value: "Amazon basin, Margarita and Venezuela",
+      },
+    ],
+    references: [
+      { label: "Ursúa & Aguirre", href: "#search-ursua-aguirre" },
+      { label: "The Search", href: "#the-search" },
+    ],
+  },
+  {
+    id: "antonio-de-berrio",
+    number: "08",
+    name: "Antonio de Berrío",
+    dates: "1527–1597",
+    role: "Governor, soldier & explorer",
+    category: "search",
+    tone: "blue",
+    image:
+      "/images/mysteries/el-dorado/key-figures/antonio-de-berrio.webp",
+    alt: "Portrait of Antonio de Berrío",
+    initials: "AB",
+    summary:
+      "Mounted repeated expeditions beyond the Orinoco and helped shift the later search toward Guiana, Manoa and the eastern interior.",
+    profile:
+      "Berrío inherited rights and ambitions connected with Gonzalo Jiménez de Quesada and spent years pursuing reports of a rich country beyond the Orinoco. His routes, testimony and captured papers became central to Walter Raleigh’s own 1595 venture and published case for Manoa.",
+    details: [
+      {
+        label: "Place in the case",
+        value: "Principal Spanish searcher in Guiana immediately before Raleigh",
+      },
+      {
+        label: "Associated region",
+        value: "Meta, Orinoco, Trinidad and Guiana",
+      },
+    ],
+    references: [
+      { label: "Berrío expeditions", href: "#search-berrio-orinoco" },
+      { label: "Raleigh account", href: "#account-raleigh" },
+    ],
+  },
+  {
+    id: "walter-raleigh",
+    number: "09",
+    name: "Walter Raleigh",
+    dates: "c. 1552–1618",
+    role: "Explorer, courtier & writer",
+    category: "search",
+    tone: "violet",
+    image:
+      "/images/mysteries/el-dorado/key-figures/walter-raleigh.webp",
+    alt: "Portrait of Walter Raleigh",
+    initials: "WR",
+    summary:
+      "Led two Guiana ventures and gave the golden city of Manoa one of its most influential written forms in The Discoverie of Guiana.",
+    profile:
+      "Raleigh explored the Orinoco in 1595 but never reached Manoa. His 1596 book combined firsthand geography with Spanish reports and gathered testimony, explicitly identifying Manoa as the great golden city called El Dorado. His second expedition ended in political and personal disaster.",
+    details: [
+      {
+        label: "Place in the case",
+        value: "Searcher and defining author of the Manoa golden-city tradition",
+      },
+      {
+        label: "Associated region",
+        value: "Trinidad, Orinoco and Guiana",
+      },
+    ],
+    references: [
+      { label: "Guiana expeditions", href: "#search-raleigh-guiana" },
+      { label: "Raleigh account", href: "#account-raleigh" },
+    ],
+  },
+  {
+    id: "gonzalo-fernandez-de-oviedo",
+    number: "10",
+    name: "Gonzalo Fernández de Oviedo",
+    dates: "1478–1557",
+    role: "Chronicler & royal historian",
+    category: "chronicler",
+    tone: "gold",
+    image:
+      "/images/mysteries/el-dorado/key-figures/gonzalo-fernandez-de-oviedo.webp",
+    alt: "Portrait of Gonzalo Fernández de Oviedo",
+    initials: "GO",
+    summary:
+      "Preserved one of the earliest detailed reports of El Dorado as a ruler repeatedly covered in fine gold powder.",
+    profile:
+      "Oviedo recorded information circulating among Spaniards connected with Quito. His El Dorado is still principally a person: a powerful ruler whose body was coated with an adhesive substance and gold powder. The familiar lake ceremony and golden city are not yet the centre of this version.",
+    details: [
+      {
+        label: "Place in the case",
+        value: "One of the earliest surviving writers on the gilded ruler",
+      },
+      {
+        label: "Principal work",
+        value: "Historia general y natural de las Indias",
+      },
+    ],
+    references: [
+      { label: "Oviedo account", href: "#account-oviedo" },
+      { label: "The Accounts", href: "#the-accounts" },
+    ],
+  },
+  {
+    id: "juan-de-castellanos",
+    number: "11",
+    name: "Juan de Castellanos",
+    dates: "1522–1607",
+    role: "Chronicler, poet & priest",
+    category: "chronicler",
+    tone: "blue",
+    image:
+      "/images/mysteries/el-dorado/key-figures/juan-de-castellanos.webp",
+    alt: "Portrait of Juan de Castellanos",
+    initials: "JC",
+    summary:
+      "Recorded the influential tradition linking a gilded ruler with a raft, a lake, offerings and reports of regional wealth.",
+    profile:
+      "Castellanos wrote retrospectively in verse, attributing the report to information received by Sebastián de Belalcázar. His account is important because several now-familiar elements appear together: the gold-covered chief, water, a raft, offerings and a wealthy land associated with Bogotá.",
+    details: [
+      {
+        label: "Place in the case",
+        value: "Bridge between the early gilded-ruler report and later lake accounts",
+      },
+      {
+        label: "Principal work",
+        value: "Elegías de varones ilustres de Indias",
+      },
+    ],
+    references: [
+      { label: "Castellanos account", href: "#account-castellanos" },
+      { label: "The Accounts", href: "#the-accounts" },
+    ],
+  },
+  {
+    id: "fray-pedro-simon",
+    number: "12",
+    name: "Fray Pedro Simón",
+    dates: "1574–c. 1628",
+    role: "Franciscan friar & chronicler",
+    category: "chronicler",
+    tone: "blue",
+    image:
+      "/images/mysteries/el-dorado/key-figures/fray-pedro-simon.webp",
+    alt: "Portrait of Fray Pedro Simón",
+    initials: "PS",
+    summary:
+      "Connected the gilded-cacique tradition with Guatavita while also recording information about continuing offering practices around the lake.",
+    profile:
+      "Simón’s work contains material at different distances from the events. He repeats the retrospective story of a gold-covered cacique and also describes ritual practices around Guatavita that Spaniards were said to have observed. That mixture makes his account especially important to the relationship between tradition and place.",
+    details: [
+      {
+        label: "Place in the case",
+        value: "Chronicler linking the early report to Guatavita’s ritual landscape",
+      },
+      {
+        label: "Principal work",
+        value: "Noticias historiales",
+      },
+    ],
+    references: [
+      { label: "Simón account", href: "#account-simon" },
+      { label: "The Muisca World", href: "#muisca-world" },
+    ],
+  },
+  {
+    id: "juan-rodriguez-freyle",
+    number: "13",
+    name: "Juan Rodríguez Freyle",
+    dates: "1566–c. 1642",
+    role: "Writer & colonial chronicler",
+    category: "chronicler",
+    tone: "gold",
+    image:
+      "/images/mysteries/el-dorado/key-figures/juan-rodriguez-freyle.webp",
+    alt: "Portrait of Juan Rodríguez Freyle",
+    initials: "RF",
+    summary:
+      "Authored the fullest surviving version of the Guatavita ceremony, including the gilded successor, raft, four chiefs and offerings.",
+    profile:
+      "Rodríguez Freyle wrote roughly a century after the Spanish conquest of the Muisca. His narrative firmly presents the ceremony as the investiture of Guatavita’s successor and supplies the vivid sequence that now dominates historical memory of the golden man and sacred lake.",
+    details: [
+      {
+        label: "Place in the case",
+        value: "Author of the defining full ceremonial account",
+      },
+      {
+        label: "Principal work",
+        value: "El Carnero",
+      },
+    ],
+    references: [
+      { label: "Rodríguez Freyle account", href: "#account-rodriguez-freyle" },
+      { label: "The Accounts", href: "#the-accounts" },
+    ],
+  },
+  {
+    id: "alexander-von-humboldt",
+    number: "14",
+    name: "Alexander von Humboldt",
+    dates: "1769–1859",
+    role: "Naturalist, geographer & explorer",
+    category: "later",
+    tone: "violet",
+    image:
+      "/images/mysteries/el-dorado/key-figures/alexander-von-humboldt.webp",
+    alt: "Portrait of Alexander von Humboldt",
+    initials: "AH",
+    summary:
+      "Examined El Dorado through geography, travel accounts and field observation, including the traditions surrounding Lake Parime and Guatavita.",
+    profile:
+      "Humboldt approached El Dorado as a historical and geographical problem rather than a treasure expedition. During and after his American travels he compared earlier narratives, maps and landscapes, proposed a natural explanation for the Lake Parime tradition and helped reshape later scholarly treatment of the case.",
+    details: [
+      {
+        label: "Place in the case",
+        value: "Later scientific and geographical investigator of the tradition",
+      },
+      {
+        label: "Associated material",
+        value: "Guatavita, Lake Parime and the geography of earlier searches",
+      },
+    ],
+    references: [
+      { label: "Lake Parime evidence", href: "#evidence-title-lake-parime-manoa" },
+      { label: "The Muisca World", href: "#muisca-world" },
+    ],
+  },
+  {
+    id: "cruz-maria-dimate",
+    number: "15",
+    name: "Cruz María Dimaté",
+    dates: "fl. 1969",
+    role: "Farmer & discoverer",
+    category: "later",
+    tone: "neutral",
+    image: null,
+    alt: "",
+    initials: "CD",
+    summary:
+      "Discovered the votive deposit near Pasca that contained the Muisca Raft, bringing the case its most famous surviving object.",
+    profile:
+      "Dimaté found a ceramic vessel in a cave while hunting near Pasca in 1969. With the help of the local priest, the importance of its contents was recognised and the deposit reached the Banco de la República. The Muisca Raft became the strongest material image associated with the ceremonial origins of El Dorado.",
+    details: [
+      {
+        label: "Place in the case",
+        value: "Discoverer of the deposit containing the Muisca Raft",
+      },
+      {
+        label: "Associated location",
+        value: "Pasca, Cundinamarca",
+      },
+    ],
+    references: [
+      { label: "The Muisca Raft", href: "#evidence-title-muisca-raft" },
+      { label: "Timeline", href: "#timeline" },
+    ],
+  },
+];
+
+
 ---
 
 <BaseLayout
@@ -1059,19 +1614,49 @@ const historicalAccounts: HistoricalAccount[] = [
         <span class="case-index__hint">Jump to section</span>
       </div>
 
-      <div class="case-index__scroller">
-        <div class="case-index__links">
-          {caseSections.map((section, index) => (
-            <a
-              href={`#${section.id}`}
-              data-case-index-link={section.id}
-              aria-current={index === 0 ? "location" : undefined}
-            >
-              <span>{section.number}</span>
-              <span>{section.label}</span>
-            </a>
-          ))}
+      <div class="case-index__rail">
+        <button
+          class="case-index__arrow case-index__arrow--previous"
+          type="button"
+          aria-label="Show earlier case sections"
+          data-case-index-previous
+          disabled
+        >
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M14.5 6.5 9 12l5.5 5.5" />
+          </svg>
+        </button>
+
+        <div
+          class="case-index__scroller"
+          id="case-index-sections"
+          data-case-index-scroller
+        >
+          <div class="case-index__links" data-case-index-links>
+            {caseSections.map((section, index) => (
+              <a
+                href={`#${section.id}`}
+                data-case-index-link={section.id}
+                aria-current={index === 0 ? "location" : undefined}
+              >
+                <span>{section.number}</span>
+                <span>{section.label}</span>
+              </a>
+            ))}
+          </div>
         </div>
+
+        <button
+          class="case-index__arrow case-index__arrow--next"
+          type="button"
+          aria-label="Show later case sections"
+          data-case-index-next
+          disabled
+        >
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="m9.5 6.5 5.5 5.5-5.5 5.5" />
+          </svg>
+        </button>
       </div>
     </nav>
 
@@ -1180,11 +1765,11 @@ const historicalAccounts: HistoricalAccount[] = [
                 1572
               </p>
 
-              <h3>The Search Turns to Guatavita</h3>
+              <h3>Royal Permission to Drain Guatavita</h3>
 
               <p>
-                Antonio de Sepúlveda receives royal permission to recover the riches believed to lie beneath Lake Guatavita, 
-                beginning an ambitious effort to uncover its hidden offerings.
+                Antonio de Sepúlveda receives royal authorisation to extract gold, silver and precious stones from Lake 
+                Guatavita, setting the stage for his later large-scale attempt to cut into the lake’s rim.
               </p>
             </div>
           </article>
@@ -1197,14 +1782,14 @@ const historicalAccounts: HistoricalAccount[] = [
 
             <div class="timeline-content">
               <p class="timeline-date">
-                1590–1595
+                1584–1595
               </p>
 
               <h3>The Legend Moves East</h3>
 
               <p>
-                Spanish expeditions push the search for El Dorado into Guiana and the Orinoco, where the legend becomes 
-                increasingly associated with Manoa, a great city or kingdom of extraordinary wealth.
+                Beginning with Antonio de Berrío’s expeditions, the search pushes through the llanos and Orinoco toward 
+                Guiana, where El Dorado becomes increasingly associated with Manoa, a great city or kingdom of extraordinary wealth.
               </p>
             </div>
           </article>
@@ -1237,14 +1822,14 @@ const historicalAccounts: HistoricalAccount[] = [
 
             <div class="timeline-content">
               <p class="timeline-date">
-                1911–1912
+                1909–1912
               </p>
 
               <h3>Guatavita Is Drained</h3>
 
               <p>
-                An ambitious British operation lowers the lake in search of its legendary treasure, revealing the difficult mud-
-                covered floor beneath the waters.
+                A British company uses an engineered tunnel to lower Lake Guatavita in search of its legendary treasure. By 
+                1912 much of the water has been removed, but the exposed lakebed hardens and frustrates excavation.
               </p>
             </div>
           </article>
@@ -1599,7 +2184,8 @@ const historicalAccounts: HistoricalAccount[] = [
             <h3>A target that moved when each attempt failed</h3>
 
             <p class="search-dashboard__copy">
-              The pursuit began at a sacred lake, spread through Amazonia and the eastern plains, gathered around the Orinoco and Manoa, then returned to Guatavita with industrial machinery.
+              Early searchers pushed east from Quito and targeted Guatavita. Later expeditions crossed Amazonia and the 
+              llanos, gathered around the Orinoco and Manoa, then returned to the lake with industrial machinery.
             </p>
 
             <dl class="search-stats">
@@ -1610,7 +2196,7 @@ const historicalAccounts: HistoricalAccount[] = [
 
               <div>
                 <dt>Centuries represented</dt>
-                <dd>04</dd>
+                <dd>03</dd>
               </div>
 
               <div>
@@ -1645,16 +2231,16 @@ const historicalAccounts: HistoricalAccount[] = [
 
                 <path
                   class="search-plot__route-glow"
-                  d="M80 250C145 230 185 135 250 130S330 215 390 220S465 95 520 85S590 160 650 165S700 245 740 265"
+                  d="M60 160C105 164 110 250 168 258S232 118 280 116S360 218 408 228S486 96 532 85S602 158 648 165S706 245 744 265"
                 />
                 <path
                   class="search-plot__route"
-                  d="M80 250C145 230 185 135 250 130S330 215 390 220S465 95 520 85S590 160 650 165S700 245 740 265"
+                  d="M60 160C105 164 110 250 168 258S232 118 280 116S360 218 408 228S486 96 532 85S602 158 648 165S706 245 744 265"
                 />
               </svg>
 
               <span class="search-plot__region search-plot__region--west" aria-hidden="true">
-                Colombian highlands
+                Quito & northern Andes
               </span>
               <span class="search-plot__region search-plot__region--centre" aria-hidden="true">
                 Amazonia & llanos
@@ -1968,13 +2554,271 @@ const historicalAccounts: HistoricalAccount[] = [
       </div>
     </section>
 
+    <!-- -------------------------------- -->
+    <!-- KEY FIGURES                      -->
+    <!-- -------------------------------- -->
+
+    <section id="key-figures" class="content-section figures-section">
+      <div class="section-heading">
+        <span class="section-number" aria-hidden="true">08</span>
+        <h2>Key Figures</h2>
+        <span class="section-rule" aria-hidden="true"></span>
+      </div>
+
+      <div class="figures-shell" data-key-figures>
+        <header class="figures-overview">
+          <div class="figures-overview__intro">
+            <p class="figures-overline">People in the case</p>
+            <h3>The searchers, writers and later investigators</h3>
+          </div>
+
+          <div class="figures-overview__aside">
+            <p class="figures-summary">
+              These fifteen people were selected for the distinct part each played in encountering, pursuing, recording or materially reshaping the El Dorado case. The gallery is a reference index rather than another required chapter.
+            </p>
+          </div>
+        </header>
+
+        <div class="figures-toolbar">
+          <div
+            class="figure-filters"
+            role="group"
+            aria-label="Filter key figures"
+          >
+            {figureFilters.map((filter, index) => (
+              <button
+                type="button"
+                data-figure-filter={filter.id}
+                aria-pressed={index === 0 ? "true" : "false"}
+              >
+                <span>{filter.label}</span>
+                <small>{String(filter.count).padStart(2, "0")}</small>
+              </button>
+            ))}
+          </div>
+
+          <div class="figures-navigation" aria-label="Key figures carousel controls">
+            <p class="figures-counter" aria-live="polite" aria-atomic="true">
+              <span data-figures-range>01–03</span>
+              <span aria-hidden="true">/</span>
+              <span data-figures-total>15</span>
+            </p>
+
+            <button
+              class="figures-arrow figures-arrow--previous"
+              type="button"
+              aria-label="Show previous key figure"
+              data-figures-previous
+              disabled
+            >
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M14.5 6.5 9 12l5.5 5.5" />
+              </svg>
+            </button>
+
+            <button
+              class="figures-arrow figures-arrow--next"
+              type="button"
+              aria-label="Show next key figure"
+              data-figures-next
+            >
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="m9.5 6.5 5.5 5.5-5.5 5.5" />
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <div
+          class="figures-scroller"
+          data-figures-scroller
+          tabindex="0"
+          aria-label="Key figure cards. Swipe horizontally or use the arrow controls."
+        >
+          <div class="figures-track" data-figures-track>
+            {keyFigures.map((figure) => (
+              <article
+                id={`figure-${figure.id}`}
+                class:list={[
+                  "figure-card",
+                  `figure-card--${figure.tone}`,
+                ]}
+                data-figure-card
+                data-figure-category={figure.category}
+                aria-labelledby={`figure-title-${figure.id}`}
+              >
+                <div class="figure-portrait" data-figure-portrait>
+                  <div class="figure-portrait__fallback" aria-hidden="true">
+                    <span class="figure-portrait__grid"></span>
+                    <span class="figure-portrait__ring figure-portrait__ring--one"></span>
+                    <span class="figure-portrait__ring figure-portrait__ring--two"></span>
+                    <span class="figure-portrait__initials">{figure.initials}</span>
+                    <span class="figure-portrait__fallback-label">Portrait unavailable</span>
+                  </div>
+
+                  {figure.image && (
+                    <img
+                      src={figure.image}
+                      alt={figure.alt}
+                      loading="lazy"
+                      decoding="async"
+                      data-figure-image
+                    />
+                  )}
+
+                  <span class="figure-portrait__number" aria-hidden="true">
+                    {figure.number}
+                  </span>
+                </div>
+
+                <div class="figure-card__body">
+                  <p class="figure-card__category">
+                    <span>{figure.number}</span>
+                    <span class="figure-card__rule" aria-hidden="true"></span>
+                    {figure.role}
+                  </p>
+
+                  <h3 id={`figure-title-${figure.id}`}>{figure.name}</h3>
+                  <p class="figure-card__dates">{figure.dates}</p>
+                  <p class="figure-card__summary">{figure.summary}</p>
+
+                  <button
+                    class="figure-card__profile-button"
+                    type="button"
+                    data-figure-open={`figure-dialog-${figure.id}`}
+                    aria-haspopup="dialog"
+                  >
+                    <span>View profile</span>
+                    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                      <path d="M5 12h13M13 7l5 5-5 5" />
+                    </svg>
+                  </button>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+
+        <p class="figures-interaction-note">
+          Swipe the gallery or use the arrows. Open a profile for the fuller case connection and direct links back into the file.
+        </p>
+      </div>
+
+      {keyFigures.map((figure) => (
+        <dialog
+          class:list={[
+            "figure-dialog",
+            `figure-dialog--${figure.tone}`,
+          ]}
+          id={`figure-dialog-${figure.id}`}
+          data-figure-dialog
+          aria-labelledby={`figure-dialog-title-${figure.id}`}
+          aria-describedby={`figure-dialog-copy-${figure.id}`}
+        >
+          <div class="figure-dialog__panel">
+            <button
+              class="figure-dialog__close"
+              type="button"
+              aria-label={`Close ${figure.name} profile`}
+              data-figure-close
+            >
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="m7 7 10 10M17 7 7 17" />
+              </svg>
+            </button>
+
+            <div class="figure-dialog__visual">
+              <div class="figure-dialog__portrait" data-figure-portrait>
+                <div class="figure-portrait__fallback" aria-hidden="true">
+                  <span class="figure-portrait__grid"></span>
+                  <span class="figure-portrait__ring figure-portrait__ring--one"></span>
+                  <span class="figure-portrait__ring figure-portrait__ring--two"></span>
+                  <span class="figure-portrait__initials">{figure.initials}</span>
+                  <span class="figure-portrait__fallback-label">Portrait unavailable</span>
+                </div>
+
+                {figure.image && (
+                  <img
+                    src={figure.image}
+                    alt={figure.alt}
+                    loading="lazy"
+                    decoding="async"
+                    data-figure-image
+                  />
+                )}
+
+                <span class="figure-dialog__number" aria-hidden="true">
+                  {figure.number}
+                </span>
+              </div>
+            </div>
+
+            <div class="figure-dialog__content">
+              <p class="figure-dialog__eyebrow">Key figure {figure.number}</p>
+              <h3 id={`figure-dialog-title-${figure.id}`}>{figure.name}</h3>
+
+              <p class="figure-dialog__meta">
+                <span>{figure.dates}</span>
+                <span aria-hidden="true"></span>
+                <span>{figure.role}</span>
+              </p>
+
+              <p
+                class="figure-dialog__copy"
+                id={`figure-dialog-copy-${figure.id}`}
+              >
+                {figure.profile}
+              </p>
+
+              <dl class="figure-dialog__details">
+                {figure.details.map((detail) => (
+                  <div>
+                    <dt>{detail.label}</dt>
+                    <dd>{detail.value}</dd>
+                  </div>
+                ))}
+              </dl>
+
+              <div class="figure-dialog__references">
+                <p>Related records</p>
+
+                <div>
+                  {figure.references.map((reference) => (
+                    <a href={reference.href} data-figure-reference>
+                      <span>{reference.label}</span>
+                      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                        <path d="M5 12h13M13 7l5 5-5 5" />
+                      </svg>
+                    </a>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </dialog>
+      ))}
+    </section>
+
   </article>
 
   <script>
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+
+    const defaultScrollBehavior: ScrollBehavior = prefersReducedMotion
+      ? "auto"
+      : "smooth";
+
     const caseIndex = document.querySelector("[data-case-index]");
 
     if (caseIndex instanceof HTMLElement) {
-      const scroller = caseIndex.querySelector(".case-index__scroller");
+      const scroller = caseIndex.querySelector("[data-case-index-scroller]");
+      const linksContainer = caseIndex.querySelector("[data-case-index-links]");
+      const previousButton = caseIndex.querySelector(
+        "[data-case-index-previous]"
+      );
+      const nextButton = caseIndex.querySelector("[data-case-index-next]");
 
       const links = Array.from(
         caseIndex.querySelectorAll("[data-case-index-link]")
@@ -1988,9 +2832,59 @@ const historicalAccounts: HistoricalAccount[] = [
         .filter((section) => section instanceof HTMLElement);
 
       let activeId = "";
-      let updateFrame = 0;
+      let activeFrame = 0;
+      let overflowFrame = 0;
 
-      const centreActiveLink = (
+      const updateIndexEdges = () => {
+        if (!(scroller instanceof HTMLElement)) return;
+
+        const hasOverflow = caseIndex.classList.contains("has-overflow");
+        const canScrollLeft = hasOverflow && scroller.scrollLeft > 2;
+        const canScrollRight =
+          hasOverflow &&
+          scroller.scrollLeft + scroller.clientWidth <
+            scroller.scrollWidth - 2;
+
+        caseIndex.classList.toggle("can-scroll-left", canScrollLeft);
+        caseIndex.classList.toggle("can-scroll-right", canScrollRight);
+
+        if (previousButton instanceof HTMLButtonElement) {
+          previousButton.disabled = !canScrollLeft;
+        }
+
+        if (nextButton instanceof HTMLButtonElement) {
+          nextButton.disabled = !canScrollRight;
+        }
+      };
+
+      const updateIndexOverflow = () => {
+        overflowFrame = 0;
+
+        if (
+          !(scroller instanceof HTMLElement) ||
+          !(linksContainer instanceof HTMLElement)
+        ) {
+          return;
+        }
+
+        const hasOverflow =
+          linksContainer.scrollWidth > scroller.clientWidth + 2;
+
+        caseIndex.classList.toggle("has-overflow", hasOverflow);
+
+        if (!hasOverflow) {
+          scroller.scrollLeft = 0;
+        }
+
+        updateIndexEdges();
+      };
+
+      const requestIndexOverflowUpdate = () => {
+        if (overflowFrame !== 0) return;
+        overflowFrame = window.requestAnimationFrame(updateIndexOverflow);
+      };
+
+      const revealActiveLink = (
         link: HTMLAnchorElement,
         behavior: ScrollBehavior
       ) => {
@@ -1998,6 +2892,13 @@ const historicalAccounts: HistoricalAccount[] = [
 
         const scrollerRect = scroller.getBoundingClientRect();
         const linkRect = link.getBoundingClientRect();
+        const inset = caseIndex.classList.contains("has-overflow") ? 34 : 8;
+        const isFullyVisible =
+          linkRect.left >= scrollerRect.left + inset &&
+          linkRect.right <= scrollerRect.right - inset;
+
+        if (isFullyVisible) return;
+
         const targetLeft =
           scroller.scrollLeft +
           (linkRect.left - scrollerRect.left) -
@@ -2011,7 +2912,7 @@ const historicalAccounts: HistoricalAccount[] = [
 
       const setActiveSection = (
         id: string,
-        behavior: ScrollBehavior = "smooth"
+        behavior: ScrollBehavior = defaultScrollBehavior
       ) => {
         if (activeId === id) return;
         activeId = id;
@@ -2021,7 +2922,7 @@ const historicalAccounts: HistoricalAccount[] = [
 
           if (isActive) {
             link.setAttribute("aria-current", "location");
-            centreActiveLink(link, behavior);
+            revealActiveLink(link, behavior);
           } else {
             link.removeAttribute("aria-current");
           }
@@ -2033,13 +2934,15 @@ const historicalAccounts: HistoricalAccount[] = [
           window.getComputedStyle(caseIndex).top
         );
 
-        return (Number.isFinite(stickyTop) ? stickyTop : 0) +
+        return (
+          (Number.isFinite(stickyTop) ? stickyTop : 0) +
           caseIndex.offsetHeight +
-          24;
+          24
+        );
       };
 
       const updateActiveSection = () => {
-        updateFrame = 0;
+        activeFrame = 0;
 
         if (sections.length === 0) return;
 
@@ -2068,8 +2971,8 @@ const historicalAccounts: HistoricalAccount[] = [
       };
 
       const requestActiveSectionUpdate = () => {
-        if (updateFrame !== 0) return;
-        updateFrame = window.requestAnimationFrame(updateActiveSection);
+        if (activeFrame !== 0) return;
+        activeFrame = window.requestAnimationFrame(updateActiveSection);
       };
 
       links.forEach((link) => {
@@ -2079,14 +2982,316 @@ const historicalAccounts: HistoricalAccount[] = [
         });
       });
 
+      if (
+        scroller instanceof HTMLElement &&
+        previousButton instanceof HTMLButtonElement &&
+        nextButton instanceof HTMLButtonElement
+      ) {
+        previousButton.addEventListener("click", () => {
+          scroller.scrollBy({
+            left: -Math.max(210, scroller.clientWidth * 0.68),
+            behavior: defaultScrollBehavior,
+          });
+        });
+
+        nextButton.addEventListener("click", () => {
+          scroller.scrollBy({
+            left: Math.max(210, scroller.clientWidth * 0.68),
+            behavior: defaultScrollBehavior,
+          });
+        });
+
+        scroller.addEventListener("scroll", updateIndexEdges, {
+          passive: true,
+        });
+      }
+
+      if ("ResizeObserver" in window) {
+        const indexResizeObserver = new ResizeObserver(() => {
+          requestIndexOverflowUpdate();
+          requestActiveSectionUpdate();
+        });
+
+        indexResizeObserver.observe(caseIndex);
+
+        if (scroller instanceof HTMLElement) {
+          indexResizeObserver.observe(scroller);
+        }
+
+        if (linksContainer instanceof HTMLElement) {
+          indexResizeObserver.observe(linksContainer);
+        }
+      }
+
       window.addEventListener("scroll", requestActiveSectionUpdate, {
         passive: true,
       });
-      window.addEventListener("resize", requestActiveSectionUpdate);
-      window.addEventListener("load", requestActiveSectionUpdate);
+      window.addEventListener("resize", () => {
+        requestIndexOverflowUpdate();
+        requestActiveSectionUpdate();
+      });
+      window.addEventListener("load", () => {
+        requestIndexOverflowUpdate();
+        requestActiveSectionUpdate();
+      });
 
+      updateIndexOverflow();
       updateActiveSection();
     }
+
+    const figurePortraits = Array.from(
+      document.querySelectorAll("[data-figure-portrait]")
+    ).filter((portrait) => portrait instanceof HTMLElement);
+
+    figurePortraits.forEach((portrait) => {
+      const image = portrait.querySelector("[data-figure-image]");
+
+      if (!(image instanceof HTMLImageElement)) {
+        portrait.classList.add("is-missing");
+        return;
+      }
+
+      const markAvailable = () => portrait.classList.remove("is-missing");
+      const markMissing = () => portrait.classList.add("is-missing");
+
+      image.addEventListener("load", markAvailable);
+      image.addEventListener("error", markMissing);
+
+      if (image.complete) {
+        image.naturalWidth > 0 ? markAvailable() : markMissing();
+      }
+    });
+
+    const keyFigures = document.querySelector("[data-key-figures]");
+
+    if (keyFigures instanceof HTMLElement) {
+      const scroller = keyFigures.querySelector("[data-figures-scroller]");
+      const track = keyFigures.querySelector("[data-figures-track]");
+      const previousButton = keyFigures.querySelector(
+        "[data-figures-previous]"
+      );
+      const nextButton = keyFigures.querySelector("[data-figures-next]");
+      const rangeLabel = keyFigures.querySelector("[data-figures-range]");
+      const totalLabel = keyFigures.querySelector("[data-figures-total]");
+
+      const filterButtons = Array.from(
+        keyFigures.querySelectorAll("[data-figure-filter]")
+      ).filter((button) => button instanceof HTMLButtonElement);
+
+      const cards = Array.from(
+        keyFigures.querySelectorAll("[data-figure-card]")
+      ).filter((card) => card instanceof HTMLElement);
+
+      let carouselFrame = 0;
+
+      const getVisibleCards = () => cards.filter((card) => !card.hidden);
+
+      const getSubstantiallyVisibleCards = () => {
+        if (!(scroller instanceof HTMLElement)) return [];
+
+        const viewport = scroller.getBoundingClientRect();
+
+        return getVisibleCards().filter((card) => {
+          const rect = card.getBoundingClientRect();
+          const overlap =
+            Math.min(rect.right, viewport.right) -
+            Math.max(rect.left, viewport.left);
+
+          return overlap >= Math.min(rect.width * 0.55, 120);
+        });
+      };
+
+      const updateCarousel = () => {
+        carouselFrame = 0;
+
+        if (!(scroller instanceof HTMLElement)) return;
+
+        const visibleCards = getVisibleCards();
+        const substantiallyVisible = getSubstantiallyVisibleCards();
+        const firstVisible = substantiallyVisible[0] ?? visibleCards[0];
+        const lastVisible =
+          substantiallyVisible[substantiallyVisible.length - 1] ??
+          firstVisible;
+
+        const firstIndex = firstVisible
+          ? visibleCards.indexOf(firstVisible) + 1
+          : 0;
+        const lastIndex = lastVisible
+          ? visibleCards.indexOf(lastVisible) + 1
+          : firstIndex;
+
+        if (rangeLabel instanceof HTMLElement) {
+          rangeLabel.textContent =
+            firstIndex === lastIndex
+              ? String(firstIndex).padStart(2, "0")
+              : `${String(firstIndex).padStart(2, "0")}–${String(
+                  lastIndex
+                ).padStart(2, "0")}`;
+        }
+
+        if (totalLabel instanceof HTMLElement) {
+          totalLabel.textContent = String(visibleCards.length).padStart(2, "0");
+        }
+
+        const canScrollLeft = scroller.scrollLeft > 2;
+        const canScrollRight =
+          scroller.scrollLeft + scroller.clientWidth <
+          scroller.scrollWidth - 2;
+
+        if (previousButton instanceof HTMLButtonElement) {
+          previousButton.disabled = !canScrollLeft;
+        }
+
+        if (nextButton instanceof HTMLButtonElement) {
+          nextButton.disabled = !canScrollRight;
+        }
+      };
+
+      const requestCarouselUpdate = () => {
+        if (carouselFrame !== 0) return;
+        carouselFrame = window.requestAnimationFrame(updateCarousel);
+      };
+
+      const moveCarousel = (direction: -1 | 1) => {
+        if (!(scroller instanceof HTMLElement)) return;
+
+        const visibleCards = getVisibleCards();
+        if (visibleCards.length === 0) return;
+
+        const substantial = getSubstantiallyVisibleCards();
+        const anchorCard = substantial[0] ?? visibleCards[0];
+        const anchorIndex = Math.max(0, visibleCards.indexOf(anchorCard));
+        const targetIndex = Math.min(
+          visibleCards.length - 1,
+          Math.max(0, anchorIndex + direction)
+        );
+        const target = visibleCards[targetIndex];
+
+        if (!(target instanceof HTMLElement) || !(track instanceof HTMLElement)) {
+          return;
+        }
+
+        const targetLeft = target.offsetLeft - track.offsetLeft;
+
+        scroller.scrollTo({
+          left: targetLeft,
+          behavior: defaultScrollBehavior,
+        });
+      };
+
+      filterButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+          const filter = button.dataset.figureFilter ?? "all";
+
+          filterButtons.forEach((candidate) => {
+            candidate.setAttribute(
+              "aria-pressed",
+              String(candidate === button)
+            );
+          });
+
+          cards.forEach((card) => {
+            card.hidden =
+              filter !== "all" && card.dataset.figureCategory !== filter;
+          });
+
+          if (scroller instanceof HTMLElement) {
+            scroller.scrollTo({ left: 0, behavior: "auto" });
+          }
+
+          window.requestAnimationFrame(updateCarousel);
+        });
+      });
+
+      if (previousButton instanceof HTMLButtonElement) {
+        previousButton.addEventListener("click", () => moveCarousel(-1));
+      }
+
+      if (nextButton instanceof HTMLButtonElement) {
+        nextButton.addEventListener("click", () => moveCarousel(1));
+      }
+
+      if (scroller instanceof HTMLElement) {
+        scroller.addEventListener("scroll", requestCarouselUpdate, {
+          passive: true,
+        });
+
+        scroller.addEventListener("keydown", (event) => {
+          if (event.key === "ArrowLeft") {
+            event.preventDefault();
+            moveCarousel(-1);
+          }
+
+          if (event.key === "ArrowRight") {
+            event.preventDefault();
+            moveCarousel(1);
+          }
+        });
+      }
+
+      if ("ResizeObserver" in window) {
+        const figuresResizeObserver = new ResizeObserver(
+          requestCarouselUpdate
+        );
+
+        figuresResizeObserver.observe(keyFigures);
+
+        if (scroller instanceof HTMLElement) {
+          figuresResizeObserver.observe(scroller);
+        }
+      }
+
+      window.addEventListener("load", requestCarouselUpdate);
+      updateCarousel();
+    }
+
+    const profileButtons = Array.from(
+      document.querySelectorAll("[data-figure-open]")
+    ).filter((button) => button instanceof HTMLButtonElement);
+
+    const figureDialogs = Array.from(
+      document.querySelectorAll("[data-figure-dialog]")
+    ).filter((dialog) => dialog instanceof HTMLDialogElement);
+
+    const closeFigureDialog = (dialog: HTMLDialogElement) => {
+      dialog.close();
+      document.documentElement.classList.remove("figure-dialog-open");
+    };
+
+    profileButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        const dialogId = button.dataset.figureOpen;
+        const dialog = dialogId ? document.getElementById(dialogId) : null;
+
+        if (!(dialog instanceof HTMLDialogElement)) return;
+
+        document.documentElement.classList.add("figure-dialog-open");
+        dialog.showModal();
+      });
+    });
+
+    figureDialogs.forEach((dialog) => {
+      const closeButton = dialog.querySelector("[data-figure-close]");
+      const references = dialog.querySelectorAll("[data-figure-reference]");
+
+      if (closeButton instanceof HTMLButtonElement) {
+        closeButton.addEventListener("click", () => closeFigureDialog(dialog));
+      }
+
+      dialog.addEventListener("click", (event) => {
+        if (event.target === dialog) {
+          closeFigureDialog(dialog);
+        }
+      });
+
+      dialog.addEventListener("close", () => {
+        document.documentElement.classList.remove("figure-dialog-open");
+      });
+
+      references.forEach((reference) => {
+        reference.addEventListener("click", () => closeFigureDialog(dialog));
+      });
+    });
   </script>
 </BaseLayout>
 
@@ -2633,21 +3838,118 @@ const historicalAccounts: HistoricalAccount[] = [
   }
 
 
-  .case-index__scroller {
+  .case-index__rail {
     min-width: 0;
     flex: 1;
+
+    position: relative;
+  }
+
+
+  .case-index__arrow {
+    width: 29px;
+    aspect-ratio: 1;
+
+    padding: 0;
+
+    position: absolute;
+    top: 50%;
+    z-index: 4;
+
+    display: none;
+    place-items: center;
+
+    color: #596171;
+    background:
+      linear-gradient(
+        145deg,
+        rgba(255, 255, 255, 0.94),
+        rgba(239, 243, 250, 0.80)
+      );
+
+    border: 1px solid rgba(255, 255, 255, 0.96);
+    border-radius: 50%;
+
+    box-shadow:
+      0 8px 18px rgba(49, 61, 88, 0.14),
+      inset 0 1px 0 rgba(255, 255, 255, 1);
+
+    cursor: pointer;
+
+    transform: translateY(-50%);
+
+    transition:
+      opacity 0.20s ease,
+      color 0.20s ease,
+      background 0.20s ease,
+      transform 0.20s var(--ease-out);
+  }
+
+
+  .case-index.has-overflow .case-index__arrow {
+    display: grid;
+  }
+
+
+  .case-index__arrow--previous {
+    left: 1px;
+  }
+
+
+  .case-index__arrow--next {
+    right: 1px;
+  }
+
+
+  .case-index__arrow:hover:not(:disabled) {
+    color: #242a37;
+    background: rgba(255, 255, 255, 0.98);
+
+    transform:
+      translateY(-50%)
+      scale(1.04);
+  }
+
+
+  .case-index__arrow:disabled {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+
+  .case-index__arrow svg {
+    width: 14px;
+    height: 14px;
+  }
+
+
+  .case-index__arrow path {
+    stroke: currentColor;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+
+  .case-index__scroller {
+    min-width: 0;
+    width: 100%;
 
     overflow-x: auto;
     overscroll-behavior-inline: contain;
 
     scrollbar-width: none;
+  }
 
+
+  .case-index.has-overflow.can-scroll-left.can-scroll-right
+  .case-index__scroller {
     mask-image:
       linear-gradient(
         to right,
         transparent,
-        black 12px,
-        black calc(100% - 12px),
+        black 36px,
+        black calc(100% - 36px),
         transparent
       );
 
@@ -2655,9 +3957,49 @@ const historicalAccounts: HistoricalAccount[] = [
       linear-gradient(
         to right,
         transparent,
-        black 12px,
-        black calc(100% - 12px),
+        black 36px,
+        black calc(100% - 36px),
         transparent
+      );
+  }
+
+
+  .case-index.has-overflow:not(.can-scroll-left).can-scroll-right
+  .case-index__scroller {
+    mask-image:
+      linear-gradient(
+        to right,
+        black 0,
+        black calc(100% - 36px),
+        transparent
+      );
+
+    -webkit-mask-image:
+      linear-gradient(
+        to right,
+        black 0,
+        black calc(100% - 36px),
+        transparent
+      );
+  }
+
+
+  .case-index.has-overflow.can-scroll-left:not(.can-scroll-right)
+  .case-index__scroller {
+    mask-image:
+      linear-gradient(
+        to right,
+        transparent,
+        black 36px,
+        black 100%
+      );
+
+    -webkit-mask-image:
+      linear-gradient(
+        to right,
+        transparent,
+        black 36px,
+        black 100%
       );
   }
 
@@ -8065,6 +9407,1418 @@ const historicalAccounts: HistoricalAccount[] = [
 
 
   /* ---------------------------------- */
+  /* KEY FIGURES                        */
+  /* ---------------------------------- */
+
+  .figures-section {
+    padding-bottom: 22px;
+  }
+
+
+  .figures-shell {
+    position: relative;
+    isolation: isolate;
+
+    overflow: hidden;
+
+    padding:
+      clamp(25px, 4vw, 46px)
+      clamp(20px, 4vw, 44px)
+      clamp(28px, 4.2vw, 48px);
+
+    background:
+      radial-gradient(
+        circle at 7% 4%,
+        rgba(118, 169, 239, 0.14),
+        transparent 31%
+      ),
+      radial-gradient(
+        circle at 94% 8%,
+        rgba(217, 173, 114, 0.14),
+        transparent 31%
+      ),
+      radial-gradient(
+        circle at 89% 97%,
+        rgba(165, 139, 217, 0.12),
+        transparent 34%
+      ),
+      linear-gradient(
+        145deg,
+        rgba(255, 255, 255, 0.79),
+        rgba(246, 249, 255, 0.49)
+      );
+
+    border: 1px solid rgba(255, 255, 255, 0.91);
+    border-radius: clamp(24px, 2.7vw, 34px);
+
+    box-shadow:
+      0 24px 60px rgba(50, 62, 88, 0.10),
+      inset 0 1px 0 rgba(255, 255, 255, 1),
+      inset 0 -1px 0 rgba(55, 65, 88, 0.04);
+
+    backdrop-filter:
+      blur(24px)
+      saturate(150%);
+
+    -webkit-backdrop-filter:
+      blur(24px)
+      saturate(150%);
+  }
+
+
+  .figures-shell::before {
+    content: "";
+
+    width: 450px;
+    aspect-ratio: 1;
+
+    position: absolute;
+    right: -270px;
+    top: 145px;
+    z-index: -1;
+
+    border: 1px solid rgba(81, 70, 60, 0.09);
+    border-radius: 50%;
+
+    box-shadow:
+      0 0 0 56px rgba(255, 255, 255, 0.045),
+      0 0 0 112px rgba(81, 70, 60, 0.020);
+
+    pointer-events: none;
+  }
+
+
+  .figures-overview {
+    position: relative;
+    z-index: 1;
+
+    display: grid;
+    grid-template-columns:
+      minmax(0, 1fr)
+      minmax(310px, 0.82fr);
+    align-items: end;
+
+    gap: clamp(24px, 4vw, 56px);
+
+    padding:
+      2px
+      4px
+      clamp(26px, 3.5vw, 38px);
+
+    border-bottom: 1px solid rgba(66, 76, 99, 0.10);
+  }
+
+
+  .figures-overline {
+    margin: 0 0 10px;
+
+    color: #92784f;
+
+    font-family: var(--font-ui);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+
+  .figures-overview h3 {
+    max-width: 650px;
+
+    margin: 0;
+
+    color: #1d2029;
+
+    font-size: clamp(25px, 3.1vw, 38px);
+    line-height: 1.25;
+  }
+
+
+  .figures-overview__aside {
+    min-width: 0;
+  }
+
+
+  .figures-summary {
+    margin: 0;
+
+    color: #69707f;
+
+    font-family: var(--font-ui);
+    font-size: 14px;
+    line-height: 1.80;
+  }
+
+
+  .figures-toolbar {
+    position: relative;
+    z-index: 2;
+
+    margin-top: clamp(24px, 3vw, 32px);
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 18px;
+  }
+
+
+  .figure-filters {
+    min-width: 0;
+
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+
+    gap: 7px;
+  }
+
+
+  .figure-filters button {
+    padding: 9px 11px;
+
+    display: inline-flex;
+    align-items: center;
+
+    gap: 8px;
+
+    color: #747b89;
+    background: rgba(255, 255, 255, 0.42);
+
+    border: 1px solid rgba(255, 255, 255, 0.72);
+    border-radius: 999px;
+
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.80);
+
+    cursor: pointer;
+
+    font-family: var(--font-ui);
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    line-height: 1;
+    text-transform: uppercase;
+
+    transition:
+      color 0.20s ease,
+      background 0.20s ease,
+      border-color 0.20s ease,
+      box-shadow 0.20s ease,
+      transform 0.20s var(--ease-out);
+  }
+
+
+  .figure-filters button:hover {
+    color: #303642;
+    background: rgba(255, 255, 255, 0.68);
+    border-color: rgba(255, 255, 255, 0.90);
+
+    transform: translateY(-1px);
+  }
+
+
+  .figure-filters button[aria-pressed="true"] {
+    color: #343a47;
+    background:
+      linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.94),
+        rgba(242, 245, 251, 0.72)
+      );
+
+    border-color: rgba(255, 255, 255, 0.96);
+
+    box-shadow:
+      0 7px 17px rgba(54, 65, 91, 0.09),
+      inset 0 1px 0 rgba(255, 255, 255, 1);
+  }
+
+
+  .figure-filters small {
+    color: #9a774b;
+
+    font-size: 7px;
+    font-weight: 750;
+    letter-spacing: 0.07em;
+  }
+
+
+  .figures-navigation {
+    flex: 0 0 auto;
+
+    display: flex;
+    align-items: center;
+
+    gap: 7px;
+  }
+
+
+  .figures-counter {
+    min-width: 74px;
+
+    margin: 0 5px 0 0;
+
+    display: inline-flex;
+    align-items: baseline;
+    justify-content: flex-end;
+
+    gap: 5px;
+
+    color: #8d94a2;
+
+    font-family: var(--font-ui);
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: 0.09em;
+    line-height: 1;
+  }
+
+
+  .figures-counter span:first-child {
+    color: #4f5664;
+
+    font-size: 10px;
+  }
+
+
+  .figures-arrow {
+    width: 36px;
+    aspect-ratio: 1;
+
+    padding: 0;
+
+    display: grid;
+    place-items: center;
+
+    color: #5f6776;
+    background:
+      linear-gradient(
+        145deg,
+        rgba(255, 255, 255, 0.86),
+        rgba(239, 243, 250, 0.64)
+      );
+
+    border: 1px solid rgba(255, 255, 255, 0.92);
+    border-radius: 50%;
+
+    box-shadow:
+      0 9px 20px rgba(51, 63, 91, 0.10),
+      inset 0 1px 0 rgba(255, 255, 255, 1);
+
+    cursor: pointer;
+
+    transition:
+      color 0.20s ease,
+      background 0.20s ease,
+      opacity 0.20s ease,
+      transform 0.20s var(--ease-out);
+  }
+
+
+  .figures-arrow:hover:not(:disabled) {
+    color: #252b37;
+    background: rgba(255, 255, 255, 0.96);
+
+    transform: scale(1.04);
+  }
+
+
+  .figures-arrow:disabled {
+    opacity: 0.34;
+    cursor: default;
+  }
+
+
+  .figures-arrow svg {
+    width: 16px;
+    height: 16px;
+  }
+
+
+  .figures-arrow path {
+    stroke: currentColor;
+    stroke-width: 1.75;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+
+  .figures-scroller {
+    position: relative;
+    z-index: 1;
+
+    margin-top: 18px;
+    padding: 3px 3px 18px;
+
+    overflow-x: auto;
+    overscroll-behavior-inline: contain;
+
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: 3px;
+    scrollbar-width: none;
+
+    mask-image:
+      linear-gradient(
+        to right,
+        black 0,
+        black calc(100% - 18px),
+        transparent
+      );
+
+    -webkit-mask-image:
+      linear-gradient(
+        to right,
+        black 0,
+        black calc(100% - 18px),
+        transparent
+      );
+  }
+
+
+  .figures-scroller::-webkit-scrollbar {
+    display: none;
+  }
+
+
+  .figures-track {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: calc((100% - 36px) / 3);
+
+    gap: 18px;
+  }
+
+
+  .figure-card[hidden] {
+    display: none !important;
+  }
+
+
+  .figure-card {
+    --figure-accent: #7a818f;
+    --figure-accent-rgb: 122, 129, 143;
+    --figure-accent-soft: rgba(122, 129, 143, 0.10);
+    --figure-accent-faint: rgba(122, 129, 143, 0.060);
+
+    min-width: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    overflow: hidden;
+
+    background:
+      radial-gradient(
+        circle at 93% 4%,
+        var(--figure-accent-soft),
+        transparent 34%
+      ),
+      linear-gradient(
+        145deg,
+        rgba(255, 255, 255, 0.82),
+        rgba(247, 248, 252, 0.55)
+      );
+
+    border: 1px solid rgba(255, 255, 255, 0.91);
+    border-radius: 25px;
+
+    box-shadow:
+      0 16px 38px rgba(50, 62, 88, 0.085),
+      inset 0 1px 0 rgba(255, 255, 255, 1),
+      inset 0 -1px 0 rgba(55, 65, 88, 0.035);
+
+    scroll-snap-align: start;
+
+    transition:
+      transform 0.30s var(--ease-out),
+      box-shadow 0.30s ease;
+  }
+
+
+  .figure-card:hover {
+    transform: translateY(-3px);
+
+    box-shadow:
+      0 23px 49px rgba(50, 62, 88, 0.12),
+      inset 0 1px 0 rgba(255, 255, 255, 1),
+      inset 0 -1px 0 rgba(55, 65, 88, 0.035);
+  }
+
+
+  .figure-card--gold,
+  .figure-dialog--gold {
+    --figure-accent: #ad7d42;
+    --figure-accent-rgb: 173, 125, 66;
+    --figure-accent-soft: rgba(217, 167, 99, 0.15);
+    --figure-accent-faint: rgba(173, 125, 66, 0.078);
+  }
+
+
+  .figure-card--blue,
+  .figure-dialog--blue {
+    --figure-accent: #6485bd;
+    --figure-accent-rgb: 100, 133, 189;
+    --figure-accent-soft: rgba(112, 151, 214, 0.13);
+    --figure-accent-faint: rgba(100, 133, 189, 0.067);
+  }
+
+
+  .figure-card--violet,
+  .figure-dialog--violet {
+    --figure-accent: #816aa6;
+    --figure-accent-rgb: 129, 106, 166;
+    --figure-accent-soft: rgba(158, 130, 202, 0.14);
+    --figure-accent-faint: rgba(129, 106, 166, 0.069);
+  }
+
+
+  .figure-card--neutral,
+  .figure-dialog--neutral {
+    --figure-accent: #737a87;
+    --figure-accent-rgb: 115, 122, 135;
+    --figure-accent-soft: rgba(115, 122, 135, 0.10);
+    --figure-accent-faint: rgba(115, 122, 135, 0.057);
+  }
+
+
+  .figure-portrait,
+  .figure-dialog__portrait {
+    width: 100%;
+    aspect-ratio: 4 / 5;
+
+    position: relative;
+    isolation: isolate;
+
+    overflow: hidden;
+
+    background:
+      radial-gradient(
+        circle at 22% 14%,
+        rgba(255, 255, 255, 0.78),
+        transparent 31%
+      ),
+      radial-gradient(
+        circle at 80% 78%,
+        var(--figure-accent-soft),
+        transparent 44%
+      ),
+      linear-gradient(
+        145deg,
+        rgba(231, 237, 247, 0.94),
+        rgba(244, 242, 239, 0.82)
+      );
+
+    border-bottom: 1px solid rgba(255, 255, 255, 0.84);
+  }
+
+
+  .figure-portrait::after,
+  .figure-dialog__portrait::after {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+
+    background:
+      linear-gradient(
+        118deg,
+        rgba(255, 255, 255, 0.34),
+        transparent 24%,
+        transparent 71%,
+        rgba(255, 255, 255, 0.12)
+      ),
+      linear-gradient(
+        to top,
+        rgba(27, 31, 42, 0.12),
+        transparent 31%
+      );
+
+    pointer-events: none;
+  }
+
+
+  .figure-portrait img,
+  .figure-dialog__portrait img {
+    width: 100%;
+    height: 100%;
+
+    position: relative;
+    z-index: 2;
+
+    display: block;
+
+    object-fit: cover;
+
+    filter:
+      saturate(0.82)
+      contrast(1.02)
+      sepia(0.05);
+
+    transition:
+      opacity 0.22s ease,
+      transform 0.55s var(--ease-out);
+  }
+
+
+  .figure-card:hover .figure-portrait img {
+    transform: scale(1.025);
+  }
+
+
+  .figure-portrait.is-missing img,
+  .figure-dialog__portrait.is-missing img {
+    opacity: 0;
+  }
+
+
+  .figure-portrait__fallback {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+
+    overflow: hidden;
+  }
+
+
+  .figure-portrait__grid {
+    position: absolute;
+    inset: 0;
+
+    opacity: 0.24;
+
+    background-image:
+      linear-gradient(
+        rgba(67, 76, 99, 0.11) 1px,
+        transparent 1px
+      ),
+      linear-gradient(
+        90deg,
+        rgba(67, 76, 99, 0.11) 1px,
+        transparent 1px
+      );
+
+    background-size: 38px 38px;
+
+    mask-image:
+      radial-gradient(
+        circle at 52% 47%,
+        black,
+        transparent 79%
+      );
+
+    -webkit-mask-image:
+      radial-gradient(
+        circle at 52% 47%,
+        black,
+        transparent 79%
+      );
+  }
+
+
+  .figure-portrait__ring {
+    position: absolute;
+    top: 47%;
+    left: 52%;
+
+    display: block;
+
+    border: 1px solid rgba(var(--figure-accent-rgb), 0.20);
+    border-radius: 50%;
+
+    transform: translate(-50%, -50%);
+  }
+
+
+  .figure-portrait__ring--one {
+    width: 57%;
+    aspect-ratio: 1;
+  }
+
+
+  .figure-portrait__ring--two {
+    width: 76%;
+    height: 28%;
+
+    transform:
+      translate(-50%, -50%)
+      rotate(-16deg);
+  }
+
+
+  .figure-portrait__initials {
+    position: absolute;
+    top: 49%;
+    left: 50%;
+
+    color: rgba(var(--figure-accent-rgb), 0.46);
+
+    font-family: var(--font-display);
+    font-size: clamp(56px, 7vw, 82px);
+    line-height: 1;
+    letter-spacing: 0.03em;
+
+    transform: translate(-50%, -50%);
+  }
+
+
+  .figure-portrait__fallback-label {
+    position: absolute;
+    left: 18px;
+    bottom: 17px;
+
+    color: rgba(68, 74, 89, 0.56);
+
+    font-family: var(--font-ui);
+    font-size: 7px;
+    font-weight: 750;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+
+  .figure-portrait__number {
+    position: absolute;
+    right: 15px;
+    bottom: 13px;
+    z-index: 4;
+
+    color: rgba(255, 255, 255, 0.90);
+
+    font-family: var(--font-ui);
+    font-size: 8px;
+    font-weight: 750;
+    letter-spacing: 0.10em;
+
+    text-shadow: 0 2px 10px rgba(25, 29, 40, 0.32);
+  }
+
+
+  .figure-card__body {
+    min-width: 0;
+    flex: 1;
+
+    display: flex;
+    flex-direction: column;
+
+    padding: 22px 21px 20px;
+  }
+
+
+  .figure-card__category {
+    min-width: 0;
+
+    margin: 0;
+
+    display: inline-flex;
+    align-items: center;
+
+    gap: 8px;
+
+    color: #82778b;
+
+    font-family: var(--font-ui);
+    font-size: 7px;
+    font-weight: 750;
+    letter-spacing: 0.12em;
+    line-height: 1.45;
+    text-transform: uppercase;
+  }
+
+
+  .figure-card__category > span:first-child {
+    color: var(--figure-accent);
+  }
+
+
+  .figure-card__rule {
+    width: 20px;
+    height: 1px;
+
+    display: block;
+
+    background:
+      linear-gradient(
+        to right,
+        rgba(var(--figure-accent-rgb), 0.44),
+        transparent
+      );
+  }
+
+
+  .figure-card h3 {
+    margin: 15px 0 0;
+
+    color: #20232d;
+
+    font-size: clamp(22px, 2.35vw, 29px);
+    line-height: 1.23;
+  }
+
+
+  .figure-card__dates {
+    margin: 7px 0 0;
+
+    color: var(--figure-accent);
+
+    font-family: var(--font-ui);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    line-height: 1.5;
+    text-transform: uppercase;
+  }
+
+
+  .figure-card__summary {
+    margin: 15px 0 0;
+
+    color: #69707f;
+
+    font-family: var(--font-ui);
+    font-size: 12px;
+    line-height: 1.75;
+  }
+
+
+  .figure-card__profile-button {
+    width: 100%;
+
+    margin-top: auto;
+    padding: 17px 0 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 13px;
+
+    color: #525966;
+    background: transparent;
+
+    border: 0;
+    border-top: 1px solid rgba(65, 75, 99, 0.10);
+
+    cursor: pointer;
+
+    font-family: var(--font-ui);
+    font-size: 8px;
+    font-weight: 750;
+    letter-spacing: 0.11em;
+    line-height: 1;
+    text-transform: uppercase;
+
+    transition:
+      color 0.20s ease,
+      padding-left 0.20s var(--ease-out);
+  }
+
+
+  .figure-card__profile-button:hover {
+    color: var(--figure-accent);
+    padding-left: 3px;
+  }
+
+
+  .figure-card__profile-button svg {
+    width: 16px;
+    height: 16px;
+  }
+
+
+  .figure-card__profile-button path {
+    stroke: currentColor;
+    stroke-width: 1.65;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+
+  .figures-interaction-note {
+    margin: 1px 4px 0;
+
+    color: #959ba8;
+
+    font-family: var(--font-ui);
+    font-size: 8px;
+    font-weight: 600;
+    letter-spacing: 0.055em;
+    line-height: 1.6;
+    text-align: center;
+  }
+
+
+  .figure-dialog {
+    --figure-accent: #737a87;
+    --figure-accent-rgb: 115, 122, 135;
+    --figure-accent-soft: rgba(115, 122, 135, 0.10);
+    --figure-accent-faint: rgba(115, 122, 135, 0.057);
+
+    width: min(960px, calc(100vw - 34px));
+    max-height: min(88vh, 820px);
+
+    padding: 0;
+
+    overflow: visible;
+
+    color: #20232d;
+    background: transparent;
+
+    border: 0;
+  }
+
+
+  .figure-dialog::backdrop {
+    background: rgba(47, 55, 72, 0.28);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+
+
+  .figure-dialog__panel {
+    max-height: min(88vh, 820px);
+
+    position: relative;
+    isolation: isolate;
+
+    display: grid;
+    grid-template-columns:
+      minmax(280px, 0.72fr)
+      minmax(0, 1.28fr);
+
+    overflow: hidden;
+
+    background:
+      radial-gradient(
+        circle at 4% 4%,
+        var(--figure-accent-soft),
+        transparent 30%
+      ),
+      radial-gradient(
+        circle at 96% 96%,
+        rgba(165, 139, 217, 0.10),
+        transparent 34%
+      ),
+      linear-gradient(
+        145deg,
+        rgba(255, 255, 255, 0.95),
+        rgba(242, 246, 252, 0.88)
+      );
+
+    border: 1px solid rgba(255, 255, 255, 0.96);
+    border-radius: clamp(25px, 3vw, 36px);
+
+    box-shadow:
+      0 40px 110px rgba(39, 48, 69, 0.24),
+      inset 0 1px 0 rgba(255, 255, 255, 1);
+
+    backdrop-filter:
+      blur(30px)
+      saturate(155%);
+
+    -webkit-backdrop-filter:
+      blur(30px)
+      saturate(155%);
+  }
+
+
+  .figure-dialog__close {
+    width: 39px;
+    aspect-ratio: 1;
+
+    padding: 0;
+
+    position: absolute;
+    top: 17px;
+    right: 17px;
+    z-index: 6;
+
+    display: grid;
+    place-items: center;
+
+    color: #5e6573;
+    background: rgba(255, 255, 255, 0.74);
+
+    border: 1px solid rgba(255, 255, 255, 0.92);
+    border-radius: 50%;
+
+    box-shadow:
+      0 9px 20px rgba(51, 63, 91, 0.11),
+      inset 0 1px 0 rgba(255, 255, 255, 1);
+
+    cursor: pointer;
+
+    transition:
+      color 0.20s ease,
+      background 0.20s ease,
+      transform 0.20s var(--ease-out);
+  }
+
+
+  .figure-dialog__close:hover {
+    color: #242a36;
+    background: rgba(255, 255, 255, 0.96);
+
+    transform: scale(1.04);
+  }
+
+
+  .figure-dialog__close svg {
+    width: 16px;
+    height: 16px;
+  }
+
+
+  .figure-dialog__close path {
+    stroke: currentColor;
+    stroke-width: 1.65;
+    stroke-linecap: round;
+  }
+
+
+  .figure-dialog__visual {
+    min-width: 0;
+
+    padding: 18px 0 18px 18px;
+  }
+
+
+  .figure-dialog__portrait {
+    height: 100%;
+    min-height: 510px;
+
+    border: 1px solid rgba(255, 255, 255, 0.86);
+    border-radius: 24px 0 0 24px;
+
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.92),
+      inset 0 0 42px rgba(86, 102, 137, 0.05);
+  }
+
+
+  .figure-dialog__number {
+    position: absolute;
+    right: 21px;
+    bottom: 18px;
+    z-index: 4;
+
+    color: rgba(255, 255, 255, 0.92);
+
+    font-family: var(--font-display);
+    font-size: 42px;
+    line-height: 1;
+
+    text-shadow: 0 3px 18px rgba(25, 29, 40, 0.38);
+  }
+
+
+  .figure-dialog__content {
+    min-width: 0;
+
+    overflow-y: auto;
+
+    padding:
+      clamp(54px, 6vw, 76px)
+      clamp(30px, 5vw, 58px)
+      clamp(34px, 5vw, 54px);
+
+    scrollbar-width: thin;
+    scrollbar-color:
+      rgba(var(--figure-accent-rgb), 0.22)
+      transparent;
+  }
+
+
+  .figure-dialog__eyebrow {
+    margin: 0 0 10px;
+
+    color: var(--figure-accent);
+
+    font-family: var(--font-ui);
+    font-size: 8px;
+    font-weight: 750;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+
+  .figure-dialog h3 {
+    max-width: 610px;
+
+    margin: 0;
+
+    color: #1d2029;
+
+    font-size: clamp(35px, 5vw, 58px);
+    line-height: 1.08;
+  }
+
+
+  .figure-dialog__meta {
+    margin: 13px 0 0;
+
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+
+    gap: 9px;
+
+    color: #7c8391;
+
+    font-family: var(--font-ui);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    line-height: 1.5;
+    text-transform: uppercase;
+  }
+
+
+  .figure-dialog__meta > span:nth-child(2) {
+    width: 4px;
+    aspect-ratio: 1;
+
+    display: block;
+
+    background: var(--figure-accent);
+    border-radius: 50%;
+
+    opacity: 0.62;
+  }
+
+
+  .figure-dialog__copy {
+    margin: clamp(24px, 3vw, 32px) 0 0;
+
+    color: #5f6675;
+
+    font-family: var(--font-ui);
+    font-size: 14px;
+    line-height: 1.86;
+  }
+
+
+  .figure-dialog__details {
+    margin: clamp(24px, 3vw, 32px) 0 0;
+    padding: 0;
+
+    border-top: 1px solid rgba(65, 75, 99, 0.10);
+  }
+
+
+  .figure-dialog__details div {
+    display: grid;
+    grid-template-columns: minmax(120px, 0.7fr) minmax(0, 1.3fr);
+    align-items: baseline;
+
+    gap: 18px;
+
+    padding: 13px 0;
+
+    border-bottom: 1px solid rgba(65, 75, 99, 0.065);
+  }
+
+
+  .figure-dialog__details dt {
+    color: #9298a5;
+
+    font-family: var(--font-ui);
+    font-size: 7px;
+    font-weight: 750;
+    letter-spacing: 0.12em;
+    line-height: 1.45;
+    text-transform: uppercase;
+  }
+
+
+  .figure-dialog__details dd {
+    margin: 0;
+
+    color: #4d5462;
+
+    font-family: var(--font-ui);
+    font-size: 11px;
+    font-weight: 600;
+    line-height: 1.65;
+    text-align: right;
+  }
+
+
+  .figure-dialog__references {
+    margin-top: clamp(24px, 3vw, 32px);
+  }
+
+
+  .figure-dialog__references > p {
+    margin: 0 0 10px;
+
+    color: #9298a5;
+
+    font-family: var(--font-ui);
+    font-size: 7px;
+    font-weight: 750;
+    letter-spacing: 0.13em;
+    line-height: 1.45;
+    text-transform: uppercase;
+  }
+
+
+  .figure-dialog__references > div {
+    display: flex;
+    flex-wrap: wrap;
+
+    gap: 7px;
+  }
+
+
+  .figure-dialog__references a {
+    padding: 10px 12px;
+
+    display: inline-flex;
+    align-items: center;
+
+    gap: 9px;
+
+    color: #555c69;
+    background: rgba(var(--figure-accent-rgb), 0.075);
+
+    border: 1px solid rgba(var(--figure-accent-rgb), 0.13);
+    border-radius: 999px;
+
+    font-family: var(--font-ui);
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: 0.065em;
+    line-height: 1;
+    text-decoration: none;
+
+    transition:
+      color 0.20s ease,
+      background 0.20s ease,
+      border-color 0.20s ease,
+      transform 0.20s var(--ease-out);
+  }
+
+
+  .figure-dialog__references a:hover {
+    color: var(--figure-accent);
+    background: rgba(var(--figure-accent-rgb), 0.12);
+    border-color: rgba(var(--figure-accent-rgb), 0.20);
+
+    transform: translateY(-1px);
+  }
+
+
+  .figure-dialog__references svg {
+    width: 14px;
+    height: 14px;
+  }
+
+
+  .figure-dialog__references path {
+    stroke: currentColor;
+    stroke-width: 1.65;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+
+  :global(html.figure-dialog-open) {
+    overflow: hidden;
+  }
+
+
+  @media (max-width: 900px) {
+    .figures-track {
+      grid-auto-columns: calc((100% - 18px) / 2);
+    }
+
+    .figure-dialog__panel {
+      grid-template-columns:
+        minmax(245px, 0.76fr)
+        minmax(0, 1.24fr);
+    }
+
+    .figure-dialog__portrait {
+      min-height: 470px;
+    }
+  }
+
+
+  @media (max-width: 720px) {
+    .figures-overview {
+      grid-template-columns: 1fr;
+    }
+
+    .figures-toolbar {
+      align-items: flex-end;
+      flex-direction: column;
+    }
+
+    .figure-filters {
+      width: 100%;
+      flex-wrap: nowrap;
+
+      overflow-x: auto;
+
+      scrollbar-width: none;
+    }
+
+    .figure-filters::-webkit-scrollbar {
+      display: none;
+    }
+
+    .figures-navigation {
+      align-self: stretch;
+      justify-content: flex-end;
+    }
+
+    .figure-dialog {
+      width: calc(100vw - 18px);
+      max-height: 92svh;
+    }
+
+    .figure-dialog__panel {
+      max-height: 92svh;
+
+      grid-template-columns: 1fr;
+
+      overflow-y: auto;
+    }
+
+    .figure-dialog__visual {
+      padding: 13px 13px 0;
+    }
+
+    .figure-dialog__portrait {
+      min-height: 0;
+      height: auto;
+      max-height: 44svh;
+
+      border-radius: 22px 22px 0 0;
+    }
+
+    .figure-dialog__content {
+      overflow: visible;
+
+      padding:
+        30px
+        22px
+        30px;
+    }
+  }
+
+
+  @media (max-width: 650px) {
+    .figures-shell {
+      padding: 22px 15px 25px;
+
+      border-radius: 24px;
+    }
+
+    .figures-overview {
+      gap: 18px;
+
+      padding:
+        1px
+        3px
+        25px;
+    }
+
+    .figures-overview h3 {
+      font-size: 26px;
+    }
+
+    .figures-summary {
+      font-size: 13px;
+    }
+
+    .figures-toolbar {
+      margin-top: 20px;
+      gap: 14px;
+    }
+
+    .figure-filters {
+      padding-bottom: 2px;
+    }
+
+    .figure-filters button {
+      flex: 0 0 auto;
+    }
+
+    .figures-counter {
+      margin-right: auto;
+      justify-content: flex-start;
+    }
+
+    .figures-arrow {
+      width: 34px;
+    }
+
+    .figures-scroller {
+      margin-top: 14px;
+      padding-bottom: 16px;
+
+      scroll-padding-inline: 2px;
+    }
+
+    .figures-track {
+      grid-auto-columns: 86%;
+
+      gap: 14px;
+    }
+
+    .figure-card {
+      border-radius: 22px;
+    }
+
+    .figure-card__body {
+      padding: 20px 18px 18px;
+    }
+
+    .figure-card h3 {
+      font-size: 25px;
+    }
+
+    .figure-card__summary {
+      font-size: 12px;
+    }
+
+    .figures-interaction-note {
+      margin-inline: 7px;
+    }
+
+    .figure-dialog__close {
+      width: 36px;
+
+      top: 20px;
+      right: 20px;
+    }
+
+    .figure-dialog h3 {
+      padding-right: 34px;
+
+      font-size: 34px;
+    }
+
+    .figure-dialog__copy {
+      font-size: 13px;
+    }
+
+    .figure-dialog__details div {
+      grid-template-columns: 1fr;
+
+      gap: 4px;
+    }
+
+    .figure-dialog__details dd {
+      text-align: left;
+    }
+  }
+
+
+  /* ---------------------------------- */
   /* EDGE DETAILS                       */
   /* ---------------------------------- */
 
@@ -8242,6 +10996,10 @@ const historicalAccounts: HistoricalAccount[] = [
 
     .case-index__hint {
       display: none;
+    }
+
+    .case-index__arrow {
+      display: none !important;
     }
 
     .case-index__links a {
@@ -8564,7 +11322,10 @@ const historicalAccounts: HistoricalAccount[] = [
     .culture-topic,
     .accounts-shell,
     .accounts-register,
-    .account-record {
+    .account-record,
+    .figures-shell,
+    .figure-card,
+    .figure-dialog__panel {
       background-color: rgba(250, 250, 249, 0.94);
     }
   }
