@@ -1,0 +1,669 @@
+---
+interface CaseSection {
+  number: string;
+  label: string;
+  id: string;
+}
+
+interface Props {
+  sections: readonly CaseSection[];
+}
+
+const { sections } = Astro.props;
+---
+
+<nav class="case-index" aria-label="Case file sections" data-case-index>
+  <div class="case-index__identity">
+    <span class="case-index__eyebrow">Case index</span>
+    <span class="case-index__hint">Jump to section</span>
+  </div>
+
+  <div class="case-index__rail">
+    <button
+      class="case-index__arrow case-index__arrow--previous"
+      type="button"
+      aria-label="Show earlier case sections"
+      data-case-index-previous
+      disabled
+    >
+      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M14.5 6.5 9 12l5.5 5.5" />
+      </svg>
+    </button>
+
+    <div
+      class="case-index__scroller"
+      id="case-index-sections"
+      data-case-index-scroller
+    >
+      <div class="case-index__links" data-case-index-links>
+        {sections.map((section, index) => (
+          <a
+            href={`#${section.id}`}
+            data-case-index-link={section.id}
+            aria-current={index === 0 ? "location" : undefined}
+          >
+            <span>{section.number}</span>
+            <span>{section.label}</span>
+          </a>
+        ))}
+      </div>
+    </div>
+
+    <button
+      class="case-index__arrow case-index__arrow--next"
+      type="button"
+      aria-label="Show later case sections"
+      data-case-index-next
+      disabled
+    >
+      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="m9.5 6.5 5.5 5.5-5.5 5.5" />
+      </svg>
+    </button>
+  </div>
+</nav>
+
+<script>
+  const prefersReducedMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+  ).matches;
+
+  const defaultScrollBehavior: ScrollBehavior = prefersReducedMotion
+    ? "auto"
+    : "smooth";
+
+  const caseIndex = document.querySelector("[data-case-index]");
+
+  if (caseIndex instanceof HTMLElement) {
+    const scroller = caseIndex.querySelector("[data-case-index-scroller]");
+    const linksContainer = caseIndex.querySelector("[data-case-index-links]");
+    const previousButton = caseIndex.querySelector(
+      "[data-case-index-previous]"
+    );
+    const nextButton = caseIndex.querySelector("[data-case-index-next]");
+
+    const links = Array.from(
+      caseIndex.querySelectorAll("[data-case-index-link]")
+    ).filter((link) => link instanceof HTMLAnchorElement);
+
+    const sections = links
+      .map((link) => {
+        const id = link.dataset.caseIndexLink;
+        return id ? document.getElementById(id) : null;
+      })
+      .filter((section) => section instanceof HTMLElement);
+
+    let activeId = "";
+    let activeFrame = 0;
+    let overflowFrame = 0;
+
+    const updateIndexEdges = () => {
+      if (!(scroller instanceof HTMLElement)) return;
+
+      const hasOverflow = caseIndex.classList.contains("has-overflow");
+      const canScrollLeft = hasOverflow && scroller.scrollLeft > 2;
+      const canScrollRight =
+        hasOverflow &&
+        scroller.scrollLeft + scroller.clientWidth < scroller.scrollWidth - 2;
+
+      caseIndex.classList.toggle("can-scroll-left", canScrollLeft);
+      caseIndex.classList.toggle("can-scroll-right", canScrollRight);
+
+      if (previousButton instanceof HTMLButtonElement) {
+        previousButton.disabled = !canScrollLeft;
+      }
+
+      if (nextButton instanceof HTMLButtonElement) {
+        nextButton.disabled = !canScrollRight;
+      }
+    };
+
+    const updateIndexOverflow = () => {
+      overflowFrame = 0;
+
+      if (
+        !(scroller instanceof HTMLElement) ||
+        !(linksContainer instanceof HTMLElement)
+      ) {
+        return;
+      }
+
+      const hasOverflow =
+        linksContainer.scrollWidth > scroller.clientWidth + 2;
+
+      caseIndex.classList.toggle("has-overflow", hasOverflow);
+
+      if (!hasOverflow) {
+        scroller.scrollLeft = 0;
+      }
+
+      updateIndexEdges();
+    };
+
+    const requestIndexOverflowUpdate = () => {
+      if (overflowFrame !== 0) return;
+      overflowFrame = window.requestAnimationFrame(updateIndexOverflow);
+    };
+
+    const revealActiveLink = (
+      link: HTMLAnchorElement,
+      behavior: ScrollBehavior
+    ) => {
+      if (!(scroller instanceof HTMLElement)) return;
+
+      const scrollerRect = scroller.getBoundingClientRect();
+      const linkRect = link.getBoundingClientRect();
+      const inset = caseIndex.classList.contains("has-overflow") ? 34 : 8;
+      const isFullyVisible =
+        linkRect.left >= scrollerRect.left + inset &&
+        linkRect.right <= scrollerRect.right - inset;
+
+      if (isFullyVisible) return;
+
+      const targetLeft =
+        scroller.scrollLeft +
+        (linkRect.left - scrollerRect.left) -
+        (scroller.clientWidth - linkRect.width) / 2;
+
+      scroller.scrollTo({
+        left: Math.max(0, targetLeft),
+        behavior,
+      });
+    };
+
+    const setActiveSection = (
+      id: string,
+      behavior: ScrollBehavior = defaultScrollBehavior
+    ) => {
+      if (activeId === id) {
+        const activeLink = links.find(
+          (link) => link.dataset.caseIndexLink === id
+        );
+
+        if (activeLink instanceof HTMLAnchorElement) {
+          revealActiveLink(activeLink, behavior);
+        }
+
+        return;
+      }
+
+      activeId = id;
+
+      links.forEach((link) => {
+        const isActive = link.dataset.caseIndexLink === id;
+
+        if (isActive) {
+          link.setAttribute("aria-current", "location");
+          revealActiveLink(link, behavior);
+        } else {
+          link.removeAttribute("aria-current");
+        }
+      });
+    };
+
+    const getActivationLine = () => {
+      const stickyTop = Number.parseFloat(
+        window.getComputedStyle(caseIndex).top
+      );
+
+      return (
+        (Number.isFinite(stickyTop) ? stickyTop : 0) +
+        caseIndex.offsetHeight +
+        24
+      );
+    };
+
+    const updateActiveSection = () => {
+      activeFrame = 0;
+
+      if (sections.length === 0) return;
+
+      const activationLine = getActivationLine();
+      let currentSection = sections[0];
+
+      for (const section of sections) {
+        if (section.getBoundingClientRect().top <= activationLine) {
+          currentSection = section;
+        } else {
+          break;
+        }
+      }
+
+      const reachedPageEnd =
+        window.innerHeight + window.scrollY >=
+        document.documentElement.scrollHeight - 4;
+
+      if (reachedPageEnd) {
+        currentSection = sections[sections.length - 1];
+      }
+
+      if (currentSection instanceof HTMLElement) {
+        setActiveSection(currentSection.id);
+      }
+    };
+
+    const requestActiveSectionUpdate = () => {
+      if (activeFrame !== 0) return;
+      activeFrame = window.requestAnimationFrame(updateActiveSection);
+    };
+
+    links.forEach((link) => {
+      link.addEventListener("click", () => {
+        const id = link.dataset.caseIndexLink;
+        if (id) setActiveSection(id);
+      });
+    });
+
+    if (
+      scroller instanceof HTMLElement &&
+      previousButton instanceof HTMLButtonElement &&
+      nextButton instanceof HTMLButtonElement
+    ) {
+      previousButton.addEventListener("click", () => {
+        scroller.scrollBy({
+          left: -Math.max(210, scroller.clientWidth * 0.68),
+          behavior: defaultScrollBehavior,
+        });
+      });
+
+      nextButton.addEventListener("click", () => {
+        scroller.scrollBy({
+          left: Math.max(210, scroller.clientWidth * 0.68),
+          behavior: defaultScrollBehavior,
+        });
+      });
+
+      scroller.addEventListener("scroll", updateIndexEdges, {
+        passive: true,
+      });
+    }
+
+    if ("ResizeObserver" in window) {
+      const indexResizeObserver = new ResizeObserver(() => {
+        requestIndexOverflowUpdate();
+        requestActiveSectionUpdate();
+      });
+
+      indexResizeObserver.observe(caseIndex);
+
+      if (scroller instanceof HTMLElement) {
+        indexResizeObserver.observe(scroller);
+      }
+
+      if (linksContainer instanceof HTMLElement) {
+        indexResizeObserver.observe(linksContainer);
+      }
+    }
+
+    window.addEventListener("scroll", requestActiveSectionUpdate, {
+      passive: true,
+    });
+    window.addEventListener("resize", () => {
+      requestIndexOverflowUpdate();
+      requestActiveSectionUpdate();
+    });
+    window.addEventListener("load", () => {
+      requestIndexOverflowUpdate();
+      requestActiveSectionUpdate();
+    });
+
+    updateIndexOverflow();
+    updateActiveSection();
+  }
+</script>
+
+<style>
+  .case-index {
+    width: min(100%, 1120px);
+
+    margin: 24px auto -18px;
+    padding: 9px 10px 9px 16px;
+
+    position: sticky;
+    top: 86px;
+    z-index: 45;
+
+    display: flex;
+    align-items: center;
+
+    gap: 14px;
+
+    background:
+      linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.82),
+        rgba(245, 248, 253, 0.64)
+      );
+
+    border: 1px solid rgba(255, 255, 255, 0.90);
+    border-radius: 999px;
+
+    box-shadow:
+      0 16px 38px rgba(48, 59, 83, 0.105),
+      inset 0 1px 0 rgba(255, 255, 255, 1),
+      inset 0 -1px 0 rgba(55, 65, 88, 0.035);
+
+    backdrop-filter:
+      blur(26px)
+      saturate(175%);
+
+    -webkit-backdrop-filter:
+      blur(26px)
+      saturate(175%);
+  }
+
+  .case-index__identity {
+    flex: 0 0 auto;
+
+    padding-right: 15px;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 2px;
+
+    border-right: 1px solid rgba(65, 75, 99, 0.10);
+  }
+
+  .case-index__eyebrow,
+  .case-index__hint {
+    white-space: nowrap;
+
+    font-family: var(--font-ui);
+    text-transform: uppercase;
+  }
+
+  .case-index__eyebrow {
+    color: #5d6472;
+
+    font-size: 8px;
+    font-weight: 750;
+    letter-spacing: 0.15em;
+  }
+
+  .case-index__hint {
+    color: #989eaa;
+
+    font-size: 7px;
+    font-weight: 650;
+    letter-spacing: 0.10em;
+  }
+
+  .case-index__rail {
+    min-width: 0;
+    flex: 1;
+
+    position: relative;
+  }
+
+  .case-index__arrow {
+    width: 29px;
+    aspect-ratio: 1;
+
+    padding: 0;
+
+    position: absolute;
+    top: 50%;
+    z-index: 4;
+
+    display: none;
+    place-items: center;
+
+    color: #596171;
+    background:
+      linear-gradient(
+        145deg,
+        rgba(255, 255, 255, 0.94),
+        rgba(239, 243, 250, 0.80)
+      );
+
+    border: 1px solid rgba(255, 255, 255, 0.96);
+    border-radius: 50%;
+
+    box-shadow:
+      0 8px 18px rgba(49, 61, 88, 0.14),
+      inset 0 1px 0 rgba(255, 255, 255, 1);
+
+    cursor: pointer;
+
+    transform: translateY(-50%);
+
+    transition:
+      opacity 0.20s ease,
+      color 0.20s ease,
+      background 0.20s ease,
+      transform 0.20s var(--ease-out);
+  }
+
+  .case-index.has-overflow .case-index__arrow {
+    display: grid;
+  }
+
+  .case-index__arrow--previous {
+    left: 1px;
+  }
+
+  .case-index__arrow--next {
+    right: 1px;
+  }
+
+  .case-index__arrow:hover:not(:disabled) {
+    color: #242a37;
+    background: rgba(255, 255, 255, 0.98);
+
+    transform:
+      translateY(-50%)
+      scale(1.04);
+  }
+
+  .case-index__arrow:disabled {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .case-index__arrow svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  .case-index__arrow path {
+    stroke: currentColor;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .case-index__scroller {
+    min-width: 0;
+    width: 100%;
+
+    overflow-x: auto;
+    overscroll-behavior-inline: contain;
+
+    scrollbar-width: none;
+  }
+
+  .case-index.has-overflow.can-scroll-left.can-scroll-right
+  .case-index__scroller {
+    mask-image:
+      linear-gradient(
+        to right,
+        transparent,
+        black 36px,
+        black calc(100% - 36px),
+        transparent
+      );
+
+    -webkit-mask-image:
+      linear-gradient(
+        to right,
+        transparent,
+        black 36px,
+        black calc(100% - 36px),
+        transparent
+      );
+  }
+
+  .case-index.has-overflow:not(.can-scroll-left).can-scroll-right
+  .case-index__scroller {
+    mask-image:
+      linear-gradient(
+        to right,
+        black 0,
+        black calc(100% - 36px),
+        transparent
+      );
+
+    -webkit-mask-image:
+      linear-gradient(
+        to right,
+        black 0,
+        black calc(100% - 36px),
+        transparent
+      );
+  }
+
+  .case-index.has-overflow.can-scroll-left:not(.can-scroll-right)
+  .case-index__scroller {
+    mask-image:
+      linear-gradient(
+        to right,
+        transparent,
+        black 36px,
+        black 100%
+      );
+
+    -webkit-mask-image:
+      linear-gradient(
+        to right,
+        transparent,
+        black 36px,
+        black 100%
+      );
+  }
+
+  .case-index__scroller::-webkit-scrollbar {
+    display: none;
+  }
+
+  .case-index__links {
+    width: max-content;
+    min-width: 100%;
+
+    padding: 0 5px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 5px;
+  }
+
+  .case-index__links a {
+    display: inline-flex;
+    align-items: center;
+
+    gap: 8px;
+
+    padding: 10px 12px;
+
+    color: #6e7481;
+    background: transparent;
+
+    border: 1px solid transparent;
+    border-radius: 999px;
+
+    font-family: var(--font-ui);
+    font-size: 9px;
+    font-weight: 650;
+    letter-spacing: 0.055em;
+    line-height: 1;
+    text-decoration: none;
+    white-space: nowrap;
+
+    transition:
+      color 0.22s ease,
+      background 0.22s ease,
+      border-color 0.22s ease,
+      box-shadow 0.22s ease,
+      transform 0.22s var(--ease-out);
+  }
+
+  .case-index__links a > span:first-child {
+    color: #9b7a4f;
+
+    font-size: 7px;
+    font-weight: 750;
+    letter-spacing: 0.08em;
+  }
+
+  .case-index__links a:hover {
+    color: #292e3a;
+    background: rgba(255, 255, 255, 0.52);
+    border-color: rgba(255, 255, 255, 0.78);
+
+    transform: translateY(-1px);
+  }
+
+  .case-index__links a[aria-current="location"] {
+    color: #292e3a;
+    background:
+      linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.93),
+        rgba(242, 245, 251, 0.70)
+      );
+
+    border-color: rgba(255, 255, 255, 0.96);
+
+    box-shadow:
+      0 7px 17px rgba(54, 65, 91, 0.10),
+      inset 0 1px 0 rgba(255, 255, 255, 1);
+  }
+
+  .case-index__links a[aria-current="location"] > span:first-child {
+    color: #8a6334;
+  }
+
+  @media (max-width: 650px) {
+    .case-index {
+      margin-top: 15px;
+      margin-bottom: -18px;
+      padding: 8px;
+
+      top: 76px;
+
+      gap: 7px;
+
+      border-radius: 22px;
+    }
+
+    .case-index__identity {
+      padding: 0 8px 0 4px;
+    }
+
+    .case-index__hint {
+      display: none;
+    }
+
+    .case-index__arrow {
+      display: none !important;
+    }
+
+    .case-index__links a {
+      padding: 10px 11px;
+
+      font-size: 8px;
+    }
+  }
+
+  @supports not (
+    (backdrop-filter: blur(1px))
+    or
+    (-webkit-backdrop-filter: blur(1px))
+  ) {
+    .case-index {
+      background-color: rgba(250, 250, 249, 0.94);
+    }
+  }
+</style>

@@ -1,0 +1,1025 @@
+---
+import SectionHeading from "./SectionHeading.astro";
+import type { HistoricalAccount } from "./types";
+
+interface Props {
+  accounts: readonly HistoricalAccount[];
+  id?: string;
+  number?: string;
+  title?: string;
+  overline: string;
+  overviewTitle: string;
+  summary: string;
+  registerLabel?: string;
+}
+
+const {
+  accounts,
+  id = "the-accounts",
+  number = "07",
+  title = "The Accounts",
+  overline,
+  overviewTitle,
+  summary,
+  registerLabel = "Source register",
+} = Astro.props;
+---
+
+<section id={id} class="content-section accounts-section">
+  <SectionHeading number={number} title={title} />
+
+  <div class="accounts-shell">
+    <header class="accounts-overview">
+      <div class="accounts-overview__intro">
+        <p class="accounts-overline">{overline}</p>
+        <h3>{overviewTitle}</h3>
+      </div>
+
+      <div class="accounts-overview__aside">
+        <p class="accounts-summary">{summary}</p>
+      </div>
+    </header>
+
+    <nav class="accounts-register" aria-label="Accounts included in this section">
+      <p class="accounts-register__label">{registerLabel}</p>
+
+      <div class="accounts-register__scroller">
+        <div class="accounts-register__links">
+          {accounts.map((account) => (
+            <a href={`#account-${account.id}`}>
+              <span>{account.number}</span>
+              <span>
+                <strong>{account.date}</strong>
+                <small>{account.focus}</small>
+              </span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </nav>
+
+    <div class="accounts-list">
+      {accounts.map((account) => (
+        <article
+          id={`account-${account.id}`}
+          class:list={[
+            "account-record",
+            `account-record--${account.tone}`,
+            account.emphasis === "defining" && "account-record--defining",
+          ]}
+          data-number={account.number}
+          aria-labelledby={`account-title-${account.id}`}
+        >
+          <div class="account-record__header">
+            <p class="account-record__label">
+              <span>{account.number}</span>
+              <span class="account-record__rule" aria-hidden="true"></span>
+              {account.sourceType}
+            </p>
+
+            <span class="account-record__date">{account.date}</span>
+          </div>
+
+          <div class="account-record__layout">
+            <div class="account-record__identity">
+              <p class="account-record__focus">{account.focus}</p>
+              <h3 id={`account-title-${account.id}`}>{account.author}</h3>
+              <p class="account-record__work"><cite>{account.work}</cite></p>
+              <p class="account-record__claim">{account.claim}</p>
+            </div>
+
+            <div class="account-record__analysis">
+              <p class="account-record__summary">{account.summary}</p>
+
+              <dl class="account-record__details">
+                {account.details.map((detail) => (
+                  <div>
+                    <dt>{detail.label}</dt>
+                    <dd>{detail.value}</dd>
+                  </div>
+                ))}
+              </dl>
+
+              <div class="account-record__significance">
+                <p>Why it matters</p>
+                <p>{account.significance}</p>
+              </div>
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .content-section {
+    width: min(100%, 1080px);
+    margin: 0 auto;
+    padding: 74px 0 8px;
+    scroll-margin-top: 158px;
+  }
+
+  .accounts-section {
+    padding-bottom: 22px;
+  }
+
+
+  .accounts-shell {
+    position: relative;
+    isolation: isolate;
+
+    overflow: hidden;
+
+    padding:
+      clamp(25px, 4vw, 46px)
+      clamp(20px, 4vw, 44px);
+
+    background:
+      radial-gradient(
+        circle at 7% 4%,
+        rgba(217, 173, 114, 0.14),
+        transparent 31%
+      ),
+      radial-gradient(
+        circle at 94% 9%,
+        rgba(165, 139, 217, 0.12),
+        transparent 31%
+      ),
+      radial-gradient(
+        circle at 89% 96%,
+        rgba(118, 169, 239, 0.12),
+        transparent 34%
+      ),
+      linear-gradient(
+        145deg,
+        rgba(255, 255, 255, 0.79),
+        rgba(246, 249, 255, 0.49)
+      );
+
+    border: 1px solid rgba(255, 255, 255, 0.91);
+    border-radius: clamp(24px, 2.7vw, 34px);
+
+    box-shadow:
+      0 24px 60px rgba(50, 62, 88, 0.10),
+      inset 0 1px 0 rgba(255, 255, 255, 1),
+      inset 0 -1px 0 rgba(55, 65, 88, 0.04);
+
+    backdrop-filter:
+      blur(24px)
+      saturate(150%);
+
+    -webkit-backdrop-filter:
+      blur(24px)
+      saturate(150%);
+  }
+
+
+  .accounts-shell::before {
+    content: "";
+
+    width: 470px;
+    aspect-ratio: 1;
+
+    position: absolute;
+    right: -282px;
+    top: 132px;
+    z-index: -1;
+
+    border: 1px solid rgba(84, 70, 55, 0.09);
+    border-radius: 50%;
+
+    box-shadow:
+      0 0 0 58px rgba(255, 255, 255, 0.045),
+      0 0 0 116px rgba(84, 70, 55, 0.020);
+
+    pointer-events: none;
+  }
+
+
+  .accounts-overview {
+    position: relative;
+    z-index: 1;
+
+    display: grid;
+    grid-template-columns:
+      minmax(0, 1fr)
+      minmax(310px, 0.82fr);
+    align-items: end;
+
+    gap: clamp(24px, 4vw, 56px);
+
+    padding:
+      2px
+      4px
+      clamp(26px, 3.5vw, 38px);
+
+    border-bottom: 1px solid rgba(66, 76, 99, 0.10);
+  }
+
+
+  .accounts-overline {
+    margin: 0 0 10px;
+
+    color: #92784f;
+
+    font-family: var(--font-ui);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+
+  .accounts-overview h3 {
+    max-width: 650px;
+
+    margin: 0;
+
+    color: #1d2029;
+
+    font-size: clamp(25px, 3.1vw, 38px);
+    line-height: 1.25;
+  }
+
+
+  .accounts-overview__aside {
+    min-width: 0;
+  }
+
+
+  .accounts-summary {
+    margin: 0;
+
+    color: #69707f;
+
+    font-family: var(--font-ui);
+    font-size: 14px;
+    line-height: 1.80;
+  }
+
+
+  .accounts-register {
+    position: relative;
+    z-index: 1;
+
+    margin-top: clamp(24px, 3vw, 32px);
+    padding: 10px 11px 10px 16px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 14px;
+
+    background:
+      linear-gradient(
+        145deg,
+        rgba(255, 255, 255, 0.76),
+        rgba(246, 249, 255, 0.50)
+      );
+
+    border: 1px solid rgba(255, 255, 255, 0.88);
+    border-radius: 22px;
+
+    box-shadow:
+      0 12px 30px rgba(50, 62, 88, 0.07),
+      inset 0 1px 0 rgba(255, 255, 255, 0.96);
+  }
+
+
+  .accounts-register__label {
+    flex: 0 0 auto;
+
+    margin: 0;
+    padding-right: 15px;
+
+    color: #8b7a66;
+
+    border-right: 1px solid rgba(65, 75, 99, 0.10);
+
+    font-family: var(--font-ui);
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    line-height: 1.4;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+
+  .accounts-register__scroller {
+    min-width: 0;
+    flex: 1;
+
+    overflow-x: auto;
+    overscroll-behavior-inline: contain;
+
+    scrollbar-width: none;
+
+    mask-image:
+      linear-gradient(
+        to right,
+        transparent,
+        black 10px,
+        black calc(100% - 10px),
+        transparent
+      );
+
+    -webkit-mask-image:
+      linear-gradient(
+        to right,
+        transparent,
+        black 10px,
+        black calc(100% - 10px),
+        transparent
+      );
+  }
+
+
+  .accounts-register__scroller::-webkit-scrollbar {
+    display: none;
+  }
+
+
+  .accounts-register__links {
+    width: max-content;
+    min-width: 100%;
+
+    padding: 0 3px;
+
+    display: flex;
+    align-items: stretch;
+
+    gap: 7px;
+  }
+
+
+  .accounts-register__links a {
+    min-width: 145px;
+
+    padding: 9px 11px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+
+    color: #606775;
+    background: transparent;
+
+    border: 1px solid transparent;
+    border-radius: 15px;
+
+    text-decoration: none;
+
+    transition:
+      color 0.22s ease,
+      background 0.22s ease,
+      border-color 0.22s ease,
+      transform 0.22s var(--ease-out);
+  }
+
+
+  .accounts-register__links a:hover {
+    color: #292e3a;
+    background: rgba(255, 255, 255, 0.56);
+    border-color: rgba(255, 255, 255, 0.82);
+
+    transform: translateY(-1px);
+  }
+
+
+  .accounts-register__links a > span:first-child {
+    width: 27px;
+    aspect-ratio: 1;
+    flex: 0 0 27px;
+
+    display: grid;
+    place-items: center;
+
+    color: #9a7445;
+    background: rgba(217, 173, 114, 0.095);
+
+    border: 1px solid rgba(188, 139, 77, 0.12);
+    border-radius: 50%;
+
+    font-family: var(--font-ui);
+    font-size: 7px;
+    font-weight: 750;
+    letter-spacing: 0.07em;
+  }
+
+
+  .accounts-register__links a > span:last-child {
+    min-width: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 3px;
+  }
+
+
+  .accounts-register__links strong,
+  .accounts-register__links small {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    font-family: var(--font-ui);
+  }
+
+
+  .accounts-register__links strong {
+    color: #4f5664;
+
+    font-size: 8px;
+    font-weight: 750;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+  }
+
+
+  .accounts-register__links small {
+    max-width: 116px;
+
+    color: #9298a5;
+
+    font-size: 8px;
+    font-weight: 600;
+    letter-spacing: 0.025em;
+  }
+
+
+  .accounts-list {
+    position: relative;
+    z-index: 1;
+
+    margin-top: 18px;
+
+    display: grid;
+
+    gap: 18px;
+  }
+
+
+  .account-record {
+    --account-accent: #7a818f;
+    --account-accent-rgb: 122, 129, 143;
+    --account-accent-soft: rgba(122, 129, 143, 0.09);
+    --account-accent-faint: rgba(122, 129, 143, 0.055);
+
+    min-width: 0;
+
+    position: relative;
+    isolation: isolate;
+
+    overflow: hidden;
+
+    padding: clamp(25px, 3.5vw, 39px);
+
+    background:
+      radial-gradient(
+        circle at 97% 2%,
+        var(--account-accent-soft),
+        transparent 33%
+      ),
+      repeating-linear-gradient(
+        to bottom,
+        transparent 0,
+        transparent 27px,
+        rgba(75, 83, 104, 0.018) 28px
+      ),
+      linear-gradient(
+        145deg,
+        rgba(255, 255, 255, 0.82),
+        rgba(247, 248, 252, 0.55)
+      );
+
+    border: 1px solid rgba(255, 255, 255, 0.91);
+    border-radius: clamp(22px, 2.5vw, 30px);
+
+    box-shadow:
+      0 18px 42px rgba(50, 62, 88, 0.085),
+      inset 0 1px 0 rgba(255, 255, 255, 1),
+      inset 0 -1px 0 rgba(55, 65, 88, 0.035);
+
+    scroll-margin-top: 165px;
+
+    transition:
+      transform 0.30s var(--ease-out),
+      box-shadow 0.30s ease;
+  }
+
+
+  .account-record::after {
+    content: attr(data-number);
+
+    position: absolute;
+    right: clamp(14px, 2.5vw, 28px);
+    bottom: clamp(-28px, -2.5vw, -18px);
+    z-index: 0;
+
+    color: var(--account-accent-faint);
+
+    font-family: var(--font-display);
+    font-size: clamp(96px, 13vw, 164px);
+    line-height: 1;
+    letter-spacing: -0.055em;
+
+    pointer-events: none;
+  }
+
+
+  .account-record:hover {
+    transform: translateY(-3px);
+
+    box-shadow:
+      0 24px 52px rgba(50, 62, 88, 0.12),
+      inset 0 1px 0 rgba(255, 255, 255, 1),
+      inset 0 -1px 0 rgba(55, 65, 88, 0.035);
+  }
+
+
+  .account-record--gold {
+    --account-accent: #ad7d42;
+    --account-accent-rgb: 173, 125, 66;
+    --account-accent-soft: rgba(217, 167, 99, 0.14);
+    --account-accent-faint: rgba(173, 125, 66, 0.075);
+  }
+
+
+  .account-record--blue {
+    --account-accent: #6485bd;
+    --account-accent-rgb: 100, 133, 189;
+    --account-accent-soft: rgba(112, 151, 214, 0.12);
+    --account-accent-faint: rgba(100, 133, 189, 0.065);
+  }
+
+
+  .account-record--violet {
+    --account-accent: #816aa6;
+    --account-accent-rgb: 129, 106, 166;
+    --account-accent-soft: rgba(158, 130, 202, 0.13);
+    --account-accent-faint: rgba(129, 106, 166, 0.067);
+  }
+
+
+  .account-record--neutral {
+    --account-accent: #737a87;
+    --account-accent-rgb: 115, 122, 135;
+    --account-accent-soft: rgba(115, 122, 135, 0.09);
+    --account-accent-faint: rgba(115, 122, 135, 0.055);
+  }
+
+
+  .account-record--defining {
+    padding: clamp(29px, 4vw, 46px);
+  }
+
+
+  .account-record--defining .account-record__claim {
+    font-size: clamp(18px, 2vw, 23px);
+  }
+
+
+  .account-record__header {
+    position: relative;
+    z-index: 1;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+
+    gap: 11px 14px;
+  }
+
+
+  .account-record__label {
+    min-width: 0;
+
+    margin: 0;
+
+    display: inline-flex;
+    align-items: center;
+
+    gap: 9px;
+
+    color: #81758b;
+
+    font-family: var(--font-ui);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.13em;
+    line-height: 1.5;
+    text-transform: uppercase;
+  }
+
+
+  .account-record__label > span:first-child {
+    color: var(--account-accent);
+  }
+
+
+  .account-record__rule {
+    width: 22px;
+    height: 1px;
+
+    display: block;
+
+    background:
+      linear-gradient(
+        to right,
+        rgba(var(--account-accent-rgb), 0.44),
+        transparent
+      );
+  }
+
+
+  .account-record__date {
+    display: inline-flex;
+    align-items: center;
+
+    gap: 7px;
+
+    padding: 7px 10px;
+
+    color: var(--account-accent);
+    background: rgba(var(--account-accent-rgb), 0.075);
+
+    border: 1px solid rgba(var(--account-accent-rgb), 0.14);
+    border-radius: 999px;
+
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.82);
+
+    font-family: var(--font-ui);
+    font-size: 8px;
+    font-weight: 750;
+    letter-spacing: 0.10em;
+    line-height: 1;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+
+  .account-record__date::before {
+    content: "";
+
+    width: 6px;
+    aspect-ratio: 1;
+
+    display: block;
+
+    background: var(--account-accent);
+    border-radius: 50%;
+
+    box-shadow: 0 0 0 3px rgba(var(--account-accent-rgb), 0.10);
+  }
+
+
+  .account-record__layout {
+    position: relative;
+    z-index: 1;
+
+    margin-top: clamp(22px, 3vw, 34px);
+
+    display: grid;
+    grid-template-columns:
+      minmax(0, 0.88fr)
+      minmax(330px, 1.12fr);
+    align-items: start;
+
+    gap: clamp(32px, 5vw, 66px);
+  }
+
+
+  .account-record--defining .account-record__layout {
+    grid-template-columns:
+      minmax(0, 0.98fr)
+      minmax(340px, 1.02fr);
+  }
+
+
+  .account-record__identity,
+  .account-record__analysis {
+    min-width: 0;
+  }
+
+
+  .account-record__focus {
+    margin: 0 0 11px;
+
+    color: var(--account-accent);
+
+    font-family: var(--font-ui);
+    font-size: 9px;
+    font-weight: 750;
+    letter-spacing: 0.14em;
+    line-height: 1.45;
+    text-transform: uppercase;
+  }
+
+
+  .account-record h3 {
+    max-width: 610px;
+
+    margin: 0;
+
+    color: #1d2029;
+
+    font-size: clamp(30px, 4vw, 46px);
+    line-height: 1.14;
+  }
+
+
+  .account-record--defining h3 {
+    font-size: clamp(35px, 4.7vw, 54px);
+  }
+
+
+  .account-record__work {
+    margin: 10px 0 0;
+
+    color: #8b909b;
+
+    font-family: var(--font-ui);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.025em;
+    line-height: 1.55;
+  }
+
+
+  .account-record__work cite {
+    font-style: italic;
+  }
+
+
+  .account-record__claim {
+    max-width: 620px;
+
+    margin: clamp(20px, 2.6vw, 29px) 0 0;
+    padding: 0 0 0 18px;
+
+    position: relative;
+
+    color: #454b59;
+
+    font-family: var(--font-ui);
+    font-size: clamp(16px, 1.75vw, 20px);
+    line-height: 1.72;
+    text-wrap: balance;
+  }
+
+
+  .account-record__claim::before {
+    content: "";
+
+    width: 2px;
+
+    position: absolute;
+    top: 5px;
+    bottom: 5px;
+    left: 0;
+
+    background:
+      linear-gradient(
+        to bottom,
+        rgba(var(--account-accent-rgb), 0.72),
+        rgba(var(--account-accent-rgb), 0.18)
+      );
+
+    border-radius: 999px;
+  }
+
+
+  .account-record__summary {
+    margin: 1px 0 0;
+
+    color: #69707f;
+
+    font-family: var(--font-ui);
+    font-size: 14px;
+    line-height: 1.84;
+  }
+
+
+  .account-record__details {
+    margin: clamp(22px, 3vw, 31px) 0 0;
+
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    gap: 10px;
+  }
+
+
+  .account-record__details div {
+    min-width: 0;
+
+    padding: 14px 15px;
+
+    background: rgba(255, 255, 255, 0.43);
+
+    border: 1px solid rgba(255, 255, 255, 0.72);
+    border-radius: 15px;
+
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.82),
+      inset 0 -1px 0 rgba(55, 65, 88, 0.025);
+  }
+
+
+  .account-record__details div:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+  }
+
+
+  .account-record__details dt {
+    color: #949aa6;
+
+    font-family: var(--font-ui);
+    font-size: 7px;
+    font-weight: 750;
+    letter-spacing: 0.12em;
+    line-height: 1.45;
+    text-transform: uppercase;
+  }
+
+
+  .account-record__details dd {
+    margin: 6px 0 0;
+
+    color: #505765;
+
+    font-family: var(--font-ui);
+    font-size: 10px;
+    font-weight: 600;
+    line-height: 1.62;
+  }
+
+
+  .account-record__significance {
+    margin-top: 10px;
+    padding: 16px 17px;
+
+    position: relative;
+
+    background:
+      linear-gradient(
+        135deg,
+        rgba(var(--account-accent-rgb), 0.075),
+        rgba(255, 255, 255, 0.40)
+      );
+
+    border: 1px solid rgba(var(--account-accent-rgb), 0.12);
+    border-radius: 16px;
+
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.78);
+  }
+
+
+  .account-record__significance p:first-child {
+    margin: 0;
+
+    color: var(--account-accent);
+
+    font-family: var(--font-ui);
+    font-size: 7px;
+    font-weight: 750;
+    letter-spacing: 0.13em;
+    line-height: 1.45;
+    text-transform: uppercase;
+  }
+
+
+  .account-record__significance p:last-child {
+    margin: 7px 0 0;
+
+    color: #4d5462;
+
+    font-family: var(--font-ui);
+    font-size: 11px;
+    font-weight: 600;
+    line-height: 1.68;
+  }
+
+
+  @media (max-width: 900px) {
+    .account-record__layout,
+    .account-record--defining .account-record__layout {
+      grid-template-columns: 1fr;
+
+      gap: 28px;
+    }
+  }
+
+
+  @media (max-width: 650px) {
+    .accounts-shell {
+      padding: 22px 15px;
+
+      border-radius: 24px;
+    }
+
+    .accounts-overview {
+      grid-template-columns: 1fr;
+
+      gap: 18px;
+
+      padding:
+        1px
+        3px
+        25px;
+    }
+
+    .accounts-overview h3 {
+      font-size: 26px;
+    }
+
+    .accounts-summary {
+      font-size: 13px;
+    }
+
+    .accounts-register {
+      padding: 8px;
+
+      gap: 7px;
+
+      border-radius: 19px;
+    }
+
+    .accounts-register__label {
+      display: none;
+    }
+
+    .accounts-register__links a {
+      min-width: 138px;
+    }
+
+    .account-record,
+    .account-record--defining {
+      padding: 22px 18px;
+
+      border-radius: 22px;
+
+      scroll-margin-top: 150px;
+    }
+
+    .account-record::after {
+      right: 12px;
+      bottom: -13px;
+
+      font-size: 84px;
+    }
+
+    .account-record__layout {
+      margin-top: 21px;
+      gap: 24px;
+    }
+
+    .account-record h3,
+    .account-record--defining h3 {
+      font-size: 30px;
+    }
+
+    .account-record__claim,
+    .account-record--defining .account-record__claim {
+      margin-top: 18px;
+
+      font-size: 15px;
+      line-height: 1.72;
+    }
+
+    .account-record__summary {
+      font-size: 13px;
+    }
+
+    .account-record__details {
+      grid-template-columns: 1fr;
+    }
+
+    .account-record__details div:last-child:nth-child(odd) {
+      grid-column: auto;
+    }
+  }
+
+
+  /* ---------------------------------- */
+
+  @media (max-width: 650px) {
+    .content-section {
+      padding-top: 54px;
+      scroll-margin-top: 145px;
+    }
+  }
+
+  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    .accounts-shell,
+    .accounts-register,
+    .account-record {
+      background-color: rgba(250, 250, 249, 0.94);
+    }
+  }
+</style>

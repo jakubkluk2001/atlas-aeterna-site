@@ -1,0 +1,1080 @@
+---
+import SectionHeading from "./SectionHeading.astro";
+import type { CulturalContextTopic } from "./types";
+
+interface CulturalHero {
+  image: string | null;
+  alt: string;
+  label: string;
+  fallbackMark?: string;
+  fallbackCopy?: string;
+  caption: string;
+}
+
+interface CulturalReading {
+  overline: string;
+  title: string;
+  copy: string;
+  points: readonly string[];
+}
+
+interface Props {
+  topics: readonly CulturalContextTopic[];
+  hero: CulturalHero;
+  reading: CulturalReading;
+  id?: string;
+  number?: string;
+  title: string;
+  overline: string;
+  overviewTitle: string;
+  summary: string;
+  topicsLabel?: string;
+}
+
+const {
+  topics,
+  hero,
+  reading,
+  id = "cultural-context",
+  number = "06",
+  title,
+  overline,
+  overviewTitle,
+  summary,
+  topicsLabel = "Key aspects of the cultural context",
+} = Astro.props;
+---
+
+<section id={id} class="content-section culture-section" data-cultural-context>
+  <SectionHeading number={number} title={title} />
+
+  <div class="culture-shell">
+    <header class="culture-overview">
+      <div class="culture-overview__intro">
+        <p class="culture-overline">{overline}</p>
+        <h3>{overviewTitle}</h3>
+      </div>
+
+      <div class="culture-overview__aside">
+        <p class="culture-summary">{summary}</p>
+      </div>
+    </header>
+
+    <div class="culture-feature">
+      <figure class="culture-hero">
+        <div class="culture-hero__visual" data-culture-hero-visual>
+          <span class="culture-hero__grid" aria-hidden="true"></span>
+
+          <div class="culture-hero__fallback" aria-hidden="true">
+            <span class="culture-hero__fallback-ring culture-hero__fallback-ring--one"></span>
+            <span class="culture-hero__fallback-ring culture-hero__fallback-ring--two"></span>
+            <span class="culture-hero__fallback-mark">{hero.fallbackMark ?? "?"}</span>
+            <span class="culture-hero__fallback-copy">{hero.fallbackCopy ?? "Image unavailable"}</span>
+          </div>
+
+          {hero.image && (
+            <img
+              src={hero.image}
+              alt={hero.alt}
+              loading="lazy"
+              decoding="async"
+              data-culture-hero-image
+            />
+          )}
+
+          <span class="culture-hero__label">{hero.label}</span>
+          <span class="culture-hero__number" aria-hidden="true">{number}</span>
+        </div>
+
+        <figcaption>{hero.caption}</figcaption>
+      </figure>
+
+      <aside class="culture-reading">
+        <p class="culture-reading__overline">{reading.overline}</p>
+        <h3>{reading.title}</h3>
+
+        <p class="culture-reading__copy">{reading.copy}</p>
+
+        <ul class="culture-reading__points">
+          {reading.points.map((point) => <li>{point}</li>)}
+        </ul>
+      </aside>
+    </div>
+
+    <div class="culture-topics" aria-label={topicsLabel}>
+      {topics.map((topic) => (
+        <article
+          class:list={["culture-topic", `culture-topic--${topic.tone}`]}
+          aria-labelledby={`culture-title-${topic.id}`}
+        >
+          <div class="culture-topic__header">
+            <p class="culture-topic__label">
+              <span>{topic.number}</span>
+              <span class="culture-topic__rule" aria-hidden="true"></span>
+              {topic.eyebrow}
+            </p>
+
+            <span class="culture-topic__node" aria-hidden="true"></span>
+          </div>
+
+          <h3 id={`culture-title-${topic.id}`}>{topic.title}</h3>
+          <p class="culture-topic__description">{topic.description}</p>
+
+          <dl class="culture-topic__details">
+            {topic.details.map((detail) => (
+              <div>
+                <dt>{detail.label}</dt>
+                <dd>{detail.value}</dd>
+              </div>
+            ))}
+          </dl>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script>
+  const culturalContexts = Array.from(
+    document.querySelectorAll("[data-cultural-context]")
+  ).filter((section) => section instanceof HTMLElement);
+
+  culturalContexts.forEach((section) => {
+    const visual = section.querySelector("[data-culture-hero-visual]");
+    if (!(visual instanceof HTMLElement)) return;
+
+    const image = visual.querySelector("[data-culture-hero-image]");
+    if (!(image instanceof HTMLImageElement)) {
+      visual.classList.add("is-missing");
+      return;
+    }
+
+    const markAvailable = () => visual.classList.remove("is-missing");
+    const markMissing = () => visual.classList.add("is-missing");
+
+    image.addEventListener("load", markAvailable);
+    image.addEventListener("error", markMissing);
+
+    if (image.complete) {
+      image.naturalWidth > 0 ? markAvailable() : markMissing();
+    }
+  });
+</script>
+
+<style>
+  .content-section {
+    width: min(100%, 1080px);
+    margin: 0 auto;
+    padding: 74px 0 8px;
+    scroll-margin-top: 158px;
+  }
+
+  .culture-section {
+    padding-bottom: 22px;
+  }
+
+
+  .culture-shell {
+    position: relative;
+    isolation: isolate;
+
+    overflow: hidden;
+
+    padding:
+      clamp(25px, 4vw, 46px)
+      clamp(20px, 4vw, 44px);
+
+    background:
+      radial-gradient(
+        circle at 6% 4%,
+        rgba(218, 166, 94, 0.16),
+        transparent 31%
+      ),
+      radial-gradient(
+        circle at 94% 8%,
+        rgba(118, 169, 239, 0.13),
+        transparent 31%
+      ),
+      radial-gradient(
+        circle at 88% 96%,
+        rgba(165, 139, 217, 0.12),
+        transparent 34%
+      ),
+      linear-gradient(
+        145deg,
+        rgba(255, 255, 255, 0.79),
+        rgba(246, 249, 255, 0.49)
+      );
+
+    border: 1px solid rgba(255, 255, 255, 0.91);
+    border-radius: clamp(24px, 2.7vw, 34px);
+
+    box-shadow:
+      0 24px 60px rgba(50, 62, 88, 0.10),
+      inset 0 1px 0 rgba(255, 255, 255, 1),
+      inset 0 -1px 0 rgba(55, 65, 88, 0.04);
+
+    backdrop-filter:
+      blur(24px)
+      saturate(150%);
+
+    -webkit-backdrop-filter:
+      blur(24px)
+      saturate(150%);
+  }
+
+
+  .culture-shell::before {
+    content: "";
+
+    width: 440px;
+    aspect-ratio: 1;
+
+    position: absolute;
+    right: -258px;
+    top: 126px;
+    z-index: -1;
+
+    border: 1px solid rgba(87, 70, 51, 0.095);
+    border-radius: 50%;
+
+    box-shadow:
+      0 0 0 54px rgba(255, 255, 255, 0.045),
+      0 0 0 108px rgba(87, 70, 51, 0.020);
+
+    pointer-events: none;
+  }
+
+
+  .culture-overview {
+    position: relative;
+    z-index: 1;
+
+    display: grid;
+    grid-template-columns:
+      minmax(0, 1fr)
+      minmax(310px, 0.82fr);
+    align-items: end;
+
+    gap: clamp(24px, 4vw, 56px);
+
+    padding:
+      2px
+      4px
+      clamp(26px, 3.5vw, 38px);
+
+    border-bottom: 1px solid rgba(66, 76, 99, 0.10);
+  }
+
+
+  .culture-overline,
+  .culture-reading__overline {
+    margin: 0 0 10px;
+
+    color: #92784f;
+
+    font-family: var(--font-ui);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+
+  .culture-overview h3 {
+    max-width: 650px;
+
+    margin: 0;
+
+    color: #1d2029;
+
+    font-size: clamp(25px, 3.1vw, 38px);
+    line-height: 1.25;
+  }
+
+
+  .culture-overview__aside {
+    min-width: 0;
+  }
+
+
+  .culture-summary {
+    margin: 0;
+
+    color: #69707f;
+
+    font-family: var(--font-ui);
+    font-size: 14px;
+    line-height: 1.80;
+  }
+
+
+  .culture-feature {
+    position: relative;
+    z-index: 1;
+
+    margin-top: clamp(25px, 3.5vw, 38px);
+    padding: clamp(17px, 2.4vw, 27px);
+
+    display: grid;
+    grid-template-columns:
+      minmax(0, 1.22fr)
+      minmax(285px, 0.78fr);
+    align-items: stretch;
+
+    gap: clamp(24px, 3.5vw, 42px);
+
+    background:
+      linear-gradient(
+        145deg,
+        rgba(255, 255, 255, 0.82),
+        rgba(247, 248, 252, 0.55)
+      );
+
+    border: 1px solid rgba(255, 255, 255, 0.91);
+    border-radius: clamp(22px, 2.5vw, 30px);
+
+    box-shadow:
+      0 18px 42px rgba(50, 62, 88, 0.086),
+      inset 0 1px 0 rgba(255, 255, 255, 1),
+      inset 0 -1px 0 rgba(55, 65, 88, 0.035);
+  }
+
+
+  .culture-hero {
+    min-width: 0;
+
+    margin: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 11px;
+  }
+
+
+  .culture-hero__visual {
+    width: 100%;
+    aspect-ratio: 3 / 2;
+
+    position: relative;
+    isolation: isolate;
+
+    overflow: hidden;
+
+    background:
+      radial-gradient(
+        circle at 22% 16%,
+        rgba(255, 255, 255, 0.70),
+        transparent 30%
+      ),
+      radial-gradient(
+        circle at 78% 78%,
+        rgba(218, 164, 91, 0.22),
+        transparent 42%
+      ),
+      linear-gradient(
+        145deg,
+        rgba(229, 235, 246, 0.92),
+        rgba(244, 239, 233, 0.82)
+      );
+
+    border: 1px solid rgba(255, 255, 255, 0.88);
+    border-radius: clamp(18px, 2vw, 24px);
+
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.96),
+      inset 0 0 46px rgba(82, 96, 127, 0.055);
+  }
+
+
+  .culture-hero__visual::after {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+
+    background:
+      linear-gradient(
+        116deg,
+        rgba(255, 255, 255, 0.38),
+        transparent 24%,
+        transparent 70%,
+        rgba(255, 255, 255, 0.12)
+      ),
+      linear-gradient(
+        to top,
+        rgba(28, 31, 39, 0.20),
+        transparent 34%
+      );
+
+    pointer-events: none;
+  }
+
+
+  .culture-hero__visual img {
+    width: 100%;
+    height: 100%;
+
+    position: relative;
+    z-index: 1;
+
+    display: block;
+
+    object-fit: cover;
+  }
+
+
+  .culture-hero__fallback {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+
+    display: grid;
+    place-items: center;
+
+    opacity: 0;
+    visibility: hidden;
+
+    transition:
+      opacity 0.24s ease,
+      visibility 0.24s ease;
+  }
+
+
+  .culture-hero__visual.is-missing img {
+    display: none;
+  }
+
+
+  .culture-hero__visual.is-missing .culture-hero__fallback {
+    opacity: 1;
+    visibility: visible;
+  }
+
+
+  .culture-hero__fallback-ring {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    display: block;
+
+    border: 1px solid rgba(112, 88, 58, 0.16);
+    border-radius: 50%;
+
+    transform: translate(-50%, -50%);
+  }
+
+
+  .culture-hero__fallback-ring--one {
+    width: 46%;
+    aspect-ratio: 1;
+  }
+
+
+  .culture-hero__fallback-ring--two {
+    width: 67%;
+    height: 31%;
+
+    transform:
+      translate(-50%, -50%)
+      rotate(-14deg);
+  }
+
+
+  .culture-hero__fallback-mark {
+    position: relative;
+    z-index: 1;
+
+    color: rgba(133, 95, 51, 0.20);
+
+    font-family: var(--font-display);
+    font-size: clamp(78px, 10vw, 128px);
+    line-height: 1;
+  }
+
+
+  .culture-hero__fallback-copy {
+    position: absolute;
+    left: 18px;
+    bottom: 17px;
+    z-index: 1;
+
+    color: rgba(70, 66, 62, 0.54);
+
+    font-family: var(--font-ui);
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    line-height: 1.4;
+    text-transform: uppercase;
+  }
+
+
+  .culture-hero__grid {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+
+    display: block;
+
+    opacity: 0.12;
+
+    background-image:
+      linear-gradient(
+        rgba(255, 255, 255, 0.34) 1px,
+        transparent 1px
+      ),
+      linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0.34) 1px,
+        transparent 1px
+      );
+
+    background-size: 48px 48px;
+
+    mask-image:
+      linear-gradient(
+        to bottom,
+        transparent,
+        black 28%,
+        black 78%,
+        transparent
+      );
+
+    -webkit-mask-image:
+      linear-gradient(
+        to bottom,
+        transparent,
+        black 28%,
+        black 78%,
+        transparent
+      );
+
+    pointer-events: none;
+  }
+
+
+  .culture-hero__label {
+    position: absolute;
+    top: 17px;
+    left: 17px;
+    z-index: 4;
+
+    padding: 8px 10px;
+
+    color: rgba(255, 255, 255, 0.90);
+    background: rgba(28, 31, 39, 0.24);
+
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    border-radius: 999px;
+
+    box-shadow:
+      0 8px 18px rgba(30, 34, 46, 0.12),
+      inset 0 1px 0 rgba(255, 255, 255, 0.20);
+
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+
+    font-family: var(--font-ui);
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: 0.13em;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+
+
+  .culture-hero__number {
+    position: absolute;
+    right: 18px;
+    bottom: -15px;
+    z-index: 4;
+
+    color: rgba(255, 255, 255, 0.28);
+
+    font-family: var(--font-display);
+    font-size: clamp(88px, 11vw, 140px);
+    line-height: 1;
+    letter-spacing: -0.055em;
+
+    text-shadow: 0 10px 28px rgba(28, 31, 39, 0.10);
+
+    pointer-events: none;
+  }
+
+
+  .culture-hero figcaption {
+    margin: 0;
+
+    color: #949aa6;
+
+    font-family: var(--font-ui);
+    font-size: 9px;
+    line-height: 1.55;
+    text-align: center;
+  }
+
+
+  .culture-reading {
+    min-width: 0;
+
+    padding:
+      clamp(12px, 2vw, 22px)
+      clamp(3px, 0.8vw, 8px)
+      clamp(7px, 1vw, 12px);
+
+    display: flex;
+    flex-direction: column;
+  }
+
+
+  .culture-reading h3 {
+    margin: 0;
+
+    color: #1d2029;
+
+    font-size: clamp(29px, 3.7vw, 44px);
+    line-height: 1.18;
+  }
+
+
+  .culture-reading__copy {
+    margin: 17px 0 0;
+
+    color: #69707f;
+
+    font-family: var(--font-ui);
+    font-size: 14px;
+    line-height: 1.82;
+  }
+
+
+  .culture-reading__points {
+    margin: auto 0 0;
+    padding: clamp(22px, 3vw, 31px) 0 0;
+
+    list-style: none;
+
+    border-top: 1px solid rgba(65, 75, 99, 0.10);
+  }
+
+
+  .culture-reading__points li {
+    position: relative;
+
+    padding: 11px 0 11px 21px;
+
+    color: #555c69;
+
+    border-bottom: 1px solid rgba(65, 75, 99, 0.065);
+
+    font-family: var(--font-ui);
+    font-size: 11px;
+    font-weight: 600;
+    line-height: 1.65;
+  }
+
+
+  .culture-reading__points li:last-child {
+    padding-bottom: 0;
+    border-bottom: 0;
+  }
+
+
+  .culture-reading__points li::before {
+    content: "";
+
+    width: 7px;
+    aspect-ratio: 1;
+
+    position: absolute;
+    top: 17px;
+    left: 1px;
+
+    background:
+      radial-gradient(
+        circle at 32% 26%,
+        white,
+        rgba(217, 172, 108, 0.82) 48%,
+        rgba(163, 115, 59, 0.72)
+      );
+
+    border: 1px solid rgba(255, 255, 255, 0.94);
+    border-radius: 50%;
+
+    box-shadow:
+      0 0 0 4px rgba(205, 154, 87, 0.075),
+      0 5px 12px rgba(105, 76, 44, 0.13);
+  }
+
+
+  .culture-topics {
+    position: relative;
+    z-index: 1;
+
+    margin-top: 18px;
+
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    gap: 18px;
+  }
+
+
+  .culture-topic {
+    --culture-accent: #858b99;
+    --culture-accent-rgb: 133, 139, 153;
+    --culture-accent-soft: rgba(133, 139, 153, 0.075);
+
+    min-width: 0;
+
+    position: relative;
+    isolation: isolate;
+
+    overflow: hidden;
+
+    padding: clamp(23px, 3vw, 32px);
+
+    background:
+      radial-gradient(
+        circle at 96% 2%,
+        var(--culture-accent-soft),
+        transparent 34%
+      ),
+      linear-gradient(
+        145deg,
+        rgba(255, 255, 255, 0.79),
+        rgba(246, 249, 255, 0.52)
+      );
+
+    border: 1px solid rgba(255, 255, 255, 0.90);
+    border-radius: 24px;
+
+    box-shadow:
+      0 14px 34px rgba(50, 62, 88, 0.078),
+      inset 0 1px 0 rgba(255, 255, 255, 1),
+      inset 0 -1px 0 rgba(55, 65, 88, 0.035);
+
+    transition:
+      transform 0.30s var(--ease-out),
+      box-shadow 0.30s ease;
+  }
+
+
+  .culture-topic:hover {
+    transform: translateY(-3px);
+
+    box-shadow:
+      0 21px 44px rgba(50, 62, 88, 0.115),
+      inset 0 1px 0 rgba(255, 255, 255, 1),
+      inset 0 -1px 0 rgba(55, 65, 88, 0.035);
+  }
+
+
+  .culture-topic--gold {
+    --culture-accent: #a9783e;
+    --culture-accent-rgb: 190, 142, 78;
+    --culture-accent-soft: rgba(211, 162, 94, 0.12);
+  }
+
+
+  .culture-topic--blue {
+    --culture-accent: #6483ba;
+    --culture-accent-rgb: 100, 131, 186;
+    --culture-accent-soft: rgba(105, 145, 209, 0.10);
+  }
+
+
+  .culture-topic--violet {
+    --culture-accent: #826ca6;
+    --culture-accent-rgb: 130, 108, 166;
+    --culture-accent-soft: rgba(152, 126, 194, 0.10);
+  }
+
+
+  .culture-topic--neutral {
+    --culture-accent: #747b88;
+    --culture-accent-rgb: 116, 123, 136;
+    --culture-accent-soft: rgba(116, 123, 136, 0.085);
+  }
+
+
+  .culture-topic__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 16px;
+  }
+
+
+  .culture-topic__label {
+    min-width: 0;
+
+    margin: 0;
+
+    display: inline-flex;
+    align-items: center;
+
+    gap: 9px;
+
+    color: #81768b;
+
+    font-family: var(--font-ui);
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    line-height: 1.5;
+    text-transform: uppercase;
+  }
+
+
+  .culture-topic__label > span:first-child {
+    color: var(--culture-accent);
+  }
+
+
+  .culture-topic__rule {
+    width: 22px;
+    height: 1px;
+
+    display: block;
+
+    background:
+      linear-gradient(
+        to right,
+        rgba(var(--culture-accent-rgb), 0.42),
+        transparent
+      );
+  }
+
+
+  .culture-topic__node {
+    width: 9px;
+    aspect-ratio: 1;
+    flex: 0 0 9px;
+
+    display: block;
+
+    background:
+      radial-gradient(
+        circle at 32% 26%,
+        white,
+        rgba(var(--culture-accent-rgb), 0.34) 48%,
+        var(--culture-accent)
+      );
+
+    border: 1px solid rgba(255, 255, 255, 0.94);
+    border-radius: 50%;
+
+    box-shadow:
+      0 0 0 4px rgba(var(--culture-accent-rgb), 0.065),
+      0 6px 13px rgba(69, 79, 105, 0.13);
+  }
+
+
+  .culture-topic h3 {
+    margin: 19px 0 0;
+
+    color: #1e212b;
+
+    font-size: clamp(25px, 3vw, 35px);
+    line-height: 1.22;
+  }
+
+
+  .culture-topic__description {
+    margin: 13px 0 0;
+
+    color: #69707f;
+
+    font-family: var(--font-ui);
+    font-size: 13px;
+    line-height: 1.82;
+  }
+
+
+  .culture-topic__details {
+    margin: 22px 0 0;
+    padding: 12px 0 0;
+
+    border-top: 1px solid rgba(65, 75, 99, 0.10);
+  }
+
+
+  .culture-topic__details div {
+    display: grid;
+    grid-template-columns: minmax(92px, 0.66fr) minmax(0, 1.34fr);
+    align-items: baseline;
+
+    gap: 14px;
+
+    padding: 8px 0;
+
+    border-bottom: 1px solid rgba(65, 75, 99, 0.065);
+  }
+
+
+  .culture-topic__details div:last-child {
+    padding-bottom: 0;
+    border-bottom: 0;
+  }
+
+
+  .culture-topic__details dt {
+    color: #9298a5;
+
+    font-family: var(--font-ui);
+    font-size: 7px;
+    font-weight: 700;
+    letter-spacing: 0.11em;
+    line-height: 1.45;
+    text-transform: uppercase;
+  }
+
+
+  .culture-topic__details dd {
+    margin: 0;
+
+    color: #4f5563;
+
+    font-family: var(--font-ui);
+    font-size: 10px;
+    font-weight: 600;
+    line-height: 1.60;
+    text-align: right;
+  }
+
+
+  @media (max-width: 900px) {
+    .culture-feature {
+      grid-template-columns: 1fr;
+    }
+
+    .culture-reading {
+      padding: 4px 5px 7px;
+    }
+
+    .culture-reading__points {
+      margin-top: 27px;
+    }
+  }
+
+
+  @media (max-width: 650px) {
+    .culture-shell {
+      padding: 22px 15px;
+
+      border-radius: 24px;
+    }
+
+    .culture-overview {
+      grid-template-columns: 1fr;
+
+      gap: 18px;
+
+      padding:
+        1px
+        3px
+        25px;
+    }
+
+    .culture-overview h3 {
+      font-size: 26px;
+    }
+
+    .culture-summary {
+      font-size: 13px;
+    }
+
+    .culture-feature {
+      padding: 14px;
+      gap: 21px;
+
+      border-radius: 22px;
+    }
+
+    .culture-hero__visual {
+      border-radius: 18px;
+    }
+
+    .culture-hero__grid {
+      background-size: 34px 34px;
+    }
+
+    .culture-hero__label {
+      top: 12px;
+      left: 12px;
+    }
+
+    .culture-hero__number {
+      right: 12px;
+      bottom: -8px;
+
+      font-size: 78px;
+    }
+
+    .culture-reading {
+      padding: 5px 5px 3px;
+    }
+
+    .culture-reading h3 {
+      font-size: 29px;
+    }
+
+    .culture-reading__copy {
+      font-size: 13px;
+    }
+
+    .culture-topics {
+      grid-template-columns: 1fr;
+
+      gap: 15px;
+    }
+
+    .culture-topic {
+      padding: 22px 18px;
+
+      border-radius: 22px;
+    }
+
+    .culture-topic h3 {
+      font-size: 27px;
+    }
+
+    .culture-topic__description {
+      font-size: 13px;
+    }
+
+    .culture-topic__details div {
+      grid-template-columns: 1fr;
+
+      gap: 4px;
+    }
+
+    .culture-topic__details dd {
+      text-align: left;
+    }
+  }
+
+
+  /* ---------------------------------- */
+
+  @media (max-width: 650px) {
+    .content-section {
+      padding-top: 54px;
+      scroll-margin-top: 145px;
+    }
+  }
+
+  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    .culture-shell,
+    .culture-feature,
+    .culture-topic {
+      background-color: rgba(250, 250, 249, 0.94);
+    }
+  }
+</style>

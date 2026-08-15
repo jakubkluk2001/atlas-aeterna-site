@@ -1,0 +1,1761 @@
+---
+import SectionHeading from "./SectionHeading.astro";
+import type { KeyFigure } from "./types";
+
+interface Props {
+  figures: readonly KeyFigure[];
+  id?: string;
+  number?: string;
+  title?: string;
+  overline: string;
+  overviewTitle: string;
+  summary: string;
+  interactionNote?: string;
+}
+
+const {
+  figures,
+  id = "key-figures",
+  number = "08",
+  title = "Key Figures",
+  overline,
+  overviewTitle,
+  summary,
+  interactionNote = "Swipe the gallery or use the arrows. Open a profile for the fuller case connection.",
+} = Astro.props;
+
+const initialEnd = Math.min(3, figures.length);
+const initialRange = figures.length === 0
+  ? "00"
+  : initialEnd === 1
+    ? "01"
+    : `01–${String(initialEnd).padStart(2, "0")}`;
+---
+
+<section id={id} class="content-section figures-section">
+  <SectionHeading number={number} title={title} />
+
+  <div class="figures-shell" data-key-figures>
+    <header class="figures-overview">
+      <div class="figures-overview__intro">
+        <p class="figures-overline">{overline}</p>
+        <h3>{overviewTitle}</h3>
+      </div>
+
+      <div class="figures-overview__aside">
+        <p class="figures-summary">{summary}</p>
+      </div>
+    </header>
+
+    <div class="figures-toolbar">
+      <div class="figures-navigation" aria-label="Key figures carousel controls">
+        <p class="figures-counter" aria-live="polite" aria-atomic="true">
+          <span data-figures-range>{initialRange}</span>
+          <span aria-hidden="true">/</span>
+          <span data-figures-total>{figures.length}</span>
+        </p>
+
+        <button
+          class="figures-arrow figures-arrow--previous"
+          type="button"
+          aria-label="Show previous key figure"
+          data-figures-previous
+          disabled
+        >
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M14.5 6.5 9 12l5.5 5.5" />
+          </svg>
+        </button>
+
+        <button
+          class="figures-arrow figures-arrow--next"
+          type="button"
+          aria-label="Show next key figure"
+          data-figures-next
+          disabled={figures.length <= 1}
+        >
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="m9.5 6.5 5.5 5.5-5.5 5.5" />
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <div
+      class="figures-scroller"
+      data-figures-scroller
+      tabindex="0"
+      aria-label="Key figure cards. Swipe horizontally or use the arrow controls."
+    >
+      <div class="figures-track" data-figures-track>
+        {figures.map((figure) => (
+          <article
+            id={`figure-${figure.id}`}
+            class:list={["figure-card", `figure-card--${figure.tone}`]}
+            data-figure-card
+            aria-labelledby={`figure-title-${figure.id}`}
+          >
+            <div class="figure-portrait" data-figure-portrait>
+              <div class="figure-portrait__fallback" aria-hidden="true">
+                <span class="figure-portrait__grid"></span>
+                <span class="figure-portrait__ring figure-portrait__ring--one"></span>
+                <span class="figure-portrait__ring figure-portrait__ring--two"></span>
+                <span class="figure-portrait__initials">{figure.initials}</span>
+                <span class="figure-portrait__fallback-label">Portrait unavailable</span>
+              </div>
+
+              {figure.image && (
+                <img
+                  src={figure.image}
+                  alt={figure.alt}
+                  loading="lazy"
+                  decoding="async"
+                  data-figure-image
+                />
+              )}
+
+              <span class="figure-portrait__number" aria-hidden="true">{figure.number}</span>
+            </div>
+
+            <div class="figure-card__body">
+              <p class="figure-card__role">
+                <span>{figure.number}</span>
+                <span class="figure-card__rule" aria-hidden="true"></span>
+                {figure.role}
+              </p>
+
+              <h3 id={`figure-title-${figure.id}`}>{figure.name}</h3>
+              <p class="figure-card__dates">{figure.dates}</p>
+              <p class="figure-card__summary">{figure.summary}</p>
+
+              <button
+                class="figure-card__profile-button"
+                type="button"
+                data-figure-open={`figure-dialog-${figure.id}`}
+                aria-haspopup="dialog"
+                aria-controls={`figure-dialog-${figure.id}`}
+              >
+                <span>View profile</span>
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M5 12h13M13 7l5 5-5 5" />
+                </svg>
+              </button>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+
+    <p class="figures-interaction-note">{interactionNote}</p>
+  </div>
+
+  {figures.map((figure) => (
+    <dialog
+      class:list={["figure-dialog", `figure-dialog--${figure.tone}`]}
+      id={`figure-dialog-${figure.id}`}
+      data-figure-dialog
+      aria-labelledby={`figure-dialog-title-${figure.id}`}
+      aria-describedby={`figure-dialog-copy-${figure.id}`}
+    >
+      <div class="figure-dialog__panel">
+        <button
+          class="figure-dialog__close"
+          type="button"
+          aria-label={`Close ${figure.name} profile`}
+          data-figure-close
+        >
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="m7 7 10 10M17 7 7 17" />
+          </svg>
+        </button>
+
+        <div class="figure-dialog__visual">
+          <div class="figure-dialog__portrait" data-figure-portrait>
+            <div class="figure-portrait__fallback" aria-hidden="true">
+              <span class="figure-portrait__grid"></span>
+              <span class="figure-portrait__ring figure-portrait__ring--one"></span>
+              <span class="figure-portrait__ring figure-portrait__ring--two"></span>
+              <span class="figure-portrait__initials">{figure.initials}</span>
+              <span class="figure-portrait__fallback-label">Portrait unavailable</span>
+            </div>
+
+            {figure.image && (
+              <img
+                src={figure.image}
+                alt={figure.alt}
+                loading="lazy"
+                decoding="async"
+                data-figure-image
+              />
+            )}
+
+            <span class="figure-dialog__number" aria-hidden="true">{figure.number}</span>
+          </div>
+        </div>
+
+        <div class="figure-dialog__content">
+          <p class="figure-dialog__eyebrow">Key figure {figure.number}</p>
+          <h3 id={`figure-dialog-title-${figure.id}`}>{figure.name}</h3>
+
+          <p class="figure-dialog__meta">
+            <span>{figure.dates}</span>
+            <span aria-hidden="true"></span>
+            <span>{figure.role}</span>
+          </p>
+
+          <p class="figure-dialog__copy" id={`figure-dialog-copy-${figure.id}`}>
+            {figure.profile}
+          </p>
+
+          <dl class="figure-dialog__details">
+            {figure.details.map((detail) => (
+              <div>
+                <dt>{detail.label}</dt>
+                <dd>{detail.value}</dd>
+              </div>
+            ))}
+          </dl>
+
+          <div class="figure-dialog__references">
+            <p>Related records</p>
+            <div>
+              {figure.references.map((reference) => (
+                <a href={reference.href} data-figure-reference>
+                  <span>{reference.label}</span>
+                  <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="M5 12h13M13 7l5 5-5 5" />
+                  </svg>
+                </a>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </dialog>
+  ))}
+</section>
+
+<script>
+  const figurePrefersReducedMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+  ).matches;
+
+  const figureScrollBehavior: ScrollBehavior = figurePrefersReducedMotion
+    ? "auto"
+    : "smooth";
+
+  const figurePortraits = Array.from(
+    document.querySelectorAll("[data-figure-portrait]")
+  ).filter((portrait) => portrait instanceof HTMLElement);
+
+  figurePortraits.forEach((portrait) => {
+    const image = portrait.querySelector("[data-figure-image]");
+
+    if (!(image instanceof HTMLImageElement)) {
+      portrait.classList.add("is-missing");
+      return;
+    }
+
+    const markAvailable = () => portrait.classList.remove("is-missing");
+    const markMissing = () => portrait.classList.add("is-missing");
+
+    image.addEventListener("load", markAvailable);
+    image.addEventListener("error", markMissing);
+
+    if (image.complete) {
+      image.naturalWidth > 0 ? markAvailable() : markMissing();
+    }
+  });
+
+  const keyFigureSections = Array.from(
+    document.querySelectorAll("[data-key-figures]")
+  ).filter((section) => section instanceof HTMLElement);
+
+  keyFigureSections.forEach((keyFigures) => {
+    const scroller = keyFigures.querySelector("[data-figures-scroller]");
+    const track = keyFigures.querySelector("[data-figures-track]");
+    const previousButton = keyFigures.querySelector("[data-figures-previous]");
+    const nextButton = keyFigures.querySelector("[data-figures-next]");
+    const rangeLabel = keyFigures.querySelector("[data-figures-range]");
+
+    const cards = Array.from(
+      keyFigures.querySelectorAll("[data-figure-card]")
+    ).filter((card) => card instanceof HTMLElement);
+
+    let carouselFrame = 0;
+
+    const getSubstantiallyVisibleCards = () => {
+      if (!(scroller instanceof HTMLElement)) return [];
+      const viewport = scroller.getBoundingClientRect();
+
+      return cards.filter((card) => {
+        const rect = card.getBoundingClientRect();
+        const overlap =
+          Math.min(rect.right, viewport.right) -
+          Math.max(rect.left, viewport.left);
+
+        return overlap >= Math.min(rect.width * 0.55, 120);
+      });
+    };
+
+    const updateCarousel = () => {
+      carouselFrame = 0;
+      if (!(scroller instanceof HTMLElement)) return;
+
+      const substantiallyVisible = getSubstantiallyVisibleCards();
+      const firstVisible = substantiallyVisible[0] ?? cards[0];
+      const lastVisible =
+        substantiallyVisible[substantiallyVisible.length - 1] ?? firstVisible;
+
+      const firstIndex = firstVisible ? cards.indexOf(firstVisible) + 1 : 0;
+      const lastIndex = lastVisible ? cards.indexOf(lastVisible) + 1 : firstIndex;
+
+      if (rangeLabel instanceof HTMLElement) {
+        rangeLabel.textContent =
+          firstIndex === lastIndex
+            ? String(firstIndex).padStart(2, "0")
+            : `${String(firstIndex).padStart(2, "0")}–${String(lastIndex).padStart(2, "0")}`;
+      }
+
+      const canScrollLeft = scroller.scrollLeft > 2;
+      const canScrollRight =
+        scroller.scrollLeft + scroller.clientWidth < scroller.scrollWidth - 2;
+
+      if (previousButton instanceof HTMLButtonElement) {
+        previousButton.disabled = !canScrollLeft;
+      }
+
+      if (nextButton instanceof HTMLButtonElement) {
+        nextButton.disabled = !canScrollRight;
+      }
+    };
+
+    const requestCarouselUpdate = () => {
+      if (carouselFrame !== 0) return;
+      carouselFrame = window.requestAnimationFrame(updateCarousel);
+    };
+
+    const moveCarousel = (direction: -1 | 1) => {
+      if (!(scroller instanceof HTMLElement) || cards.length === 0) return;
+
+      const substantial = getSubstantiallyVisibleCards();
+      const anchorCard = substantial[0] ?? cards[0];
+      const anchorIndex = Math.max(0, cards.indexOf(anchorCard));
+      const targetIndex = Math.min(
+        cards.length - 1,
+        Math.max(0, anchorIndex + direction)
+      );
+      const target = cards[targetIndex];
+
+      if (!(target instanceof HTMLElement) || !(track instanceof HTMLElement)) return;
+
+      scroller.scrollTo({
+        left: target.offsetLeft - track.offsetLeft,
+        behavior: figureScrollBehavior,
+      });
+    };
+
+    if (previousButton instanceof HTMLButtonElement) {
+      previousButton.addEventListener("click", () => moveCarousel(-1));
+    }
+
+    if (nextButton instanceof HTMLButtonElement) {
+      nextButton.addEventListener("click", () => moveCarousel(1));
+    }
+
+    if (scroller instanceof HTMLElement) {
+      scroller.addEventListener("scroll", requestCarouselUpdate, { passive: true });
+      scroller.addEventListener("keydown", (event) => {
+        if (event.key === "ArrowLeft") {
+          event.preventDefault();
+          moveCarousel(-1);
+        }
+        if (event.key === "ArrowRight") {
+          event.preventDefault();
+          moveCarousel(1);
+        }
+      });
+    }
+
+    if ("ResizeObserver" in window) {
+      const figuresResizeObserver = new ResizeObserver(requestCarouselUpdate);
+      figuresResizeObserver.observe(keyFigures);
+      if (scroller instanceof HTMLElement) figuresResizeObserver.observe(scroller);
+    }
+
+    window.addEventListener("load", requestCarouselUpdate);
+    updateCarousel();
+  });
+
+  const profileButtons = Array.from(
+    document.querySelectorAll("[data-figure-open]")
+  ).filter((button) => button instanceof HTMLButtonElement);
+
+  const figureDialogs = Array.from(
+    document.querySelectorAll("[data-figure-dialog]")
+  ).filter((dialog) => dialog instanceof HTMLDialogElement);
+
+  const closeFigureDialog = (dialog: HTMLDialogElement) => {
+    dialog.close();
+    document.documentElement.classList.remove("figure-dialog-open");
+  };
+
+  profileButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const dialogId = button.dataset.figureOpen;
+      const dialog = dialogId ? document.getElementById(dialogId) : null;
+      if (!(dialog instanceof HTMLDialogElement)) return;
+
+      document.documentElement.classList.add("figure-dialog-open");
+      dialog.showModal();
+    });
+  });
+
+  figureDialogs.forEach((dialog) => {
+    const closeButton = dialog.querySelector("[data-figure-close]");
+    const references = dialog.querySelectorAll("[data-figure-reference]");
+
+    if (closeButton instanceof HTMLButtonElement) {
+      closeButton.addEventListener("click", () => closeFigureDialog(dialog));
+    }
+
+    dialog.addEventListener("click", (event) => {
+      if (event.target === dialog) closeFigureDialog(dialog);
+    });
+
+    dialog.addEventListener("close", () => {
+      document.documentElement.classList.remove("figure-dialog-open");
+    });
+
+    references.forEach((reference) => {
+      reference.addEventListener("click", () => closeFigureDialog(dialog));
+    });
+  });
+</script>
+
+<style>
+  .content-section {
+    width: min(100%, 1080px);
+    margin: 0 auto;
+    padding: 74px 0 8px;
+    scroll-margin-top: 158px;
+  }
+
+  .figures-section {
+    padding-bottom: 22px;
+  }
+
+
+  .figures-shell {
+    position: relative;
+    isolation: isolate;
+
+    overflow: hidden;
+
+    padding:
+      clamp(25px, 4vw, 46px)
+      clamp(20px, 4vw, 44px)
+      clamp(28px, 4.2vw, 48px);
+
+    background:
+      radial-gradient(
+        circle at 7% 4%,
+        rgba(118, 169, 239, 0.14),
+        transparent 31%
+      ),
+      radial-gradient(
+        circle at 94% 8%,
+        rgba(217, 173, 114, 0.14),
+        transparent 31%
+      ),
+      radial-gradient(
+        circle at 89% 97%,
+        rgba(165, 139, 217, 0.12),
+        transparent 34%
+      ),
+      linear-gradient(
+        145deg,
+        rgba(255, 255, 255, 0.79),
+        rgba(246, 249, 255, 0.49)
+      );
+
+    border: 1px solid rgba(255, 255, 255, 0.91);
+    border-radius: clamp(24px, 2.7vw, 34px);
+
+    box-shadow:
+      0 24px 60px rgba(50, 62, 88, 0.10),
+      inset 0 1px 0 rgba(255, 255, 255, 1),
+      inset 0 -1px 0 rgba(55, 65, 88, 0.04);
+
+    backdrop-filter:
+      blur(24px)
+      saturate(150%);
+
+    -webkit-backdrop-filter:
+      blur(24px)
+      saturate(150%);
+  }
+
+
+  .figures-shell::before {
+    content: "";
+
+    width: 450px;
+    aspect-ratio: 1;
+
+    position: absolute;
+    right: -270px;
+    top: 145px;
+    z-index: -1;
+
+    border: 1px solid rgba(81, 70, 60, 0.09);
+    border-radius: 50%;
+
+    box-shadow:
+      0 0 0 56px rgba(255, 255, 255, 0.045),
+      0 0 0 112px rgba(81, 70, 60, 0.020);
+
+    pointer-events: none;
+  }
+
+
+  .figures-overview {
+    position: relative;
+    z-index: 1;
+
+    display: grid;
+    grid-template-columns:
+      minmax(0, 1fr)
+      minmax(310px, 0.82fr);
+    align-items: end;
+
+    gap: clamp(24px, 4vw, 56px);
+
+    padding:
+      2px
+      4px
+      clamp(26px, 3.5vw, 38px);
+
+    border-bottom: 1px solid rgba(66, 76, 99, 0.10);
+  }
+
+
+  .figures-overline {
+    margin: 0 0 10px;
+
+    color: #92784f;
+
+    font-family: var(--font-ui);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+
+  .figures-overview h3 {
+    max-width: 650px;
+
+    margin: 0;
+
+    color: #1d2029;
+
+    font-size: clamp(25px, 3.1vw, 38px);
+    line-height: 1.25;
+  }
+
+
+  .figures-overview__aside {
+    min-width: 0;
+  }
+
+
+  .figures-summary {
+    margin: 0;
+
+    color: #69707f;
+
+    font-family: var(--font-ui);
+    font-size: 14px;
+    line-height: 1.80;
+  }
+
+
+  .figures-toolbar {
+    position: relative;
+    z-index: 2;
+
+    margin-top: clamp(24px, 3vw, 32px);
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    gap: 18px;
+  }
+
+
+  .figures-navigation {
+    flex: 0 0 auto;
+
+    display: flex;
+    align-items: center;
+
+    gap: 7px;
+  }
+
+
+  .figures-counter {
+    min-width: 74px;
+
+    margin: 0 5px 0 0;
+
+    display: inline-flex;
+    align-items: baseline;
+    justify-content: flex-end;
+
+    gap: 5px;
+
+    color: #8d94a2;
+
+    font-family: var(--font-ui);
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: 0.09em;
+    line-height: 1;
+  }
+
+
+  .figures-counter span:first-child {
+    color: #4f5664;
+
+    font-size: 10px;
+  }
+
+
+  .figures-arrow {
+    width: 36px;
+    aspect-ratio: 1;
+
+    padding: 0;
+
+    display: grid;
+    place-items: center;
+
+    color: #5f6776;
+    background:
+      linear-gradient(
+        145deg,
+        rgba(255, 255, 255, 0.86),
+        rgba(239, 243, 250, 0.64)
+      );
+
+    border: 1px solid rgba(255, 255, 255, 0.92);
+    border-radius: 50%;
+
+    box-shadow:
+      0 9px 20px rgba(51, 63, 91, 0.10),
+      inset 0 1px 0 rgba(255, 255, 255, 1);
+
+    cursor: pointer;
+
+    transition:
+      color 0.20s ease,
+      background 0.20s ease,
+      opacity 0.20s ease,
+      transform 0.20s var(--ease-out);
+  }
+
+
+  .figures-arrow:hover:not(:disabled) {
+    color: #252b37;
+    background: rgba(255, 255, 255, 0.96);
+
+    transform: scale(1.04);
+  }
+
+
+  .figures-arrow:disabled {
+    opacity: 0.34;
+    cursor: default;
+  }
+
+
+  .figures-arrow svg {
+    width: 16px;
+    height: 16px;
+  }
+
+
+  .figures-arrow path {
+    stroke: currentColor;
+    stroke-width: 1.75;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+
+  .figures-scroller {
+    position: relative;
+    z-index: 1;
+
+    margin-top: 18px;
+    padding: 3px 3px 18px;
+
+    overflow-x: auto;
+    overscroll-behavior-inline: contain;
+
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: 3px;
+    scrollbar-width: none;
+
+    mask-image:
+      linear-gradient(
+        to right,
+        black 0,
+        black calc(100% - 18px),
+        transparent
+      );
+
+    -webkit-mask-image:
+      linear-gradient(
+        to right,
+        black 0,
+        black calc(100% - 18px),
+        transparent
+      );
+  }
+
+
+  .figures-scroller::-webkit-scrollbar {
+    display: none;
+  }
+
+
+  .figures-track {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: calc((100% - 36px) / 3);
+
+    gap: 18px;
+  }
+
+
+  .figure-card {
+    --figure-accent: #7a818f;
+    --figure-accent-rgb: 122, 129, 143;
+    --figure-accent-soft: rgba(122, 129, 143, 0.10);
+    --figure-accent-faint: rgba(122, 129, 143, 0.060);
+
+    min-width: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    overflow: hidden;
+
+    background:
+      radial-gradient(
+        circle at 93% 4%,
+        var(--figure-accent-soft),
+        transparent 34%
+      ),
+      linear-gradient(
+        145deg,
+        rgba(255, 255, 255, 0.82),
+        rgba(247, 248, 252, 0.55)
+      );
+
+    border: 1px solid rgba(255, 255, 255, 0.91);
+    border-radius: 25px;
+
+    box-shadow:
+      0 16px 38px rgba(50, 62, 88, 0.085),
+      inset 0 1px 0 rgba(255, 255, 255, 1),
+      inset 0 -1px 0 rgba(55, 65, 88, 0.035);
+
+    scroll-snap-align: start;
+
+    transition:
+      transform 0.30s var(--ease-out),
+      box-shadow 0.30s ease;
+  }
+
+
+  .figure-card:hover {
+    transform: translateY(-3px);
+
+    box-shadow:
+      0 23px 49px rgba(50, 62, 88, 0.12),
+      inset 0 1px 0 rgba(255, 255, 255, 1),
+      inset 0 -1px 0 rgba(55, 65, 88, 0.035);
+  }
+
+
+  .figure-card--gold,
+  .figure-dialog--gold {
+    --figure-accent: #ad7d42;
+    --figure-accent-rgb: 173, 125, 66;
+    --figure-accent-soft: rgba(217, 167, 99, 0.15);
+    --figure-accent-faint: rgba(173, 125, 66, 0.078);
+  }
+
+
+  .figure-card--blue,
+  .figure-dialog--blue {
+    --figure-accent: #6485bd;
+    --figure-accent-rgb: 100, 133, 189;
+    --figure-accent-soft: rgba(112, 151, 214, 0.13);
+    --figure-accent-faint: rgba(100, 133, 189, 0.067);
+  }
+
+
+  .figure-card--violet,
+  .figure-dialog--violet {
+    --figure-accent: #816aa6;
+    --figure-accent-rgb: 129, 106, 166;
+    --figure-accent-soft: rgba(158, 130, 202, 0.14);
+    --figure-accent-faint: rgba(129, 106, 166, 0.069);
+  }
+
+
+  .figure-card--neutral,
+  .figure-dialog--neutral {
+    --figure-accent: #737a87;
+    --figure-accent-rgb: 115, 122, 135;
+    --figure-accent-soft: rgba(115, 122, 135, 0.10);
+    --figure-accent-faint: rgba(115, 122, 135, 0.057);
+  }
+
+
+  .figure-portrait,
+  .figure-dialog__portrait {
+    width: 100%;
+    aspect-ratio: 4 / 5;
+
+    position: relative;
+    isolation: isolate;
+
+    overflow: hidden;
+
+    background:
+      radial-gradient(
+        circle at 22% 14%,
+        rgba(255, 255, 255, 0.78),
+        transparent 31%
+      ),
+      radial-gradient(
+        circle at 80% 78%,
+        var(--figure-accent-soft),
+        transparent 44%
+      ),
+      linear-gradient(
+        145deg,
+        rgba(231, 237, 247, 0.94),
+        rgba(244, 242, 239, 0.82)
+      );
+
+    border-bottom: 1px solid rgba(255, 255, 255, 0.84);
+  }
+
+
+  .figure-portrait::after,
+  .figure-dialog__portrait::after {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+
+    background:
+      linear-gradient(
+        118deg,
+        rgba(255, 255, 255, 0.34),
+        transparent 24%,
+        transparent 71%,
+        rgba(255, 255, 255, 0.12)
+      ),
+      linear-gradient(
+        to top,
+        rgba(27, 31, 42, 0.12),
+        transparent 31%
+      );
+
+    pointer-events: none;
+  }
+
+
+  .figure-portrait img,
+  .figure-dialog__portrait img {
+    width: 100%;
+    height: 100%;
+
+    position: relative;
+    z-index: 2;
+
+    display: block;
+
+    object-fit: cover;
+
+    filter:
+      saturate(0.82)
+      contrast(1.02)
+      sepia(0.05);
+
+    transition:
+      opacity 0.22s ease,
+      transform 0.55s var(--ease-out);
+  }
+
+
+  .figure-card:hover .figure-portrait img {
+    transform: scale(1.025);
+  }
+
+
+  .figure-portrait.is-missing img,
+  .figure-dialog__portrait.is-missing img {
+    opacity: 0;
+  }
+
+
+  .figure-portrait__fallback {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+
+    overflow: hidden;
+  }
+
+
+  .figure-portrait__grid {
+    position: absolute;
+    inset: 0;
+
+    opacity: 0.24;
+
+    background-image:
+      linear-gradient(
+        rgba(67, 76, 99, 0.11) 1px,
+        transparent 1px
+      ),
+      linear-gradient(
+        90deg,
+        rgba(67, 76, 99, 0.11) 1px,
+        transparent 1px
+      );
+
+    background-size: 38px 38px;
+
+    mask-image:
+      radial-gradient(
+        circle at 52% 47%,
+        black,
+        transparent 79%
+      );
+
+    -webkit-mask-image:
+      radial-gradient(
+        circle at 52% 47%,
+        black,
+        transparent 79%
+      );
+  }
+
+
+  .figure-portrait__ring {
+    position: absolute;
+    top: 47%;
+    left: 52%;
+
+    display: block;
+
+    border: 1px solid rgba(var(--figure-accent-rgb), 0.20);
+    border-radius: 50%;
+
+    transform: translate(-50%, -50%);
+  }
+
+
+  .figure-portrait__ring--one {
+    width: 57%;
+    aspect-ratio: 1;
+  }
+
+
+  .figure-portrait__ring--two {
+    width: 76%;
+    height: 28%;
+
+    transform:
+      translate(-50%, -50%)
+      rotate(-16deg);
+  }
+
+
+  .figure-portrait__initials {
+    position: absolute;
+    top: 49%;
+    left: 50%;
+
+    color: rgba(var(--figure-accent-rgb), 0.46);
+
+    font-family: var(--font-display);
+    font-size: clamp(56px, 7vw, 82px);
+    line-height: 1;
+    letter-spacing: 0.03em;
+
+    transform: translate(-50%, -50%);
+  }
+
+
+  .figure-portrait__fallback-label {
+    position: absolute;
+    left: 18px;
+    bottom: 17px;
+
+    color: rgba(68, 74, 89, 0.56);
+
+    font-family: var(--font-ui);
+    font-size: 7px;
+    font-weight: 750;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+
+  .figure-portrait__number {
+    position: absolute;
+    right: 15px;
+    bottom: 13px;
+    z-index: 4;
+
+    color: rgba(255, 255, 255, 0.90);
+
+    font-family: var(--font-ui);
+    font-size: 8px;
+    font-weight: 750;
+    letter-spacing: 0.10em;
+
+    text-shadow: 0 2px 10px rgba(25, 29, 40, 0.32);
+  }
+
+
+  .figure-card__body {
+    min-width: 0;
+    flex: 1;
+
+    display: flex;
+    flex-direction: column;
+
+    padding: 22px 21px 20px;
+  }
+
+
+  .figure-card__role {
+    min-width: 0;
+
+    margin: 0;
+
+    display: inline-flex;
+    align-items: center;
+
+    gap: 8px;
+
+    color: #82778b;
+
+    font-family: var(--font-ui);
+    font-size: 7px;
+    font-weight: 750;
+    letter-spacing: 0.12em;
+    line-height: 1.45;
+    text-transform: uppercase;
+  }
+
+
+  .figure-card__role > span:first-child {
+    color: var(--figure-accent);
+  }
+
+
+  .figure-card__rule {
+    width: 20px;
+    height: 1px;
+
+    display: block;
+
+    background:
+      linear-gradient(
+        to right,
+        rgba(var(--figure-accent-rgb), 0.44),
+        transparent
+      );
+  }
+
+
+  .figure-card h3 {
+    margin: 15px 0 0;
+
+    color: #20232d;
+
+    font-size: clamp(22px, 2.35vw, 29px);
+    line-height: 1.23;
+  }
+
+
+  .figure-card__dates {
+    margin: 7px 0 0;
+
+    color: var(--figure-accent);
+
+    font-family: var(--font-ui);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    line-height: 1.5;
+    text-transform: uppercase;
+  }
+
+
+  .figure-card__summary {
+    margin: 15px 0 0;
+
+    color: #69707f;
+
+    font-family: var(--font-ui);
+    font-size: 12px;
+    line-height: 1.75;
+  }
+
+
+  .figure-card__profile-button {
+    width: 100%;
+
+    margin-top: auto;
+    padding: 17px 0 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 13px;
+
+    color: #525966;
+    background: transparent;
+
+    border: 0;
+    border-top: 1px solid rgba(65, 75, 99, 0.10);
+
+    cursor: pointer;
+
+    font-family: var(--font-ui);
+    font-size: 8px;
+    font-weight: 750;
+    letter-spacing: 0.11em;
+    line-height: 1;
+    text-transform: uppercase;
+
+    transition:
+      color 0.20s ease,
+      padding-left 0.20s var(--ease-out);
+  }
+
+
+  .figure-card__profile-button:hover {
+    color: var(--figure-accent);
+    padding-left: 3px;
+  }
+
+
+  .figure-card__profile-button svg {
+    width: 16px;
+    height: 16px;
+  }
+
+
+  .figure-card__profile-button path {
+    stroke: currentColor;
+    stroke-width: 1.65;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+
+  .figures-interaction-note {
+    margin: 1px 4px 0;
+
+    color: #959ba8;
+
+    font-family: var(--font-ui);
+    font-size: 8px;
+    font-weight: 600;
+    letter-spacing: 0.055em;
+    line-height: 1.6;
+    text-align: center;
+  }
+
+
+  .figure-dialog {
+    --figure-accent: #737a87;
+    --figure-accent-rgb: 115, 122, 135;
+    --figure-accent-soft: rgba(115, 122, 135, 0.10);
+    --figure-accent-faint: rgba(115, 122, 135, 0.057);
+
+    width: min(960px, calc(100vw - 34px));
+    max-height: min(88vh, 820px);
+
+    padding: 0;
+
+    overflow: visible;
+
+    color: #20232d;
+    background: transparent;
+
+    border: 0;
+  }
+
+
+  .figure-dialog::backdrop {
+    background: rgba(47, 55, 72, 0.28);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+
+
+  .figure-dialog__panel {
+    max-height: min(88vh, 820px);
+
+    position: relative;
+    isolation: isolate;
+
+    display: grid;
+    grid-template-columns:
+      minmax(280px, 0.72fr)
+      minmax(0, 1.28fr);
+
+    overflow: hidden;
+
+    background:
+      radial-gradient(
+        circle at 4% 4%,
+        var(--figure-accent-soft),
+        transparent 30%
+      ),
+      radial-gradient(
+        circle at 96% 96%,
+        rgba(165, 139, 217, 0.10),
+        transparent 34%
+      ),
+      linear-gradient(
+        145deg,
+        rgba(255, 255, 255, 0.95),
+        rgba(242, 246, 252, 0.88)
+      );
+
+    border: 1px solid rgba(255, 255, 255, 0.96);
+    border-radius: clamp(25px, 3vw, 36px);
+
+    box-shadow:
+      0 40px 110px rgba(39, 48, 69, 0.24),
+      inset 0 1px 0 rgba(255, 255, 255, 1);
+
+    backdrop-filter:
+      blur(30px)
+      saturate(155%);
+
+    -webkit-backdrop-filter:
+      blur(30px)
+      saturate(155%);
+  }
+
+
+  .figure-dialog__close {
+    width: 39px;
+    aspect-ratio: 1;
+
+    padding: 0;
+
+    position: absolute;
+    top: 17px;
+    right: 17px;
+    z-index: 6;
+
+    display: grid;
+    place-items: center;
+
+    color: #5e6573;
+    background: rgba(255, 255, 255, 0.74);
+
+    border: 1px solid rgba(255, 255, 255, 0.92);
+    border-radius: 50%;
+
+    box-shadow:
+      0 9px 20px rgba(51, 63, 91, 0.11),
+      inset 0 1px 0 rgba(255, 255, 255, 1);
+
+    cursor: pointer;
+
+    transition:
+      color 0.20s ease,
+      background 0.20s ease,
+      transform 0.20s var(--ease-out);
+  }
+
+
+  .figure-dialog__close:hover {
+    color: #242a36;
+    background: rgba(255, 255, 255, 0.96);
+
+    transform: scale(1.04);
+  }
+
+
+  .figure-dialog__close svg {
+    width: 16px;
+    height: 16px;
+  }
+
+
+  .figure-dialog__close path {
+    stroke: currentColor;
+    stroke-width: 1.65;
+    stroke-linecap: round;
+  }
+
+
+  .figure-dialog__visual {
+    min-width: 0;
+
+    padding: 18px 0 18px 18px;
+  }
+
+
+  .figure-dialog__portrait {
+    height: 100%;
+    min-height: 510px;
+
+    border: 1px solid rgba(255, 255, 255, 0.86);
+    border-radius: 24px 0 0 24px;
+
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.92),
+      inset 0 0 42px rgba(86, 102, 137, 0.05);
+  }
+
+
+  .figure-dialog__number {
+    position: absolute;
+    right: 21px;
+    bottom: 18px;
+    z-index: 4;
+
+    color: rgba(255, 255, 255, 0.92);
+
+    font-family: var(--font-display);
+    font-size: 42px;
+    line-height: 1;
+
+    text-shadow: 0 3px 18px rgba(25, 29, 40, 0.38);
+  }
+
+
+  .figure-dialog__content {
+    min-width: 0;
+
+    overflow-y: auto;
+
+    padding:
+      clamp(54px, 6vw, 76px)
+      clamp(30px, 5vw, 58px)
+      clamp(34px, 5vw, 54px);
+
+    scrollbar-width: thin;
+    scrollbar-color:
+      rgba(var(--figure-accent-rgb), 0.22)
+      transparent;
+  }
+
+
+  .figure-dialog__eyebrow {
+    margin: 0 0 10px;
+
+    color: var(--figure-accent);
+
+    font-family: var(--font-ui);
+    font-size: 8px;
+    font-weight: 750;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+
+  .figure-dialog h3 {
+    max-width: 610px;
+
+    margin: 0;
+
+    color: #1d2029;
+
+    font-size: clamp(35px, 5vw, 58px);
+    line-height: 1.08;
+  }
+
+
+  .figure-dialog__meta {
+    margin: 13px 0 0;
+
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+
+    gap: 9px;
+
+    color: #7c8391;
+
+    font-family: var(--font-ui);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    line-height: 1.5;
+    text-transform: uppercase;
+  }
+
+
+  .figure-dialog__meta > span:nth-child(2) {
+    width: 4px;
+    aspect-ratio: 1;
+
+    display: block;
+
+    background: var(--figure-accent);
+    border-radius: 50%;
+
+    opacity: 0.62;
+  }
+
+
+  .figure-dialog__copy {
+    margin: clamp(24px, 3vw, 32px) 0 0;
+
+    color: #5f6675;
+
+    font-family: var(--font-ui);
+    font-size: 14px;
+    line-height: 1.86;
+  }
+
+
+  .figure-dialog__details {
+    margin: clamp(24px, 3vw, 32px) 0 0;
+    padding: 0;
+
+    border-top: 1px solid rgba(65, 75, 99, 0.10);
+  }
+
+
+  .figure-dialog__details div {
+    display: grid;
+    grid-template-columns: minmax(120px, 0.7fr) minmax(0, 1.3fr);
+    align-items: baseline;
+
+    gap: 18px;
+
+    padding: 13px 0;
+
+    border-bottom: 1px solid rgba(65, 75, 99, 0.065);
+  }
+
+
+  .figure-dialog__details dt {
+    color: #9298a5;
+
+    font-family: var(--font-ui);
+    font-size: 7px;
+    font-weight: 750;
+    letter-spacing: 0.12em;
+    line-height: 1.45;
+    text-transform: uppercase;
+  }
+
+
+  .figure-dialog__details dd {
+    margin: 0;
+
+    color: #4d5462;
+
+    font-family: var(--font-ui);
+    font-size: 11px;
+    font-weight: 600;
+    line-height: 1.65;
+    text-align: right;
+  }
+
+
+  .figure-dialog__references {
+    margin-top: clamp(24px, 3vw, 32px);
+  }
+
+
+  .figure-dialog__references > p {
+    margin: 0 0 10px;
+
+    color: #9298a5;
+
+    font-family: var(--font-ui);
+    font-size: 7px;
+    font-weight: 750;
+    letter-spacing: 0.13em;
+    line-height: 1.45;
+    text-transform: uppercase;
+  }
+
+
+  .figure-dialog__references > div {
+    display: flex;
+    flex-wrap: wrap;
+
+    gap: 7px;
+  }
+
+
+  .figure-dialog__references a {
+    padding: 10px 12px;
+
+    display: inline-flex;
+    align-items: center;
+
+    gap: 9px;
+
+    color: #555c69;
+    background: rgba(var(--figure-accent-rgb), 0.075);
+
+    border: 1px solid rgba(var(--figure-accent-rgb), 0.13);
+    border-radius: 999px;
+
+    font-family: var(--font-ui);
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: 0.065em;
+    line-height: 1;
+    text-decoration: none;
+
+    transition:
+      color 0.20s ease,
+      background 0.20s ease,
+      border-color 0.20s ease,
+      transform 0.20s var(--ease-out);
+  }
+
+
+  .figure-dialog__references a:hover {
+    color: var(--figure-accent);
+    background: rgba(var(--figure-accent-rgb), 0.12);
+    border-color: rgba(var(--figure-accent-rgb), 0.20);
+
+    transform: translateY(-1px);
+  }
+
+
+  .figure-dialog__references svg {
+    width: 14px;
+    height: 14px;
+  }
+
+
+  .figure-dialog__references path {
+    stroke: currentColor;
+    stroke-width: 1.65;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+
+  :global(html.figure-dialog-open) {
+    overflow: hidden;
+  }
+
+
+  @media (max-width: 900px) {
+    .figures-track {
+      grid-auto-columns: calc((100% - 18px) / 2);
+    }
+
+    .figure-dialog__panel {
+      grid-template-columns:
+        minmax(245px, 0.76fr)
+        minmax(0, 1.24fr);
+    }
+
+    .figure-dialog__portrait {
+      min-height: 470px;
+    }
+  }
+
+
+  @media (max-width: 720px) {
+    .figures-overview {
+      grid-template-columns: 1fr;
+    }
+
+    .figures-toolbar {
+      align-items: flex-end;
+      flex-direction: column;
+    }
+
+    .figures-navigation {
+      align-self: stretch;
+      justify-content: flex-end;
+    }
+
+    .figure-dialog {
+      width: calc(100vw - 18px);
+      max-height: 92svh;
+    }
+
+    .figure-dialog__panel {
+      max-height: 92svh;
+
+      grid-template-columns: 1fr;
+
+      overflow-y: auto;
+    }
+
+    .figure-dialog__visual {
+      padding: 13px 13px 0;
+    }
+
+    .figure-dialog__portrait {
+      min-height: 0;
+      height: auto;
+      max-height: 44svh;
+
+      border-radius: 22px 22px 0 0;
+    }
+
+    .figure-dialog__content {
+      overflow: visible;
+
+      padding:
+        30px
+        22px
+        30px;
+    }
+  }
+
+
+  @media (max-width: 650px) {
+    .figures-shell {
+      padding: 22px 15px 25px;
+
+      border-radius: 24px;
+    }
+
+    .figures-overview {
+      gap: 18px;
+
+      padding:
+        1px
+        3px
+        25px;
+    }
+
+    .figures-overview h3 {
+      font-size: 26px;
+    }
+
+    .figures-summary {
+      font-size: 13px;
+    }
+
+    .figures-toolbar {
+      margin-top: 20px;
+      gap: 14px;
+    }
+
+    .figures-counter {
+      margin-right: auto;
+      justify-content: flex-start;
+    }
+
+    .figures-arrow {
+      width: 34px;
+    }
+
+    .figures-scroller {
+      margin-top: 14px;
+      padding-bottom: 16px;
+
+      scroll-padding-inline: 2px;
+    }
+
+    .figures-track {
+      grid-auto-columns: 86%;
+
+      gap: 14px;
+    }
+
+    .figure-card {
+      border-radius: 22px;
+    }
+
+    .figure-card__body {
+      padding: 20px 18px 18px;
+    }
+
+    .figure-card h3 {
+      font-size: 25px;
+    }
+
+    .figure-card__summary {
+      font-size: 12px;
+    }
+
+    .figures-interaction-note {
+      margin-inline: 7px;
+    }
+
+    .figure-dialog__close {
+      width: 36px;
+
+      top: 20px;
+      right: 20px;
+    }
+
+    .figure-dialog h3 {
+      padding-right: 34px;
+
+      font-size: 34px;
+    }
+
+    .figure-dialog__copy {
+      font-size: 13px;
+    }
+
+    .figure-dialog__details div {
+      grid-template-columns: 1fr;
+
+      gap: 4px;
+    }
+
+    .figure-dialog__details dd {
+      text-align: left;
+    }
+  }
+
+
+
+  @media (max-width: 650px) {
+    .content-section {
+      padding-top: 54px;
+      scroll-margin-top: 145px;
+    }
+  }
+
+  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    .figures-shell,
+    .figure-card,
+    .figure-dialog__panel {
+      background-color: rgba(250, 250, 249, 0.94);
+    }
+  }
+</style>

@@ -1,0 +1,416 @@
+---
+import SectionHeading from "./SectionHeading.astro";
+
+interface MapConfig {
+  worldWidth: string;
+  worldLeft: string;
+  worldTop: string;
+  markerTop: string;
+  markerLeft: string;
+}
+
+interface Props {
+  id?: string;
+  number?: string;
+  title?: string;
+  mapImage?: string;
+  alt: string;
+  caption: string;
+  map: MapConfig;
+}
+
+const {
+  id = "location",
+  number = "01",
+  title = "Location",
+  mapImage = "/blank-map-world.svg",
+  alt,
+  caption,
+  map,
+} = Astro.props;
+
+const mapStyle = [
+  `--map-world-width:${map.worldWidth}`,
+  `--map-world-left:${map.worldLeft}`,
+  `--map-world-top:${map.worldTop}`,
+  `--map-marker-top:${map.markerTop}`,
+  `--map-marker-left:${map.markerLeft}`,
+].join(";");
+---
+
+<section id={id} class="content-section map-section" style={mapStyle}>
+  <SectionHeading number={number} title={title} />
+
+  <figure class="map-card">
+    <div class="map-viewport">
+      <span class="map-grid" aria-hidden="true"></span>
+      <span class="map-compass" aria-hidden="true"></span>
+
+      <div class="map-world">
+        <img
+          class="map-image"
+          src={mapImage}
+          alt={alt}
+          loading="eager"
+        />
+
+        <div class="map-marker" aria-hidden="true">
+          <span class="marker-area"></span>
+          <span class="marker-core"></span>
+        </div>
+      </div>
+    </div>
+
+    <figcaption class="map-caption">{caption}</figcaption>
+  </figure>
+</section>
+
+<style>
+  .content-section {
+    width: min(100%, 1080px);
+
+    margin: 0 auto;
+    padding: 74px 0 8px;
+
+    scroll-margin-top: 158px;
+  }
+
+  .map-card {
+    width: 100%;
+
+    margin: 0;
+    padding: clamp(18px, 2.6vw, 30px);
+
+    position: relative;
+    isolation: isolate;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 23px;
+
+    background:
+      radial-gradient(
+        circle at 8% 3%,
+        rgba(117, 171, 255, 0.16),
+        transparent 30%
+      ),
+      radial-gradient(
+        circle at 93% 96%,
+        rgba(230, 175, 111, 0.16),
+        transparent 32%
+      ),
+      linear-gradient(
+        145deg,
+        rgba(255, 255, 255, 0.79),
+        rgba(246, 249, 255, 0.50)
+      );
+
+    border: 1px solid rgba(255, 255, 255, 0.91);
+    border-radius: clamp(24px, 2.7vw, 34px);
+
+    box-shadow:
+      0 24px 60px rgba(50, 62, 88, 0.10),
+      inset 0 1px 0 rgba(255, 255, 255, 1),
+      inset 0 -1px 0 rgba(55, 65, 88, 0.04);
+
+    backdrop-filter:
+      blur(24px)
+      saturate(150%);
+
+    -webkit-backdrop-filter:
+      blur(24px)
+      saturate(150%);
+  }
+
+  .map-card::before {
+    content: "";
+
+    position: absolute;
+    inset: 1px;
+    z-index: -1;
+
+    border-radius: inherit;
+
+    background:
+      linear-gradient(
+        112deg,
+        rgba(255, 255, 255, 0.54),
+        transparent 28%,
+        transparent 74%,
+        rgba(255, 255, 255, 0.17)
+      );
+
+    opacity: 0.55;
+    pointer-events: none;
+  }
+
+  .map-viewport {
+    width: 100%;
+
+    position: relative;
+    isolation: isolate;
+
+    aspect-ratio: 16 / 8.5;
+
+    overflow: hidden;
+
+    background:
+      radial-gradient(
+        circle at 18% 10%,
+        rgba(121, 172, 248, 0.12),
+        transparent 36%
+      ),
+      radial-gradient(
+        circle at 88% 92%,
+        rgba(221, 170, 110, 0.12),
+        transparent 38%
+      ),
+      linear-gradient(
+        145deg,
+        rgba(239, 244, 251, 0.74),
+        rgba(250, 247, 244, 0.70)
+      );
+
+    border: 1px solid rgba(255, 255, 255, 0.82);
+    border-radius: clamp(18px, 2vw, 25px);
+
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.92),
+      inset 0 0 42px rgba(86, 102, 137, 0.06);
+  }
+
+  .map-grid {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+
+    display: block;
+
+    opacity: 0.18;
+
+    background-image:
+      linear-gradient(
+        rgba(62, 74, 100, 0.13) 1px,
+        transparent 1px
+      ),
+      linear-gradient(
+        90deg,
+        rgba(62, 74, 100, 0.13) 1px,
+        transparent 1px
+      );
+
+    background-size: 54px 54px;
+
+    mask-image:
+      radial-gradient(
+        circle at 50% 50%,
+        black,
+        transparent 78%
+      );
+
+    -webkit-mask-image:
+      radial-gradient(
+        circle at 50% 50%,
+        black,
+        transparent 78%
+      );
+
+    pointer-events: none;
+  }
+
+  .map-compass {
+    width: clamp(54px, 7vw, 82px);
+    aspect-ratio: 1;
+
+    position: absolute;
+    right: clamp(15px, 2.6vw, 30px);
+    bottom: clamp(15px, 2.6vw, 30px);
+    z-index: 3;
+
+    display: block;
+
+    border: 1px solid rgba(71, 78, 96, 0.20);
+    border-radius: 50%;
+
+    opacity: 0.38;
+    pointer-events: none;
+  }
+
+  .map-compass::before,
+  .map-compass::after {
+    content: "";
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    background: rgba(71, 78, 96, 0.24);
+
+    transform: translate(-50%, -50%);
+  }
+
+  .map-compass::before {
+    width: 1px;
+    height: 72%;
+  }
+
+  .map-compass::after {
+    width: 72%;
+    height: 1px;
+  }
+
+  .map-world {
+    width: var(--map-world-width);
+
+    position: absolute;
+    z-index: 1;
+
+    left: var(--map-world-left);
+    top: var(--map-world-top);
+  }
+
+  .map-image {
+    width: 125%;
+
+    display: block;
+
+    opacity: 0.78;
+
+    filter:
+      grayscale(100%)
+      contrast(1.04)
+      sepia(8%);
+  }
+
+  .map-marker {
+    width: 5%;
+    aspect-ratio: 1;
+
+    position: absolute;
+
+    top: var(--map-marker-top);
+    left: var(--map-marker-left);
+
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+  }
+
+  .marker-area {
+    position: absolute;
+    inset: 0;
+
+    display: block;
+
+    background: rgba(222, 171, 99, 0.20);
+
+    border: 1px solid rgba(199, 142, 70, 0.23);
+    border-radius: 50%;
+
+    box-shadow:
+      0 0 0 8px rgba(228, 183, 119, 0.06),
+      0 10px 30px rgba(150, 101, 49, 0.16),
+      inset 0 1px 0 rgba(255, 255, 255, 0.48);
+
+    backdrop-filter: blur(0.7px);
+    -webkit-backdrop-filter: blur(0.7px);
+
+    animation:
+      marker-pulse
+      3.4s
+      ease-in-out
+      infinite;
+  }
+
+  .marker-core {
+    width: 14%;
+    aspect-ratio: 1;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    display: block;
+
+    background: rgba(130, 88, 44, 0.70);
+    border-radius: 50%;
+
+    box-shadow:
+      0 0 0 5px rgba(255, 255, 255, 0.26),
+      0 4px 12px rgba(105, 69, 36, 0.22);
+
+    transform: translate(-50%, -50%);
+  }
+
+  .map-caption {
+    max-width: 640px;
+
+    margin: 0 auto;
+
+    color: #858b99;
+
+    font-family: var(--font-ui);
+    font-size: 12px;
+    line-height: 1.72;
+    letter-spacing: 0.025em;
+    text-align: center;
+  }
+
+  @keyframes marker-pulse {
+    0%,
+    100% {
+      opacity: 0.80;
+      transform: scale(0.94);
+    }
+
+    50% {
+      opacity: 1;
+      transform: scale(1.04);
+    }
+  }
+
+  @media (max-width: 650px) {
+    .content-section {
+      padding-top: 54px;
+      scroll-margin-top: 145px;
+    }
+
+    .map-card {
+      padding: 15px;
+      gap: 18px;
+
+      border-radius: 24px;
+    }
+
+    .map-viewport {
+      aspect-ratio: 16 / 8.5;
+      border-radius: 17px;
+    }
+
+    .map-grid {
+      background-size: 34px 34px;
+    }
+
+    .map-compass {
+      width: 48px;
+    }
+
+    .map-caption {
+      max-width: 330px;
+
+      padding: 0 5px 2px;
+
+      font-size: 11px;
+    }
+  }
+
+  @supports not (
+    (backdrop-filter: blur(1px))
+    or
+    (-webkit-backdrop-filter: blur(1px))
+  ) {
+    .map-card {
+      background-color: rgba(250, 250, 249, 0.94);
+    }
+  }
+</style>

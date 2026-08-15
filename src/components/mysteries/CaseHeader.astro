@@ -1,0 +1,682 @@
+---
+type TitleVariant = "default" | "long";
+
+interface Props {
+  title: string;
+  intro: string;
+  id?: string;
+  titleVariant?: TitleVariant;
+}
+
+const {
+  title,
+  intro,
+  id = "overview",
+  titleVariant = "default",
+} = Astro.props;
+---
+
+<section
+  id={id}
+  class:list={["case-header", titleVariant === "long" && "case-header--long-title"]}
+>
+  <svg
+    class="header-contours"
+    viewBox="0 0 620 620"
+    fill="none"
+    aria-hidden="true"
+  >
+    <path d="M-36 448C42 357 98 386 158 314C216 245 221 157 318 112C414 67 499 107 656 -14" />
+    <path d="M-18 485C63 396 128 418 190 346C254 270 263 188 354 143C450 96 529 131 651 39" />
+    <path d="M7 523C85 446 159 453 224 384C294 311 304 225 390 182C476 139 548 155 644 95" />
+    <path d="M48 562C124 504 189 499 260 432C334 363 349 284 426 241C500 200 562 204 637 164" />
+    <path d="M114 601C187 549 246 544 314 485C383 423 400 347 468 304C530 265 582 264 637 241" />
+  </svg>
+
+  <div class="case-object" aria-hidden="true">
+    <span class="case-object__orbit case-object__orbit--outer"></span>
+    <span class="case-object__orbit case-object__orbit--middle"></span>
+    <span class="case-object__orbit case-object__orbit--inner"></span>
+    <span class="case-object__axis"></span>
+
+    <span class="case-object__sphere">
+      <span class="case-object__latitude case-object__latitude--one"></span>
+      <span class="case-object__latitude case-object__latitude--two"></span>
+      <span class="case-object__meridian"></span>
+    </span>
+
+    <span class="case-object__node case-object__node--one"></span>
+    <span class="case-object__node case-object__node--two"></span>
+  </div>
+
+  <div class="case-header__content">
+    <h1>{title}</h1>
+    <p class="case-intro">{intro}</p>
+  </div>
+
+  <span class="edge-mark edge-mark--top-left" aria-hidden="true"></span>
+  <span class="edge-mark edge-mark--top-right" aria-hidden="true"></span>
+  <span class="edge-mark edge-mark--bottom-left" aria-hidden="true"></span>
+  <span class="edge-mark edge-mark--bottom-right" aria-hidden="true"></span>
+</section>
+
+<style>
+  .case-header {
+    --case-title-size: clamp(68px, 9.4vw, 132px);
+    --case-title-mobile-size: clamp(44px, 14vw, 72px);
+    --case-title-mobile-spacing: 0.028em;
+
+    min-height: 540px;
+    scroll-margin-top: 118px;
+
+    position: relative;
+    isolation: isolate;
+
+    display: flex;
+    align-items: center;
+
+    overflow: hidden;
+
+    padding:
+      clamp(68px, 8vw, 108px)
+      clamp(28px, 7vw, 92px);
+
+    background:
+      radial-gradient(
+        circle at 8% 7%,
+        rgba(116, 171, 255, 0.28),
+        transparent 34%
+      ),
+      radial-gradient(
+        circle at 91% 8%,
+        rgba(230, 176, 112, 0.30),
+        transparent 37%
+      ),
+      radial-gradient(
+        circle at 60% 112%,
+        rgba(171, 143, 224, 0.20),
+        transparent 41%
+      ),
+      linear-gradient(
+        142deg,
+        rgba(255, 255, 255, 0.77),
+        rgba(247, 249, 255, 0.46) 46%,
+        rgba(255, 248, 241, 0.50)
+      );
+
+    border: 1px solid rgba(255, 255, 255, 0.89);
+    border-radius: clamp(30px, 3.2vw, 48px);
+
+    box-shadow:
+      0 44px 110px rgba(50, 62, 88, 0.13),
+      0 12px 34px rgba(50, 62, 88, 0.07),
+      inset 0 1px 0 rgba(255, 255, 255, 1),
+      inset 0 -1px 0 rgba(58, 69, 94, 0.045);
+
+    backdrop-filter:
+      blur(30px)
+      saturate(155%);
+
+    -webkit-backdrop-filter:
+      blur(30px)
+      saturate(155%);
+  }
+
+  .case-header--long-title {
+    --case-title-size: clamp(60px, 7.8vw, 108px);
+    --case-title-mobile-size: clamp(36px, 11vw, 56px);
+    --case-title-mobile-spacing: 0.020em;
+  }
+
+  .case-header::after {
+    content: "";
+
+    position: absolute;
+    inset: 1px;
+    z-index: 5;
+
+    border-radius: inherit;
+
+    background:
+      linear-gradient(
+        112deg,
+        rgba(255, 255, 255, 0.59),
+        transparent 26%,
+        transparent 72%,
+        rgba(255, 255, 255, 0.20)
+      );
+
+    mask-image:
+      linear-gradient(
+        to bottom,
+        black,
+        transparent 24%,
+        transparent 76%,
+        black
+      );
+
+    -webkit-mask-image:
+      linear-gradient(
+        to bottom,
+        black,
+        transparent 24%,
+        transparent 76%,
+        black
+      );
+
+    opacity: 0.54;
+    pointer-events: none;
+  }
+
+  .case-header__content {
+    width: min(67%, 820px);
+
+    position: relative;
+    z-index: 3;
+
+    animation:
+      content-enter
+      0.85s
+      var(--ease-out)
+      both;
+  }
+
+  h1 {
+    margin: 0;
+
+    background:
+      linear-gradient(
+        180deg,
+        #171922 0%,
+        #292d39 66%,
+        #454a57 100%
+      );
+
+    -webkit-background-clip: text;
+    background-clip: text;
+
+    font-size: var(--case-title-size);
+    line-height: 0.94;
+    letter-spacing: 0.038em;
+    text-wrap: balance;
+
+    -webkit-text-fill-color: transparent;
+
+    filter: drop-shadow(0 2px 0 rgba(255, 255, 255, 0.36));
+  }
+
+  .case-intro {
+    max-width: 760px;
+
+    margin: 29px 0 0;
+
+    color: #606775;
+
+    font-family: var(--font-ui);
+    font-size: clamp(18px, 1.9vw, 22px);
+    line-height: 1.78;
+    text-wrap: balance;
+  }
+
+  .header-contours {
+    width: min(53vw, 690px);
+
+    position: absolute;
+    right: -15%;
+    bottom: -43%;
+    z-index: -2;
+
+    color: rgba(87, 70, 52, 0.16);
+
+    opacity: 0.48;
+    transform: rotate(-11deg);
+    pointer-events: none;
+  }
+
+  .header-contours path {
+    stroke: currentColor;
+    stroke-width: 1.15;
+    vector-effect: non-scaling-stroke;
+  }
+
+  .case-object {
+    width: clamp(380px, 42vw, 610px);
+    aspect-ratio: 1;
+
+    position: absolute;
+    top: 49%;
+    right: clamp(-175px, -6vw, -34px);
+    z-index: 1;
+
+    opacity: 0.80;
+
+    filter:
+      drop-shadow(0 34px 40px rgba(83, 67, 49, 0.14));
+
+    transform: translateY(-50%);
+    pointer-events: none;
+
+    animation:
+      object-float
+      10s
+      ease-in-out
+      infinite;
+  }
+
+  .case-object__sphere {
+    width: 56%;
+    aspect-ratio: 1;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    display: block;
+    overflow: hidden;
+
+    background:
+      radial-gradient(
+        circle at 29% 22%,
+        rgba(255, 255, 255, 0.98),
+        rgba(255, 255, 255, 0.44) 19%,
+        rgba(240, 205, 156, 0.27) 48%,
+        rgba(195, 157, 111, 0.16) 67%,
+        rgba(144, 155, 205, 0.12) 88%
+      );
+
+    border: 1px solid rgba(255, 255, 255, 0.92);
+    border-radius: 50%;
+
+    box-shadow:
+      inset 19px 23px 35px rgba(255, 255, 255, 0.50),
+      inset -25px -35px 49px rgba(150, 112, 68, 0.17),
+      0 37px 69px rgba(100, 79, 55, 0.15);
+
+    transform: translate(-50%, -50%);
+  }
+
+  .case-object__sphere::before {
+    content: "";
+
+    width: 68%;
+    height: 34%;
+
+    position: absolute;
+    top: 7%;
+    left: 13%;
+
+    border-radius: 50%;
+
+    background:
+      radial-gradient(
+        ellipse,
+        rgba(255, 255, 255, 0.78),
+        transparent 70%
+      );
+
+    filter: blur(7px);
+    transform: rotate(-24deg);
+  }
+
+  .case-object__sphere::after {
+    content: "";
+
+    width: 56%;
+    aspect-ratio: 1;
+
+    position: absolute;
+    right: -5%;
+    bottom: -14%;
+
+    border-radius: 50%;
+
+    background:
+      radial-gradient(
+        circle,
+        rgba(220, 157, 88, 0.26),
+        transparent 70%
+      );
+
+    filter: blur(5px);
+  }
+
+  .case-object__latitude,
+  .case-object__meridian {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    display: block;
+
+    border: 1px solid rgba(82, 61, 41, 0.17);
+    border-radius: 50%;
+  }
+
+  .case-object__latitude {
+    width: 84%;
+    height: 30%;
+  }
+
+  .case-object__latitude--one {
+    transform:
+      translate(-50%, -50%)
+      rotate(-7deg);
+  }
+
+  .case-object__latitude--two {
+    width: 72%;
+    height: 20%;
+
+    transform:
+      translate(-50%, -50%)
+      rotate(-7deg)
+      translateY(510%);
+  }
+
+  .case-object__meridian {
+    width: 38%;
+    height: 86%;
+
+    transform:
+      translate(-50%, -50%)
+      rotate(16deg);
+  }
+
+  .case-object__orbit {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    display: block;
+
+    border: 1px solid rgba(83, 63, 44, 0.19);
+    border-radius: 50%;
+
+    box-shadow:
+      0 0 18px rgba(255, 255, 255, 0.52),
+      inset 0 0 18px rgba(255, 255, 255, 0.22);
+  }
+
+  .case-object__orbit--outer {
+    width: 93%;
+    height: 35%;
+
+    transform:
+      translate(-50%, -50%)
+      rotate(-18deg);
+  }
+
+  .case-object__orbit--middle {
+    width: 80%;
+    height: 80%;
+
+    border-color: rgba(86, 68, 49, 0.14);
+
+    transform:
+      translate(-50%, -50%)
+      rotate(31deg);
+  }
+
+  .case-object__orbit--inner {
+    width: 41%;
+    height: 92%;
+
+    border-color: rgba(86, 68, 49, 0.16);
+
+    transform:
+      translate(-50%, -50%)
+      rotate(28deg);
+  }
+
+  .case-object__axis {
+    width: 1px;
+    height: 90%;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    display: block;
+
+    background:
+      linear-gradient(
+        transparent,
+        rgba(80, 61, 44, 0.22) 18%,
+        rgba(80, 61, 44, 0.22) 82%,
+        transparent
+      );
+
+    transform:
+      translate(-50%, -50%)
+      rotate(28deg);
+  }
+
+  .case-object__node {
+    width: 13px;
+    aspect-ratio: 1;
+
+    position: absolute;
+
+    display: block;
+
+    background:
+      radial-gradient(
+        circle at 32% 26%,
+        white,
+        rgba(247, 220, 178, 0.81) 42%,
+        rgba(143, 102, 62, 0.44)
+      );
+
+    border: 1px solid rgba(255, 255, 255, 0.90);
+    border-radius: 50%;
+
+    box-shadow:
+      0 8px 16px rgba(92, 69, 46, 0.18),
+      inset 0 1px 0 white;
+  }
+
+  .case-object__node--one {
+    top: 24%;
+    right: 7%;
+  }
+
+  .case-object__node--two {
+    width: 9px;
+
+    bottom: 18%;
+    left: 15%;
+  }
+
+  .edge-mark {
+    width: 40px;
+    height: 40px;
+
+    position: absolute;
+    z-index: 4;
+
+    opacity: 0.28;
+    pointer-events: none;
+  }
+
+  .edge-mark::before,
+  .edge-mark::after {
+    content: "";
+
+    position: absolute;
+
+    background: rgba(78, 67, 55, 0.27);
+    border-radius: 999px;
+  }
+
+  .edge-mark::before {
+    width: 40px;
+    height: 1px;
+  }
+
+  .edge-mark::after {
+    width: 1px;
+    height: 40px;
+  }
+
+  .edge-mark--top-left {
+    top: 24px;
+    left: 24px;
+  }
+
+  .edge-mark--top-right {
+    top: 24px;
+    right: 24px;
+
+    transform: rotate(90deg);
+  }
+
+  .edge-mark--bottom-left {
+    bottom: 24px;
+    left: 24px;
+
+    transform: rotate(-90deg);
+  }
+
+  .edge-mark--bottom-right {
+    right: 24px;
+    bottom: 24px;
+
+    transform: rotate(180deg);
+  }
+
+  @keyframes content-enter {
+    from {
+      opacity: 0;
+      transform: translateY(17px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes object-float {
+    0%,
+    100% {
+      transform:
+        translateY(calc(-50% - 5px))
+        rotate(-0.5deg);
+    }
+
+    50% {
+      transform:
+        translateY(calc(-50% + 7px))
+        rotate(0.7deg);
+    }
+  }
+
+  @media (max-width: 980px) {
+    .case-header {
+      min-height: 590px;
+    }
+
+    .case-header__content {
+      width: min(74%, 800px);
+    }
+
+    .case-object {
+      right: -205px;
+      opacity: 0.61;
+    }
+  }
+
+  @media (max-width: 650px) {
+    .case-header {
+      min-height: 620px;
+      scroll-margin-top: 100px;
+
+      align-items: flex-end;
+
+      padding:
+        82px
+        22px
+        60px;
+
+      border-radius: 30px;
+    }
+
+    .case-header__content {
+      width: 100%;
+    }
+
+    h1 {
+      max-width: 100%;
+
+      font-size: var(--case-title-mobile-size);
+      line-height: 0.96;
+      letter-spacing: var(--case-title-mobile-spacing);
+    }
+
+    .case-intro {
+      margin-top: 24px;
+
+      font-size: 16px;
+      line-height: 1.76;
+    }
+
+    .case-object {
+      width: min(126vw, 510px);
+
+      top: 34%;
+      right: -43%;
+
+      opacity: 0.52;
+    }
+
+    .header-contours {
+      width: 108vw;
+
+      right: -54%;
+      bottom: -14%;
+    }
+
+    .edge-mark {
+      width: 29px;
+      height: 29px;
+    }
+
+    .edge-mark::before {
+      width: 29px;
+    }
+
+    .edge-mark::after {
+      height: 29px;
+    }
+
+    .edge-mark--top-left,
+    .edge-mark--top-right {
+      top: 17px;
+    }
+
+    .edge-mark--bottom-left,
+    .edge-mark--bottom-right {
+      bottom: 17px;
+    }
+
+    .edge-mark--top-left,
+    .edge-mark--bottom-left {
+      left: 17px;
+    }
+
+    .edge-mark--top-right,
+    .edge-mark--bottom-right {
+      right: 17px;
+    }
+  }
+
+  @supports not (
+    (backdrop-filter: blur(1px))
+    or
+    (-webkit-backdrop-filter: blur(1px))
+  ) {
+    .case-header {
+      background-color: rgba(250, 250, 249, 0.94);
+    }
+  }
+</style>

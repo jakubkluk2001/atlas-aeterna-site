@@ -1,0 +1,911 @@
+---
+import SectionHeading from "./SectionHeading.astro";
+import type { TheoryItem } from "./types";
+
+const theoryStatuses = {
+  leading: "Leading Interpretation",
+  possibility: "Open Possibility",
+  legend: "The Legend",
+} as const;
+
+interface Props {
+  theories: readonly TheoryItem[];
+  id?: string;
+  number?: string;
+  title?: string;
+  overline: string;
+  overviewTitle: string;
+  summary: string;
+  evidenceLabel?: string;
+}
+
+const {
+  theories,
+  id = "working-theories",
+  number = "04",
+  title = "Working Theories",
+  overline,
+  overviewTitle,
+  summary,
+  evidenceLabel = "Evidence in this file",
+} = Astro.props;
+---
+
+<section id={id} class="content-section theories-section">
+  <SectionHeading number={number} title={title} />
+
+  <div class="theories-shell">
+    <header class="theories-overview">
+      <div class="theories-overview__intro">
+        <p class="theories-overline">{overline}</p>
+        <h3>{overviewTitle}</h3>
+      </div>
+
+      <div class="theories-overview__aside">
+        <p class="theories-summary">{summary}</p>
+      </div>
+    </header>
+
+    <div class="theories-list">
+      {theories.map((theory) => (
+        <div class:list={["theory-step", `theory-step--${theory.tone}`]}>
+          <span class="theory-step__marker" aria-hidden="true"></span>
+
+          <article
+            class="theory-card"
+            data-number={theory.number}
+            aria-labelledby={`theory-title-${theory.id}`}
+          >
+            <div class="theory-card__header">
+              <p class="theory-label">
+                <span>{theory.number}</span>
+                <span class="theory-label__rule" aria-hidden="true"></span>
+                {theory.category}
+              </p>
+
+              <span
+                class:list={[
+                  "theory-status",
+                  `theory-status--${theory.status}`,
+                ]}
+              >
+                {theoryStatuses[theory.status]}
+              </span>
+            </div>
+
+            <div class="theory-card__layout">
+              <div class="theory-card__statement">
+                <h3 id={`theory-title-${theory.id}`}>{theory.title}</h3>
+                <p class="theory-thesis">{theory.statement}</p>
+
+                {theory.evidence.length > 0 && (
+                  <div class="theory-evidence">
+                    <p>{evidenceLabel}</p>
+
+                    <div
+                      class="theory-evidence__list"
+                      aria-label={`Evidence entries related to ${theory.title}`}
+                    >
+                      {theory.evidence.map((reference) => (
+                        <a
+                          href={reference.href}
+                          title={reference.title}
+                          aria-label={`${reference.label}: ${reference.title}`}
+                        >
+                          {reference.label}
+                        </a>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              <div class="theory-card__analysis">
+                <p class="theory-copy">{theory.summary}</p>
+
+                <dl class="theory-details">
+                  {theory.details.map((detail) => (
+                    <div>
+                      <dt>{detail.label}</dt>
+                      <dd>{detail.value}</dd>
+                    </div>
+                  ))}
+                </dl>
+              </div>
+            </div>
+          </article>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .content-section {
+    width: min(100%, 1080px);
+    margin: 0 auto;
+    padding: 74px 0 8px;
+    scroll-margin-top: 158px;
+  }
+  .theories-section {
+    padding-bottom: 22px;
+  }
+
+
+  .theories-shell {
+    position: relative;
+    isolation: isolate;
+
+    overflow: hidden;
+
+    padding:
+      clamp(25px, 4vw, 46px)
+      clamp(20px, 4vw, 44px);
+
+    background:
+      radial-gradient(
+        circle at 7% 4%,
+        rgba(217, 173, 114, 0.15),
+        transparent 31%
+      ),
+      radial-gradient(
+        circle at 94% 8%,
+        rgba(121, 169, 238, 0.13),
+        transparent 30%
+      ),
+      radial-gradient(
+        circle at 91% 96%,
+        rgba(165, 139, 217, 0.13),
+        transparent 34%
+      ),
+      linear-gradient(
+        145deg,
+        rgba(255, 255, 255, 0.79),
+        rgba(246, 249, 255, 0.49)
+      );
+
+    border: 1px solid rgba(255, 255, 255, 0.91);
+    border-radius: clamp(24px, 2.7vw, 34px);
+
+    box-shadow:
+      0 24px 60px rgba(50, 62, 88, 0.10),
+      inset 0 1px 0 rgba(255, 255, 255, 1),
+      inset 0 -1px 0 rgba(55, 65, 88, 0.04);
+
+    backdrop-filter:
+      blur(24px)
+      saturate(150%);
+
+    -webkit-backdrop-filter:
+      blur(24px)
+      saturate(150%);
+  }
+
+
+  .theories-shell::before {
+    content: "";
+
+    width: 420px;
+    aspect-ratio: 1;
+
+    position: absolute;
+    right: -245px;
+    top: 116px;
+    z-index: -1;
+
+    border: 1px solid rgba(85, 72, 59, 0.10);
+    border-radius: 50%;
+
+    box-shadow:
+      0 0 0 52px rgba(255, 255, 255, 0.05),
+      0 0 0 104px rgba(85, 72, 59, 0.022);
+
+    pointer-events: none;
+  }
+
+
+  .theories-overview {
+    position: relative;
+    z-index: 1;
+
+    display: grid;
+    grid-template-columns:
+      minmax(0, 1fr)
+      minmax(310px, 0.82fr);
+    align-items: end;
+
+    gap: clamp(24px, 4vw, 56px);
+
+    padding:
+      2px
+      4px
+      clamp(26px, 3.5vw, 38px);
+
+    border-bottom: 1px solid rgba(66, 76, 99, 0.10);
+  }
+
+
+  .theories-overline {
+    margin: 0 0 10px;
+
+    color: #92784f;
+
+    font-family: var(--font-ui);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+
+  .theories-overview h3 {
+    max-width: 650px;
+
+    margin: 0;
+
+    color: #1d2029;
+
+    font-size: clamp(25px, 3.1vw, 38px);
+    line-height: 1.25;
+  }
+
+
+  .theories-overview__aside {
+    min-width: 0;
+  }
+
+
+  .theories-summary {
+    margin: 0;
+
+    color: #69707f;
+
+    font-family: var(--font-ui);
+    font-size: 14px;
+    line-height: 1.80;
+  }
+
+
+  .theories-list {
+    position: relative;
+    z-index: 1;
+
+    margin-top: clamp(25px, 3.5vw, 38px);
+    padding-left: 52px;
+
+    display: grid;
+
+    gap: 18px;
+  }
+
+
+  .theories-list::before {
+    content: "";
+
+    width: 2px;
+
+    position: absolute;
+    top: 35px;
+    bottom: 35px;
+    left: 10px;
+
+    background:
+      linear-gradient(
+        to bottom,
+        rgba(199, 149, 80, 0.74) 0%,
+        rgba(130, 159, 213, 0.50) 48%,
+        rgba(137, 143, 156, 0.18) 100%
+      );
+
+    border-radius: 999px;
+
+    box-shadow: 0 0 18px rgba(142, 146, 174, 0.13);
+  }
+
+
+  .theory-step {
+    --theory-accent: #8d94a2;
+    --theory-accent-rgb: 141, 148, 162;
+    --theory-accent-soft: rgba(141, 148, 162, 0.12);
+    --theory-accent-faint: rgba(141, 148, 162, 0.055);
+
+    min-width: 0;
+
+    position: relative;
+  }
+
+
+  .theory-step__marker {
+    width: 17px;
+    aspect-ratio: 1;
+
+    position: absolute;
+    top: 31px;
+    left: -51px;
+    z-index: 3;
+
+    display: block;
+
+    background:
+      radial-gradient(
+        circle at 31% 26%,
+        white,
+        rgba(var(--theory-accent-rgb), 0.35) 46%,
+        var(--theory-accent)
+      );
+
+    border: 1px solid rgba(255, 255, 255, 0.94);
+    border-radius: 50%;
+
+    box-shadow:
+      0 0 0 5px var(--theory-accent-faint),
+      0 8px 18px rgba(69, 79, 105, 0.16),
+      inset 0 1px 0 rgba(255, 255, 255, 1);
+  }
+
+
+  .theory-card {
+    min-width: 0;
+
+    position: relative;
+    isolation: isolate;
+
+    overflow: hidden;
+
+    padding: clamp(24px, 3.4vw, 38px);
+
+    background:
+      radial-gradient(
+        circle at 96% 2%,
+        var(--theory-accent-soft),
+        transparent 32%
+      ),
+      linear-gradient(
+        145deg,
+        rgba(255, 255, 255, 0.83),
+        rgba(247, 248, 252, 0.55)
+      );
+
+    border: 1px solid rgba(255, 255, 255, 0.91);
+    border-radius: clamp(22px, 2.5vw, 30px);
+
+    box-shadow:
+      0 18px 42px rgba(50, 62, 88, 0.087),
+      inset 0 1px 0 rgba(255, 255, 255, 1),
+      inset 0 -1px 0 rgba(55, 65, 88, 0.035);
+
+    transition:
+      transform 0.30s var(--ease-out),
+      box-shadow 0.30s ease;
+  }
+
+
+  .theory-card::after {
+    content: attr(data-number);
+
+    position: absolute;
+    right: clamp(14px, 2.5vw, 28px);
+    bottom: clamp(-27px, -2.5vw, -18px);
+    z-index: 0;
+
+    color: var(--theory-accent-faint);
+
+    font-family: var(--font-display);
+    font-size: clamp(92px, 13vw, 162px);
+    line-height: 1;
+    letter-spacing: -0.055em;
+
+    pointer-events: none;
+  }
+
+
+  .theory-card:hover {
+    transform: translateY(-3px);
+
+    box-shadow:
+      0 24px 52px rgba(50, 62, 88, 0.12),
+      inset 0 1px 0 rgba(255, 255, 255, 1),
+      inset 0 -1px 0 rgba(55, 65, 88, 0.035);
+  }
+
+
+  .theory-step--grounded {
+    --theory-accent: #b6864b;
+    --theory-accent-rgb: 182, 134, 75;
+    --theory-accent-soft: rgba(214, 167, 101, 0.17);
+    --theory-accent-faint: rgba(182, 134, 75, 0.085);
+  }
+
+
+  .theory-step--grounded .theory-card {
+    padding: clamp(28px, 4vw, 46px);
+  }
+
+
+  .theory-step--open {
+    --theory-accent: #708fc7;
+    --theory-accent-rgb: 112, 143, 199;
+    --theory-accent-soft: rgba(114, 151, 213, 0.14);
+    --theory-accent-faint: rgba(112, 143, 199, 0.075);
+  }
+
+
+  .theory-step--legendary {
+    --theory-accent: #858b99;
+    --theory-accent-rgb: 133, 139, 153;
+    --theory-accent-soft: rgba(132, 139, 153, 0.10);
+    --theory-accent-faint: rgba(132, 139, 153, 0.055);
+  }
+
+
+  .theory-step--legendary .theory-card {
+    background:
+      radial-gradient(
+        circle at 96% 2%,
+        rgba(132, 139, 153, 0.10),
+        transparent 32%
+      ),
+      linear-gradient(
+        145deg,
+        rgba(251, 251, 251, 0.78),
+        rgba(243, 244, 247, 0.48)
+      );
+  }
+
+
+  .theory-card__header {
+    position: relative;
+    z-index: 1;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+
+    gap: 11px 14px;
+  }
+
+
+  .theory-label {
+    min-width: 0;
+
+    margin: 0;
+
+    display: inline-flex;
+    align-items: center;
+
+    gap: 9px;
+
+    color: #84758e;
+
+    font-family: var(--font-ui);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.13em;
+    line-height: 1.5;
+    text-transform: uppercase;
+  }
+
+
+  .theory-label > span:first-child {
+    color: var(--theory-accent);
+  }
+
+
+  .theory-label__rule {
+    width: 22px;
+    height: 1px;
+
+    display: block;
+
+    background:
+      linear-gradient(
+        to right,
+        rgba(var(--theory-accent-rgb), 0.42),
+        transparent
+      );
+  }
+
+
+  .theory-status {
+    --status-color: #606775;
+    --status-background: rgba(255, 255, 255, 0.52);
+    --status-border: rgba(255, 255, 255, 0.82);
+    --status-dot: #9aa0ad;
+    --status-glow: rgba(154, 160, 173, 0.10);
+
+    display: inline-flex;
+    align-items: center;
+
+    gap: 7px;
+
+    padding: 7px 10px;
+
+    color: var(--status-color);
+    background: var(--status-background);
+
+    border: 1px solid var(--status-border);
+    border-radius: 999px;
+
+    box-shadow:
+      0 6px 14px rgba(52, 62, 85, 0.06),
+      inset 0 1px 0 rgba(255, 255, 255, 0.86);
+
+    font-family: var(--font-ui);
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: 0.10em;
+    line-height: 1;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+
+  .theory-status::before {
+    content: "";
+
+    width: 6px;
+    aspect-ratio: 1;
+
+    display: block;
+
+    background: var(--status-dot);
+    border-radius: 50%;
+
+    box-shadow: 0 0 0 3px var(--status-glow);
+  }
+
+
+  .theory-status--leading {
+    --status-color: #966b35;
+    --status-background: rgba(210, 163, 96, 0.115);
+    --status-border: rgba(199, 145, 76, 0.20);
+    --status-dot: #bc8541;
+    --status-glow: rgba(188, 133, 65, 0.13);
+  }
+
+
+  .theory-status--possibility {
+    --status-color: #5877ad;
+    --status-background: rgba(111, 151, 220, 0.105);
+    --status-border: rgba(111, 151, 220, 0.19);
+    --status-dot: #6689c8;
+    --status-glow: rgba(102, 137, 200, 0.13);
+  }
+
+
+  .theory-status--legend {
+    --status-color: #626873;
+    --status-background: rgba(112, 119, 132, 0.09);
+    --status-border: rgba(112, 119, 132, 0.16);
+    --status-dot: #777e8a;
+    --status-glow: rgba(119, 126, 138, 0.12);
+  }
+
+
+  .theory-card__layout {
+    position: relative;
+    z-index: 1;
+
+    margin-top: clamp(22px, 3vw, 34px);
+
+    display: grid;
+    grid-template-columns:
+      minmax(0, 0.92fr)
+      minmax(320px, 1.08fr);
+    align-items: start;
+
+    gap: clamp(30px, 5vw, 68px);
+  }
+
+
+  .theory-step--grounded .theory-card__layout {
+    grid-template-columns:
+      minmax(0, 1.02fr)
+      minmax(330px, 0.98fr);
+  }
+
+
+  .theory-card__statement,
+  .theory-card__analysis {
+    min-width: 0;
+  }
+
+
+  .theory-card h3 {
+    max-width: 660px;
+
+    margin: 0;
+
+    color: #1d2029;
+
+    font-size: clamp(30px, 4vw, 46px);
+    line-height: 1.14;
+  }
+
+
+  .theory-step--grounded h3 {
+    font-size: clamp(36px, 4.8vw, 56px);
+  }
+
+
+  .theory-thesis {
+    max-width: 620px;
+
+    margin: 17px 0 0;
+
+    color: #454b59;
+
+    font-family: var(--font-ui);
+    font-size: clamp(16px, 1.75vw, 20px);
+    line-height: 1.72;
+    text-wrap: balance;
+  }
+
+
+  .theory-step--grounded .theory-thesis {
+    font-size: clamp(17px, 1.95vw, 22px);
+  }
+
+
+  .theory-copy {
+    margin: 1px 0 0;
+
+    color: #69707f;
+
+    font-family: var(--font-ui);
+    font-size: 14px;
+    line-height: 1.84;
+  }
+
+
+  .theory-evidence {
+    margin-top: clamp(24px, 3vw, 34px);
+    padding-top: 17px;
+
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+
+    gap: 12px 16px;
+
+    border-top: 1px solid rgba(65, 75, 99, 0.10);
+  }
+
+
+  .theory-evidence > p {
+    margin: 0;
+
+    color: #9298a5;
+
+    font-family: var(--font-ui);
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    line-height: 1.45;
+    text-transform: uppercase;
+  }
+
+
+  .theory-evidence__list {
+    display: flex;
+    flex-wrap: wrap;
+
+    gap: 6px;
+  }
+
+
+  .theory-evidence__list a {
+    min-width: 31px;
+
+    padding: 6px 7px;
+
+    color: var(--theory-accent);
+    background: rgba(var(--theory-accent-rgb), 0.075);
+
+    border: 1px solid rgba(var(--theory-accent-rgb), 0.14);
+    border-radius: 999px;
+
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.82);
+
+    font-family: var(--font-ui);
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    line-height: 1;
+    text-align: center;
+    text-decoration: none;
+
+    transition:
+      color 0.20s ease,
+      background 0.20s ease,
+      border-color 0.20s ease,
+      transform 0.20s var(--ease-out);
+  }
+
+
+  .theory-evidence__list a:hover {
+    color: #313744;
+    background: rgba(var(--theory-accent-rgb), 0.13);
+    border-color: rgba(var(--theory-accent-rgb), 0.22);
+
+    transform: translateY(-1px);
+  }
+
+
+  .theory-details {
+    margin: clamp(24px, 3vw, 34px) 0 0;
+    padding: 0;
+
+    border-top: 1px solid rgba(65, 75, 99, 0.10);
+  }
+
+
+  .theory-details div {
+    display: grid;
+    grid-template-columns: minmax(112px, 0.72fr) minmax(0, 1.28fr);
+    align-items: baseline;
+
+    gap: 17px;
+
+    padding: 13px 0;
+
+    border-bottom: 1px solid rgba(65, 75, 99, 0.065);
+  }
+
+
+  .theory-details div:last-child {
+    padding-bottom: 0;
+    border-bottom: 0;
+  }
+
+
+  .theory-details dt {
+    color: #9298a5;
+
+    font-family: var(--font-ui);
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    line-height: 1.45;
+    text-transform: uppercase;
+  }
+
+
+  .theory-details dd {
+    margin: 0;
+
+    color: #4d5361;
+
+    font-family: var(--font-ui);
+    font-size: 11px;
+    font-weight: 600;
+    line-height: 1.65;
+    text-align: right;
+  }
+
+
+  @media (max-width: 820px) {
+    .theories-overview,
+    .theory-card__layout,
+    .theory-step--grounded .theory-card__layout {
+      grid-template-columns: 1fr;
+    }
+
+    .theory-card__layout {
+      gap: 28px;
+    }
+  }
+
+
+  @media (max-width: 650px) {
+    .theories-shell {
+      padding: 22px 15px;
+
+      border-radius: 24px;
+    }
+
+    .theories-overview {
+      gap: 18px;
+
+      padding:
+        1px
+        3px
+        25px;
+    }
+
+    .theories-overview h3 {
+      font-size: 26px;
+    }
+
+    .theories-summary {
+      font-size: 13px;
+    }
+
+    .theories-list {
+      padding-left: 35px;
+
+      gap: 15px;
+    }
+
+    .theories-list::before {
+      left: 6px;
+    }
+
+    .theory-card,
+    .theory-step--grounded .theory-card {
+      padding: 22px 18px;
+
+      border-radius: 22px;
+    }
+
+    .theory-step__marker {
+      width: 15px;
+
+      top: 27px;
+      left: -36px;
+
+      box-shadow:
+        0 0 0 4px var(--theory-accent-faint),
+        0 7px 15px rgba(69, 79, 105, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 1);
+    }
+
+    .theory-card::after {
+      right: 12px;
+      bottom: -15px;
+
+      font-size: 84px;
+    }
+
+    .theory-card__layout {
+      margin-top: 21px;
+      gap: 24px;
+    }
+
+    .theory-card h3,
+    .theory-step--grounded h3 {
+      font-size: 30px;
+    }
+
+    .theory-thesis,
+    .theory-step--grounded .theory-thesis {
+      margin-top: 13px;
+
+      font-size: 15px;
+      line-height: 1.72;
+    }
+
+    .theory-copy {
+      font-size: 13px;
+    }
+
+    .theory-details div {
+      grid-template-columns: 1fr;
+
+      gap: 5px;
+    }
+
+    .theory-details dd {
+      text-align: left;
+    }
+  }
+
+
+  @supports not (
+    (backdrop-filter: blur(1px)) or
+    (-webkit-backdrop-filter: blur(1px))
+  ) {
+    .theories-shell,
+    .theory-card {
+      background-color: rgba(250, 250, 249, 0.94);
+    }
+  }
+
+  @media (max-width: 650px) {
+    .content-section {
+      padding-top: 54px;
+      scroll-margin-top: 145px;
+    }
+  }
+</style>

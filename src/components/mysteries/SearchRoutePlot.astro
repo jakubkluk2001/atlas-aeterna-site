@@ -1,0 +1,524 @@
+---
+import type { SearchRouteNode, SearchRouteRegion } from "./types";
+
+interface Props {
+  nodes: readonly SearchRouteNode[];
+  regions: readonly SearchRouteRegion[];
+  contourPaths: readonly string[];
+  routePath: string;
+  caption: string;
+  viewBox?: string;
+}
+
+const {
+  nodes,
+  regions,
+  contourPaths,
+  routePath,
+  caption,
+  viewBox = "0 0 800 340",
+} = Astro.props;
+---
+
+<figure class="search-plot-frame">
+  <div class="search-plot">
+    <span class="search-plot__grid" aria-hidden="true"></span>
+
+    <svg
+      class="search-plot__routes"
+      viewBox={viewBox}
+      preserveAspectRatio="none"
+      aria-hidden="true"
+    >
+      {contourPaths.map((path, index) => (
+        <path
+          class:list={[
+            "search-plot__contour",
+            index === 0 && "search-plot__contour--one",
+            index === 1 && "search-plot__contour--two",
+            index === 2 && "search-plot__contour--three",
+          ]}
+          d={path}
+        />
+      ))}
+
+      <path class="search-plot__route-glow" d={routePath} />
+      <path class="search-plot__route" d={routePath} />
+    </svg>
+
+    {regions.map((region) => (
+      <span
+        class:list={[
+          "search-plot__region",
+          `search-plot__region--${region.position}`,
+        ]}
+        aria-hidden="true"
+      >
+        {region.label}
+      </span>
+    ))}
+
+    {nodes.map((node) => (
+      <a
+        class:list={[
+          "search-plot__node",
+          `search-plot__node--${node.tone}`,
+          `search-plot__node--${node.placement}`,
+        ]}
+        style={`--node-x: ${node.x}; --node-y: ${node.y};`}
+        href={node.href}
+        aria-label={`${node.number}: ${node.label}, ${node.date}`}
+      >
+        <span class="search-plot__point" aria-hidden="true">{node.number}</span>
+        <span class="search-plot__label">
+          <strong>{node.label}</strong>
+          <span>{node.date}</span>
+        </span>
+      </a>
+    ))}
+  </div>
+
+  <figcaption>{caption}</figcaption>
+</figure>
+
+<style>
+  .search-plot-frame {
+    min-width: 0;
+
+    margin: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 11px;
+  }
+
+
+  .search-plot {
+    min-height: 338px;
+
+    position: relative;
+    isolation: isolate;
+
+    overflow: hidden;
+
+    background:
+      radial-gradient(
+        circle at 17% 78%,
+        rgba(218, 167, 99, 0.15),
+        transparent 27%
+      ),
+      radial-gradient(
+        circle at 78% 24%,
+        rgba(116, 166, 235, 0.15),
+        transparent 31%
+      ),
+      linear-gradient(
+        145deg,
+        rgba(237, 242, 250, 0.86),
+        rgba(248, 246, 243, 0.76)
+      );
+
+    border: 1px solid rgba(255, 255, 255, 0.88);
+    border-radius: clamp(18px, 2vw, 24px);
+
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.96),
+      inset 0 0 46px rgba(82, 96, 127, 0.055);
+  }
+
+
+  .search-plot::after {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+    z-index: 5;
+
+    background:
+      linear-gradient(
+        116deg,
+        rgba(255, 255, 255, 0.42),
+        transparent 23%,
+        transparent 73%,
+        rgba(255, 255, 255, 0.15)
+      );
+
+    pointer-events: none;
+  }
+
+
+  .search-plot__grid {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+
+    display: block;
+
+    opacity: 0.20;
+
+    background-image:
+      linear-gradient(
+        rgba(65, 76, 102, 0.13) 1px,
+        transparent 1px
+      ),
+      linear-gradient(
+        90deg,
+        rgba(65, 76, 102, 0.13) 1px,
+        transparent 1px
+      );
+
+    background-size: 42px 42px;
+
+    mask-image:
+      radial-gradient(
+        circle at 50% 50%,
+        black,
+        transparent 82%
+      );
+
+    -webkit-mask-image:
+      radial-gradient(
+        circle at 50% 50%,
+        black,
+        transparent 82%
+      );
+
+    pointer-events: none;
+  }
+
+
+  .search-plot__routes {
+    width: 100%;
+    height: 100%;
+
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+
+    overflow: visible;
+
+    pointer-events: none;
+  }
+
+
+  .search-plot__contour {
+    fill: none;
+    stroke: rgba(78, 86, 106, 0.10);
+    stroke-width: 1.1;
+    vector-effect: non-scaling-stroke;
+  }
+
+
+  .search-plot__contour--two {
+    opacity: 0.75;
+  }
+
+
+  .search-plot__contour--three {
+    opacity: 0.58;
+  }
+
+
+  .search-plot__route-glow,
+  .search-plot__route {
+    fill: none;
+    vector-effect: non-scaling-stroke;
+  }
+
+
+  .search-plot__route-glow {
+    stroke: rgba(119, 143, 193, 0.13);
+    stroke-width: 8;
+    filter: blur(3px);
+  }
+
+
+  .search-plot__route {
+    stroke: rgba(104, 122, 160, 0.42);
+    stroke-width: 1.6;
+    stroke-linecap: round;
+    stroke-dasharray: 5 6;
+  }
+
+
+  .search-plot__region {
+    position: absolute;
+    z-index: 1;
+
+    color: rgba(62, 69, 86, 0.20);
+
+    font-family: var(--font-ui);
+    font-size: 7px;
+    font-weight: 750;
+    letter-spacing: 0.17em;
+    text-transform: uppercase;
+
+    pointer-events: none;
+  }
+
+
+  .search-plot__region--west {
+    left: 5%;
+    top: 10%;
+  }
+
+
+  .search-plot__region--centre {
+    left: 39%;
+    bottom: 9%;
+  }
+
+
+  .search-plot__region--east {
+    right: 5%;
+    top: 9%;
+  }
+
+
+  .search-plot__node {
+    --search-node-accent: #858b99;
+    --search-node-rgb: 133, 139, 153;
+
+    position: absolute;
+    left: var(--node-x);
+    top: var(--node-y);
+    z-index: 4;
+
+    color: #4f5664;
+
+    text-decoration: none;
+
+    transform: translate(-50%, -50%);
+  }
+
+
+  .search-plot__point {
+    width: 27px;
+    aspect-ratio: 1;
+
+    display: grid;
+    place-items: center;
+
+    color: var(--search-node-accent);
+    background:
+      radial-gradient(
+        circle at 31% 26%,
+        white,
+        rgba(var(--search-node-rgb), 0.24) 48%,
+        rgba(var(--search-node-rgb), 0.54)
+      );
+
+    border: 1px solid rgba(255, 255, 255, 0.96);
+    border-radius: 50%;
+
+    box-shadow:
+      0 0 0 6px rgba(var(--search-node-rgb), 0.065),
+      0 9px 19px rgba(62, 75, 105, 0.17),
+      inset 0 1px 0 white;
+
+    font-family: var(--font-ui);
+    font-size: 6px;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+
+    transition:
+      transform 0.24s var(--ease-out),
+      box-shadow 0.24s ease;
+  }
+
+
+  .search-plot__label {
+    width: max-content;
+    max-width: 126px;
+
+    position: absolute;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 3px;
+
+    pointer-events: none;
+  }
+
+
+  .search-plot__label strong {
+    color: #3f4552;
+
+    font-family: var(--font-ui);
+    font-size: 9px;
+    font-weight: 750;
+    letter-spacing: 0.055em;
+    line-height: 1.25;
+  }
+
+
+  .search-plot__label span {
+    color: #9298a5;
+
+    font-family: var(--font-ui);
+    font-size: 7px;
+    font-weight: 650;
+    letter-spacing: 0.07em;
+    line-height: 1.3;
+  }
+
+
+  .search-plot__node--above .search-plot__label {
+    left: 50%;
+    bottom: calc(100% + 13px);
+
+    text-align: center;
+
+    transform: translateX(-50%);
+  }
+
+
+  .search-plot__node--below .search-plot__label {
+    left: 50%;
+    top: calc(100% + 13px);
+
+    text-align: center;
+
+    transform: translateX(-50%);
+  }
+
+
+  .search-plot__node--left .search-plot__label {
+    right: calc(100% + 13px);
+    top: 50%;
+
+    text-align: right;
+
+    transform: translateY(-50%);
+  }
+
+
+  .search-plot__node--right .search-plot__label {
+    left: calc(100% + 13px);
+    top: 50%;
+
+    text-align: left;
+
+    transform: translateY(-50%);
+  }
+
+
+  .search-plot__node:hover .search-plot__point,
+  .search-plot__node:focus-visible .search-plot__point {
+    transform: scale(1.08);
+
+    box-shadow:
+      0 0 0 8px rgba(var(--search-node-rgb), 0.085),
+      0 12px 23px rgba(62, 75, 105, 0.20),
+      inset 0 1px 0 white;
+  }
+
+
+  .search-plot__node--gold {
+    --search-node-accent: #a9793d;
+    --search-node-rgb: 190, 143, 80;
+  }
+
+
+  .search-plot__node--blue {
+    --search-node-accent: #6383bb;
+    --search-node-rgb: 104, 140, 201;
+  }
+
+
+  .search-plot__node--violet {
+    --search-node-accent: #8069a6;
+    --search-node-rgb: 143, 116, 184;
+  }
+
+
+  .search-plot__node--neutral {
+    --search-node-accent: #737a87;
+    --search-node-rgb: 125, 132, 146;
+  }
+
+
+  .search-plot-frame figcaption {
+    margin: 0;
+
+    color: #949aa6;
+
+    font-family: var(--font-ui);
+    font-size: 9px;
+    line-height: 1.55;
+    text-align: center;
+  }
+
+
+  @media (max-width: 650px) {
+    .search-plot {
+      min-height: auto;
+
+      padding: 19px;
+
+      display: grid;
+
+      gap: 12px;
+    }
+
+    .search-plot__routes,
+    .search-plot__region {
+      display: none;
+    }
+
+    .search-plot__grid {
+      background-size: 34px 34px;
+    }
+
+    .search-plot__node {
+      width: 100%;
+
+      position: relative;
+      left: auto;
+      top: auto;
+
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr);
+      align-items: center;
+
+      gap: 13px;
+
+      padding: 11px 12px;
+
+      background: rgba(255, 255, 255, 0.43);
+
+      border: 1px solid rgba(255, 255, 255, 0.68);
+      border-radius: 16px;
+
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.84);
+
+      transform: none;
+    }
+
+    .search-plot__point {
+      width: 29px;
+    }
+
+    .search-plot__label,
+    .search-plot__node--above .search-plot__label,
+    .search-plot__node--below .search-plot__label,
+    .search-plot__node--left .search-plot__label,
+    .search-plot__node--right .search-plot__label {
+      width: auto;
+      max-width: none;
+
+      position: static;
+
+      text-align: left;
+
+      transform: none;
+    }
+
+    .search-plot__label strong {
+      font-size: 10px;
+    }
+
+  }
+</style>
