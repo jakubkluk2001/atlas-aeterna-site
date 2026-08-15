@@ -4,9 +4,9 @@ import type { KeyFigure } from "./types";
 
 interface Props {
   figures: readonly KeyFigure[];
-  id?: string;
-  number?: string;
-  title?: string;
+  id: string;
+  number: string;
+  title: string;
   overline: string;
   overviewTitle: string;
   summary: string;
@@ -15,9 +15,9 @@ interface Props {
 
 const {
   figures,
-  id = "key-figures",
-  number = "08",
-  title = "Key Figures",
+  id,
+  number,
+  title,
   overline,
   overviewTitle,
   summary,

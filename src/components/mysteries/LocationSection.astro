@@ -10,9 +10,9 @@ interface MapConfig {
 }
 
 interface Props {
-  id?: string;
-  number?: string;
-  title?: string;
+  id: string;
+  number: string;
+  title: string;
   mapImage?: string;
   alt: string;
   caption: string;
@@ -20,9 +20,9 @@ interface Props {
 }
 
 const {
-  id = "location",
-  number = "01",
-  title = "Location",
+  id,
+  number,
+  title,
   mapImage = "/blank-map-world.svg",
   alt,
   caption,

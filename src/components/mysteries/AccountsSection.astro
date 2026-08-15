@@ -4,9 +4,9 @@ import type { HistoricalAccount } from "./types";
 
 interface Props {
   accounts: readonly HistoricalAccount[];
-  id?: string;
-  number?: string;
-  title?: string;
+  id: string;
+  number: string;
+  title: string;
   overline: string;
   overviewTitle: string;
   summary: string;
@@ -15,9 +15,9 @@ interface Props {
 
 const {
   accounts,
-  id = "the-accounts",
-  number = "07",
-  title = "The Accounts",
+  id,
+  number,
+  title,
   overline,
   overviewTitle,
   summary,

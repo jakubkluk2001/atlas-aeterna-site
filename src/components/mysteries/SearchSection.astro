@@ -21,9 +21,9 @@ interface SearchDashboard {
 interface Props {
   records: readonly SearchRecord[];
   dashboard: SearchDashboard;
-  id?: string;
-  number?: string;
-  title?: string;
+  id: string;
+  number: string;
+  title: string;
   overline: string;
   overviewTitle: string;
   summary: string;
@@ -34,9 +34,9 @@ interface Props {
 const {
   records,
   dashboard,
-  id = "the-search",
-  number = "05",
-  title = "The Search",
+  id,
+  number,
+  title,
   overline,
   overviewTitle,
   summary,

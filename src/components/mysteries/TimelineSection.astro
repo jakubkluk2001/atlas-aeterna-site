@@ -9,16 +9,16 @@ interface TimelineEvent {
 
 interface Props {
   events: readonly TimelineEvent[];
-  id?: string;
-  number?: string;
-  title?: string;
+  id: string;
+  number: string;
+  title: string;
 }
 
 const {
   events,
-  id = "timeline",
-  number = "02",
-  title = "Timeline",
+  id,
+  number,
+  title,
 } = Astro.props;
 ---
 

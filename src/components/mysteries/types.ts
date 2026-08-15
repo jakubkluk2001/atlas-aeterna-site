@@ -1,3 +1,48 @@
+export interface CaseSectionDefinition {
+  id: string;
+  title: string;
+}
+
+export interface CaseSection extends CaseSectionDefinition {
+  number: string;
+}
+
+export const createCaseSections = (
+  sections: readonly CaseSectionDefinition[]
+): readonly CaseSection[] => {
+  if (sections.length === 0 || sections[0].id !== "overview") {
+    throw new Error('Case sections must begin with the "overview" section.');
+  }
+
+  const ids = new Set<string>();
+
+  return sections.map((section, index) => {
+    if (ids.has(section.id)) {
+      throw new Error(`Duplicate case section id: ${section.id}`);
+    }
+
+    ids.add(section.id);
+
+    return {
+      ...section,
+      number: String(index).padStart(2, "0"),
+    };
+  });
+};
+
+export const getCaseSection = (
+  sections: readonly CaseSection[],
+  id: string
+): CaseSection => {
+  const section = sections.find((item) => item.id === id);
+
+  if (!section) {
+    throw new Error(`Unknown case section id: ${id}`);
+  }
+
+  return section;
+};
+
 export type EvidenceFit = "cover" | "contain";
 export type EvidenceTone = "blue" | "gold" | "violet" | "neutral";
 export type EvidenceStatusTone =

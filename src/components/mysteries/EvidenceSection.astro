@@ -14,9 +14,9 @@ const evidenceStatuses = {
 interface Props {
   featured?: EvidenceItem | null;
   items: readonly EvidenceItem[];
-  id?: string;
-  number?: string;
-  title?: string;
+  id: string;
+  number: string;
+  title: string;
   overline: string;
   overviewTitle: string;
   summary: string;
@@ -25,9 +25,9 @@ interface Props {
 const {
   featured = null,
   items,
-  id = "evidence",
-  number = "03",
-  title = "Evidence",
+  id,
+  number,
+  title,
   overline,
   overviewTitle,
   summary,

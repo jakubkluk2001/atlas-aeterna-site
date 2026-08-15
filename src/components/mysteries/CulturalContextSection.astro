@@ -22,8 +22,8 @@ interface Props {
   topics: readonly CulturalContextTopic[];
   hero: CulturalHero;
   reading: CulturalReading;
-  id?: string;
-  number?: string;
+  id: string;
+  number: string;
   title: string;
   overline: string;
   overviewTitle: string;
@@ -35,8 +35,8 @@ const {
   topics,
   hero,
   reading,
-  id = "cultural-context",
-  number = "06",
+  id,
+  number,
   title,
   overline,
   overviewTitle,

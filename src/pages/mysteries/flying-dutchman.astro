@@ -4,12 +4,16 @@ import CaseHeader from "../../components/mysteries/CaseHeader.astro";
 import CaseIndex from "../../components/mysteries/CaseIndex.astro";
 import LocationSection from "../../components/mysteries/LocationSection.astro";
 import TimelineSection from "../../components/mysteries/TimelineSection.astro";
+import {
+  createCaseSections,
+  getCaseSection,
+} from "../../components/mysteries/types";
 
-const caseSections = [
-  { number: "00", label: "Overview", id: "overview" },
-  { number: "01", label: "Location", id: "location" },
-  { number: "02", label: "Timeline", id: "timeline" },
-] as const;
+const caseSections = createCaseSections([
+  { title: "Overview", id: "overview" },
+  { title: "Location", id: "location" },
+  { title: "Timeline", id: "timeline" },
+]);
 
 const timelineEvents = [
   {
@@ -69,6 +73,7 @@ const timelineEvents = [
 >
   <article class="case-page">
     <CaseHeader
+      id={getCaseSection(caseSections, "overview").id}
       title="Flying Dutchman"
       intro="The Flying Dutchman is one of maritime folklore’s most enduring legends, a phantom ship said to wander the seas without rest, most famously associated with the waters around the Cape of Good Hope."
       titleVariant="long"
@@ -77,6 +82,7 @@ const timelineEvents = [
     <CaseIndex sections={caseSections} />
 
     <LocationSection
+      {...getCaseSection(caseSections, "location")}
       alt="World map showing the approximate region around the Cape of Good Hope associated with the Flying Dutchman legend"
       caption="Approximate region associated with the Flying Dutchman legend in the waters around the Cape of Good Hope."
       map={{
@@ -88,7 +94,10 @@ const timelineEvents = [
       }}
     />
 
-    <TimelineSection events={timelineEvents} />
+    <TimelineSection
+      {...getCaseSection(caseSections, "timeline")}
+      events={timelineEvents}
+    />
   </article>
 </BaseLayout>
 

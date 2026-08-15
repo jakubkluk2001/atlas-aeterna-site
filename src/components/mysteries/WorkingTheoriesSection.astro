@@ -10,9 +10,9 @@ const theoryStatuses = {
 
 interface Props {
   theories: readonly TheoryItem[];
-  id?: string;
-  number?: string;
-  title?: string;
+  id: string;
+  number: string;
+  title: string;
   overline: string;
   overviewTitle: string;
   summary: string;
@@ -21,9 +21,9 @@ interface Props {
 
 const {
   theories,
-  id = "working-theories",
-  number = "04",
-  title = "Working Theories",
+  id,
+  number,
+  title,
   overline,
   overviewTitle,
   summary,

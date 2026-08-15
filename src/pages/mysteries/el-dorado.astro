@@ -21,6 +21,10 @@ import type {
   HistoricalAccount,
   KeyFigure,
 } from "../../components/mysteries/types";
+import {
+  createCaseSections,
+  getCaseSection,
+} from "../../components/mysteries/types";
 
 const featuredEvidence: EvidenceItem = {
   id: "muisca-raft",
@@ -320,17 +324,17 @@ const workingTheories: TheoryItem[] = [
 ];
 
 
-const caseSections = [
-  { number: "00", label: "Overview", id: "overview" },
-  { number: "01", label: "Location", id: "location" },
-  { number: "02", label: "Timeline", id: "timeline" },
-  { number: "03", label: "Evidence", id: "evidence" },
-  { number: "04", label: "Working Theories", id: "working-theories" },
-  { number: "05", label: "The Search", id: "the-search" },
-  { number: "06", label: "The Muisca World", id: "muisca-world" },
-  { number: "07", label: "The Accounts", id: "the-accounts" },
-  { number: "08", label: "Key Figures", id: "key-figures" },
- ] as const;
+const caseSections = createCaseSections([
+  { title: "Overview", id: "overview" },
+  { title: "Location", id: "location" },
+  { title: "Timeline", id: "timeline" },
+  { title: "Evidence", id: "evidence" },
+  { title: "Working Theories", id: "working-theories" },
+  { title: "The Search", id: "the-search" },
+  { title: "The Muisca World", id: "muisca-world" },
+  { title: "The Accounts", id: "the-accounts" },
+  { title: "Key Figures", id: "key-figures" },
+]);
 
 const timelineEvents = [
   {
@@ -343,7 +347,7 @@ const timelineEvents = [
     date: "1537",
     title: "The Spanish Encounter the Muisca",
     description:
-      "Gonzalo Jiménez de Quesada and his expedition enter Muisca territory, beginning Spanish contact with the culture and region that would become central to the El Dorado legend.",
+      "With stories of El Dorado already circulating, Gonzalo Jiménez de Quesada and his expedition enter Muisca territory, bringing the Spanish into the region that would become central to the legend.",
   },
   {
     date: "1572",
@@ -355,19 +359,19 @@ const timelineEvents = [
     date: "1584–1595",
     title: "The Legend Moves East",
     description:
-      "Beginning with Antonio de Berrío’s expeditions, the search pushes through the llanos and Orinoco toward Guiana, where El Dorado becomes increasingly associated with Manoa, a great city or kingdom of extraordinary wealth.",
+      "With Antonio de Berrío's expeditions, the search pushes through the Llanos and Orinoco towards Guiana, where El Dorado becomes increasingly associated with Manoa, a great city of extraordinary wealth.",
   },
   {
-    date: "1595–1618",
+    date: "1595, 1617–1618",
     title: "Raleigh’s Search for El Dorado",
     description:
-      "Walter Raleigh leads two expeditions into Guiana in pursuit of El Dorado, exploring the Orinoco and searching for the great golden city of Manoa. His final expedition ends in disaster.",
+      "Walter Raleigh mounts two expeditions to Guiana in pursuit of El Dorado, exploring the Orinoco and searching for the great golden city of Manoa. His final expedition ends in disaster.",
   },
   {
     date: "1909–1912",
     title: "Guatavita Is Drained",
     description:
-      "A British company uses an engineered tunnel to lower Lake Guatavita in search of its legendary treasure. By 1912 much of the water has been removed, but the exposed lakebed hardens and frustrates excavation.",
+      "A British company digs a tunnel beneath Lake Guatavita to lower its waters in search of the legendary treasure. By 1912 the lake is almost completely drained, but the exposed mud hardens like concrete, making excavation difficult.",
   },
   {
     date: "1969",
@@ -1430,6 +1434,7 @@ const keyFigures: KeyFigure[] = [
     <!-- -------------------------------- -->
 
     <CaseHeader
+      id={getCaseSection(caseSections, "overview").id}
       title="El Dorado"
       intro="El Dorado is one of history’s most enduring legends, a tale of gold, discovery and a hidden land of extraordinary wealth somewhere in the vast landscapes of South America."
     />
@@ -1437,6 +1442,7 @@ const keyFigures: KeyFigure[] = [
     <CaseIndex sections={caseSections} />
 
     <LocationSection
+      {...getCaseSection(caseSections, "location")}
       alt="World map showing the approximate region associated with El Dorado"
       caption="Approximate region associated with the origins of the El Dorado legend in present-day Colombia."
       map={{
@@ -1448,7 +1454,10 @@ const keyFigures: KeyFigure[] = [
       }}
     />
 
-    <TimelineSection events={timelineEvents} />
+    <TimelineSection
+      {...getCaseSection(caseSections, "timeline")}
+      events={timelineEvents}
+    />
 
 
     <!-- -------------------------------- -->
@@ -1456,6 +1465,7 @@ const keyFigures: KeyFigure[] = [
     <!-- -------------------------------- -->
 
     <EvidenceSection
+      {...getCaseSection(caseSections, "evidence")}
       featured={featuredEvidence}
       items={supportingEvidence}
       overline="The surviving record"
@@ -1468,6 +1478,7 @@ const keyFigures: KeyFigure[] = [
     <!-- -------------------------------- -->
 
     <WorkingTheoriesSection
+      {...getCaseSection(caseSections, "working-theories")}
       theories={workingTheories}
       overline="Interpreting the record"
       overviewTitle="What was El Dorado?"
@@ -1479,6 +1490,7 @@ const keyFigures: KeyFigure[] = [
     <!-- -------------------------------- -->
 
     <SearchSection
+      {...getCaseSection(caseSections, "the-search")}
       records={searchRecords}
       overline="Attempts to resolve the case"
       overviewTitle="What happened when people went looking?"
@@ -1509,9 +1521,7 @@ const keyFigures: KeyFigure[] = [
     <!-- -------------------------------- -->
 
     <CulturalContextSection
-      id="muisca-world"
-      number="06"
-      title="The Muisca World"
+      {...getCaseSection(caseSections, "muisca-world")}
       overline="The culture beneath the legend"
       overviewTitle="Gold meant something very different here"
       summary="The Muisca were not a hidden golden empire but a network of highland chiefdoms. Their metalwork, sacred places, exchange systems and political ceremonies formed the real cultural world from which El Dorado was later reconstructed."
@@ -1542,9 +1552,7 @@ const keyFigures: KeyFigure[] = [
     <!-- -------------------------------- -->
 
     <AccountsSection
-      id="the-accounts"
-      number="07"
-      title="The Accounts"
+      {...getCaseSection(caseSections, "the-accounts")}
       accounts={historicalAccounts}
       overline="The surviving testimony"
       overviewTitle="What did the record actually say?"
@@ -1557,9 +1565,7 @@ const keyFigures: KeyFigure[] = [
     <!-- -------------------------------- -->
 
     <KeyFiguresSection
-      id="key-figures"
-      number="08"
-      title="Key Figures"
+      {...getCaseSection(caseSections, "key-figures")}
       figures={keyFigures}
       overline="People in the case"
       overviewTitle="The searchers, writers and later investigators"

@@ -1,9 +1,5 @@
 ---
-interface CaseSection {
-  number: string;
-  label: string;
-  id: string;
-}
+import type { CaseSection } from "./types";
 
 interface Props {
   sections: readonly CaseSection[];
@@ -44,7 +40,7 @@ const { sections } = Astro.props;
             aria-current={index === 0 ? "location" : undefined}
           >
             <span>{section.number}</span>
-            <span>{section.label}</span>
+            <span>{section.title}</span>
           </a>
         ))}
       </div>
