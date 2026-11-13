@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 280" width="800" height="280">
+<g stroke-linecap="round" stroke-linejoin="round">
+  <defs>
+    <linearGradient id="grail-vellum" x1="200" y1="90" x2="580" y2="216" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#f1e0bb" stop-opacity=".62"/>
+      <stop offset="1" stop-color="#e9d4ac" stop-opacity=".34"/>
+    </linearGradient>
+    <linearGradient id="grail-metal" x1="303" y1="96" x2="502" y2="175" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#bc935c"/>
+      <stop offset=".23" stop-color="#ecd2a0"/>
+      <stop offset=".5" stop-color="#f3d9a2"/>
+      <stop offset=".73" stop-color="#d9b382"/>
+      <stop offset="1" stop-color="#b78c5c"/>
+    </linearGradient>
+    <linearGradient id="grail-ink" x1="146" x2="654" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#a98660" stop-opacity="0"/>
+      <stop offset=".23" stop-color="#a98660" stop-opacity=".48"/>
+      <stop offset=".74" stop-color="#a98660" stop-opacity=".48"/>
+      <stop offset="1" stop-color="#a98660" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <path d="M154 213c137-12 327-14 491 1m-428 12c118-9 270-11 377-4" fill="none" stroke="url(#grail-ink)" stroke-width="1.4"/>
+  <g stroke="#ac8e68" stroke-width="1.35" opacity=".72">
+    <path d="M183 193l61-67 113-31 58 19 68-42 98 23 41 78-71 25-135-19-51 32z" fill="url(#grail-vellum)"/>
+    <path d="M188 196l177 20 52-30 135 18 68-27m-427 22l171 20 54-30 135 18 58-23" fill="none" opacity=".62"/>
+    <path d="M206 187l55-54 94-27 49 14-46 81zM435 119l49-35 88 20 35 63-59 21-120-16z" stroke-width="1" fill="none" opacity=".73"/>
+    <path d="M260 144l74-22m-81 31 70-19m-82 29 75-19m-82 29 71-16m-80 25 64-14m205-63 57 15m-49-7 57 15m-49-5 57 14m-52-4 59 15m-57-4 64 15m-57-4 61 13" fill="none" stroke="#987851" opacity=".58"/>
+  </g>
+  <g stroke="#7f5f3c" stroke-width="1.7">
+    <path d="M387 138h26v37c0 8 5 12 11 16h-48c6-4 11-8 11-16z" fill="url(#grail-metal)"/>
+    <path d="M396 147v29c0 6-2 10-6 15m13-43v29c0 6 2 11 4 14" fill="none" stroke="#715235" opacity=".49" stroke-width="1.45"/>
+    <path d="M370 196c4-6 12-9 30-9s26 3 30 9l19 6v7c-26 9-72 9-98 0v-7z" fill="url(#grail-metal)"/>
+    <path d="M351 203c26 9 72 9 98 0" fill="none"/>
+    <path d="M382 157c5-3 31-3 36 0v6c-9 5-27 5-36 0z" fill="#dfb87d"/>
+    <path d="M312 75c4 38 28 73 67 80 14 3 28 3 42 0 39-7 63-42 67-80z" fill="url(#grail-metal)"/>
+    <path d="M326 97c9 27 27 45 53 52m95-52c-9 27-27 45-53 52" fill="none" stroke="#926a40" stroke-width="1.5" opacity=".69"/>
+    <path d="M325 105c35 11 115 11 150 0m-147 7c34 10 110 10 144 0" fill="none" stroke="#8e693e" stroke-width="1.2"/>
+    <path d="M346 118l6 5 7-4 7 6 8-4 8 6 9-5 9 5 9-5 9 5 8-6 8 4 7-6 7 4 6-5" fill="none" stroke="#9b744c" stroke-width="1.4"/>
+    <path d="M356 131c23 10 65 10 88 0" fill="none" stroke="#fcdfaa" stroke-width="2"/>
+    <ellipse cx="400" cy="75" rx="88" ry="16" fill="#f3ddb1"/>
+    <ellipse cx="400" cy="76" rx="78" ry="9.6" fill="#ac835c" stroke="#8f6c45" stroke-width="1.4"/>
+    <path d="M331 78c34-10 104-10 138 0m-143-9c29-9 110-11 146-1" fill="none" stroke="#fff0cc" opacity=".86" stroke-width="1.4"/>
+    <path d="M313 83c33 16 141 16 174 0" fill="none" stroke="#fff0cc" stroke-width="1.65" opacity=".75"/>
+  </g>
+</g>
+</svg>

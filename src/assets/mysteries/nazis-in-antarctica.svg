@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 280" width="800" height="280">
+<g fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <defs>
+    <linearGradient id="antarctica-wall" x1="0" y1="0" x2="0" y2="1">
+      <stop stop-color="#f3f8fd"/>
+      <stop offset=".55" stop-color="#cbdcec"/>
+      <stop offset="1" stop-color="#a1bfd7"/>
+    </linearGradient>
+    <linearGradient id="antarctica-water" x1="136" x2="668" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#698cad" stop-opacity="0"/>
+      <stop offset=".23" stop-color="#698cad" stop-opacity=".51"/>
+      <stop offset=".72" stop-color="#698cad" stop-opacity=".48"/>
+      <stop offset="1" stop-color="#698cad" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <path d="m138 162 51-16 35 3 48-30 20 3 36-21 18 2 75-36 24 8 62-19 40 9 37-10 80 21v98H139Z" fill="#f2f6fb" stroke="#9bb6d1" stroke-width="1.55"/>
+  <g stroke="#89a6c3" stroke-width="1.15" opacity=".71">
+    <path d="m192 147 33 3 50-24 18 2 51-25 45-5 23-15 33-4 48-17 49 9 55-11 39 13"/>
+    <path d="m275 126 36-8 20-5 22 2 39-20 36-1 46-20 24-1 29 7 45-9 62 10"/>
+    <path d="m376 109 27-4 36-12 30-1 25-8 42 3 43-8 50 9m-285 29 20 5 45-12 31-6"/>
+  </g>
+  <path d="m308 142 25-12 16 2 19-16 27 5 27-14 29 4 17-10 34 4 18-9 53 6 27-8 60 11v65l-29 15-34-3-18 6-32-5-26 9-27-7-23 7-38-7-22 5-19-8-27 5-27-11-37 4-17-9Z" fill="url(#antarctica-wall)" stroke="#7c9fbe" stroke-width="1.85"/>
+  <path d="m308 142 25-12 16 2 19-16 27 5 27-14 29 4 17-10 34 4 18-9 53 6 27-8 60 11-22 10-25-3-15 8-36-6-18 8-25-3-18 8-25-7-33 9-20-4-23 12-25-6-26 12-24-3-25 9-24-4Z" fill="#f5faff" stroke="#9ab6d3" stroke-width="1.45"/>
+  <path d="m340 152 8 21 19-7-3-19 18-6 5 28 25 11-8-36 12-5 15 6 2 17 17 15-1-39 14-5v16l15 13 3 19 15 3 5-33 11 7 4-15 15-5 13 16-1 29 12 2 12-16 5-38 15-8 15 9-3 22 11 22 17-6 10-43 13 3 12 20-3 18 24 5 12-12 7-40" fill="#b4ccdf" fill-opacity=".66" stroke="#85a7c3" stroke-width="1.22"/>
+  <g stroke="#718fac" stroke-width="1.3">
+    <path d="m328 144 6 13-3 13m24-27 6 13 1 15m21-33 4 20 14 11m8-37 7 21-2 21m17-41 6 10 3 29m15-41 5 10m4 12 5 6 1 18m27-41-4 11m26-18-1 19 9 13 2 17m10-42 10 14 1 15m18-33-3 12-6 10-1 23m26-44 1 9-8 16-2 20m25-46-3 11 5 9 2 11m31-37-8 19 1 11m13-28 2 16 11 8-2 12m19-27 6 13m17-20-1 18-8 10m-289 13 16 4m27-2 12 3m32-2 19 5m53-2 17-4m30 2 17-2"/>
+  </g>
+  <g stroke="url(#antarctica-water)" stroke-width="1.4">
+    <path d="M136 179c47 5 80 1 123 4m80 10c53-5 72 5 117 6 45 2 107-4 207-3"/>
+    <path d="M145 198c48-2 84-1 119 3 49 5 95 7 137 5 105-5 160-7 260 0m-487 2c44-1 74-3 117 1m71 9c51-3 105-4 149-3m19 5 93-3"/>
+    <path d="M174 216c54 7 106 4 147-1m-175 9c58-4 96 1 146 0m237-25c47-2 92 0 137 1"/>
+  </g>
+  <g fill="#e9f4fc" stroke="#89aac6" stroke-width="1.3">
+    <path d="m385 207 17-7 36-2 20 4-14 5-38 4Z"/>
+    <path d="m493 214 11-5 24-3 12 7-23 5Z"/>
+    <path d="m568 202 22-7 22 3 14 4-13 5-27 2Z"/>
+    <path d="m318 219 20-5 22 1 10 4-17 4-23-1Z"/>
+    <path d="m619 215 13-5 21 3-3 4-22 2Z"/>
+  </g>
+  <g stroke="#597b99" stroke-width="1.7">
+    <path d="M208 185l8-9h116l14-9c-4 17-10 27-25 33-39 5-90 4-116-2l-8-14Z" fill="#8baac2"/>
+    <path d="m202 191 35 2c28 2 63 2 107-15m-133 17c35 6 79 5 114 0"/>
+    <path d="M219 177v-9h25l5-10h12v-10h32v7h14l5 14 16 3v4Z" fill="#e7eff7"/>
+    <path d="M259 156h51m-61 6h57m-87 9 24 1h67"/>
+    <path d="M268 149l1-19 12-2v21Z" fill="#a2bdd2"/>
+    <path d="M267 132v-5l15-2v5Z" fill="#6c8ea9"/>
+    <path d="M238 170l-2-42m51 32 13-38m-64 7 64-7m-65 12 21 27m42-35 26 44m-25-47v-6m-66 17 9-1m54-4 11-1" stroke-width="1.24"/>
+    <path d="M263 153h5m4 0h5m4 0h5m-53 23h4m13 10h4m9 0h4m10 0h4m10-1h4m9-1h4m10-2h4" stroke-width="1.7"/>
+  </g>
+  <path d="M270 120c-12-3-10-8-17-11s-19 0-27-7m56 14c-7-4-4-9-11-13-8-5-18 0-25-9" stroke="#9bb5ce" stroke-width="1.25" opacity=".67"/>
+  <path d="M155 209c26 3 64-6 80-4 19 3 53 3 102 1" stroke="url(#antarctica-water)" stroke-width="1.6"/>
+</g>
+</svg>

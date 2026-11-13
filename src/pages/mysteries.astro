@@ -1,1182 +1,172 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-
-type CaseAccent =
-  | "gold"
-  | "amber"
-  | "blue"
-  | "teal"
-  | "violet"
-  | "rose"
-  | "ice"
-  | "sage";
-
-interface MysteryCase {
-  title: string;
-  slug: string;
-  accent: CaseAccent;
-}
-
-/*
-  Add future cases here by copying one object and changing its
-  title, slug and accent. The grid and numbering update automatically.
-*/
-const caseFiles: MysteryCase[] = [
-  {
-    title: "Alexander the Great’s Tomb",
-    slug: "alexander-the-greats-tomb",
-    accent: "gold"
-  },
-  {
-    title: "Amber Room",
-    slug: "amber-room",
-    accent: "amber"
-  },
-  {
-    title: "Ark of the Covenant",
-    slug: "ark-of-the-covenant",
-    accent: "violet"
-  },
-  {
-    title: "Atlantis",
-    slug: "atlantis",
-    accent: "teal"
-  },
-  {
-    title: "Bermuda Triangle",
-    slug: "bermuda-triangle",
-    accent: "blue"
-  },
-  {
-    title: "Curse of Tutankhamun",
-    slug: "curse-of-tutankhamun",
-    accent: "amber"
-  },
-  {
-    title: "D. B. Cooper",
-    slug: "d-b-cooper",
-    accent: "ice"
-  },
-  {
-    title: "Dragons",
-    slug: "dragons",
-    accent: "rose"
-  },
-  {
-    title: "El Dorado",
-    slug: "el-dorado",
-    accent: "gold"
-  },
-  {
-    title: "Flor de la Mar",
-    slug: "flor-de-la-mar",
-    accent: "blue"
-  },
-  {
-    title: "Flying Dutchman",
-    slug: "flying-dutchman",
-    accent: "teal"
-  },
-  {
-    title: "Holy Grail",
-    slug: "holy-grail",
-    accent: "gold"
-  },
-  {
-    title: "Knights Templar Treasure",
-    slug: "knights-templar-treasure",
-    accent: "rose"
-  },
-  {
-    title: "Lost City of Z",
-    slug: "lost-city-of-z",
-    accent: "sage"
-  },
-  {
-    title: "Nazi Gold Train",
-    slug: "nazi-gold-train",
-    accent: "amber"
-  },
-  {
-    title: "Oak Island",
-    slug: "oak-island",
-    accent: "blue"
-  },
-  {
-    title: "Roswell Incident",
-    slug: "roswell-incident",
-    accent: "violet"
-  },
-  {
-    title: "Sea Peoples",
-    slug: "sea-peoples",
-    accent: "teal"
-  },
-  {
-    title: "Voynich Manuscript",
-    slug: "voynich-manuscript",
-    accent: "violet"
-  },
-  {
-    title: "Woman in White",
-    slug: "woman-in-white",
-    accent: "ice"
-  }
-];
+import { mysteryCases } from "../data/mystery-cases";
 ---
 
 <BaseLayout
+  sectionPlaceholder
   title="Mysteries | Atlas Aeterna"
   description="Explore lost treasures, legendary places, unexplained events and enduring mysteries with Atlas Aeterna."
 >
-  <section class="mysteries-page">
-    <!-- -------------------------------- -->
-    <!-- COLLECTION HEADER                -->
-    <!-- -------------------------------- -->
+  <section class="mysteries-index" aria-labelledby="mysteries-title">
+    <h1 id="mysteries-title">Mysteries</h1>
 
-    <header class="collection-header">
-      <svg
-        class="contour-lines contour-lines--left"
-        viewBox="0 0 620 620"
-        fill="none"
-        aria-hidden="true"
-      >
-        <path d="M-36 448C42 357 98 386 158 314C216 245 221 157 318 112C414 67 499 107 656 -14" />
-        <path d="M-18 485C63 396 128 418 190 346C254 270 263 188 354 143C450 96 529 131 651 39" />
-        <path d="M7 523C85 446 159 453 224 384C294 311 304 225 390 182C476 139 548 155 644 95" />
-        <path d="M48 562C124 504 189 499 260 432C334 363 349 284 426 241C500 200 562 204 637 164" />
-      </svg>
+    <ul class="case-grid" aria-label="Mystery cases">
+      {mysteryCases.map((caseFile) => {
+        const Card = caseFile.published ? "a" : "div";
 
-      <div class="mystery-object" aria-hidden="true">
-        <span class="mystery-object__halo"></span>
-        <span class="mystery-object__lens"></span>
-        <span class="mystery-object__ring mystery-object__ring--outer"></span>
-        <span class="mystery-object__ring mystery-object__ring--middle"></span>
-        <span class="mystery-object__ring mystery-object__ring--inner"></span>
-        <span class="mystery-object__axis"></span>
-        <span class="mystery-object__node mystery-object__node--one"></span>
-        <span class="mystery-object__node mystery-object__node--two"></span>
-      </div>
-
-      <div class="collection-header__content">
-        <h1>Mysteries</h1>
-      </div>
-
-      <span class="edge-mark edge-mark--top-left" aria-hidden="true"></span>
-      <span class="edge-mark edge-mark--top-right" aria-hidden="true"></span>
-      <span class="edge-mark edge-mark--bottom-left" aria-hidden="true"></span>
-      <span class="edge-mark edge-mark--bottom-right" aria-hidden="true"></span>
-    </header>
-
-
-    <!-- -------------------------------- -->
-    <!-- CASE FILES                       -->
-    <!-- -------------------------------- -->
-
-    <div class="case-files">
-      {
-        caseFiles.map((caseFile, index) => (
-          <a
-            class={`case-file case-file--${caseFile.accent}`}
-            href={`/mysteries/${caseFile.slug}`}
-            aria-label={`Open the ${caseFile.title} case file`}
-          >
-            <span class="case-file__number" aria-hidden="true">
-              {String(index + 1).padStart(2, "0")}
-            </span>
-
-            <span class="case-file__title">
-              {caseFile.title}
-            </span>
-
-            <span class="case-file__orb" aria-hidden="true"></span>
-            <span class="case-file__arrow" aria-hidden="true">↗</span>
-          </a>
-        ))
-      }
-    </div>
+        return (
+          <li>
+            <Card
+              class:list={["case-card", `case-card--${caseFile.theme}`]}
+              href={caseFile.published ? `/mysteries/${caseFile.slug}` : undefined}
+            >
+              <div class="case-artwork">
+                <img src={caseFile.artwork} alt="" width="800" height="280" decoding="async" />
+              </div>
+              <h2>{caseFile.title}</h2>
+              {caseFile.published ? (
+                <span class="case-arrow" aria-hidden="true">→</span>
+              ) : (
+                <p class="case-status">In development</p>
+              )}
+            </Card>
+          </li>
+        );
+      })}
+    </ul>
   </section>
 </BaseLayout>
 
-
 <style>
-  .mysteries-page {
-    padding: 18px 0 38px;
+  .mysteries-index {
+    inline-size: min(92%, 82.5rem);
+    margin-inline: auto;
+    padding-block: clamp(3.25rem, 7.1svh, 5.5rem) 4.4rem;
   }
 
-
-  /* ---------------------------------- */
-  /* COLLECTION HEADER                  */
-  /* ---------------------------------- */
-
-  .collection-header {
-    min-height: 390px;
-
-    position: relative;
-    isolation: isolate;
-
-    display: grid;
-    place-items: center;
-
-    overflow: hidden;
-
-    padding:
-      clamp(78px, 9vw, 118px)
-      clamp(24px, 6vw, 78px);
-
-    background:
-      radial-gradient(
-        circle at 8% 7%,
-        rgba(114, 169, 255, 0.29),
-        transparent 34%
-      ),
-      radial-gradient(
-        circle at 91% 10%,
-        rgba(173, 142, 246, 0.30),
-        transparent 36%
-      ),
-      radial-gradient(
-        circle at 50% 112%,
-        rgba(238, 179, 142, 0.21),
-        transparent 41%
-      ),
-      linear-gradient(
-        142deg,
-        rgba(255, 255, 255, 0.76),
-        rgba(247, 247, 254, 0.45) 48%,
-        rgba(255, 249, 246, 0.47)
-      );
-
-    border: 1px solid rgba(255, 255, 255, 0.88);
-    border-radius: clamp(30px, 3.2vw, 46px);
-
-    box-shadow:
-      0 40px 100px rgba(50, 62, 88, 0.12),
-      0 10px 30px rgba(50, 62, 88, 0.06),
-      inset 0 1px 0 rgba(255, 255, 255, 1),
-      inset 0 -1px 0 rgba(58, 69, 94, 0.045);
-
-    backdrop-filter:
-      blur(30px)
-      saturate(155%);
-
-    -webkit-backdrop-filter:
-      blur(30px)
-      saturate(155%);
-
-    text-align: center;
+  h1,
+  h2 {
+    margin: 0;
+    font-family: var(--font-display);
+    font-weight: 400;
+    color: #141724;
   }
-
-
-  .collection-header::after {
-    content: "";
-
-    position: absolute;
-    inset: 1px;
-    z-index: 5;
-
-    border-radius: inherit;
-
-    background:
-      linear-gradient(
-        112deg,
-        rgba(255, 255, 255, 0.58),
-        transparent 25%,
-        transparent 72%,
-        rgba(255, 255, 255, 0.20)
-      );
-
-    mask-image:
-      linear-gradient(
-        to bottom,
-        black,
-        transparent 24%,
-        transparent 76%,
-        black
-      );
-
-    -webkit-mask-image:
-      linear-gradient(
-        to bottom,
-        black,
-        transparent 24%,
-        transparent 76%,
-        black
-      );
-
-    opacity: 0.54;
-    pointer-events: none;
-  }
-
-
-  .collection-header__content {
-    position: relative;
-    z-index: 3;
-
-    animation:
-      content-enter
-      0.85s
-      var(--ease-out)
-      both;
-  }
-
 
   h1 {
+    margin-block-end: clamp(1.65rem, 3.15vw, 2.65rem);
+    padding-inline-start: clamp(0.15rem, 0.8vw, 0.75rem);
+    font-size: clamp(2.65rem, 6.25vw, 5.2rem);
+    line-height: 1.03;
+    letter-spacing: 0.045em;
+  }
+
+  .case-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(0.95rem, 1.65vw, 1.4rem);
     margin: 0;
-
-    background:
-      linear-gradient(
-        180deg,
-        #171922 0%,
-        #292d39 66%,
-        #414654 100%
-      );
-
-    -webkit-background-clip: text;
-    background-clip: text;
-
-    font-size: clamp(72px, 10.8vw, 150px);
-    line-height: 0.92;
-    letter-spacing: 0.043em;
-
-    -webkit-text-fill-color: transparent;
-
-    filter: drop-shadow(0 2px 0 rgba(255, 255, 255, 0.36));
+    padding: 0;
+    list-style: none;
   }
 
+  .case-grid > li { min-inline-size: 0; }
 
-  .contour-lines {
-    width: min(49vw, 650px);
-
-    position: absolute;
-    left: -17%;
-    bottom: -45%;
-    z-index: -2;
-
-    color: rgba(55, 66, 99, 0.18);
-
-    opacity: 0.42;
-    transform: rotate(9deg);
-    pointer-events: none;
-  }
-
-
-  .contour-lines path {
-    stroke: currentColor;
-    stroke-width: 1.15;
-    vector-effect: non-scaling-stroke;
-  }
-
-
-  /* ---------------------------------- */
-  /* MYSTERY OBJECT                     */
-  /* ---------------------------------- */
-
-  .mystery-object {
-    width: clamp(380px, 47vw, 650px);
-    aspect-ratio: 1;
-
-    position: absolute;
-    top: 46%;
-    right: clamp(-210px, -9vw, -80px);
-    z-index: -1;
-
-    opacity: 0.68;
-
-    filter:
-      drop-shadow(0 35px 42px rgba(59, 66, 101, 0.14));
-
-    transform: translateY(-50%);
-    pointer-events: none;
-
-    animation:
-      object-float
-      10s
-      ease-in-out
-      infinite;
-  }
-
-
-  .mystery-object__halo {
-    position: absolute;
-    inset: 7%;
-
-    display: block;
-
-    border-radius: 50%;
-
-    background:
-      repeating-conic-gradient(
-        from 2deg,
-        rgba(54, 61, 91, 0.25) 0deg 0.65deg,
-        transparent 0.65deg 18deg
-      );
-
-    mask-image:
-      radial-gradient(
-        circle,
-        transparent 0 46%,
-        black 46.5% 47.5%,
-        transparent 48% 100%
-      );
-
-    -webkit-mask-image:
-      radial-gradient(
-        circle,
-        transparent 0 46%,
-        black 46.5% 47.5%,
-        transparent 48% 100%
-      );
-  }
-
-
-  .mystery-object__lens {
-    width: 55%;
-    aspect-ratio: 1;
-
-    position: absolute;
-    top: 50%;
-    left: 50%;
-
-    display: block;
-    overflow: hidden;
-
-    background:
-      radial-gradient(
-        circle at 29% 22%,
-        rgba(255, 255, 255, 0.97),
-        rgba(255, 255, 255, 0.42) 19%,
-        rgba(181, 157, 231, 0.23) 50%,
-        rgba(139, 149, 207, 0.14) 69%,
-        rgba(236, 180, 148, 0.11) 88%
-      );
-
-    border: 1px solid rgba(255, 255, 255, 0.92);
-    border-radius: 50%;
-
-    box-shadow:
-      inset 19px 23px 35px rgba(255, 255, 255, 0.49),
-      inset -25px -35px 49px rgba(105, 94, 157, 0.17),
-      0 37px 69px rgba(70, 75, 116, 0.15);
-
-    transform: translate(-50%, -50%);
-  }
-
-
-  .mystery-object__lens::before {
-    content: "";
-
-    width: 68%;
-    height: 34%;
-
-    position: absolute;
-    top: 7%;
-    left: 13%;
-
-    border-radius: 50%;
-
-    background:
-      radial-gradient(
-        ellipse,
-        rgba(255, 255, 255, 0.76),
-        transparent 70%
-      );
-
-    filter: blur(7px);
-    transform: rotate(-24deg);
-  }
-
-
-  .mystery-object__lens::after {
-    content: "";
-
-    position: absolute;
-    inset: 29%;
-
-    border: 1px solid rgba(55, 62, 87, 0.18);
-    border-radius: 50%;
-
-    box-shadow:
-      0 0 0 13px rgba(255, 255, 255, 0.08),
-      inset 0 0 20px rgba(66, 54, 105, 0.12);
-  }
-
-
-  .mystery-object__ring {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-
-    display: block;
-
-    border: 1px solid rgba(50, 60, 91, 0.18);
-    border-radius: 50%;
-
-    box-shadow:
-      0 0 18px rgba(255, 255, 255, 0.50),
-      inset 0 0 18px rgba(255, 255, 255, 0.22);
-  }
-
-
-  .mystery-object__ring--outer {
-    width: 93%;
-    height: 35%;
-
-    transform:
-      translate(-50%, -50%)
-      rotate(-18deg);
-  }
-
-
-  .mystery-object__ring--middle {
-    width: 79%;
-    height: 79%;
-
-    border-color: rgba(55, 65, 99, 0.13);
-
-    transform:
-      translate(-50%, -50%)
-      rotate(34deg);
-  }
-
-
-  .mystery-object__ring--inner {
-    width: 40%;
-    height: 91%;
-
-    border-color: rgba(55, 65, 99, 0.15);
-
-    transform:
-      translate(-50%, -50%)
-      rotate(27deg);
-  }
-
-
-  .mystery-object__axis {
-    width: 1px;
-    height: 89%;
-
-    position: absolute;
-    top: 50%;
-    left: 50%;
-
-    display: block;
-
-    background:
-      linear-gradient(
-        transparent,
-        rgba(46, 53, 83, 0.21) 18%,
-        rgba(46, 53, 83, 0.21) 82%,
-        transparent
-      );
-
-    transform:
-      translate(-50%, -50%)
-      rotate(27deg);
-  }
-
-
-  .mystery-object__node {
-    width: 12px;
-    aspect-ratio: 1;
-
-    position: absolute;
-
-    display: block;
-
-    background:
-      radial-gradient(
-        circle at 32% 26%,
-        white,
-        rgba(221, 205, 249, 0.78) 42%,
-        rgba(107, 88, 154, 0.42)
-      );
-
-    border: 1px solid rgba(255, 255, 255, 0.89);
-    border-radius: 50%;
-
-    box-shadow:
-      0 8px 16px rgba(60, 57, 96, 0.18),
-      inset 0 1px 0 white;
-  }
-
-
-  .mystery-object__node--one {
-    top: 24%;
-    right: 7%;
-  }
-
-
-  .mystery-object__node--two {
-    width: 9px;
-
-    bottom: 18%;
-    left: 15%;
-  }
-
-
-  /* ---------------------------------- */
-  /* CASE FILE GRID                     */
-  /* ---------------------------------- */
-
-  .case-files {
-    margin-top: 22px;
-
-    display: grid;
-    grid-template-columns: repeat(6, minmax(0, 1fr));
-
-    gap: 18px;
-  }
-
-
-  .case-file {
-    --case-accent: 124, 169, 238;
-    --case-accent-deep: 83, 119, 184;
-    --case-label: #7287aa;
-
-    min-height: 220px;
-
+  .case-card {
     position: relative;
-    isolation: isolate;
-
-    grid-column: span 2;
-
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-
-    overflow: hidden;
-
-    padding: 25px;
-
-    color: #1d2029;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    gap: 0.5rem;
+    min-block-size: 100%;
+    padding: clamp(1.05rem, 2.15vw, 1.75rem);
+    border: 1px solid #ffffffbf;
+    border-radius: 1.3rem;
     background:
-      linear-gradient(
-        145deg,
-        rgba(255, 255, 255, 0.78),
-        rgba(246, 248, 254, 0.48)
-      );
-
-    border: 1px solid rgba(255, 255, 255, 0.90);
-    border-radius: 28px;
-
-    box-shadow:
-      0 18px 46px rgba(50, 62, 88, 0.08),
-      inset 0 1px 0 rgba(255, 255, 255, 1),
-      inset 0 -1px 0 rgba(55, 65, 88, 0.04);
-
-    backdrop-filter:
-      blur(22px)
-      saturate(150%);
-
-    -webkit-backdrop-filter:
-      blur(22px)
-      saturate(150%);
-
+      radial-gradient(ellipse 115% 100% at 90% 5%, var(--wash), transparent 85%),
+      linear-gradient(145deg, #ffffff86, #ffffff3d);
+    box-shadow: inset 0 0 0 1px var(--edge), 0 7px 24px #3a46640b;
     text-decoration: none;
-
-    transition:
-      color 0.25s ease,
-      transform 0.32s var(--ease-out),
-      box-shadow 0.32s ease;
   }
 
-
-  /*
-    The grid repeats a 3-card row followed by a 2-card row.
-    Colour is not tied to position; each case owns its accent class.
-  */
-  .case-file:nth-child(5n + 4),
-  .case-file:nth-child(5n + 5) {
-    grid-column: span 3;
-  }
-
-
-  .case-file::before {
+  .case-card::before {
     content: "";
-
-    width: 250px;
-    aspect-ratio: 1;
-
     position: absolute;
-    top: -132px;
-    right: -100px;
-    z-index: -1;
-
-    border-radius: 50%;
-
-    background:
-      radial-gradient(
-        circle,
-        rgba(var(--case-accent), 0.36),
-        transparent 70%
-      );
-
-    opacity: 0.64;
-
-    transition:
-      opacity 0.3s ease,
-      transform 0.45s var(--ease-out);
-  }
-
-
-  /* PERMANENT CASE ACCENT FAMILIES */
-
-  .case-file--gold {
-    --case-accent: 226, 180, 111;
-    --case-accent-deep: 169, 120, 57;
-    --case-label: #98733e;
-  }
-
-
-  .case-file--amber {
-    --case-accent: 229, 166, 127;
-    --case-accent-deep: 176, 112, 76;
-    --case-label: #9d6e51;
-  }
-
-
-  .case-file--blue {
-    --case-accent: 124, 169, 238;
-    --case-accent-deep: 76, 116, 181;
-    --case-label: #6d83aa;
-  }
-
-
-  .case-file--teal {
-    --case-accent: 131, 196, 193;
-    --case-accent-deep: 65, 133, 132;
-    --case-label: #5d8887;
-  }
-
-
-  .case-file--violet {
-    --case-accent: 165, 139, 221;
-    --case-accent-deep: 112, 84, 169;
-    --case-label: #7d6c9e;
-  }
-
-
-  .case-file--rose {
-    --case-accent: 211, 154, 168;
-    --case-accent-deep: 153, 91, 108;
-    --case-label: #936977;
-  }
-
-
-  .case-file--ice {
-    --case-accent: 183, 209, 233;
-    --case-accent-deep: 108, 143, 177;
-    --case-label: #71889e;
-  }
-
-
-  .case-file--sage {
-    --case-accent: 159, 189, 170;
-    --case-accent-deep: 91, 134, 106;
-    --case-label: #6c8875;
-  }
-
-
-  .case-file:hover {
-    color: #151821;
-
-    transform: translateY(-6px);
-
-    box-shadow:
-      0 28px 58px rgba(50, 62, 88, 0.14),
-      0 18px 42px rgba(var(--case-accent), 0.09),
-      inset 0 1px 0 rgba(255, 255, 255, 1),
-      inset 0 -1px 0 rgba(55, 65, 88, 0.04);
-  }
-
-
-  .case-file:hover::before {
-    opacity: 0.88;
-    transform: translate(-12px, 12px) scale(1.08);
-  }
-
-
-  .case-file__number {
-    position: relative;
-    z-index: 2;
-
-    color: var(--case-label);
-
-    font-family: var(--font-ui);
-    font-size: 10px;
-    font-weight: 650;
-    letter-spacing: 0.14em;
-  }
-
-
-  .case-file__title {
-    max-width: calc(100% - 66px);
-
-    position: relative;
-    z-index: 2;
-
-    font-family: var(--font-display);
-    font-size: clamp(25px, 2.45vw, 34px);
-    line-height: 1.17;
-    letter-spacing: 0.012em;
-    text-wrap: balance;
-  }
-
-
-  .case-file__arrow {
-    width: 40px;
-    aspect-ratio: 1;
-
-    position: absolute;
-    right: 21px;
-    bottom: 21px;
-    z-index: 3;
-
-    display: grid;
-    place-items: center;
-
-    color: #6e7483;
-    background:
-      linear-gradient(
-        145deg,
-        rgba(255, 255, 255, 0.82),
-        rgba(240, 244, 252, 0.52)
-      );
-
-    border: 1px solid rgba(255, 255, 255, 0.92);
-    border-radius: 50%;
-
-    box-shadow:
-      0 9px 20px rgba(55, 67, 95, 0.11),
-      inset 0 1px 0 rgba(255, 255, 255, 1);
-
-    font-family: var(--font-ui);
-    font-size: 14px;
-
-    transition:
-      color 0.25s ease,
-      transform 0.28s var(--ease-out);
-  }
-
-
-  .case-file:hover .case-file__arrow {
-    color: #242936;
-    transform: translate(2px, -2px);
-  }
-
-
-  .case-file__orb {
-    width: 94px;
-    aspect-ratio: 1;
-
-    position: absolute;
-    top: 16px;
-    right: 13px;
-    z-index: 1;
-
-    display: block;
-
-    background:
-      radial-gradient(
-        circle at 29% 23%,
-        rgba(255, 255, 255, 0.96),
-        rgba(255, 255, 255, 0.42) 22%,
-        rgba(var(--case-accent), 0.24) 58%,
-        rgba(var(--case-accent-deep), 0.12)
-      );
-
-    border: 1px solid rgba(255, 255, 255, 0.86);
-    border-radius: 50%;
-
-    box-shadow:
-      inset 8px 10px 18px rgba(255, 255, 255, 0.50),
-      inset -12px -16px 23px rgba(var(--case-accent-deep), 0.14),
-      0 15px 28px rgba(var(--case-accent-deep), 0.11);
-
-    opacity: 0.58;
-
-    transition:
-      opacity 0.3s ease,
-      transform 0.42s var(--ease-out);
-  }
-
-
-  .case-file__orb::before,
-  .case-file__orb::after {
-    content: "";
-
-    position: absolute;
-    top: 50%;
-    left: 50%;
-
-    border: 1px solid rgba(var(--case-accent-deep), 0.22);
-    border-radius: 50%;
-  }
-
-
-  .case-file__orb::before {
-    width: 118%;
-    height: 38%;
-
-    transform:
-      translate(-50%, -50%)
-      rotate(-19deg);
-  }
-
-
-  .case-file__orb::after {
-    width: 42%;
-    height: 118%;
-
-    transform:
-      translate(-50%, -50%)
-      rotate(25deg);
-  }
-
-
-  .case-file:hover .case-file__orb {
-    opacity: 0.82;
-    transform: translate(-5px, 5px) rotate(3deg);
-  }
-
-
-  /* ---------------------------------- */
-  /* EDGE DETAILS                       */
-  /* ---------------------------------- */
-
-  .edge-mark {
-    width: 40px;
-    height: 40px;
-
-    position: absolute;
-    z-index: 4;
-
-    opacity: 0.28;
+    inset: 7px 18% auto 7%;
+    block-size: 1px;
+    background: linear-gradient(90deg, transparent, #fff 22%, #fff9 58%, transparent);
     pointer-events: none;
   }
 
+  .case-card--forest { --wash: #c4dabbc9; --edge: #678d622d; --accent: #465e40; }
+  .case-card--ocean { --wash: #b8cbdfd6; --edge: #54739036; --accent: #405b73; }
+  .case-card--archive { --wash: #eadcc1dc; --edge: #8b765933; --accent: #705c3e; }
+  .case-card--ice { --wash: #e8f9ffee; --edge: #7199b53d; --accent: #3d657b; }
+  .case-card--desert { --wash: #edd5b6df; --edge: #ae7f4c39; --accent: #795435; }
+  .case-card--twilight { --wash: #cec3dfdd; --edge: #7b699c3a; --accent: #614b79; }
 
-  .edge-mark::before,
-  .edge-mark::after {
-    content: "";
+  .case-artwork {
+    position: relative;
+    aspect-ratio: 570 / 240;
+    margin-block: 0.22rem 0.76rem;
+    overflow: hidden;
+    pointer-events: none;
+  }
 
+  /* Crop the shared 800 × 280 artwork to the tighter card framing. */
+  .case-artwork img {
     position: absolute;
-
-    background: rgba(61, 70, 96, 0.27);
-    border-radius: 999px;
+    inset-block-start: -7.9167%;
+    inset-inline-start: -20.1754%;
+    inline-size: 140.3509%;
+    max-inline-size: none;
+    max-width: none;
+    block-size: auto;
   }
 
-
-  .edge-mark::before {
-    width: 40px;
-    height: 1px;
+  h2 {
+    overflow-wrap: anywhere;
+    font-size: clamp(1.16rem, 2.05vw, 1.79rem);
+    line-height: 1.22;
+    text-wrap: pretty;
   }
 
-
-  .edge-mark::after {
-    width: 1px;
-    height: 40px;
+  .case-status,
+  .case-arrow {
+    display: flex;
+    align-items: end;
+    min-block-size: 1.32rem;
+    margin: 0;
+    color: var(--accent);
   }
 
-
-  .edge-mark--top-left {
-    top: 24px;
-    left: 24px;
+  .case-status {
+    font-size: 0.82rem;
+    letter-spacing: 0.015em;
+    line-height: 1.45;
   }
 
-
-  .edge-mark--top-right {
-    top: 24px;
-    right: 24px;
-
-    transform: rotate(90deg);
+  .case-arrow {
+    justify-self: end;
+    font: 400 1.37rem/1 system-ui, sans-serif;
   }
 
-
-  .edge-mark--bottom-left {
-    bottom: 24px;
-    left: 24px;
-
-    transform: rotate(-90deg);
+  a.case-card:hover,
+  a.case-card:focus-visible {
+    border-color: var(--accent);
   }
 
-
-  .edge-mark--bottom-right {
-    right: 24px;
-    bottom: 24px;
-
-    transform: rotate(180deg);
+  a.case-card:focus-visible {
+    outline: 2px solid #455687;
+    outline-offset: 3px;
   }
 
-
-  /* ---------------------------------- */
-  /* MOTION                             */
-  /* ---------------------------------- */
-
-  @keyframes content-enter {
-    from {
-      opacity: 0;
-      transform: translateY(16px);
-    }
-
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+  @media (max-width: 960px) {
+    .case-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   }
 
-
-  @keyframes object-float {
-    0%,
-    100% {
-      transform:
-        translateY(calc(-50% - 5px))
-        rotate(-0.5deg);
-    }
-
-    50% {
-      transform:
-        translateY(calc(-50% + 7px))
-        rotate(0.7deg);
-    }
-  }
-
-
-  /* ---------------------------------- */
-  /* TABLET                             */
-  /* ---------------------------------- */
-
-  @media (max-width: 920px) {
-    .case-files {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-
-    .case-file,
-    .case-file:nth-child(5n + 4),
-    .case-file:nth-child(5n + 5) {
-      grid-column: auto;
-    }
-  }
-
-
-  /* ---------------------------------- */
-  /* MOBILE                             */
-  /* ---------------------------------- */
-
-  @media (max-width: 620px) {
-    .mysteries-page {
-      padding-top: 0;
-    }
-
-    .collection-header {
-      min-height: 350px;
-
-      padding:
-        78px
-        18px
-        68px;
-
-      border-radius: 30px;
-    }
-
-    h1 {
-      max-width: 100%;
-
-      font-size: clamp(42px, 14vw, 72px);
-      line-height: 0.96;
-      letter-spacing: 0.026em;
-    }
-
-    .mystery-object {
-      width: min(125vw, 500px);
-
-      top: 44%;
-      right: -45%;
-
-      opacity: 0.51;
-    }
-
-    .contour-lines {
-      width: 102vw;
-
-      left: -53%;
-      bottom: -25%;
-    }
-
-    .case-files {
-      margin-top: 14px;
-
-      grid-template-columns: 1fr;
-
-      gap: 14px;
-    }
-
-    .case-file,
-    .case-file:nth-child(5n + 4),
-    .case-file:nth-child(5n + 5) {
-      min-height: 180px;
-
-      grid-column: auto;
-
-      padding: 23px;
-
-      border-radius: 24px;
-    }
-
-    .case-file__title {
-      max-width: calc(100% - 62px);
-
-      font-size: clamp(25px, 7.4vw, 28px);
-    }
-
-    .case-file__orb {
-      width: 84px;
-    }
-
-    .edge-mark {
-      width: 29px;
-      height: 29px;
-    }
-
-    .edge-mark::before {
-      width: 29px;
-    }
-
-    .edge-mark::after {
-      height: 29px;
-    }
-
-    .edge-mark--top-left,
-    .edge-mark--top-right {
-      top: 17px;
-    }
-
-    .edge-mark--bottom-left,
-    .edge-mark--bottom-right {
-      bottom: 17px;
-    }
-
-    .edge-mark--top-left,
-    .edge-mark--bottom-left {
-      left: 17px;
-    }
-
-    .edge-mark--top-right,
-    .edge-mark--bottom-right {
-      right: 17px;
-    }
-  }
-
-
-  @supports not (
-    (backdrop-filter: blur(1px))
-    or
-    (-webkit-backdrop-filter: blur(1px))
-  ) {
-    .collection-header,
-    .case-file {
-      background-color: rgba(249, 250, 255, 0.94);
-    }
+  @media (max-width: 590px) {
+    .mysteries-index { padding-block-start: 3.25rem; }
+    .case-grid { grid-template-columns: 1fr; }
+    h2 { font-size: clamp(1.35rem, 5vw, 1.8rem); }
   }
 </style>

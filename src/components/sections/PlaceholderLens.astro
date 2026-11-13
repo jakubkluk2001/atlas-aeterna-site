@@ -1,0 +1,142 @@
+---
+interface Props {
+  kind: "history" | "geography";
+}
+
+const { kind } = Astro.props;
+const gradientId = (name: string) => `placeholder-${kind}-${name}`;
+const gradient = (name: string) => `url(#${gradientId(name)})`;
+---
+
+<svg class="placeholder-lens" viewBox="0 0 640 260" aria-hidden="true" focusable="false">
+  <defs>
+    <linearGradient id={gradientId("body")} x2="1" y2="1">
+      <stop stop-color="#fbfcff" stop-opacity=".74" />
+      <stop offset=".35" stop-color="#edf4ff" stop-opacity=".36" />
+      <stop offset=".66" stop-color="#cdd4f2" stop-opacity=".20" />
+      <stop offset="1" stop-color="#e8dcf8" stop-opacity=".42" />
+    </linearGradient>
+    <linearGradient id={gradientId("depth")} x1="0" y1="1" x2="1" y2="0">
+      <stop stop-color="#acd6f0" stop-opacity=".26" />
+      <stop offset=".36" stop-color="#e9f8ff" stop-opacity=".04" />
+      <stop offset=".63" stop-color="#f8faff" stop-opacity=".27" />
+      <stop offset="1" stop-color="#c1b2eb" stop-opacity=".19" />
+    </linearGradient>
+    <linearGradient id={gradientId("rim")} x1="0" y1=".24" x2="1" y2=".72">
+      <stop stop-color="#91c8ec" />
+      <stop offset=".24" stop-color="#b1d9ee" stop-opacity=".76" />
+      <stop offset=".47" stop-color="#f1f4ff" />
+      <stop offset=".82" stop-color="#d0c0ec" />
+      <stop offset="1" stop-color="#ad9bd9" stop-opacity=".88" />
+    </linearGradient>
+    <linearGradient id={gradientId("reflection")} x1="0" y1="0" x2="1" y2=".72">
+      <stop stop-color="#fff" stop-opacity=".14" />
+      <stop offset=".22" stop-color="#fff" stop-opacity=".94" />
+      <stop offset=".64" stop-color="#fff" stop-opacity=".72" />
+      <stop offset="1" stop-color="#fff" stop-opacity="0" />
+    </linearGradient>
+    <radialGradient id={gradientId("shadow")}>
+      <stop stop-color="#7d83aa" stop-opacity=".16" />
+      <stop offset=".55" stop-color="#8a8ab3" stop-opacity=".09" />
+      <stop offset="1" stop-color="#b29bc6" stop-opacity="0" />
+    </radialGradient>
+    <linearGradient id={gradientId("ink")}>
+      <stop stop-color="#91a6ca" stop-opacity=".35" />
+      <stop offset=".34" stop-color="#697fae" stop-opacity=".82" />
+      <stop offset=".63" stop-color="#6b79a8" stop-opacity=".8" />
+      <stop offset="1" stop-color="#9b9ac3" stop-opacity=".32" />
+    </linearGradient>
+  </defs>
+
+  <ellipse cx="326" cy="238" rx="259" ry="22" fill={gradient("shadow")} />
+  <ellipse cx="320" cy="123" rx="314" ry="119" fill={gradient("body")} stroke={gradient("rim")} stroke-width="1.6" />
+  <ellipse cx="320" cy="123" rx="309" ry="115" fill={gradient("depth")} stroke="#fbfcff" stroke-opacity=".62" stroke-width="1.1" />
+
+  {kind === "history" ? (
+    <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path
+        d="M113 174C151 110 230 59 320 59C410 59 489 110 527 174"
+        stroke={gradient("ink")}
+        stroke-width="1.35"
+      />
+      <path
+        d="M159 174C193 122 253 89 320 89C387 89 447 122 481 174"
+        stroke={gradient("ink")}
+        stroke-width="1.2"
+        opacity=".49"
+      />
+      <path
+        d="M125 127L146 144M184 86L199 108M249 55L256 77M384 55L376 77M449 81L434 105M505 117L484 135"
+        stroke={gradient("ink")}
+        stroke-width="1.25"
+      />
+      <path d="M320 37V65" stroke="#5d729f" stroke-width="1.65" />
+      <path d="M320 174L402 102" stroke="#5e719f" stroke-width="1.55" />
+      <path d="M380 125L383 117L391 116L387 123Z" fill="#e4e9f7" stroke="#697dac" stroke-width="1.05" />
+      <path d="M320 174L261 142" stroke="#8294bd" stroke-width="1.25" />
+      <path d="M280 153L272 152L267 147L274 147Z" fill="#edf1fa" stroke="#8798bf" stroke-width=".9" />
+      <circle cx="320" cy="174" r="9.5" fill="#e4e9f7" stroke="#8899c0" stroke-width="1.15" />
+      <circle cx="320" cy="174" r="5" fill="#7288b3" stroke="#f2f5ff" stroke-width="1.15" />
+    </g>
+  ) : (
+    <g fill="none" stroke={gradient("ink")} stroke-linecap="round" stroke-linejoin="round">
+      <path
+        d="M82 124C107 124 113 112 139 104C163 97 193 97 217 89C249 78 269 58 294 50C328 39 356 43 381 59C406 75 410 84 440 84C471 84 490 78 516 87C542 96 551 122 588 122"
+        stroke-width="1.3"
+      />
+      <path
+        d="M91 146C119 151 138 133 161 124C185 113 211 111 236 101C265 89 280 70 306 62C334 53 354 59 374 72C393 86 399 95 425 99C450 103 475 96 496 103C508 107 518 114 509 118C500 122 476 117 458 126"
+        stroke-width="1.23"
+        opacity=".9"
+      />
+      <path
+        d="M138 136C144 128 164 122 188 117C215 111 235 104 256 94C281 81 298 68 322 68C350 68 366 82 382 95C402 111 430 108 421 121C414 133 390 135 364 133C337 131 327 137 307 143C276 152 251 160 229 152C207 145 193 139 176 139C158 139 133 144 138 136Z"
+        stroke-width="1.24"
+      />
+      <path
+        d="M207 119C218 112 243 106 263 96C286 85 306 74 326 77C344 79 354 90 366 100C379 111 372 119 354 120C333 122 319 123 298 130C275 138 255 140 242 133C229 127 199 127 207 119Z"
+        stroke-width="1.16"
+      />
+      <path
+        d="M248 114C252 106 277 98 296 88C314 79 331 83 344 95C358 108 350 111 335 112C320 113 305 115 291 120C278 123 264 126 260 121C257 117 246 119 248 114Z"
+        stroke-width="1.13"
+      />
+      <path
+        d="M275 107C279 102 292 97 306 91C319 85 332 92 336 99C342 111 322 106 306 110C293 114 269 116 275 107Z"
+        stroke-width="1.1"
+      />
+      <path
+        d="M92 169C126 164 137 149 170 154C197 158 202 174 231 176C260 179 290 165 318 156C345 147 362 150 388 160C414 170 427 188 463 181C490 176 514 158 529 146C544 134 565 136 589 137"
+        stroke-width="1.28"
+      />
+      <path
+        d="M409 160C414 146 440 140 460 136C482 132 502 123 520 129C536 134 548 148 577 150"
+        stroke-width="1.19"
+        opacity=".84"
+      />
+      <path
+        d="M431 160C442 151 458 149 470 144C484 138 496 140 496 147C496 157 471 167 453 170C441 172 423 168 431 160Z"
+        stroke-width="1.13"
+      />
+    </g>
+  )}
+
+  <path
+    d="M31 86C66 51 132 29 214 20C141 33 76 54 31 89Z"
+    fill={gradient("reflection")}
+  />
+  <path
+    d="M384 228C466 214 532 185 582 156C533 192 455 223 384 231Z"
+    fill={gradient("reflection")}
+    opacity=".84"
+  />
+</svg>
+
+<style>
+  .placeholder-lens {
+    display: block;
+    inline-size: 100%;
+    block-size: auto;
+    pointer-events: none;
+  }
+</style>

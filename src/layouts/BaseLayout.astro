@@ -6,14 +6,17 @@ interface Props {
   title?: string;
   description?: string;
   featuredHome?: boolean;
+  sectionPlaceholder?: boolean;
 }
 
 const {
   title = "Atlas Aeterna",
   description = "Explore history, geography, mysteries and legendary places with Atlas Aeterna.",
   featuredHome = false,
+  sectionPlaceholder = false,
 }: Props = Astro.props;
 
+const useSectionLayout = sectionPlaceholder && !featuredHome;
 const pathname = Astro.url.pathname;
 
 const canonicalURL = Astro.site
@@ -36,10 +39,10 @@ const isActive = (path: string) => {
 
     <meta
       name="viewport"
-      content={featuredHome ? "width=device-width, initial-scale=1, viewport-fit=cover" : "width=device-width, initial-scale=1"}
+      content={featuredHome || useSectionLayout ? "width=device-width, initial-scale=1, viewport-fit=cover" : "width=device-width, initial-scale=1"}
     />
 
-    <meta name="theme-color" content={featuredHome ? "#f4f1fa" : "#eef2f8"} />
+    <meta name="theme-color" content={featuredHome || useSectionLayout ? "#f4f1fa" : "#eef2f8"} />
     <meta name="color-scheme" content="light" />
 
     <link
@@ -66,12 +69,15 @@ const isActive = (path: string) => {
     <Analytics />
   </head>
 
-  <body class={featuredHome ? "featured-home-layout" : undefined}>
+  <body class:list={{
+    "featured-home-layout": featuredHome,
+    "section-placeholder-layout": useSectionLayout,
+  }}>
     <a class="skip-link" href={featuredHome ? "#atlas-title" : "#main-content"}>
       Skip to content
     </a>
 
-    {!featuredHome && <div class="site-ambient" aria-hidden="true">
+    {!featuredHome && !useSectionLayout && <div class="site-ambient" aria-hidden="true">
       <span class="ambient-orb ambient-orb--blue"></span>
       <span class="ambient-orb ambient-orb--violet"></span>
       <span class="ambient-orb ambient-orb--peach"></span>
@@ -89,7 +95,7 @@ const isActive = (path: string) => {
           href="/"
           aria-current={isActive("/") ? "page" : undefined}
         >
-          <span class="brand-mark" aria-hidden="true"></span>
+          {!useSectionLayout && <span class="brand-mark" aria-hidden="true"></span>}
           <span class="brand-name">Atlas Aeterna</span>
         </a>
 
@@ -837,7 +843,7 @@ const isActive = (path: string) => {
     background: #f4f1fa;
   }
 
-  .featured-home-layout > .skip-link:not(:focus) {
+  :is(.featured-home-layout, .section-placeholder-layout) > .skip-link:not(:focus) {
     opacity: 0;
     pointer-events: none;
   }
@@ -878,6 +884,130 @@ const isActive = (path: string) => {
 
     to {
       transform: translate3d(-7%, -4%, 0) scale(1.08);
+    }
+  }
+
+  /* History and Geography use the homepage palette and a lighter navigation surface. */
+  .section-placeholder-layout {
+    --text: #141724;
+    --text-secondary: #3d4255;
+    --lens-paper: #f3f0f9;
+    --lens-violet: #dacdf7;
+    --lens-blue: #cfe4fa;
+    --lens-warm: #fbf5f3;
+
+    display: flex;
+    flex-direction: column;
+    min-block-size: 100vh;
+    min-block-size: 100svh;
+
+    background:
+      radial-gradient(ellipse 65% 82% at 98% 15%, var(--lens-violet) 0%, transparent 84%),
+      radial-gradient(ellipse 76% 86% at 0% 100%, var(--lens-blue) 0%, transparent 82%),
+      radial-gradient(ellipse 60% 78% at 45% 12%, var(--lens-warm) 4%, transparent 90%),
+      var(--lens-paper);
+  }
+
+  .section-placeholder-layout > main {
+    display: grid;
+    flex: 1;
+    max-width: none;
+    padding: 0;
+  }
+
+  .section-placeholder-layout .site-header {
+    flex: none;
+    padding: max(clamp(1.75rem, 8.8svh, 5rem), env(safe-area-inset-top)) 4vw 0;
+  }
+
+  .section-placeholder-layout .site-nav {
+    max-width: 1320px;
+    min-height: 60px;
+    padding: 0 clamp(1rem, 4.45vw, 3rem);
+    gap: 1rem;
+    background: linear-gradient(110deg, #ffffff4f, #ffffff16);
+    border-color: #ffffff60;
+    box-shadow: 0 10px 29px #444e7a08, inset 0 1px #ffffff58;
+    -webkit-backdrop-filter: blur(16px);
+    backdrop-filter: blur(16px);
+  }
+
+  .section-placeholder-layout .site-nav::before {
+    content: none;
+  }
+
+  .section-placeholder-layout .brand-name {
+    max-width: none;
+    font-size: clamp(1.05rem, 2.55vw, 1.5rem);
+    font-weight: 400;
+    letter-spacing: 0.035em;
+  }
+
+  .section-placeholder-layout .site-brand:hover {
+    transform: none;
+  }
+
+  .section-placeholder-layout .nav-links {
+    gap: clamp(0.3rem, 2.5vw, 2.25rem);
+  }
+
+  .section-placeholder-layout .nav-links a {
+    display: inline-flex;
+    align-items: center;
+    min-block-size: 44px;
+    padding: 0 0.45rem;
+    color: var(--text);
+    border: 0;
+    border-radius: 0.5rem;
+    font-size: clamp(0.82rem, 1.57vw, 1rem);
+    font-weight: 450;
+    letter-spacing: 0.01em;
+    text-transform: none;
+  }
+
+  .section-placeholder-layout .nav-links a:is(:hover, .active) {
+    background: none;
+    box-shadow: none;
+    text-decoration: underline;
+    text-decoration-color: #586d9e;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.47em;
+    transform: none;
+  }
+
+  @media (max-width: 760px) {
+    .section-placeholder-layout .site-header {
+      padding: max(0.875rem, env(safe-area-inset-top)) 4vw 0;
+    }
+
+    .section-placeholder-layout .site-nav {
+      min-height: 54px;
+      padding-inline: 1rem 0.35rem;
+    }
+
+    .section-placeholder-layout .menu-toggle {
+      flex: 0 0 44px;
+      background: none;
+      border: 0;
+      box-shadow: none;
+    }
+
+    .section-placeholder-layout .menu-toggle:hover {
+      background: #ffffff61;
+      transform: none;
+    }
+
+    .section-placeholder-layout .nav-links {
+      gap: 0.15rem;
+      background: #f6f3faf5;
+      border-color: #ffffffb3;
+      border-radius: 1.1rem;
+      box-shadow: 0 14px 36px #454b7240;
+    }
+
+    .section-placeholder-layout .nav-links a {
+      padding-inline: 0.85rem;
+      font-size: 0.95rem;
     }
   }
 

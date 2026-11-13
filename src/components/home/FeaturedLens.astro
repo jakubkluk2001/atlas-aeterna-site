@@ -1,10 +1,17 @@
 ---
+import { featuredMystery } from "../../data/mystery-cases";
 import LensArtwork from "./LensArtwork.astro";
 
 const features = [
   { id: "history", section: "History", sectionHref: "/history", title: "The Pyramids of Giza", storyHref: null },
   { id: "geography", section: "Geography", sectionHref: "/geography", title: "The Northern Lights", storyHref: null },
-  { id: "mysteries", section: "Mysteries", sectionHref: "/mysteries", title: "El Dorado", storyHref: "/mysteries/el-dorado" },
+  {
+    id: "mysteries",
+    section: "Mysteries",
+    sectionHref: "/mysteries",
+    title: featuredMystery.title,
+    storyHref: featuredMystery.published ? `/mysteries/${featuredMystery.slug}` : null,
+  },
 ];
 ---
 
@@ -67,7 +74,7 @@ const features = [
           <ellipse cx="600" cy="231" rx="590" ry="222" fill="url(#glass-thickness)"/>
           <ellipse cx="600" cy="229" rx="576" ry="209" fill="url(#inner-depth)" opacity=".56"/>
         </svg>
-      <div class="lens-art"><LensArtwork /></div>
+      <div class="lens-art"><LensArtwork mysteryArtwork={featuredMystery.artwork} /></div>
       <svg class="glass-surface" viewBox="0 0 1200 465" preserveAspectRatio="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
           <defs>
             <linearGradient id="upper-edge" x1="0" y1=".55" x2="1" y2=".54">

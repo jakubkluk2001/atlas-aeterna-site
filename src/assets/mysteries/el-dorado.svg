@@ -1,0 +1,270 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 280" width="800" height="280">
+<g class="artwork artwork--mysteries" stroke-linecap="round" stroke-linejoin="round">
+  <defs>
+    <linearGradient id="eld-roof" x1="0" y1="0" x2="0" y2="1">
+      <stop stop-color="#ffecb4"/>
+      <stop offset="1" stop-color="#f7d377"/>
+    </linearGradient>
+    <linearGradient id="eld-wall" x1="0" y1="0" x2="0" y2="1">
+      <stop stop-color="#f5d38c"/>
+      <stop offset="1" stop-color="#eac388"/>
+    </linearGradient>
+    <linearGradient id="eld-side" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#d9ab68"/>
+      <stop offset="1" stop-color="#cda26d"/>
+    </linearGradient>
+    <linearGradient id="eld-ground" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#f5dfad" stop-opacity=".70"/>
+      <stop offset="1" stop-color="#dfbf8f" stop-opacity=".36"/>
+    </linearGradient>
+    <linearGradient id="eld-hills" x1="130" x2="676" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#bb9969" stop-opacity="0"/>
+      <stop offset=".22" stop-color="#bb9969" stop-opacity=".56"/>
+      <stop offset=".62" stop-color="#b3864b" stop-opacity=".52"/>
+      <stop offset="1" stop-color="#bb9969" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <g fill="none" stroke="url(#eld-hills)" stroke-width="1.45">
+    <path d="M131 142c29-15 43-37 78-45 30-8 61-5 89-10 42-8 61-24 96-23 36 1 54 13 87 10 32-3 67-18 99-9 36 10 50 37 91 41"/>
+    <path d="M132 155c24-11 40-31 65-39m392-36c24 10 41 32 81 39"/>
+    <path d="M130 219c48-3 64 6 111 10 52 4 92-5 126-5 57 0 92 9 141 3 43-6 87-16 171-12"/>
+  </g>
+  <g fill="url(#eld-ground)" stroke="#ab8559" stroke-width="1.28">
+    <path d="M167 131l43-25 135-1 50-17 161 1 75 17 34 21-32 18-199 5-217 2z"/>
+    <path d="M167 131l50 21 217-2 199-5 32-18v7l-32 18-199 6-218 1-49-21z" fill="#d9ba90" fill-opacity=".57"/>
+  </g>
+  <g stroke="#997044" stroke-width="1.36">
+    <path d="M214 95l12 -6h31l-12 6z" fill="url(#eld-roof)"/>
+    <path d="M245 95l12 -6v22l-12 6z" fill="url(#eld-side)"/>
+    <path d="M214 95h31v22h-31z" fill="url(#eld-wall)"/>
+    <path d="M216 97h27" fill="none" stroke="#fff3ce" stroke-width="1.2"/>
+    <path d="M223 116v-11a6 6 0 0 1 12 0v11z" fill="#b5834f" fill-opacity=".48" stroke-width="1.15"/>
+    <path d="M247 110l8 -4" fill="none" stroke="#a1754e" stroke-width="1" opacity=".8"/>
+  </g>
+  <g stroke="#997044" stroke-width="1.36">
+    <path d="M249 82l11 -6h21l-11 6z" fill="url(#eld-roof)"/>
+    <path d="M270 82l11 -6v31l-11 6z" fill="url(#eld-side)"/>
+    <path d="M249 82h21v31h-21z" fill="url(#eld-wall)"/>
+    <path d="M251 84h17" fill="none" stroke="#fff3ce" stroke-width="1.2"/>
+    <path d="M257 95v-4a2 2 0 0 1 4 0v4z" fill="#ad7b49" fill-opacity=".65" stroke-width="1"/>
+    <path d="M257 104v-4a2 2 0 0 1 4 0v4z" fill="#ad7b49" fill-opacity=".65" stroke-width="1"/>
+    <path d="M272 106l7 -3" fill="none" stroke="#a1754e" stroke-width="1" opacity=".8"/>
+  </g>
+  <g stroke="#997044" stroke-width="1.36">
+    <path d="M286 93l12 -6h43l-12 6z" fill="url(#eld-roof)"/>
+    <path d="M329 93l12 -6v23l-12 6z" fill="url(#eld-side)"/>
+    <path d="M286 93h43v23h-43z" fill="url(#eld-wall)"/>
+    <path d="M288 95h39" fill="none" stroke="#fff3ce" stroke-width="1.2"/>
+    <path d="M300 115v-11a7 7 0 0 1 14 0v11z" fill="#b5834f" fill-opacity=".48" stroke-width="1.15"/>
+    <path d="M331 109l8 -4" fill="none" stroke="#a1754e" stroke-width="1" opacity=".8"/>
+  </g>
+  <g stroke="#997044" stroke-width="1.36">
+    <path d="M365 77l15 -8h48l-15 8z" fill="url(#eld-roof)"/>
+    <path d="M413 77l15 -8v29l-15 8z" fill="url(#eld-side)"/>
+    <path d="M365 77h48v29h-48z" fill="url(#eld-wall)"/>
+    <path d="M367 79h44" fill="none" stroke="#fff3ce" stroke-width="1.2"/>
+    <path d="M373 105v-13a4 4 0 0 1 8 0v13z" fill="#b5834f" fill-opacity=".43" stroke-width="1.04"/>
+    <path d="M385 105v-13a4 4 0 0 1 8 0v13z" fill="#b5834f" fill-opacity=".43" stroke-width="1.04"/>
+    <path d="M397 105v-13a4 4 0 0 1 8 0v13z" fill="#b5834f" fill-opacity=".43" stroke-width="1.04"/>
+    <path d="M370 84h38" fill="none" stroke="#aa7644" stroke-width="1.1" opacity=".78"/>
+    <path d="M415 99l11 -6" fill="none" stroke="#a1754e" stroke-width="1" opacity=".8"/>
+  </g>
+  <g stroke="#997044" stroke-width="1.36">
+    <path d="M419 62l10 -5h22l-10 5z" fill="url(#eld-roof)"/>
+    <path d="M441 62l10 -5v42l-10 5z" fill="url(#eld-side)"/>
+    <path d="M419 62h22v42h-22z" fill="url(#eld-wall)"/>
+    <path d="M421 64h18" fill="none" stroke="#fff3ce" stroke-width="1.2"/>
+    <path d="M428 75v-4a2 2 0 0 1 4 0v4z" fill="#ad7b49" fill-opacity=".65" stroke-width="1"/>
+    <path d="M428 84v-4a2 2 0 0 1 4 0v4z" fill="#ad7b49" fill-opacity=".65" stroke-width="1"/>
+    <path d="M428 93v-4a2 2 0 0 1 4 0v4z" fill="#ad7b49" fill-opacity=".65" stroke-width="1"/>
+  </g>
+  <g stroke="#997044" stroke-width="1.36">
+    <path d="M457 83l11 -6h31l-11 6z" fill="url(#eld-roof)"/>
+    <path d="M488 83l11 -6v25l-11 6z" fill="url(#eld-side)"/>
+    <path d="M457 83h31v25h-31z" fill="url(#eld-wall)"/>
+    <path d="M459 85h27" fill="none" stroke="#fff3ce" stroke-width="1.2"/>
+    <path d="M466 107v-12a6 6 0 0 1 12 0v12z" fill="#b5834f" fill-opacity=".48" stroke-width="1.15"/>
+    <path d="M490 101l7 -3" fill="none" stroke="#a1754e" stroke-width="1" opacity=".8"/>
+  </g>
+  <g stroke="#997044" stroke-width="1.36">
+    <path d="M517 75l15 -8h49l-15 8z" fill="url(#eld-roof)"/>
+    <path d="M566 75l15 -8v40l-15 8z" fill="url(#eld-side)"/>
+    <path d="M517 75h49v40h-49z" fill="url(#eld-wall)"/>
+    <path d="M519 77h45" fill="none" stroke="#fff3ce" stroke-width="1.2"/>
+    <path d="M525 114v-13a4 4 0 0 1 8 0v13z" fill="#b5834f" fill-opacity=".43" stroke-width="1.04"/>
+    <path d="M537 114v-13a4 4 0 0 1 8 0v13z" fill="#b5834f" fill-opacity=".43" stroke-width="1.04"/>
+    <path d="M549 114v-13a4 4 0 0 1 8 0v13z" fill="#b5834f" fill-opacity=".43" stroke-width="1.04"/>
+    <path d="M522 82h39" fill="none" stroke="#aa7644" stroke-width="1.1" opacity=".78"/>
+    <path d="M568 108l11 -6" fill="none" stroke="#a1754e" stroke-width="1" opacity=".8"/>
+  </g>
+  <g stroke="#997044" stroke-width="1.36">
+    <path d="M576 92l12 -6h32l-12 6z" fill="url(#eld-roof)"/>
+    <path d="M608 92l12 -6v27l-12 6z" fill="url(#eld-side)"/>
+    <path d="M576 92h32v27h-32z" fill="url(#eld-wall)"/>
+    <path d="M578 94h28" fill="none" stroke="#fff3ce" stroke-width="1.2"/>
+    <path d="M581 100h22m-22 5h22" fill="none" stroke="#a77442" stroke-width="1.06" opacity=".82"/>
+    <path d="M610 112l8 -4" fill="none" stroke="#a1754e" stroke-width="1" opacity=".8"/>
+  </g>
+  <g fill="url(#eld-ground)" stroke="#ab8559" stroke-width="1.28">
+    <path d="M147 170l36-24 73-9 74 5 46-14 58 2 62-12 95 9 49 15 26 23-97 16-201 3-193 2z"/>
+    <path d="M147 170l28 16 193-2 201-3 97-16v7l-97 16-201 4-193 1-28-15z" fill="#d9ba90" fill-opacity=".63"/>
+    <path d="M232 152l97-4 48-14h56l62-10 106 15m-367 17l98-3 46-14 53 1 62-10 92 12" fill="none" stroke="#bf9765" stroke-opacity=".56" stroke-width="1"/>
+    <path d="M192 181l33-19 92 4 81-13 46 3 56-18 59 5 56 21" fill="none" stroke="#c49a64" stroke-opacity=".53" stroke-width="1.1"/>
+  </g>
+  <g stroke="#997044" stroke-width="1.36">
+    <path d="M177 148l12 -6h44l-12 6z" fill="url(#eld-roof)"/>
+    <path d="M221 148l12 -6v25l-12 6z" fill="url(#eld-side)"/>
+    <path d="M177 148h44v25h-44z" fill="url(#eld-wall)"/>
+    <path d="M179 150h40" fill="none" stroke="#fff3ce" stroke-width="1.2"/>
+    <path d="M184 172v-12a4 4 0 0 1 8 0v12z" fill="#b5834f" fill-opacity=".43" stroke-width="1.04"/>
+    <path d="M195 172v-12a4 4 0 0 1 8 0v12z" fill="#b5834f" fill-opacity=".43" stroke-width="1.04"/>
+    <path d="M206 172v-12a4 4 0 0 1 8 0v12z" fill="#b5834f" fill-opacity=".43" stroke-width="1.04"/>
+    <path d="M182 155h34" fill="none" stroke="#aa7644" stroke-width="1.1" opacity=".78"/>
+    <path d="M223 166l8 -4" fill="none" stroke="#a1754e" stroke-width="1" opacity=".8"/>
+  </g>
+  <g stroke="#997044" stroke-width="1.36">
+    <path d="M231 127l12 -6h36l-12 6z" fill="url(#eld-roof)"/>
+    <path d="M267 127l12 -6v37l-12 6z" fill="url(#eld-side)"/>
+    <path d="M231 127h36v37h-36z" fill="url(#eld-wall)"/>
+    <path d="M233 129h32" fill="none" stroke="#fff3ce" stroke-width="1.2"/>
+    <path d="M242 163v-14a7 7 0 0 1 14 0v14z" fill="#b5834f" fill-opacity=".48" stroke-width="1.15"/>
+    <path d="M237 135h24" fill="none" stroke-width="1.05" opacity=".7"/>
+    <path d="M269 157l8 -4" fill="none" stroke="#a1754e" stroke-width="1" opacity=".8"/>
+  </g>
+  <g stroke="#997044" stroke-width="1.36">
+    <path d="M274 142l12 -6h26l-12 6z" fill="url(#eld-roof)"/>
+    <path d="M300 142l12 -6v25l-12 6z" fill="url(#eld-side)"/>
+    <path d="M274 142h26v25h-26z" fill="url(#eld-wall)"/>
+    <path d="M276 144h22" fill="none" stroke="#fff3ce" stroke-width="1.2"/>
+    <path d="M282 166v-12a5 5 0 0 1 10 0v12z" fill="#b5834f" fill-opacity=".48" stroke-width="1.15"/>
+    <path d="M302 160l8 -4" fill="none" stroke="#a1754e" stroke-width="1" opacity=".8"/>
+  </g>
+  <g stroke="#997044" stroke-width="1.36">
+    <path d="M335 133l12 -6h31l-12 6z" fill="url(#eld-roof)"/>
+    <path d="M366 133l12 -6v25l-12 6z" fill="url(#eld-side)"/>
+    <path d="M335 133h31v25h-31z" fill="url(#eld-wall)"/>
+    <path d="M337 135h27" fill="none" stroke="#fff3ce" stroke-width="1.2"/>
+    <path d="M344 157v-12a6 6 0 0 1 12 0v12z" fill="#b5834f" fill-opacity=".48" stroke-width="1.15"/>
+    <path d="M368 151l8 -4" fill="none" stroke="#a1754e" stroke-width="1" opacity=".8"/>
+  </g>
+  <g stroke="#997044" stroke-width="1.36">
+    <path d="M386 136l13 -7h42l-13 7z" fill="url(#eld-roof)"/>
+    <path d="M428 136l13 -7v21l-13 7z" fill="url(#eld-side)"/>
+    <path d="M386 136h42v21h-42z" fill="url(#eld-wall)"/>
+    <path d="M388 138h38" fill="none" stroke="#fff3ce" stroke-width="1.2"/>
+    <path d="M392 156v-10a4 4 0 0 1 8 0v10z" fill="#b5834f" fill-opacity=".43" stroke-width="1.04"/>
+    <path d="M403 156v-10a4 4 0 0 1 8 0v10z" fill="#b5834f" fill-opacity=".43" stroke-width="1.04"/>
+    <path d="M413 156v-10a4 4 0 0 1 8 0v10z" fill="#b5834f" fill-opacity=".43" stroke-width="1.04"/>
+    <path d="M391 143h32" fill="none" stroke="#aa7644" stroke-width="1.1" opacity=".78"/>
+    <path d="M430 150l9 -5" fill="none" stroke="#a1754e" stroke-width="1" opacity=".8"/>
+  </g>
+  <g stroke="#997044" stroke-width="1.36">
+    <path d="M457 121l10 -5h27l-10 5z" fill="url(#eld-roof)"/>
+    <path d="M484 121l10 -5v30l-10 5z" fill="url(#eld-side)"/>
+    <path d="M457 121h27v30h-27z" fill="url(#eld-wall)"/>
+    <path d="M459 123h23" fill="none" stroke="#fff3ce" stroke-width="1.2"/>
+    <path d="M468 134v-4a2 2 0 0 1 4 0v4z" fill="#ad7b49" fill-opacity=".65" stroke-width="1"/>
+    <path d="M468 143v-4a2 2 0 0 1 4 0v4z" fill="#ad7b49" fill-opacity=".65" stroke-width="1"/>
+  </g>
+  <g stroke="#997044" stroke-width="1.36">
+    <path d="M493 132l15 -8h49l-15 8z" fill="url(#eld-roof)"/>
+    <path d="M542 132l15 -8v24l-15 8z" fill="url(#eld-side)"/>
+    <path d="M493 132h49v24h-49z" fill="url(#eld-wall)"/>
+    <path d="M495 134h45" fill="none" stroke="#fff3ce" stroke-width="1.2"/>
+    <path d="M501 155v-12a4 4 0 0 1 8 0v12z" fill="#b5834f" fill-opacity=".43" stroke-width="1.04"/>
+    <path d="M513 155v-12a4 4 0 0 1 8 0v12z" fill="#b5834f" fill-opacity=".43" stroke-width="1.04"/>
+    <path d="M525 155v-12a4 4 0 0 1 8 0v12z" fill="#b5834f" fill-opacity=".43" stroke-width="1.04"/>
+    <path d="M498 139h39" fill="none" stroke="#aa7644" stroke-width="1.1" opacity=".78"/>
+    <path d="M544 149l11 -6" fill="none" stroke="#a1754e" stroke-width="1" opacity=".8"/>
+  </g>
+  <g stroke="#997044" stroke-width="1.36">
+    <path d="M565 141l11 -6h35l-11 6z" fill="url(#eld-roof)"/>
+    <path d="M600 141l11 -6v24l-11 6z" fill="url(#eld-side)"/>
+    <path d="M565 141h35v24h-35z" fill="url(#eld-wall)"/>
+    <path d="M567 143h31" fill="none" stroke="#fff3ce" stroke-width="1.2"/>
+    <path d="M575 164v-12a7 7 0 0 1 14 0v12z" fill="#b5834f" fill-opacity=".48" stroke-width="1.15"/>
+    <path d="M602 158l7 -3" fill="none" stroke="#a1754e" stroke-width="1" opacity=".8"/>
+  </g>
+  <g stroke="#997044" stroke-width="1.36">
+    <path d="M610 131l11 -6h24l-11 6z" fill="url(#eld-roof)"/>
+    <path d="M634 131l11 -6v32l-11 6z" fill="url(#eld-side)"/>
+    <path d="M610 131h24v32h-24z" fill="url(#eld-wall)"/>
+    <path d="M612 133h20" fill="none" stroke="#fff3ce" stroke-width="1.2"/>
+    <path d="M620 144v-4a2 2 0 0 1 4 0v4z" fill="#ad7b49" fill-opacity=".65" stroke-width="1"/>
+    <path d="M620 153v-4a2 2 0 0 1 4 0v4z" fill="#ad7b49" fill-opacity=".65" stroke-width="1"/>
+    <path d="M636 156l7 -3" fill="none" stroke="#a1754e" stroke-width="1" opacity=".8"/>
+  </g>
+  <g fill="url(#eld-ground)" stroke="#ab8559" stroke-width="1.28">
+    <path d="M158 198l35-15 94-1 56-13 104 9 82-11 82 11 53 16-38 16-151 11-111-6-121 8-60-11z"/>
+    <path d="M158 198l25 14 60 11 121-8 111 6 151-11 38-16v7l-38 17-151 11-111-6-121 7-60-11-25-14z" fill="#d9ba90" fill-opacity=".64"/>
+    <path d="M201 197l79-4 63-17 103 11 81-14 91 16m-412 12l76-4 62-16 102 10 82-14 82 17" fill="none" stroke="#c49a64" stroke-opacity=".68" stroke-width="1.2"/>
+    <path d="M300 214l-21-17-4-24m141 42l33-24 3-17m101 42l-12-16 20-19" fill="none" stroke="#c49a64" stroke-opacity=".54" stroke-width="1.12"/>
+  </g>
+  <g stroke="#997044" stroke-width="1.36">
+    <path d="M191 182l11 -6h39l-11 6z" fill="url(#eld-roof)"/>
+    <path d="M230 182l11 -6v22l-11 6z" fill="url(#eld-side)"/>
+    <path d="M191 182h39v22h-39z" fill="url(#eld-wall)"/>
+    <path d="M193 184h35" fill="none" stroke="#fff3ce" stroke-width="1.2"/>
+    <path d="M203 203v-11a7 7 0 0 1 14 0v11z" fill="#b5834f" fill-opacity=".48" stroke-width="1.15"/>
+    <path d="M232 197l7 -3" fill="none" stroke="#a1754e" stroke-width="1" opacity=".8"/>
+  </g>
+  <g stroke="#997044" stroke-width="1.36">
+    <path d="M237 187l11 -6h30l-11 6z" fill="url(#eld-roof)"/>
+    <path d="M267 187l11 -6v17l-11 6z" fill="url(#eld-side)"/>
+    <path d="M237 187h30v17h-30z" fill="url(#eld-wall)"/>
+    <path d="M239 189h26" fill="none" stroke="#fff3ce" stroke-width="1.2"/>
+    <path d="M242 195h20m-20 5h20" fill="none" stroke="#a77442" stroke-width="1.06" opacity=".82"/>
+  </g>
+  <g stroke="#997044" stroke-width="1.36">
+    <path d="M305 178l14 -7h66l-14 7z" fill="url(#eld-roof)"/>
+    <path d="M371 178l14 -7v29l-14 7z" fill="url(#eld-side)"/>
+    <path d="M305 178h66v29h-66z" fill="url(#eld-wall)"/>
+    <path d="M307 180h62" fill="none" stroke="#fff3ce" stroke-width="1.2"/>
+    <path d="M316 206v-13a5 5 0 0 1 10 0v13z" fill="#b5834f" fill-opacity=".43" stroke-width="1.04"/>
+    <path d="M333 206v-13a5 5 0 0 1 10 0v13z" fill="#b5834f" fill-opacity=".43" stroke-width="1.04"/>
+    <path d="M349 206v-13a5 5 0 0 1 10 0v13z" fill="#b5834f" fill-opacity=".43" stroke-width="1.04"/>
+    <path d="M310 185h56" fill="none" stroke="#aa7644" stroke-width="1.1" opacity=".78"/>
+    <path d="M373 200l10 -5" fill="none" stroke="#a1754e" stroke-width="1" opacity=".8"/>
+  </g>
+  <g stroke="#997044" stroke-width="1.36">
+    <path d="M383 184l10 -5h32l-10 5z" fill="url(#eld-roof)"/>
+    <path d="M415 184l10 -5v23l-10 5z" fill="url(#eld-side)"/>
+    <path d="M383 184h32v23h-32z" fill="url(#eld-wall)"/>
+    <path d="M385 186h28" fill="none" stroke="#fff3ce" stroke-width="1.2"/>
+    <path d="M393 206v-11a6 6 0 0 1 12 0v11z" fill="#b5834f" fill-opacity=".48" stroke-width="1.15"/>
+  </g>
+  <g stroke="#997044" stroke-width="1.36">
+    <path d="M471 180l14 -7h48l-14 7z" fill="url(#eld-roof)"/>
+    <path d="M519 180l14 -7v29l-14 7z" fill="url(#eld-side)"/>
+    <path d="M471 180h48v29h-48z" fill="url(#eld-wall)"/>
+    <path d="M473 182h44" fill="none" stroke="#fff3ce" stroke-width="1.2"/>
+    <path d="M479 208v-13a4 4 0 0 1 8 0v13z" fill="#b5834f" fill-opacity=".43" stroke-width="1.04"/>
+    <path d="M491 208v-13a4 4 0 0 1 8 0v13z" fill="#b5834f" fill-opacity=".43" stroke-width="1.04"/>
+    <path d="M503 208v-13a4 4 0 0 1 8 0v13z" fill="#b5834f" fill-opacity=".43" stroke-width="1.04"/>
+    <path d="M476 187h38" fill="none" stroke="#aa7644" stroke-width="1.1" opacity=".78"/>
+    <path d="M521 202l10 -5" fill="none" stroke="#a1754e" stroke-width="1" opacity=".8"/>
+  </g>
+  <g stroke="#997044" stroke-width="1.36">
+    <path d="M573 172l9 -5h26l-9 5z" fill="url(#eld-roof)"/>
+    <path d="M599 172l9 -5v33l-9 5z" fill="url(#eld-side)"/>
+    <path d="M573 172h26v33h-26z" fill="url(#eld-wall)"/>
+    <path d="M575 174h22" fill="none" stroke="#fff3ce" stroke-width="1.2"/>
+    <path d="M584 185v-4a2 2 0 0 1 4 0v4z" fill="#ad7b49" fill-opacity=".65" stroke-width="1"/>
+    <path d="M584 194v-4a2 2 0 0 1 4 0v4z" fill="#ad7b49" fill-opacity=".65" stroke-width="1"/>
+  </g>
+  <g stroke="#997044" stroke-width="1.36">
+    <path d="M610 183l10 -5h24l-10 5z" fill="url(#eld-roof)"/>
+    <path d="M634 183l10 -5v19l-10 5z" fill="url(#eld-side)"/>
+    <path d="M610 183h24v19h-24z" fill="url(#eld-wall)"/>
+    <path d="M612 185h20" fill="none" stroke="#fff3ce" stroke-width="1.2"/>
+    <path d="M618 201v-9a4 4 0 0 1 8 0v9z" fill="#b5834f" fill-opacity=".48" stroke-width="1.15"/>
+  </g>
+  <g fill="none" stroke="#ac8556" stroke-width="1.15" opacity=".56">
+    <path d="M182 213l19 4m31 8l25 0m38-3l37-2m61-1l26 1m82 3l24-2m59-3l28-3m26-8l12-4"/>
+    <path d="M291 207l9 1m-10 3l9 1m243-8l9-2m-7 5l9-2"/>
+  </g>
+  <g fill="none" stroke="#fff6d6" stroke-width="1.6" opacity=".86">
+    <path d="M261 77h15m154-19h17m86 9h28m-191 121h-20m-99-31h-13m271-34h28m74 35h17"/>
+  </g>
+</g>
+</svg>

@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 280" width="800" height="280">
+<g stroke-linecap="round" stroke-linejoin="round">
+  <defs>
+    <linearGradient id="roswell-mesa" x1="400" y1="78" x2="400" y2="164" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#dbad89" stop-opacity=".6"/>
+      <stop offset="1" stop-color="#f0cfad" stop-opacity=".18"/>
+    </linearGradient>
+    <linearGradient id="roswell-ground" x1="135" x2="665" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#ac795d" stop-opacity="0"/>
+      <stop offset=".24" stop-color="#ac795d" stop-opacity=".58"/>
+      <stop offset=".73" stop-color="#aa725d" stop-opacity=".58"/>
+      <stop offset="1" stop-color="#aa725d" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="roswell-panel" x1="300" y1="135" x2="476" y2="211" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#bba6a1"/>
+      <stop offset=".35" stop-color="#e2cec0"/>
+      <stop offset=".73" stop-color="#d4b8aa"/>
+      <stop offset="1" stop-color="#ac8d84"/>
+    </linearGradient>
+  </defs>
+  <path d="M165 142l29-5 18-8 34-1 25-15 9-17 21-6 37 1 14 8 13 17 30 4 21 12 37 2 27-14 21-4 13-14 28-3 36 3 15 12 26 3 24 16 17 2" fill="none" stroke="#ba8f73" stroke-width="1.35" opacity=".56"/>
+  <path d="M137 154l32-4 32-15 22-14 11-20 17-5 52 1 7 16 22 8 29 16 37 6 26-2 23-9 14-13 15-3 9-24 19-7h63l14 7 12 22 30 12 16 10 22 7 25 2v14H137z" fill="url(#roswell-mesa)"/>
+  <path d="M138 153l31-4 32-14 22-14 11-20 17-5 52 1 7 16 22 8 29 16 37 6 26-2 23-9 14-13 15-3 9-24 19-7h63l14 7 12 22 30 12 16 10 22 7 25 2" fill="none" stroke="#a46e54" stroke-width="1.7" opacity=".82"/>
+  <path d="M252 102l47 2m-65 7 71 1m-76 7 81-1m-93 8 99-2m-108 9 127-3m152-32 94-1m-99 9h100m-104 9 107-2m-115 10 129-2m-141 10 159-2" fill="none" stroke="#ab795e" stroke-width="1.28" opacity=".49"/>
+  <g fill="none" stroke="url(#roswell-ground)" stroke-width="1.35">
+    <path d="M132 164c130-10 379-10 535 0M150 176c90-9 139-10 202-10m137 0c65 0 125 6 159 9M136 204c91-11 170-12 238-9 95 3 196-3 292 1m-511 23c112-8 244-10 348-6 56 2 100-2 144-3"/>
+    <path d="M211 185l23-2m-30 7 13-1m27 14 31-2m-39 12 18-1m301-25 31 2m-47 17 36-3m16 8 23-2m-433-35 20-2m386 47 20-2"/>
+  </g>
+  <g stroke="#986f67" stroke-width="1.65">
+    <path d="M281 194l39-14 5-15 31-4 35-26 20 6 25-13 40 14-13 15 22 9-13 15 14 9-55 22-37 3-70-12z" fill="url(#roswell-panel)"/>
+    <path d="M281 194l46 3 55-15 54-5 50 13-55 22-37 3-70-12z" fill="#b89690"/>
+    <path d="M357 160l35-25 19 6 24-13 40 14-38 10-27 18-38 7-42 15z" fill="#e8d9cc"/>
+    <path d="M437 152l26 5 22 9-13 15-36-4-54 5 28-12z" fill="#aa908b"/>
+    <path d="M317 187l45-18 31-20 24 2m-64 31 33-7 22-10 21-7m-11 36 24-3 17-7m-131 15 41-6 17-5" fill="none" stroke="#885f58" stroke-width="1.15" opacity=".74"/>
+    <path d="M372 177l38-7 27-18 38-10m-145 50 24-17" fill="none" stroke="#f8e7de" stroke-width="1.6"/>
+    <path d="M405 178l13-4m23-7 15 2m-81 25 12-3m50-49 11-5" fill="none" stroke="#f8e7de" stroke-width="1.25"/>
+    <path d="M237 200l24-15 24 4 5 9-17 7-19 1z" fill="#d6bdb1"/>
+    <path d="M237 200l23 2 25-13m-25 13 13 3" fill="none" stroke-width="1.22"/>
+    <path d="M514 194l32-8 11 7 12 1-11 11-36-3z" fill="#c3a49a"/>
+    <path d="M514 194l26 2 17-3m-17 3-7 5" fill="none" stroke-width="1.22"/>
+    <path d="M477 213l19-5 11 5-10 6-15-1zM205 209l11-5 9 4-8 4z" fill="#d2b4a3" stroke-width="1.15"/>
+  </g>
+  <g fill="none" stroke="#ac805e" stroke-width="1.25" opacity=".68">
+    <path d="M187 177l-4-7m4 7 4-9m-4 9 8-4m400 6-5-10m5 10 6-11m-6 11 10-5m-348-10-4-5m4 5 3-6m263 5-4-5m4 5 4-7"/>
+    <path d="M245 215l15-2m14 7 12-1m27 5 15-2m183 3 29-3m21-8 16 1"/>
+  </g>
+</g>
+</svg>
