@@ -5,11 +5,13 @@ import SpeedInsights from '@vercel/speed-insights/astro';
 interface Props {
   title?: string;
   description?: string;
+  featuredHome?: boolean;
 }
 
 const {
   title = "Atlas Aeterna",
-  description = "Explore history, geography, mysteries and legendary places with Atlas Aeterna."
+  description = "Explore history, geography, mysteries and legendary places with Atlas Aeterna.",
+  featuredHome = false,
 }: Props = Astro.props;
 
 const pathname = Astro.url.pathname;
@@ -34,10 +36,10 @@ const isActive = (path: string) => {
 
     <meta
       name="viewport"
-      content="width=device-width, initial-scale=1"
+      content={featuredHome ? "width=device-width, initial-scale=1, viewport-fit=cover" : "width=device-width, initial-scale=1"}
     />
 
-    <meta name="theme-color" content="#eef2f8" />
+    <meta name="theme-color" content={featuredHome ? "#f4f1fa" : "#eef2f8"} />
     <meta name="color-scheme" content="light" />
 
     <link
@@ -64,19 +66,19 @@ const isActive = (path: string) => {
     <Analytics />
   </head>
 
-  <body>
-    <a class="skip-link" href="#main-content">
+  <body class={featuredHome ? "featured-home-layout" : undefined}>
+    <a class="skip-link" href={featuredHome ? "#atlas-title" : "#main-content"}>
       Skip to content
     </a>
 
-    <div class="site-ambient" aria-hidden="true">
+    {!featuredHome && <div class="site-ambient" aria-hidden="true">
       <span class="ambient-orb ambient-orb--blue"></span>
       <span class="ambient-orb ambient-orb--violet"></span>
       <span class="ambient-orb ambient-orb--peach"></span>
       <span class="ambient-grid"></span>
-    </div>
+    </div>}
 
-    <header class="site-header">
+    {!featuredHome && <header class="site-header">
       <nav
         class="site-nav"
         aria-label="Primary navigation"
@@ -144,7 +146,7 @@ const isActive = (path: string) => {
           </a>
         </div>
       </nav>
-    </header>
+    </header>}
 
     <main id="main-content">
       <slot />
@@ -829,6 +831,20 @@ const isActive = (path: string) => {
 
     position: relative;
     z-index: 1;
+  }
+
+  .featured-home-layout {
+    background: #f4f1fa;
+  }
+
+  .featured-home-layout > .skip-link:not(:focus) {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .featured-home-layout > main {
+    max-width: none;
+    padding: 0;
   }
 
   /* ---------------------------------- */

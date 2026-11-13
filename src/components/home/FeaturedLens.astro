@@ -1,0 +1,372 @@
+---
+import LensArtwork from "./LensArtwork.astro";
+
+const features = [
+  { id: "history", section: "History", sectionHref: "/history", title: "The Pyramids of Giza", storyHref: null },
+  { id: "geography", section: "Geography", sectionHref: "/geography", title: "The Northern Lights", storyHref: null },
+  { id: "mysteries", section: "Mysteries", sectionHref: "/mysteries", title: "El Dorado", storyHref: "/mysteries/el-dorado" },
+];
+---
+
+<div class="featured-home" data-featured-home data-feature="idle">
+  <nav class="section-nav" aria-label="Primary navigation">
+    {features.map((feature) => (
+      <div class="section-item">
+        <a class="section-link" href={feature.sectionHref} data-section={feature.id}>
+          <span>{feature.section}</span>
+        </a>
+        <button
+          class="touch-preview"
+          type="button"
+          aria-label={`Preview ${feature.title}`}
+          aria-controls="featured-lens"
+          aria-pressed="false"
+          data-preview={feature.id}
+        >
+          <span>Preview</span>
+        </button>
+      </div>
+    ))}
+  </nav>
+
+  <div class="lens-hero">
+    <h1 id="atlas-title" tabindex="-1">Atlas Aeterna</h1>
+    <section id="featured-lens" class="lens-stage" aria-label="Featured story">
+      <svg class="glass-bed" viewBox="0 0 1200 465" preserveAspectRatio="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="glass-body" x1="0" y1="0" x2="1" y2="1" gradientUnits="objectBoundingBox">
+              <stop stop-color="#f7fbff" stop-opacity=".78"/>
+              <stop offset=".30" stop-color="#ecf3ff" stop-opacity=".40"/>
+              <stop offset=".58" stop-color="#d4d8f3" stop-opacity=".27"/>
+              <stop offset=".84" stop-color="#eae0fa" stop-opacity=".55"/>
+              <stop offset="1" stop-color="#fcf8ff" stop-opacity=".74"/>
+            </linearGradient>
+            <linearGradient id="inner-depth" x1="0" y1="1" x2="1" y2="0">
+              <stop stop-color="#acd6f0" stop-opacity=".43"/>
+              <stop offset=".29" stop-color="#e9f8ff" stop-opacity=".12"/>
+              <stop offset=".61" stop-color="#f8faff" stop-opacity=".28"/>
+              <stop offset=".87" stop-color="#c1b2eb" stop-opacity=".26"/>
+              <stop offset="1" stop-color="#f4ebff" stop-opacity=".5"/>
+            </linearGradient>
+            <radialGradient id="glass-thickness" cx=".48" cy=".46" r=".63" gradientTransform="translate(0 -.08) scale(1 1.16)">
+              <stop offset=".48" stop-color="#b9c7f3" stop-opacity="0"/>
+              <stop offset=".79" stop-color="#b3bce0" stop-opacity=".05"/>
+              <stop offset=".93" stop-color="#a8a2d2" stop-opacity=".36"/>
+              <stop offset="1" stop-color="#d5dfff" stop-opacity=".23"/>
+            </radialGradient>
+            <linearGradient id="refracted-edge" x1="0" y1=".2" x2="1" y2=".78">
+              <stop stop-color="#89b7dc" stop-opacity=".79"/>
+              <stop offset=".19" stop-color="#b2d8ee" stop-opacity=".83"/>
+              <stop offset=".40" stop-color="#e7ebff" stop-opacity=".76"/>
+              <stop offset=".67" stop-color="#c6bced" stop-opacity=".81"/>
+              <stop offset=".87" stop-color="#aa95d9" stop-opacity=".84"/>
+              <stop offset="1" stop-color="#e9d6f8" stop-opacity=".85"/>
+            </linearGradient>
+          </defs>
+          <ellipse cx="600" cy="231" rx="594" ry="225" fill="url(#glass-body)" stroke="url(#refracted-edge)" stroke-width="2.2"/>
+          <ellipse cx="600" cy="231" rx="590" ry="222" fill="url(#glass-thickness)"/>
+          <ellipse cx="600" cy="229" rx="576" ry="209" fill="url(#inner-depth)" opacity=".56"/>
+        </svg>
+      <div class="lens-art"><LensArtwork /></div>
+      <svg class="glass-surface" viewBox="0 0 1200 465" preserveAspectRatio="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="upper-edge" x1="0" y1=".55" x2="1" y2=".54">
+              <stop stop-color="#fff" stop-opacity=".35"/>
+              <stop offset=".16" stop-color="#fff" stop-opacity=".83"/>
+              <stop offset=".43" stop-color="#fff" stop-opacity=".93"/>
+              <stop offset=".71" stop-color="#f2ecff" stop-opacity=".56"/>
+              <stop offset="1" stop-color="#fff" stop-opacity=".46"/>
+            </linearGradient>
+            <linearGradient id="lower-edge" x1="0" y1="1" x2="1" y2="1">
+              <stop stop-color="#76bde5" stop-opacity=".32"/>
+              <stop offset=".22" stop-color="#95ceef" stop-opacity=".85"/>
+              <stop offset=".47" stop-color="#e4edff" stop-opacity=".9"/>
+              <stop offset=".8" stop-color="#efd8fb" stop-opacity=".7"/>
+              <stop offset="1" stop-color="#af9ce8" stop-opacity=".37"/>
+            </linearGradient>
+            <linearGradient id="sheen" x1="0" y1="0" x2="1" y2=".4">
+              <stop stop-color="#fff" stop-opacity="0"/>
+              <stop offset=".39" stop-color="#fff" stop-opacity=".88"/>
+              <stop offset=".66" stop-color="#fff" stop-opacity=".64"/>
+              <stop offset="1" stop-color="#fff" stop-opacity="0"/>
+            </linearGradient>
+          </defs>
+          <path d="M 12 232 A 588 219 0 0 1 1188 232" fill="none" stroke="url(#upper-edge)" stroke-width="2.1"/>
+          <path d="M 10 236 A 590 220 0 0 0 1190 236" fill="none" stroke="#fff" stroke-opacity=".72" stroke-width="2.5"/>
+          <path d="M 12 253 C 82 380 300 451 600 451 C 875 451 1100 386 1188 251" fill="none" stroke="url(#lower-edge)" stroke-width="2.3"/>
+          <path d="M 78 153 C 148 99 259 60 404 42 C 290 64 178 109 77 155 Z" fill="url(#sheen)"/>
+          <path d="M 758 424 C 881 401 1045 344 1106 295 C 1043 351 920 410 758 424 Z" fill="url(#sheen)" opacity=".81"/>
+        </svg>
+
+      <div class="story-captions" aria-live="polite">
+        {features.map((feature) => (
+          <div data-story={feature.id} hidden>
+            {feature.storyHref ? (
+              <a class="story-caption story-link" href={feature.storyHref} data-feature-link>
+                <span class="caption-label">{feature.title}</span><span aria-hidden="true">→</span>
+              </a>
+            ) : (
+              <span class="story-caption" role="link" aria-disabled="true">
+                <span class="caption-label">{feature.title}</span><span aria-hidden="true">→</span>
+              </span>
+            )}
+          </div>
+        ))}
+      </div>
+    </section>
+  </div>
+</div>
+
+<script>
+  import "./featured-lens";
+</script>
+
+<style>
+  .featured-home {
+    /* The shared neutral palette can be overridden for a future page treatment. */
+    --lens-paper: #f3f0f9;
+    --lens-violet: #dacdf7;
+    --lens-blue: #cfe4fa;
+    --lens-warm: #fbf5f3;
+    display: grid;
+    min-block-size: 100vh;
+    min-block-size: 100svh;
+    grid-template-rows: auto 1fr;
+    color: #161927;
+    background:
+      radial-gradient(ellipse 65% 82% at 98% 15%, var(--lens-violet) 0%, transparent 84%),
+      radial-gradient(ellipse 76% 86% at 0% 100%, var(--lens-blue) 0%, transparent 82%),
+      radial-gradient(ellipse 60% 78% at 45% 12%, var(--lens-warm) 4%, transparent 90%),
+      var(--lens-paper);
+  }
+
+  .section-nav {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    inline-size: min(77%, 66rem);
+    margin-inline: auto;
+    padding-block-start: max(clamp(1.1rem, 4.1vh, 2.65rem), env(safe-area-inset-top));
+  }
+
+  .section-item {
+    display: grid;
+    justify-items: stretch;
+  }
+
+  .section-link {
+    display: grid;
+    place-items: center;
+    min-block-size: 48px;
+    border-radius: 0.45rem;
+    color: inherit;
+    font-size: clamp(0.64rem, 1.17vw, 1.12rem);
+    font-weight: 500;
+    letter-spacing: 0.19em;
+    line-height: 1.35;
+    text-transform: uppercase;
+    text-decoration: none;
+  }
+
+  .section-link span { position: relative; }
+
+  .section-link span::after {
+    content: "";
+    position: absolute;
+    inset: calc(100% + 0.55rem) -0.2em auto;
+    block-size: 1px;
+    background: #455687;
+    opacity: 0;
+    transform: scaleX(0.75);
+    transition: opacity 180ms ease, transform 250ms ease;
+  }
+
+  .featured-home[data-feature="history"] [data-section="history"] span::after,
+  .featured-home[data-feature="geography"] [data-section="geography"] span::after,
+  .featured-home[data-feature="mysteries"] [data-section="mysteries"] span::after {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+
+  .touch-preview {
+    display: none;
+    justify-self: center;
+    min-inline-size: 64px;
+    min-block-size: 44px;
+    padding: 0 0.5rem;
+    border: 0;
+    border-radius: 0.45rem;
+    background: transparent;
+    color: #465477;
+    font-size: 0.71rem;
+    cursor: pointer;
+    touch-action: manipulation;
+  }
+
+  .touch-preview span {
+    padding: 0.42rem 0.58rem;
+    border: 1px solid #828cb230;
+    border-radius: 999px;
+    background: #fcfbff60;
+  }
+
+  .touch-preview[aria-pressed="true"] span {
+    border-color: #58658d6b;
+    background: #fdfcffbd;
+    color: #263351;
+  }
+
+  .lens-hero {
+    display: grid;
+    justify-items: center;
+    align-content: center;
+    gap: clamp(1rem, 3.1vh, 2rem);
+    padding: 2.5rem 1rem clamp(3.25rem, 9vh, 5.5rem);
+  }
+
+  .lens-hero h1 {
+    margin: 0;
+    padding-inline-start: 0.065em;
+    color: #141724;
+    font-family: var(--font-display);
+    font-size: clamp(1.85rem, min(6.45vw, 11vh), 6.6rem);
+    font-weight: 400;
+    letter-spacing: 0.065em;
+    line-height: 1.06;
+    text-align: center;
+    white-space: nowrap;
+  }
+
+  .lens-stage {
+    position: relative;
+    isolation: isolate;
+    inline-size: min(75vw, 77rem, 137vh);
+    aspect-ratio: 1200 / 465;
+  }
+
+  .lens-stage::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    inset: 70% 4% -13%;
+    background: radial-gradient(ellipse at center, #6c70a32c 0%, #8187af20 36%, #9f8cc41e 52%, transparent 72%);
+    filter: blur(12px);
+    transform: rotate(-1deg);
+    pointer-events: none;
+  }
+
+  .glass-bed,
+  .glass-surface,
+  .lens-art {
+    position: absolute;
+    display: block;
+    pointer-events: none;
+  }
+
+  .glass-bed,
+  .glass-surface {
+    inset: 0;
+    inline-size: 100%;
+    block-size: 100%;
+  }
+
+  .lens-art {
+    inset: 10% 5% auto;
+    inline-size: 90%;
+    block-size: 71%;
+  }
+
+  .story-captions {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    grid-template-rows: 1fr 10%;
+    align-items: end;
+    justify-items: center;
+    text-align: center;
+    color: #232842;
+    pointer-events: none;
+  }
+
+  .story-captions > div { grid-row: 1; }
+  .story-captions [hidden] { display: none; }
+
+  .story-caption {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.44em;
+    min-block-size: 44px;
+    padding-inline: 0.42rem;
+    border-radius: 0.35rem;
+    color: inherit;
+    font-size: clamp(0.88rem, 1.7vw, 1.27rem);
+    font-weight: 600;
+    line-height: 1.25;
+    text-decoration: none;
+  }
+
+  .caption-label {
+    text-decoration: underline;
+    text-decoration-color: #45568788;
+    text-underline-offset: 0.28em;
+  }
+
+  .story-link { pointer-events: auto; }
+
+  .story-link::before {
+    content: "";
+    position: absolute;
+    inset: 5% 9% 24%;
+    border-radius: 50%;
+  }
+
+  .story-link:hover .caption-label {
+    text-decoration-color: #455687;
+  }
+
+  :is(.section-link, .touch-preview, .story-link):focus-visible {
+    outline: 2px solid #455687;
+    outline-offset: 3px;
+  }
+
+  @media (max-width: 720px) {
+    .section-nav {
+      inline-size: min(calc(100% - 1rem), 32rem);
+      padding-block-start: max(1rem, env(safe-area-inset-top));
+    }
+
+    .section-link {
+      min-block-size: 44px;
+      letter-spacing: 0.12em;
+      font-size: clamp(0.64rem, 2.4vw, 0.84rem);
+    }
+
+    .section-link span::after { inset-block-start: calc(100% + 0.25rem); }
+
+    .lens-hero {
+      gap: clamp(1.35rem, 4vh, 2rem);
+      padding-block-end: max(6rem, 16vh);
+    }
+
+    .lens-hero h1 {
+      font-size: clamp(1.55rem, 8.65vw, 3.9rem);
+      letter-spacing: 0.04em;
+    }
+
+    .lens-stage {
+      inline-size: min(92vw, 36rem);
+      aspect-ratio: 1.58;
+    }
+
+    .lens-art { inset: 5% 1% auto; inline-size: 98%; block-size: 67%; }
+    .story-captions { grid-template-rows: 1fr 8%; }
+  }
+
+  @media (max-width: 720px), (hover: none), (any-pointer: coarse) {
+    [data-lens-ready] .touch-preview { display: block; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .section-link span::after { transition: none; }
+  }
+</style>
