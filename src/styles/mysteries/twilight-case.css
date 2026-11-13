@@ -1,0 +1,13 @@
+@import "./case-layout.css";
+
+body:has(.case-page[data-case-theme="twilight"]) {
+  --case-palette-dark: #2c2337;
+  --case-palette-middle: #493952;
+  --case-palette-glow: #674f71;
+  --case-palette-paper: #efeaf3;
+  --case-palette-wash: #e2d6e8;
+  --case-palette-ink: #42314c;
+  --case-palette-edge: #907a9a;
+  --case-palette-light: #dabee7;
+  --case-palette-ivory: #f8eef9;
+}

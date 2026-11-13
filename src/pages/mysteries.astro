@@ -1,6 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { mysteryCases } from "../data/mystery-cases";
+import { mysteryCases, type MysteryCase } from "../data/mystery-cases";
 ---
 
 <BaseLayout
@@ -12,24 +12,24 @@ import { mysteryCases } from "../data/mystery-cases";
     <h1 id="mysteries-title">Mysteries</h1>
 
     <ul class="case-grid" aria-label="Mystery cases">
-      {mysteryCases.map((caseFile) => {
-        const Card = caseFile.published ? "a" : "div";
+      {mysteryCases.map((caseFile: MysteryCase) => {
+        const hasPage = caseFile.published || caseFile.routeReady;
+        const Card = hasPage ? "a" : "div";
 
         return (
           <li>
             <Card
               class:list={["case-card", `case-card--${caseFile.theme}`]}
-              href={caseFile.published ? `/mysteries/${caseFile.slug}` : undefined}
+              href={hasPage ? `/mysteries/${caseFile.slug}` : undefined}
             >
               <div class="case-artwork">
                 <img src={caseFile.artwork} alt="" width="800" height="280" decoding="async" />
               </div>
               <h2>{caseFile.title}</h2>
-              {caseFile.published ? (
-                <span class="case-arrow" aria-hidden="true">→</span>
-              ) : (
-                <p class="case-status">In development</p>
-              )}
+              <div class="case-footer">
+                {!caseFile.published && <p class="case-status">In development</p>}
+                {hasPage && <span class="case-arrow" aria-hidden="true">→</span>}
+              </div>
             </Card>
           </li>
         );
@@ -130,6 +130,13 @@ import { mysteryCases } from "../data/mystery-cases";
     text-wrap: pretty;
   }
 
+  .case-footer {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 0.5rem;
+  }
+
   .case-status,
   .case-arrow {
     display: flex;
@@ -146,7 +153,7 @@ import { mysteryCases } from "../data/mystery-cases";
   }
 
   .case-arrow {
-    justify-self: end;
+    margin-inline-start: auto;
     font: 400 1.37rem/1 system-ui, sans-serif;
   }
 

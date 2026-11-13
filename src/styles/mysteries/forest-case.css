@@ -1,0 +1,239 @@
+@import "./case-layout.css";
+
+body.section-placeholder-layout:has([data-case-theme="forest"]) {
+  --text: #202b23;
+  --text-secondary: #455045;
+  --forest-bg: #e8eee3;
+  --forest-glass: linear-gradient(147deg, #f7f9f0, #e7eee2 81%);
+  --case-nav-bg: linear-gradient(125deg, #213830, #182a23);
+  --case-nav-edge: #acc4a935;
+  --case-nav-shadow: inset 0 1px #d2e5c70b, 0 9px 28px #14221917;
+  --case-nav-text: #f5f1e1;
+  --case-nav-active: #d1b17b;
+  --case-nav-menu-bg: #233a30;
+  --case-nav-menu-edge: #bdcfb444;
+  --case-focus-dark: #efd7a5;
+  background:
+    radial-gradient(ellipse 75% 27rem at 104% 68rem, #d4e2d2 0%, transparent 88%),
+    radial-gradient(ellipse 66% 42rem at -10% 63rem, #f9f3e7 0%, transparent 92%),
+    var(--forest-bg);
+}
+
+.case-page[data-case-theme="forest"] {
+  --case-panel: #edf1e8;
+  --case-card: #f6f7ee;
+  --case-panel-edge: #a4b29b75;
+  --case-card-edge: #a7b59e62;
+  --case-route-line: #8a9c82;
+  --case-route-node: #ae9058;
+  --case-muted-label: #6f5836;
+  --case-search-accent: #48634e;
+  --case-search-accent-rgb: 72, 99, 78;
+  --case-search-report: #eaf0e5;
+  --case-card-shadow: 0 3px 10px #243c2814;
+  --case-card-hover-shadow: 0 7px 16px #243c2820;
+  --case-blue: #87a793;
+  --case-gold: #bf9d69;
+  --case-violet: #8a9f89;
+  --case-cover-bg: radial-gradient(ellipse at 81% 41%, #405c48 0%, #223b31 30%, transparent 67%),
+    radial-gradient(ellipse at 19% 0%, #1b352c 0%, #10201b 62%, #0d1915 100%);
+  --case-cover-text: #f3eed9;
+  --case-cover-type: linear-gradient(169deg, #fbf6e4 16%, #eee5cd 47%, #b5c2a9 93%);
+  --case-cover-shadow: drop-shadow(0 2px 0 #b6ad8d60) drop-shadow(0 15px 24px #08150eb5);
+  --case-index-edge: #a8bf9c87;
+  --case-index-bg: linear-gradient(110deg, #1b352b 0%, #233c32 57%, #304a3a 100%);
+  --case-index-shadow: inset 0 1px #cfdec044, 0 8px 24px #172e2450;
+  --case-index-text: #eff3e4;
+  --case-index-divider: #b1c5a934;
+  --case-index-label: #f0ead5;
+  --case-index-route: #a1b79b66;
+  --case-index-link: #cfdbcb;
+  --case-index-number: #b8c6b5;
+  --case-index-stop-edge: #a2b89c;
+  --case-index-stop-fill: #29453a;
+  --case-index-current-text: #fff6de;
+  --case-index-current-number: #ecd6a6;
+  --case-index-current-fill: #e7cf95;
+  --case-index-current-edge: #eddaab;
+  --case-index-current-ring: #dabe85bf;
+  --case-intro-line: #947a4d70;
+  --case-intro-text: #23392c;
+  --case-heading: #203a2b;
+  --case-heading-rule: linear-gradient(90deg, #7d946cc4, #7d946c22);
+  --case-heading-stop: #879b80;
+  --case-heading-number-text: #684d29;
+  --case-heading-number-edge: #b6bd9d;
+  --case-heading-number-bg: #f2f0df;
+  --case-heading-number-ring: #f7f7ec90;
+  --case-map-edge: #9ca88d67;
+  --case-map-bg: linear-gradient(135deg, #f5f8ee 0%, #e4ece0 100%);
+  --case-map-shadow: inset 0 1px #ffffffba, 0 15px 30px #2b533210;
+  --case-map-water: radial-gradient(ellipse at 27% 57%, #ecf0dd, transparent 59%),
+    #e1ebdf;
+  --case-map-water-edge: #718b6c4d;
+  --case-map-filter: grayscale(1) sepia(.29) hue-rotate(47deg) saturate(1.08);
+  --case-map-caption: #526052;
+  --case-map-grid: #45614c33;
+  --case-index-toggle: #fff5df;
+  --case-index-mobile-label: #cfddce;
+  --case-index-mobile-number: #edd7a5;
+  --case-index-chevron: #c3cfb7;
+  --case-index-menu-edge: #9cb89c8c;
+  --case-index-menu-bg: #223c32;
+  --case-index-menu-shadow: #0a1b3466;
+  --case-focus: #45654c;
+}
+
+.case-page[data-case-theme="forest"] .evidence-visual {
+  border-color: #b6a37b7a;
+  background: radial-gradient(ellipse at 20% 10%, #fcfcf079, transparent 60%), #dfe8da;
+  box-shadow: inset 0 1px #ffffffd6, inset 0 0 42px #67826916;
+}
+
+.case-page[data-case-theme="forest"] .evidence-visual--gold {
+  background-color: #eae3d1;
+}
+
+.case-page[data-case-theme="forest"] .search-plot {
+  background: radial-gradient(ellipse at 20% 85%, #ccb46d22, transparent 50%), linear-gradient(145deg, #e1ebdf, #f0f2e7);
+}
+
+.case-page[data-case-theme="forest"] .search-plot__grid {
+  opacity: .38;
+  background-image: linear-gradient(#54725933 1px, transparent 1px), linear-gradient(90deg, #54725933 1px, transparent 1px);
+}
+
+.case-page[data-case-theme="forest"] .search-plot__contour { stroke: #63836632; }
+.case-page[data-case-theme="forest"] .search-plot__route { stroke: #526b52bb; }
+.case-page[data-case-theme="forest"] .search-plot__route-glow { stroke: #829a713f; }
+
+.case-page[data-case-theme="forest"] :is(.search-plot__node--blue, .search-plot__node--violet) {
+  --search-node-accent: #45694f;
+  --search-node-rgb: 69, 105, 79;
+}
+
+.case-page[data-case-theme="forest"] :is(.culture-topic--blue, .culture-topic--violet) {
+  --culture-accent: #45694f;
+  --culture-accent-rgb: 69, 105, 79;
+  --culture-accent-soft: #45694f1a;
+}
+
+.case-page[data-case-theme="forest"] :is(.account-record--blue, .account-record--violet) {
+  --account-accent: #45694f;
+  --account-accent-rgb: 69, 105, 79;
+  --account-accent-soft: #45694f1a;
+  --account-accent-faint: #45694f10;
+}
+
+.case-page[data-case-theme="forest"] :is(.figure-card--blue, .figure-card--violet, .figure-dialog--blue, .figure-dialog--violet) {
+  --figure-accent: #45694f;
+  --figure-accent-rgb: 69, 105, 79;
+  --figure-accent-soft: #45694f1a;
+  --figure-accent-faint: #45694f10;
+}
+
+.case-page[data-case-theme="forest"] .theory-step--open {
+  --theory-accent: #45694f;
+  --theory-accent-rgb: 69, 105, 79;
+  --theory-accent-soft: #45694f1a;
+  --theory-accent-faint: #45694f10;
+}
+
+.case-page[data-case-theme="forest"] .figure-dialog__panel {
+  background: var(--forest-glass);
+}
+
+.case-page[data-case-theme="forest"] .culture-hero__visual {
+  background: radial-gradient(ellipse at 19% 10%, #f5f8eb, transparent 63%), #dfe8da;
+}
+
+.case-page[data-case-theme="forest"] :is(.evidence-label, .account-record__label, .theory-label, .figure-card__role, .culture-overline, .culture-reading__overline) {
+  color: #705b36;
+}
+
+/* The module frame is a quiet surface. The cards carry the small amount of depth. */
+.case-page[data-case-theme="forest"] :is(
+  .evidence-shell, .theories-shell,
+  .culture-shell, .accounts-shell, .figures-shell
+) {
+  background: var(--case-panel);
+  border: 1px solid var(--case-panel-edge);
+  box-shadow: none;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+
+.case-page[data-case-theme="forest"] :is(
+  .evidence-shell, .theories-shell,
+  .culture-shell, .accounts-shell, .figures-shell
+)::before {
+  content: none;
+}
+
+.case-page[data-case-theme="forest"] :is(
+  .evidence-featured, .evidence-card,
+  .culture-feature, .culture-topic, .accounts-register,
+  .account-record, .figure-card
+),
+.case-page[data-case-theme="forest"] .theories-list .theory-step .theory-card {
+  background: var(--case-card);
+  border-color: var(--case-card-edge);
+  box-shadow: var(--case-card-shadow);
+}
+
+.case-page[data-case-theme="forest"] :is(
+  .evidence-featured, .evidence-card,
+  .culture-topic, .account-record, .figure-card
+):hover,
+.case-page[data-case-theme="forest"] .theories-list .theory-step .theory-card:hover {
+  box-shadow: var(--case-card-hover-shadow);
+}
+
+.case-page[data-case-theme="forest"] .account-record .account-record__claim::before {
+  inline-size: 1px;
+  background: var(--case-route-line);
+}
+
+.case-page[data-case-theme="forest"] .culture-reading .culture-reading__points li::before {
+  background: var(--case-route-node);
+  border: 0;
+  box-shadow: none;
+}
+
+.case-page[data-case-theme="forest"] .search-plot__node .search-plot__point {
+  background: var(--case-card);
+  border-color: var(--search-node-accent);
+  box-shadow: 0 1px 4px #243c281a;
+}
+
+.case-page[data-case-theme="forest"] .search-plot__node:is(:hover, :focus-visible) .search-plot__point {
+  box-shadow: 0 0 0 3px rgba(var(--search-node-rgb), .15);
+}
+
+.case-page[data-case-theme="forest"] .figures-shell .figures-arrow {
+  color: #365441;
+  background: var(--case-card);
+  border-color: var(--case-card-edge);
+  box-shadow: none;
+}
+
+.case-page[data-case-theme="forest"] :is(.figure-portrait, .figure-dialog__portrait) {
+  background: radial-gradient(ellipse at 24% 15%, #f5f7e9, transparent 63%), #dde8d9;
+  border-color: var(--case-card-edge);
+}
+
+.case-page[data-case-theme="forest"] .figure-portrait__ring {
+  inset-block-start: 49%;
+  inset-inline-start: 50%;
+}
+
+.case-page[data-case-theme="forest"] .figure-dialog::backdrop {
+  background: #182b2263;
+}
+
+.case-page[data-case-theme="forest"] :is(
+  .theories-summary, .culture-summary, .accounts-summary,
+  .evidence-summary, .figures-summary, .figure-card__summary, .figures-interaction-note
+) {
+  color: var(--text-secondary);
+}

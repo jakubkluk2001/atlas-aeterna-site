@@ -1,0 +1,128 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { mysteryCases } from "../../data/mystery-cases";
+import CaseCover from "./CaseCover.astro";
+import CaseRoute from "./CaseRoute.astro";
+import { createCaseSections } from "./types";
+
+type Placeholder = Extract<(typeof mysteryCases)[number], { theme: "archive" | "ice" | "desert" | "twilight" }>;
+
+interface Props {
+  slug: Placeholder["slug"];
+  overview: string;
+}
+
+const { slug, overview } = Astro.props;
+const caseFile = mysteryCases.find((entry): entry is Placeholder => entry.slug === slug);
+if (!caseFile) throw new Error(`Unknown placeholder case: ${slug}`);
+const sections = createCaseSections([{ title: "Overview", id: "overview" }]);
+---
+
+<BaseLayout sectionPlaceholder title={`${caseFile.title} | Atlas Aeterna`} description={overview}>
+  <article class="case-page case-page--placeholder" data-case-theme={caseFile.theme}>
+    <CaseCover id="case-cover" scene={caseFile.theme} title={caseFile.title} titleVariant="long" />
+    <CaseRoute sections={sections} />
+
+    <section class="case-intro" id="overview" aria-labelledby="case-overview-title">
+      <h2 id="case-overview-title">Overview</h2>
+      <p>{overview}</p>
+    </section>
+  </article>
+</BaseLayout>
+
+<style is:global>
+body.section-placeholder-layout:has(.case-page--placeholder) {
+  --text: var(--case-palette-ink);
+  --text-secondary: var(--case-palette-ink);
+  --case-nav-bg: linear-gradient(115deg, var(--case-palette-middle), var(--case-palette-dark));
+  --case-nav-edge: color-mix(in srgb, var(--case-palette-light) 32%, transparent);
+  --case-nav-shadow: inset 0 1px #ffffff13, 0 8px 24px #17101d22;
+  --case-nav-text: var(--case-palette-ivory);
+  --case-nav-active: var(--case-palette-light);
+  --case-nav-menu-bg: var(--case-palette-middle);
+  --case-nav-menu-edge: var(--case-nav-edge);
+  --case-focus-dark: var(--case-palette-light);
+  background: radial-gradient(ellipse at 101% 77%, var(--case-palette-wash), transparent 70%), var(--case-palette-paper);
+}
+
+.case-page.case-page--placeholder {
+  --case-cover-bg: radial-gradient(ellipse at 75% 60%, var(--case-palette-glow), transparent 61%), linear-gradient(155deg, var(--case-palette-middle), var(--case-palette-dark) 66%);
+  --case-cover-text: var(--case-palette-ivory);
+  --case-cover-type: linear-gradient(165deg, var(--case-palette-ivory) 26%, var(--case-palette-light));
+  --case-cover-shadow: drop-shadow(0 2px 0 #ffffff30) drop-shadow(0 14px 22px #160f1b8c);
+  --case-index-text: var(--case-palette-ivory);
+  --case-index-edge: color-mix(in srgb, var(--case-palette-light) 55%, transparent);
+  --case-index-bg: linear-gradient(110deg, var(--case-palette-dark), var(--case-palette-middle));
+  --case-index-shadow: inset 0 1px #ffffff26, 0 7px 22px #160f1b3b;
+  --case-index-divider: color-mix(in srgb, var(--case-palette-ivory) 24%, transparent);
+  --case-index-label: var(--case-palette-ivory);
+  --case-index-link: var(--case-palette-ivory);
+  --case-index-number: var(--case-palette-light);
+  --case-index-stop-edge: var(--case-palette-light);
+  --case-index-stop-fill: var(--case-palette-middle);
+  --case-index-current-text: var(--case-palette-ivory);
+  --case-index-current-number: var(--case-palette-light);
+  --case-index-current-fill: var(--case-palette-light);
+  --case-index-current-edge: var(--case-palette-light);
+  --case-index-current-ring: var(--case-index-edge);
+  --case-index-toggle: var(--case-palette-ivory);
+  --case-index-mobile-label: var(--case-palette-ivory);
+  --case-index-mobile-number: var(--case-palette-light);
+  --case-index-chevron: var(--case-palette-light);
+  --case-index-menu-edge: var(--case-index-edge);
+  --case-index-menu-bg: var(--case-palette-middle);
+  --case-index-menu-shadow: #160f1b63;
+  --case-intro-line: var(--case-palette-edge);
+  --case-intro-text: var(--case-palette-ink);
+  --case-focus: var(--case-palette-ink);
+}
+
+.case-page[data-case-theme].case-page--placeholder .case-header {
+  padding-block-start: clamp(7.25rem, 17svh, 12rem);
+  min-block-size: clamp(28rem, 61svh, 42rem);
+}
+
+.case-page[data-case-theme].case-page--placeholder .case-header h1 {
+  inline-size: 100%;
+  max-inline-size: 13ch;
+  margin-inline: auto;
+  font-size: clamp(3rem, 8.5vw, 8.875rem);
+  letter-spacing: -.047em;
+  text-align: center;
+  text-wrap: balance;
+}
+
+.case-page--placeholder .case-index__route {
+  justify-self: start;
+  inline-size: min(100%, 9rem);
+}
+
+.case-page--placeholder .case-index__route::before { content: none; }
+
+.case-page--placeholder #overview { scroll-margin-block-start: var(--case-anchor-offset); }
+
+.case-page--placeholder #overview h2 {
+  margin-block: 0 0.85rem;
+  color: var(--case-palette-ink);
+  font-size: clamp(1.6rem, 3.2vw, 2.8rem);
+}
+
+@media (max-width: 900px) {
+  .case-page--placeholder .case-index__route {
+    justify-self: stretch;
+    inline-size: auto;
+  }
+}
+
+@media (max-width: 650px) {
+  .case-page[data-case-theme].case-page--placeholder .case-header {
+    min-block-size: clamp(22rem, 53svh, 28rem);
+    padding-block-start: clamp(5rem, 12svh, 7rem);
+  }
+
+  .case-page[data-case-theme].case-page--placeholder .case-header h1 {
+    max-inline-size: min(100%, 11ch);
+    font-size: clamp(2.35rem, 10.4vw, 4.6rem);
+  }
+}
+</style>

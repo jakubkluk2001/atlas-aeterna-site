@@ -144,7 +144,7 @@ const hasVisual = Astro.slots.has("visual");
     width: min(100%, 1080px);
     margin: 0 auto;
     padding: 74px 0 8px;
-    scroll-margin-top: 158px;
+    scroll-margin-top: var(--case-anchor-offset, 158px);
   }
 
   .search-section {
@@ -162,65 +162,9 @@ const hasVisual = Astro.slots.has("visual");
       clamp(25px, 4vw, 46px)
       clamp(20px, 4vw, 44px);
 
-    background:
-      radial-gradient(
-        circle at 7% 5%,
-        rgba(116, 166, 235, 0.14),
-        transparent 31%
-      ),
-      radial-gradient(
-        circle at 94% 6%,
-        rgba(218, 167, 99, 0.15),
-        transparent 31%
-      ),
-      radial-gradient(
-        circle at 89% 96%,
-        rgba(165, 139, 217, 0.12),
-        transparent 34%
-      ),
-      linear-gradient(
-        145deg,
-        rgba(255, 255, 255, 0.79),
-        rgba(246, 249, 255, 0.49)
-      );
-
-    border: 1px solid rgba(255, 255, 255, 0.91);
+    background: var(--case-panel, #edf1f6);
+    border: 1px solid var(--case-panel-edge, #cdd4de);
     border-radius: clamp(24px, 2.7vw, 34px);
-
-    box-shadow:
-      0 24px 60px rgba(50, 62, 88, 0.10),
-      inset 0 1px 0 rgba(255, 255, 255, 1),
-      inset 0 -1px 0 rgba(55, 65, 88, 0.04);
-
-    backdrop-filter:
-      blur(24px)
-      saturate(150%);
-
-    -webkit-backdrop-filter:
-      blur(24px)
-      saturate(150%);
-  }
-
-
-  .search-shell::before {
-    content: "";
-
-    width: 460px;
-    aspect-ratio: 1;
-
-    position: absolute;
-    right: -275px;
-    top: 148px;
-    z-index: -1;
-
-    border: 1px solid rgba(75, 84, 106, 0.095);
-    border-radius: 50%;
-
-    box-shadow:
-      0 0 0 58px rgba(255, 255, 255, 0.045),
-      0 0 0 116px rgba(75, 84, 106, 0.020);
-
-    pointer-events: none;
   }
 
 
@@ -249,7 +193,7 @@ const hasVisual = Astro.slots.has("visual");
   .search-dashboard__overline {
     margin: 0 0 10px;
 
-    color: #7c7595;
+    color: var(--case-muted-label, #605775);
 
     font-family: var(--font-ui);
     font-size: 10px;
@@ -279,7 +223,7 @@ const hasVisual = Astro.slots.has("visual");
   .search-summary {
     margin: 0;
 
-    color: #69707f;
+    color: var(--text-secondary, #4c5768);
 
     font-family: var(--font-ui);
     font-size: 14px;
@@ -302,20 +246,10 @@ const hasVisual = Astro.slots.has("visual");
 
     gap: clamp(22px, 3.5vw, 40px);
 
-    background:
-      linear-gradient(
-        145deg,
-        rgba(255, 255, 255, 0.82),
-        rgba(247, 248, 252, 0.55)
-      );
-
-    border: 1px solid rgba(255, 255, 255, 0.91);
+    background: var(--case-card, #f9fafb);
+    border: 1px solid var(--case-card-edge, #d3d9e2);
     border-radius: clamp(22px, 2.5vw, 30px);
-
-    box-shadow:
-      0 18px 42px rgba(50, 62, 88, 0.086),
-      inset 0 1px 0 rgba(255, 255, 255, 1),
-      inset 0 -1px 0 rgba(55, 65, 88, 0.035);
+    box-shadow: var(--case-card-shadow, 0 3px 10px #26375012);
   }
 
 
@@ -334,7 +268,7 @@ const hasVisual = Astro.slots.has("visual");
 
 
   .search-dashboard__overline {
-    color: #92784f;
+    color: var(--case-muted-label, #6b5738);
   }
 
 
@@ -351,7 +285,7 @@ const hasVisual = Astro.slots.has("visual");
   .search-dashboard__copy {
     margin: 17px 0 0;
 
-    color: #69707f;
+    color: var(--text-secondary, #4c5768);
 
     font-family: var(--font-ui);
     font-size: 14px;
@@ -391,10 +325,10 @@ const hasVisual = Astro.slots.has("visual");
 
 
   .search-stats dt {
-    color: #9298a5;
+    color: var(--text-secondary, #4e5969);
 
     font-family: var(--font-ui);
-    font-size: 7px;
+    font-size: 9px;
     font-weight: 700;
     letter-spacing: 0.11em;
     line-height: 1.45;
@@ -427,7 +361,7 @@ const hasVisual = Astro.slots.has("visual");
 
     gap: 8px 18px;
 
-    border-bottom: 1px solid rgba(65, 75, 99, 0.11);
+    border-bottom: 1px solid var(--case-panel-edge, #cdd4de);
   }
 
 
@@ -445,107 +379,64 @@ const hasVisual = Astro.slots.has("visual");
 
 
   .search-records__heading p {
-    color: #6d7482;
+    color: var(--text-secondary, #4e5969);
   }
 
 
   .search-records__heading span {
-    color: #9aa0ac;
+    color: var(--text-secondary, #4e5969);
   }
 
 
   .search-records {
     position: relative;
     z-index: 1;
+    display: grid;
+    gap: clamp(14px, 1.7vw, 22px);
+    margin-top: 14px;
   }
 
 
   .search-record {
-    --search-accent: #858b99;
-    --search-accent-rgb: 133, 139, 153;
-    --search-accent-soft: rgba(133, 139, 153, 0.075);
+    --search-accent: var(--case-search-accent, var(--search-default-accent, #566176));
+    --search-accent-rgb: var(--case-search-accent-rgb, var(--search-default-accent-rgb, 86, 97, 118));
 
     min-width: 0;
-
-    position: relative;
-
-    padding:
-      clamp(27px, 3.7vw, 42px)
-      4px;
-
+    padding: clamp(18px, 2.7vw, 32px);
     display: grid;
-    grid-template-columns:
-      minmax(105px, 0.34fr)
-      minmax(0, 0.92fr)
-      minmax(330px, 1.08fr);
+    grid-template-columns: minmax(max-content, 0.35fr) minmax(0, 1.12fr) minmax(0, 1fr);
     align-items: start;
+    gap: clamp(16px, 2.5vw, 32px);
 
-    gap: clamp(24px, 4vw, 52px);
-
-    border-bottom: 1px solid rgba(65, 75, 99, 0.095);
-
-    scroll-margin-top: 158px;
-  }
-
-
-  .search-record:last-child {
-    padding-bottom: 2px;
-    border-bottom: 0;
-  }
-
-
-  .search-record::before {
-    content: "";
-
-    position: absolute;
-    inset: 9px -12px;
-    z-index: -1;
-
-    background:
-      radial-gradient(
-        circle at 94% 8%,
-        var(--search-accent-soft),
-        transparent 31%
-      );
-
-    border-radius: 25px;
-
-    opacity: 0;
-
-    transition: opacity 0.28s ease;
-  }
-
-
-  .search-record:hover::before {
-    opacity: 1;
+    background: var(--case-card, #f9fafb);
+    border: 1px solid var(--case-card-edge, #d3d9e2);
+    border-radius: clamp(16px, 1.7vw, 23px);
+    box-shadow: var(--case-card-shadow, 0 3px 10px #26375012);
+    scroll-margin-top: var(--case-anchor-offset, 158px);
   }
 
 
   .search-record--gold {
-    --search-accent: #a9783e;
-    --search-accent-rgb: 190, 142, 78;
-    --search-accent-soft: rgba(211, 162, 94, 0.10);
+    --search-default-accent: #a9783e;
+    --search-default-accent-rgb: 190, 142, 78;
   }
 
 
   .search-record--blue {
-    --search-accent: #6483ba;
-    --search-accent-rgb: 100, 131, 186;
-    --search-accent-soft: rgba(105, 145, 209, 0.09);
+    --search-default-accent: #6483ba;
+    --search-default-accent-rgb: 100, 131, 186;
   }
 
 
   .search-record--violet {
-    --search-accent: #826ca6;
-    --search-accent-rgb: 130, 108, 166;
-    --search-accent-soft: rgba(152, 126, 194, 0.09);
+    --search-default-accent: #826ca6;
+    --search-default-accent-rgb: 130, 108, 166;
   }
 
 
   .search-record--neutral {
-    --search-accent: #747b88;
-    --search-accent-rgb: 116, 123, 136;
-    --search-accent-soft: rgba(116, 123, 136, 0.075);
+    --search-default-accent: #747b88;
+    --search-default-accent-rgb: 116, 123, 136;
   }
 
 
@@ -568,10 +459,10 @@ const hasVisual = Astro.slots.has("visual");
 
 
   .search-record__number {
-    color: rgba(var(--search-accent-rgb), 0.75);
+    color: var(--search-accent);
 
     font-family: var(--font-display);
-    font-size: clamp(39px, 4.8vw, 56px);
+    font-size: clamp(35px, 3.4vw, 48px);
     line-height: 0.92;
     letter-spacing: -0.045em;
   }
@@ -580,7 +471,7 @@ const hasVisual = Astro.slots.has("visual");
   .search-record__date {
     margin: 0;
 
-    color: #7c8391;
+    color: var(--text-secondary, #4e5969);
 
     font-family: var(--font-ui);
     font-size: 9px;
@@ -713,15 +604,15 @@ const hasVisual = Astro.slots.has("visual");
 
     color: #1e212b;
 
-    font-size: clamp(27px, 3.4vw, 40px);
-    line-height: 1.18;
+    font-size: clamp(25px, 2.55vw, 36px);
+    line-height: 1.2;
   }
 
 
   .search-record__description {
     margin: 16px 0 0;
 
-    color: #69707f;
+    color: var(--text-secondary, #4c5768);
 
     font-family: var(--font-ui);
     font-size: 14px;
@@ -732,19 +623,9 @@ const hasVisual = Astro.slots.has("visual");
   .search-record__report {
     padding: clamp(18px, 2.4vw, 25px);
 
-    background:
-      linear-gradient(
-        145deg,
-        rgba(255, 255, 255, 0.68),
-        rgba(245, 247, 251, 0.47)
-      );
-
-    border: 1px solid rgba(255, 255, 255, 0.82);
-    border-radius: 21px;
-
-    box-shadow:
-      0 11px 28px rgba(50, 62, 88, 0.058),
-      inset 0 1px 0 rgba(255, 255, 255, 0.94);
+    background: var(--case-search-report, #edf1f6);
+    border: 1px solid var(--case-card-edge, #d3d9e2);
+    border-radius: 15px;
   }
 
 
@@ -763,7 +644,7 @@ const hasVisual = Astro.slots.has("visual");
 
     padding: 9px 0;
 
-    border-bottom: 1px solid rgba(65, 75, 99, 0.065);
+    border-bottom: 1px solid var(--case-card-edge, #d3d9e2);
   }
 
 
@@ -780,10 +661,10 @@ const hasVisual = Astro.slots.has("visual");
 
   .search-record__details dt,
   .search-record__changed > p:first-child {
-    color: #9298a5;
+    color: var(--text-secondary, #4e5969);
 
     font-family: var(--font-ui);
-    font-size: 7px;
+    font-size: 9px;
     font-weight: 700;
     letter-spacing: 0.11em;
     line-height: 1.45;
@@ -794,13 +675,13 @@ const hasVisual = Astro.slots.has("visual");
   .search-record__details dd {
     margin: 0;
 
-    color: #4f5563;
+    color: var(--text-secondary, #404a5a);
 
     font-family: var(--font-ui);
-    font-size: 10px;
-    font-weight: 600;
+    font-size: 12px;
+    font-weight: 550;
     line-height: 1.60;
-    text-align: right;
+    text-align: start;
   }
 
 
@@ -825,12 +706,23 @@ const hasVisual = Astro.slots.has("visual");
   .search-record__changed > p:last-child {
     margin: 0;
 
-    color: #555c69;
+    color: var(--text-secondary, #4c5665);
 
     font-family: var(--font-ui);
     font-size: 11px;
     font-weight: 600;
     line-height: 1.66;
+  }
+
+
+  @media (max-width: 1050px) {
+    .search-record {
+      grid-template-columns: minmax(max-content, 0.28fr) minmax(0, 1fr);
+    }
+
+    .search-record__report {
+      grid-column: 2;
+    }
   }
 
 
@@ -847,15 +739,6 @@ const hasVisual = Astro.slots.has("visual");
       margin-top: 27px;
     }
 
-    .search-record {
-      grid-template-columns:
-        minmax(95px, 0.28fr)
-        minmax(0, 1fr);
-    }
-
-    .search-record__report {
-      grid-column: 2;
-    }
   }
 
 
@@ -922,7 +805,7 @@ const hasVisual = Astro.slots.has("visual");
       gap: 16px;
 
       border-left: 0;
-      border-bottom: 1px solid rgba(65, 75, 99, 0.065);
+      border-bottom: 1px solid var(--case-card-edge, #d3d9e2);
     }
 
     .search-stats div:first-child {
@@ -946,7 +829,7 @@ const hasVisual = Astro.slots.has("visual");
     }
 
     .search-record {
-      padding: 26px 3px;
+      padding: 18px;
 
       grid-template-columns: 1fr;
 
@@ -962,7 +845,7 @@ const hasVisual = Astro.slots.has("visual");
     }
 
     .search-record__number {
-      font-size: 40px;
+      font-size: 34px;
     }
 
     .search-record__date {
@@ -970,7 +853,7 @@ const hasVisual = Astro.slots.has("visual");
     }
 
     .search-record__story h3 {
-      font-size: 29px;
+      font-size: 26px;
     }
 
     .search-record__description {
@@ -1002,21 +885,10 @@ const hasVisual = Astro.slots.has("visual");
     grid-template-columns: 1fr;
   }
 
-  @supports not (
-    (backdrop-filter: blur(1px)) or
-    (-webkit-backdrop-filter: blur(1px))
-  ) {
-    .search-shell,
-    .search-dashboard,
-    .search-record__report {
-      background-color: rgba(250, 250, 249, 0.94);
-    }
-  }
-
   @media (max-width: 650px) {
     .content-section {
       padding-top: 54px;
-      scroll-margin-top: 145px;
+      scroll-margin-top: var(--case-anchor-offset, 145px);
     }
   }
 </style>

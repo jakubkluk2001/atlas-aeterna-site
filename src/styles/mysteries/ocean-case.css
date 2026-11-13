@@ -1,0 +1,120 @@
+@import "./case-layout.css";
+
+body.section-placeholder-layout:has([data-case-theme="open-ocean"]) {
+  --text: #1d2e3d;
+  --text-secondary: #405464;
+  --case-nav-bg: linear-gradient(125deg, #20384c, #162839);
+  --case-nav-edge: #abc4d54a;
+  --case-nav-shadow: inset 0 1px #d4e6f417, 0 9px 28px #0c18252b;
+  --case-nav-text: #edf4f7;
+  --case-nav-active: #b0d5e9;
+  --case-nav-menu-bg: #1e364b;
+  --case-nav-menu-edge: #a6c7db5e;
+  --case-focus-dark: #d0efff;
+  background:
+    radial-gradient(ellipse 75% 28rem at 105% 60rem, #cadbe5 0%, transparent 88%),
+    radial-gradient(ellipse 66% 42rem at -10% 67rem, #f1f4f3 0%, transparent 92%),
+    #e5ecf0;
+}
+
+.case-page[data-case-theme="open-ocean"] {
+  --case-panel: #eaf0f3;
+  --case-card: #f4f7f8;
+  --case-panel-edge: #97adba85;
+  --case-card-edge: #91a8b667;
+  --case-route-line: #829eae;
+  --case-route-node: #52788e;
+  --case-muted-label: #3c657b;
+  --case-card-shadow: 0 3px 10px #162f4214;
+  --case-card-hover-shadow: 0 7px 16px #162f4220;
+  --case-search-accent: #3c657b;
+  --case-search-accent-rgb: 60, 101, 123;
+  --case-search-report: #e6edf2;
+
+  --case-cover-bg: radial-gradient(ellipse at 72% 47%, #324f67 0%, #1b3348 30%, transparent 63%),
+    linear-gradient(155deg, #14293d 0%, #102335 50%, #0b1724 100%);
+  --case-cover-text: #edf4fa;
+  --case-cover-type: linear-gradient(169deg, #f5fafb 12%, #e6eef3 52%, #aec5d5 95%);
+  --case-cover-shadow: drop-shadow(0 2px 0 #a5c1d46b) drop-shadow(0 15px 24px #050e1cb5);
+
+  --case-index-edge: #a4c4d587;
+  --case-index-bg: linear-gradient(110deg, #193347, #27465a 62%, #345b70);
+  --case-index-shadow: inset 0 1px #d4eafa40, 0 8px 24px #112b3b49;
+  --case-index-text: #edf5f9;
+  --case-index-divider: #b7d5e138;
+  --case-index-label: #edf5f9;
+  --case-index-route: #aecddb75;
+  --case-index-link: #deebf2;
+  --case-index-number: #bfd5e1;
+  --case-index-stop-edge: #a9cadc;
+  --case-index-stop-fill: #28475c;
+  --case-index-current-text: #f5fbff;
+  --case-index-current-number: #d3ebf7;
+  --case-index-current-fill: #c1e0f4;
+  --case-index-current-edge: #d0edf9;
+  --case-index-current-ring: #b5d7eabf;
+  --case-index-toggle: #f0f8fd;
+  --case-index-mobile-label: #dbeaf4;
+  --case-index-mobile-number: #c5e5f5;
+  --case-index-chevron: #d5e5ed;
+  --case-index-menu-edge: #a4c4d589;
+  --case-index-menu-bg: #233f54;
+  --case-index-menu-shadow: #081a2c63;
+
+  --case-intro-line: #668fa78c;
+  --case-intro-text: #203d51;
+  --case-heading: #234259;
+  --case-heading-rule: linear-gradient(90deg, #658ca3c4, #658ca322);
+  --case-heading-stop: #7a9cae;
+  --case-heading-number-text: #335970;
+  --case-heading-number-edge: #9bb4c4;
+  --case-heading-number-bg: #e9f0f4;
+  --case-heading-number-ring: #f7fbfc90;
+
+  --case-map-edge: #8da6b777;
+  --case-map-bg: linear-gradient(135deg, #f3f7f9, #e2ebf0);
+  --case-map-shadow: inset 0 1px #ffffffba, 0 15px 30px #183e5312;
+  --case-map-water: radial-gradient(ellipse at 52% 71%, #eff6f9, transparent 69%), #dbe8ef;
+  --case-map-water-edge: #628aa24d;
+  --case-map-filter: grayscale(1) sepia(.32) hue-rotate(148deg) saturate(1.2);
+  --case-map-caption: #435c6c;
+  --case-map-grid: #42627a34;
+  --case-focus: #38617a;
+}
+
+.case-page[data-case-theme="open-ocean"] .case-header--long-title h1 {
+  font-size: clamp(3.3rem, 8.7vw, 9.65rem);
+  letter-spacing: -.054em;
+  line-height: .94;
+  text-align: center;
+  text-wrap: balance;
+}
+
+.case-page[data-case-theme="open-ocean"] .case-header {
+  padding-block-start: clamp(10.8rem, 24svh, 15.2rem);
+}
+
+.case-page[data-case-theme="open-ocean"] .marker-area {
+  background: #8aafc43d;
+  border-color: #52778f6b;
+  box-shadow: 0 0 0 8px #92b3c51c, 0 10px 30px #28506b24, inset 0 1px #f3fbff8a;
+}
+
+.case-page[data-case-theme="open-ocean"] .marker-core {
+  background: #366580;
+  box-shadow: 0 0 0 5px #eff9ff85, 0 4px 12px #28506b3a;
+}
+
+@media (max-width: 650px) {
+  .case-page[data-case-theme="open-ocean"] .case-header {
+    padding-block-start: clamp(6.5rem, 15svh, 9rem);
+    min-block-size: clamp(26rem, 63svh, 33rem);
+  }
+
+  .case-page[data-case-theme="open-ocean"] .case-header--long-title h1 {
+    width: min(100%, 8.2em);
+    margin-inline: auto;
+    font-size: clamp(2.45rem, 12vw, 5.15rem);
+    letter-spacing: -.047em;
+  }
+}

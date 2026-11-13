@@ -1,0 +1,13 @@
+@import "./case-layout.css";
+
+body:has(.case-page[data-case-theme="archive"]) {
+  --case-palette-dark: #36271f;
+  --case-palette-middle: #514036;
+  --case-palette-glow: #70583f;
+  --case-palette-paper: #f0e9de;
+  --case-palette-wash: #e1d1bb;
+  --case-palette-ink: #413328;
+  --case-palette-edge: #a48a70;
+  --case-palette-light: #e2c29b;
+  --case-palette-ivory: #f7eddd;
+}

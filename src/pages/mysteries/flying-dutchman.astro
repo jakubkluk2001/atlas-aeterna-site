@@ -1,7 +1,8 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import CaseHeader from "../../components/mysteries/CaseHeader.astro";
-import CaseIndex from "../../components/mysteries/CaseIndex.astro";
+import CaseCover from "../../components/mysteries/CaseCover.astro";
+import CaseRoute from "../../components/mysteries/CaseRoute.astro";
+import "../../styles/mysteries/ocean-case.css";
 import LocationSection from "../../components/mysteries/LocationSection.astro";
 import TimelineSection from "../../components/mysteries/TimelineSection.astro";
 import {
@@ -68,18 +69,23 @@ const timelineEvents = [
 ---
 
 <BaseLayout
+  sectionPlaceholder
   title="Flying Dutchman | Atlas Aeterna"
   description="Explore the Flying Dutchman, the legendary ghost ship associated with the Cape of Good Hope, and the history and folklore behind its enduring mystery."
 >
-  <article class="case-page">
-    <CaseHeader
+  <article class="case-page" data-case-theme="open-ocean">
+    <CaseCover
       id={getCaseSection(caseSections, "overview").id}
       title="Flying Dutchman"
-      intro="The Flying Dutchman is one of maritime folklore’s most enduring legends, a phantom ship said to wander the seas without rest, most famously associated with the waters around the Cape of Good Hope."
       titleVariant="long"
+      scene="open-ocean"
     />
 
-    <CaseIndex sections={caseSections} />
+    <CaseRoute sections={caseSections} />
+
+    <div class="case-intro">
+      <p>The Flying Dutchman is one of maritime folklore’s most enduring legends, a phantom ship said to wander the seas without rest, most famously associated with the waters around the Cape of Good Hope.</p>
+    </div>
 
     <LocationSection
       {...getCaseSection(caseSections, "location")}
@@ -100,19 +106,3 @@ const timelineEvents = [
     />
   </article>
 </BaseLayout>
-
-<style>
-  .case-page {
-    --case-blue: #84a9ee;
-    --case-gold: #d9ad72;
-    --case-violet: #a58bd9;
-
-    padding: 18px 0 38px;
-  }
-
-  @media (max-width: 650px) {
-    .case-page {
-      padding-top: 0;
-    }
-  }
-</style>

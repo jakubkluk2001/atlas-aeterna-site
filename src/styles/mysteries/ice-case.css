@@ -1,0 +1,13 @@
+@import "./case-layout.css";
+
+body:has(.case-page[data-case-theme="ice"]) {
+  --case-palette-dark: #152c3e;
+  --case-palette-middle: #2a495b;
+  --case-palette-glow: #4e7185;
+  --case-palette-paper: #eaf2f5;
+  --case-palette-wash: #d4e5ec;
+  --case-palette-ink: #274453;
+  --case-palette-edge: #7899a9;
+  --case-palette-light: #c5e6f0;
+  --case-palette-ivory: #f0f9fc;
+}

@@ -1,0 +1,104 @@
+---
+import type { CaseSection } from "./types";
+
+interface Props {
+  sections: readonly CaseSection[];
+}
+
+const { sections } = Astro.props;
+const currentSection = sections[0];
+---
+
+<nav class="case-index" aria-label="Case file sections" data-case-index>
+  <div class="case-index__label" aria-hidden="true">Case index</div>
+  <button type="button" class="case-index__toggle" aria-expanded="false" aria-controls="case-route" data-route-toggle>
+    <span class="case-index__mobile-label">Case index</span>
+    <span class="case-index__now"><span data-route-number>{currentSection?.number}</span><span data-route-title>{currentSection?.title}</span></span>
+    <span class="case-index__chevron" aria-hidden="true"></span>
+  </button>
+  <ol class="case-index__route" id="case-route" style={`--case-stop-count: ${sections.length}`}>
+    {sections.map((section, index) => (
+      <li>
+        <a href={`#${section.id}`} data-case-index-link={section.id} aria-current={index === 0 ? "location" : undefined}>
+          <span class="case-index__number">{section.number}</span>
+          <span class="case-index__stop" aria-hidden="true"></span>
+          <span class="case-index__name">{section.title}</span>
+        </a>
+      </li>
+    ))}
+  </ol>
+</nav>
+
+<script>
+  const index = document.querySelector<HTMLElement>("[data-case-index]");
+  const toggle = index?.querySelector<HTMLButtonElement>("[data-route-toggle]");
+  const number = index?.querySelector<HTMLElement>("[data-route-number]");
+  const name = index?.querySelector<HTMLElement>("[data-route-title]");
+
+  if (index && toggle && number && name) {
+    const stops = [...index.querySelectorAll<HTMLAnchorElement>("[data-case-index-link]")].flatMap(link => {
+      const section = document.getElementById(link.hash.slice(1));
+      return section ? [{ link, section }] : [];
+    });
+    const narrow = window.matchMedia("(max-width: 900px)");
+    let current = stops[0]?.link;
+    let frame = 0;
+
+    const expand = (open: boolean) => {
+      toggle.setAttribute("aria-expanded", String(open));
+      index.classList.toggle("is-expanded", open);
+    };
+
+    const select = (link: HTMLAnchorElement) => {
+      if (current === link) return;
+      current?.removeAttribute("aria-current");
+      current = link;
+      current.setAttribute("aria-current", "location");
+      number.textContent = link.querySelector(".case-index__number")?.textContent ?? "";
+      name.textContent = link.querySelector(".case-index__name")?.textContent ?? "";
+    };
+
+    const refresh = () => {
+      frame = 0;
+      if (stops.length === 0) return;
+      const stickyTop = Number.parseFloat(getComputedStyle(index).top) || 0;
+      const height = narrow.matches ? toggle.offsetHeight : index.offsetHeight;
+      let active = stops[0];
+      for (const stop of stops) {
+        if (stop.section.getBoundingClientRect().top > stickyTop + height + 45) break;
+        active = stop;
+      }
+      if (window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 4) {
+        active = stops[stops.length - 1];
+      }
+      select(active.link);
+    };
+
+    toggle.addEventListener("click", () => expand(toggle.getAttribute("aria-expanded") !== "true"));
+    index.addEventListener("keydown", event => {
+      if (event.key !== "Escape" || !index.classList.contains("is-expanded")) return;
+      event.stopPropagation();
+      expand(false);
+      toggle.focus();
+    });
+    document.addEventListener("click", event => {
+      if (event.target instanceof Node && !index.contains(event.target)) expand(false);
+    });
+    for (const { link } of stops) {
+      link.addEventListener("click", () => {
+        select(link);
+        expand(false);
+      });
+    }
+    const scheduleRefresh = () => {
+      if (!frame) frame = window.requestAnimationFrame(refresh);
+    };
+
+    narrow.addEventListener("change", () => expand(false));
+    window.addEventListener("scroll", scheduleRefresh, { passive: true });
+    window.addEventListener("resize", scheduleRefresh);
+    window.addEventListener("load", scheduleRefresh);
+    index.classList.add("is-ready");
+    refresh();
+  }
+</script>

@@ -277,6 +277,11 @@ const isActive = (path: string) => {
     scroll-behavior: smooth;
   }
 
+  /* Keep the header aligned when pages differ in scroll height. */
+  html:has(body.section-placeholder-layout) {
+    scrollbar-gutter: stable;
+  }
+
   body {
     min-height: 100vh;
 

@@ -13,6 +13,7 @@ export interface MysteryCase {
   theme: MysteryTheme;
   artwork: string;
   published: boolean;
+  routeReady?: boolean;
 }
 
 export const mysteryCases = [
@@ -36,6 +37,7 @@ export const mysteryCases = [
     theme: "archive",
     artwork: holyGrail,
     published: false,
+    routeReady: true,
   },
   {
     slug: "nazis-in-antarctica",
@@ -43,6 +45,7 @@ export const mysteryCases = [
     theme: "ice",
     artwork: nazisInAntarctica,
     published: false,
+    routeReady: true,
   },
   {
     slug: "roswell-incident",
@@ -50,6 +53,7 @@ export const mysteryCases = [
     theme: "desert",
     artwork: roswellIncident,
     published: false,
+    routeReady: true,
   },
   {
     slug: "woman-in-white",
@@ -57,6 +61,7 @@ export const mysteryCases = [
     theme: "twilight",
     artwork: womanInWhite,
     published: false,
+    routeReady: true,
   },
 ] as const satisfies readonly MysteryCase[];
 

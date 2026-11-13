@@ -1,0 +1,47 @@
+---
+import type { PlaceholderScene } from "./placeholder-scenes";
+
+interface Props {
+  title: string;
+  id?: string;
+  scene?: "forest" | "open-ocean" | PlaceholderScene;
+  titleVariant?: "default" | "long";
+}
+
+const { title, id = "overview", scene = "forest", titleVariant = "default" } = Astro.props;
+---
+
+<section class:list={["case-header", titleVariant === "long" && "case-header--long-title"]} id={id} data-case-cover={scene}>
+  <canvas class="case-header__terrain" aria-hidden="true"></canvas>
+  <div class="case-header__inner">
+    <h1>{title}</h1>
+  </div>
+  <canvas class="case-header__foreground" aria-hidden="true"></canvas>
+</section>
+
+<script>
+  import { renderRelief } from "./forest-relief";
+  import { renderOpenOcean } from "./ocean-swell";
+  import { placeholderScenes } from "./placeholder-scenes";
+
+  const renderers = new Map([
+    ["forest", renderRelief],
+    ["open-ocean", renderOpenOcean],
+    ...Object.entries(placeholderScenes),
+  ]);
+
+  for (const cover of document.querySelectorAll<HTMLElement>("[data-case-cover]")) {
+    const terrain = cover.querySelector<HTMLCanvasElement>(".case-header__terrain");
+    const foreground = cover.querySelector<HTMLCanvasElement>(".case-header__foreground");
+    if (!terrain || !foreground) continue;
+
+    const render = renderers.get(cover.dataset.caseCover ?? "") ?? renderRelief;
+    const redraw = () => render(terrain, foreground, cover.clientWidth, cover.clientHeight);
+    redraw();
+    if (typeof ResizeObserver === "function") {
+      new ResizeObserver(redraw).observe(cover);
+    } else {
+      window.addEventListener("resize", redraw);
+    }
+  }
+</script>

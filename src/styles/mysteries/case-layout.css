@@ -1,0 +1,479 @@
+/* Shared cover, route, map and timeline layout for themed mysteries. */
+body.section-placeholder-layout:has([data-case-theme]) > main { min-inline-size: 0; }
+
+body.section-placeholder-layout:has([data-case-theme]) .site-header {
+  padding: max(1.45rem, env(safe-area-inset-top)) 4.7vw 0;
+}
+
+body.section-placeholder-layout:has([data-case-theme]) .site-nav {
+  min-height: 56px;
+  background: var(--case-nav-bg);
+  border-color: var(--case-nav-edge);
+  box-shadow: var(--case-nav-shadow);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+body.section-placeholder-layout:has([data-case-theme]) :is(.site-brand, .nav-links a, .menu-toggle) { color: var(--case-nav-text); }
+body.section-placeholder-layout:has([data-case-theme]) .nav-links a:is(:hover, .active) { text-decoration-color: var(--case-nav-active); }
+body.section-placeholder-layout:has([data-case-theme]) .menu-icon span { background: currentColor; }
+
+.case-page[data-case-theme] {
+  --case-width: min(85.5vw, 76rem);
+  --case-anchor-offset: 12rem;
+  min-inline-size: 0;
+  padding: 0 0 5rem;
+}
+
+.case-page[data-case-theme] .case-header {
+  position: relative;
+  isolation: isolate;
+  min-inline-size: 0;
+  min-block-size: clamp(35rem, 68svh, 47.5rem);
+  display: grid;
+  align-items: start;
+  padding-block-start: clamp(9rem, 18svh, 13rem);
+  scroll-margin-top: 7rem;
+}
+
+.case-page[data-case-theme] .case-header::before {
+  content: "";
+  position: absolute;
+  z-index: -2;
+  inset: -9rem 0 0;
+  background:
+    var(--case-cover-bg);
+}
+
+.case-page[data-case-theme] .case-header__terrain,
+.case-page[data-case-theme] .case-header__foreground {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.case-page[data-case-theme] .case-header__foreground { z-index: 2; }
+
+.case-page[data-case-theme] .case-header__inner {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  padding-inline: 4.4vw;
+}
+
+.case-page[data-case-theme] .case-header h1 {
+  position: relative;
+  width: max-content;
+  max-width: 100%;
+  margin: 0 auto;
+  padding-inline-end: 0.04em;
+  color: var(--case-cover-text);
+  background: var(--case-cover-type);
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: var(--case-cover-shadow);
+  font-size: clamp(5rem, 15.1vw, 17rem);
+  letter-spacing: -0.046em;
+  line-height: 0.96;
+}
+
+.case-page[data-case-theme] .case-index {
+  position: sticky;
+  z-index: 45;
+  top: 6rem;
+  display: grid;
+  grid-template-columns: 6.6rem minmax(0, 1fr);
+  align-items: center;
+  gap: 0.8rem;
+  width: var(--case-width);
+  min-height: 5.4rem;
+  margin: -2.7rem auto 0;
+  padding: 0.55rem 0.75rem 0.65rem 1.2rem;
+  color: var(--case-index-text);
+  border: 1px solid var(--case-index-edge);
+  border-radius: 0.9rem;
+  background: var(--case-index-bg);
+  box-shadow: var(--case-index-shadow);
+}
+
+:where(.case-page[data-case-theme]) .case-index__label {
+  align-content: center;
+  align-self: stretch;
+  border-right: 1px solid var(--case-index-divider);
+  color: var(--case-index-label);
+  font-size: 0.73rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+:where(.case-page[data-case-theme]) .case-index__toggle { display: none; }
+
+:where(.case-page[data-case-theme]) .case-index__route {
+  position: relative;
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(0, 1fr);
+  align-items: start;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+:where(.case-page[data-case-theme]) .case-index__route::before {
+  content: "";
+  position: absolute;
+  top: 26px;
+  inset-inline: calc(50% / var(--case-stop-count));
+  height: 1px;
+  background: var(--case-index-route);
+}
+
+:where(.case-page[data-case-theme]) .case-index__route a {
+  position: relative;
+  display: grid;
+  min-height: 3.95rem;
+  grid-template-rows: 12px 12px 1fr;
+  justify-items: center;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 0.08rem;
+  border-radius: 0.38rem;
+  color: var(--case-index-link);
+  text-decoration: none;
+}
+
+:where(.case-page[data-case-theme]) .case-index__number {
+  color: var(--case-index-number);
+  font-size: 0.59rem;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.1em;
+  line-height: 1;
+}
+
+:where(.case-page[data-case-theme]) .case-index__stop {
+  display: block;
+  width: 7px;
+  height: 7px;
+  border: 1px solid var(--case-index-stop-edge);
+  border-radius: 50%;
+  background: var(--case-index-stop-fill);
+}
+
+:where(.case-page[data-case-theme]) .case-index__name {
+  align-self: start;
+  font-size: clamp(0.57rem, 0.86vw, 0.74rem);
+  line-height: 1.14;
+  text-align: center;
+  text-wrap: balance;
+}
+
+:where(.case-page[data-case-theme]) .case-index__route a[aria-current] { color: var(--case-index-current-text); }
+:where(.case-page[data-case-theme]) .case-index__route a[aria-current] .case-index__number { color: var(--case-index-current-number); }
+:where(.case-page[data-case-theme]) .case-index__route a[aria-current] .case-index__stop {
+  background: var(--case-index-current-fill);
+  border-color: var(--case-index-current-edge);
+  box-shadow: 0 0 0 3px var(--case-index-stop-fill), 0 0 0 4px var(--case-index-current-ring);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  :where(.case-page[data-case-theme]) .case-index__route a:hover { color: var(--case-index-current-text); }
+  :where(.case-page[data-case-theme]) .case-index__route a:hover .case-index__stop { border-color: var(--case-index-current-edge); }
+}
+
+.case-page[data-case-theme] .case-intro {
+  position: relative;
+  inline-size: var(--case-width);
+  margin: clamp(3rem, 8.1svh, 5.8rem) auto clamp(3.2rem, 7.5svh, 5.4rem);
+  padding-inline: clamp(1.1rem, 3.4vw, 2.6rem) 0;
+  border-inline-start: 1px solid var(--case-intro-line);
+}
+
+.case-page[data-case-theme] .case-intro p {
+  max-inline-size: 45ch;
+  margin: 0;
+  color: var(--case-intro-text);
+  font-size: clamp(1.2rem, 2.25vw, 2rem);
+  line-height: 1.45;
+  letter-spacing: -0.015em;
+  text-wrap: pretty;
+}
+
+.case-page[data-case-theme] > .content-section {
+  inline-size: var(--case-width);
+  max-inline-size: none;
+  margin-inline: auto;
+  scroll-margin-top: var(--case-anchor-offset);
+}
+
+.case-page[data-case-theme] .map-section { padding-block-start: 0; }
+
+.case-page[data-case-theme] .section-heading {
+  position: relative;
+  margin-block-end: clamp(1.1rem, 3vh, 1.65rem);
+}
+.case-page[data-case-theme] .section-heading h2 {
+  color: var(--case-heading);
+  font-size: clamp(1.8rem, 3.7vw, 3.2rem);
+}
+.case-page[data-case-theme] .section-rule {
+  position: relative;
+  background: var(--case-heading-rule);
+}
+
+.case-page[data-case-theme] .section-rule::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 7px;
+  height: 7px;
+  transform: translateY(-50%);
+  border: 1px solid var(--case-heading-stop);
+  border-radius: 50%;
+  background: var(--case-panel);
+}
+
+.case-page[data-case-theme] .section-number {
+  color: var(--case-heading-number-text);
+  border-color: var(--case-heading-number-edge);
+  background: var(--case-heading-number-bg);
+  box-shadow: 0 0 0 3px var(--case-heading-number-ring);
+}
+
+.case-page[data-case-theme] .map-card {
+  gap: 0.92rem;
+  padding: clamp(0.7rem, 1.25vw, 1.2rem);
+  border: 1px solid var(--case-map-edge);
+  border-radius: 1.28rem;
+  background: var(--case-map-bg);
+  box-shadow: var(--case-map-shadow);
+}
+
+.case-page[data-case-theme] .map-viewport {
+  border-radius: 0.9rem;
+  background:
+    var(--case-map-water);
+  box-shadow: inset 0 0 0 1px var(--case-map-water-edge);
+}
+
+.case-page[data-case-theme] .map-image {
+  filter: var(--case-map-filter);
+  opacity: 0.84;
+}
+
+.case-page[data-case-theme] .map-caption {
+  margin-block: 0;
+  color: var(--case-map-caption);
+}
+
+.case-page[data-case-theme] .map-grid {
+  opacity: .48;
+  background-image: linear-gradient(var(--case-map-grid) 1px, transparent 1px), linear-gradient(90deg, var(--case-map-grid) 1px, transparent 1px);
+}
+
+@media (max-width: 900px) {
+  .case-page[data-case-theme] .case-index {
+    display: block;
+    min-height: 0;
+    margin-block-start: -1.79rem;
+    padding: 0;
+  }
+
+  :where(.case-page[data-case-theme]) .case-index__label { display: none; }
+  .case-page[data-case-theme] .case-index:not(.is-ready) { position: relative; }
+  :where(.case-page[data-case-theme]) .case-index.is-ready .case-index__toggle {
+    display: flex;
+    align-items: center;
+    gap: .88rem;
+    width: 100%;
+    min-height: 3.5rem;
+    padding: .52rem .92rem;
+    border: 0;
+    border-radius: inherit;
+    color: var(--case-index-toggle);
+    background: transparent;
+    text-align: left;
+    cursor: pointer;
+  }
+  :where(.case-page[data-case-theme]) .case-index__mobile-label {
+    margin-inline-end: auto;
+    color: var(--case-index-mobile-label);
+    font-size: .67rem;
+    text-transform: uppercase;
+    letter-spacing: .13em;
+  }
+  :where(.case-page[data-case-theme]) .case-index__now {
+    display: inline-flex;
+    gap: .45rem;
+    align-items: center;
+    font-size: .83rem;
+  }
+  :where(.case-page[data-case-theme]) .case-index__now [data-route-number] {
+    color: var(--case-index-mobile-number);
+    font-size: .6rem;
+  }
+  :where(.case-page[data-case-theme]) .case-index__chevron {
+    width: .42rem;
+    height: .42rem;
+    margin: -.19rem .15rem 0 .15rem;
+    transform: rotate(45deg);
+    border: solid var(--case-index-chevron);
+    border-width: 0 1px 1px 0;
+  }
+  :where(.case-page[data-case-theme]) .case-index.is-expanded .case-index__chevron {
+    transform: rotate(225deg);
+    margin-block: .2rem 0;
+  }
+  :where(.case-page[data-case-theme]) .case-index.is-ready:not(.is-expanded) .case-index__route { display: none; }
+  :where(.case-page[data-case-theme]) .case-index__route {
+    display: grid;
+    grid-auto-flow: row;
+    grid-template-columns: minmax(0, 1fr);
+    max-height: 57svh;
+    padding: .45rem .63rem .55rem;
+    overflow-y: auto;
+    border: 1px solid var(--case-index-menu-edge);
+    border-radius: .85rem;
+    background: var(--case-index-menu-bg);
+    box-shadow: 0 12px 32px var(--case-index-menu-shadow);
+  }
+  :where(.case-page[data-case-theme]) .case-index.is-ready.is-expanded .case-index__route {
+    position: absolute;
+    top: calc(100% + .38rem);
+    inset-inline: -1px;
+  }
+  :where(.case-page[data-case-theme]) .case-index__route::before {
+    top: 1.35rem;
+    bottom: 1.5rem;
+    left: 3.32rem;
+    right: auto;
+    width: 1px;
+    height: auto;
+  }
+  :where(.case-page[data-case-theme]) .case-index__route a {
+    min-height: 2.68rem;
+    grid-template: 1fr / 1.3rem .75rem 1fr;
+    justify-items: start;
+    gap: .52rem;
+    padding: .35rem .54rem;
+  }
+  :where(.case-page[data-case-theme]) .case-index__name { align-self: center; font-size: .85rem; text-align: left; }
+  :where(.case-page[data-case-theme]) .case-index__stop { justify-self: center; }
+  .case-page[data-case-theme] { --case-anchor-offset: 10.8rem; }
+}
+
+@media (max-width: 760px) {
+  body.section-placeholder-layout:has([data-case-theme]) .site-header {
+    padding-block-start: max(.85rem, env(safe-area-inset-top));
+  }
+  body.section-placeholder-layout:has([data-case-theme]) .site-nav { min-height: 52px; }
+  body.section-placeholder-layout:has([data-case-theme]) .nav-links { background: var(--case-nav-menu-bg); border-color: var(--case-nav-menu-edge); }
+  body.section-placeholder-layout:has([data-case-theme]) .menu-toggle:hover { background: #ffffff14; }
+  .case-page[data-case-theme] { --case-width: 89.5vw; }
+  .case-page[data-case-theme] .case-index { top: 4.8rem; }
+}
+
+@media (max-width: 560px) {
+  .case-page[data-case-theme] .case-header {
+    min-block-size: clamp(26rem, 63svh, 33rem);
+    padding-block-start: clamp(5.25rem, 12.2svh, 8rem);
+  }
+  .case-page[data-case-theme] .case-header__inner { padding-inline: 5.2vw; }
+  .case-page[data-case-theme] .case-header h1 {
+    width: 100%;
+    max-width: none;
+    margin-inline: 0;
+    font-size: clamp(3.25rem, 19vw, 6.5rem);
+    line-height: .88;
+  }
+  .case-page[data-case-theme] .case-intro { margin-block: 2.85rem 3.15rem; }
+  .case-page[data-case-theme] .section-heading h2 { font-size: clamp(1.7rem, 8vw, 2.25rem); }
+}
+
+.case-page[data-case-theme] .timeline-shell {
+  background: var(--case-panel);
+  border: 1px solid var(--case-panel-edge);
+  box-shadow: none;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+
+.case-page[data-case-theme] .timeline-shell::before { content: none; }
+
+.case-page[data-case-theme] .timeline-content {
+  background: var(--case-card);
+  border-color: var(--case-card-edge);
+  box-shadow: var(--case-card-shadow);
+}
+
+.case-page[data-case-theme] .timeline-content:hover { box-shadow: var(--case-card-hover-shadow); }
+.case-page[data-case-theme] .timeline .timeline-item:nth-child(n) .timeline-content::before { content: none; }
+.case-page[data-case-theme] .timeline .timeline-item:nth-child(n) .timeline-date { color: var(--case-muted-label); }
+.case-page[data-case-theme] .timeline-content p:last-child { color: var(--text-secondary); }
+
+.case-page[data-case-theme] :is(a, button):focus-visible { outline-color: var(--case-focus); }
+
+.case-page[data-case-theme] .case-index :is(a, button):focus-visible,
+body:has([data-case-theme]) .site-nav :is(a, button):focus-visible {
+  outline-color: var(--case-focus-dark);
+}
+
+/* Both lists place each marker and its connector on the same axis.
+   Each segment ends at the next marker, even when a card wraps to more lines. */
+.case-page[data-case-theme] :is(.timeline, .theories-list) {
+  --rail-gutter: 42px;
+  --rail-center: 8px;
+  --rail-stop-top: 38px;
+  --rail-gap: 17px;
+  --rail-marker-size: 11px;
+  display: grid;
+  gap: var(--rail-gap);
+  padding-inline-start: var(--rail-gutter);
+}
+
+.case-page[data-case-theme] .timeline {
+  --rail-stop-top: 33px;
+}
+
+.case-page[data-case-theme] :is(.timeline, .theories-list)::before {
+  content: none;
+}
+
+.case-page[data-case-theme] .timeline .timeline-item {
+  margin-block: 0;
+}
+
+.case-page[data-case-theme] :is(.timeline-item, .theory-step):not(:last-child)::before {
+  content: "";
+  position: absolute;
+  inset-inline-start: calc(var(--rail-center) - var(--rail-gutter) - .5px);
+  inset-block-start: var(--rail-stop-top);
+  inset-block-end: calc(-1 * (var(--rail-gap) + var(--rail-stop-top)));
+  inline-size: 1px;
+  background: var(--case-route-line);
+  pointer-events: none;
+}
+
+.case-page[data-case-theme] .timeline .timeline-item:nth-child(n) .timeline-marker,
+.case-page[data-case-theme] .theories-list .theory-step .theory-step__marker {
+  inset-inline-start: calc(var(--rail-center) - var(--rail-gutter) - var(--rail-marker-size) / 2);
+  inset-block-start: calc(var(--rail-stop-top) - var(--rail-marker-size) / 2);
+  inline-size: var(--rail-marker-size);
+  z-index: 1;
+  background: var(--case-panel);
+  border: 1px solid var(--case-route-node);
+  box-shadow: inset 0 0 0 2px var(--case-panel), inset 0 0 0 5px var(--case-route-node);
+}
+
+@media (max-width: 650px) {
+  .case-page[data-case-theme] :is(.timeline, .theories-list) {
+    --rail-gutter: 24px;
+    --rail-center: 5px;
+    --rail-stop-top: 29px;
+    --rail-gap: 14px;
+    --rail-marker-size: 9px;
+  }
+}

@@ -1,7 +1,8 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import CaseHeader from "../../components/mysteries/CaseHeader.astro";
-import CaseIndex from "../../components/mysteries/CaseIndex.astro";
+import CaseCover from "../../components/mysteries/CaseCover.astro";
+import CaseRoute from "../../components/mysteries/CaseRoute.astro";
+import "../../styles/mysteries/forest-case.css";
 import LocationSection from "../../components/mysteries/LocationSection.astro";
 import TimelineSection from "../../components/mysteries/TimelineSection.astro";
 import EvidenceSection from "../../components/mysteries/EvidenceSection.astro";
@@ -1425,21 +1426,25 @@ const keyFigures: KeyFigure[] = [
 ---
 
 <BaseLayout
+  sectionPlaceholder
   title="El Dorado | Atlas Aeterna"
   description="Explore the legend of El Dorado, its location and the history of the search for the legendary source of extraordinary wealth."
 >
-  <article class="case-page">
+  <article class="case-page" data-case-theme="forest">
     <!-- -------------------------------- -->
     <!-- SHARED CASE CORE                 -->
     <!-- -------------------------------- -->
 
-    <CaseHeader
+    <CaseCover
       id={getCaseSection(caseSections, "overview").id}
       title="El Dorado"
-      intro="El Dorado is one of history’s most enduring legends, a tale of gold, discovery and a hidden land of extraordinary wealth somewhere in the vast landscapes of South America."
     />
 
-    <CaseIndex sections={caseSections} />
+    <CaseRoute sections={caseSections} />
+
+    <div class="case-intro">
+      <p>El Dorado is one of history’s most enduring legends, a tale of gold, discovery and a hidden land of extraordinary wealth somewhere in the vast landscapes of South America.</p>
+    </div>
 
     <LocationSection
       {...getCaseSection(caseSections, "location")}
@@ -1577,20 +1582,3 @@ const keyFigures: KeyFigure[] = [
 
 
 </BaseLayout>
-
-
-<style>
-  .case-page {
-    --case-blue: #84a9ee;
-    --case-gold: #d9ad72;
-    --case-violet: #a58bd9;
-
-    padding: 18px 0 38px;
-  }
-
-  @media (max-width: 650px) {
-    .case-page {
-      padding-top: 0;
-    }
-  }
-</style>
