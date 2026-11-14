@@ -7,12 +7,36 @@ const { mysteryArtwork } = Astro.props;
 ---
 
 <svg viewBox="0 0 800 280" aria-hidden="true">
-  <g class="artwork artwork--idle" fill="none" stroke="url(#atlas-quiet-ink)" stroke-width="1.25" stroke-linecap="round">
-    <path d="M112 153C224 139 280 104 398 101c110-3 198 19 290 45"/>
-    <path d="M106 173c102-11 204-37 295-40 106-4 209 12 293 34"/>
-    <path d="M113 193c97-4 186-24 283-28 111-4 200 4 290 19"/>
-    <path d="M132 210c92 0 172-12 265-15 101-4 179 0 267 6"/>
-    <path d="M204 207c28-24 48-61 60-104M335 214c19-29 29-67 27-122M468 214c-2-39-12-84-35-120M592 207c-15-31-33-59-66-97" opacity=".67"/>
+  <g class="artwork artwork--idle" fill="none" stroke-linecap="round">
+    <defs>
+      <linearGradient id="meridian-ink" x1="101" x2="699" gradientUnits="userSpaceOnUse">
+        <stop stop-color="#526e9b" stop-opacity="0"/>
+        <stop offset=".11" stop-color="#526e9b" stop-opacity=".17"/>
+        <stop offset=".33" stop-color="#596f9c" stop-opacity=".44"/>
+        <stop offset=".58" stop-color="#585a89" stop-opacity=".59"/>
+        <stop offset=".87" stop-color="#666499" stop-opacity=".25"/>
+        <stop offset="1" stop-color="#6e649b" stop-opacity="0"/>
+      </linearGradient>
+      <linearGradient id="meridian-axis" x1="0" y1="66" x2="0" y2="226" gradientUnits="userSpaceOnUse">
+        <stop stop-color="#686898" stop-opacity="0"/>
+        <stop offset=".24" stop-color="#626994" stop-opacity=".46"/>
+        <stop offset=".54" stop-color="#535e89" stop-opacity=".63"/>
+        <stop offset=".85" stop-color="#566b9a" stop-opacity=".34"/>
+        <stop offset="1" stop-color="#64749f" stop-opacity="0"/>
+      </linearGradient>
+    </defs>
+    <g stroke="url(#meridian-ink)" stroke-width="1.1">
+      <path d="M103 141C191 120 298 85 399 85C515 85 621 111 697 139" opacity=".7"/>
+      <path d="M99 158C214 140 303 116 399 115C503 114 618 136 701 153"/>
+      <path d="M100 177C206 166 303 144 398 144C501 144 600 155 700 174" stroke-width="1.65"/>
+      <path d="M109 196C210 191 303 175 393 174C504 172 606 183 691 194"/>
+      <path d="M131 215C237 213 311 202 390 202C478 201 575 206 674 210" opacity=".72"/>
+      <path d="M257 85C227 101 199 138 175 165C159 184 143 197 123 206M306 75C273 106 265 147 238 176C221 194 204 209 180 220M356 70C334 106 337 147 321 179C312 198 303 214 287 226"/>
+      <path d="M454 70C467 105 476 146 489 178C497 198 505 214 516 225M503 76C532 105 540 143 563 175C576 194 592 209 612 222M552 83C589 104 602 138 628 166C642 183 661 200 682 208"/>
+    </g>
+    <path d="M407 68C404 103 402 125 398 144C394 166 390 193 386 226" stroke="url(#meridian-axis)" stroke-width="1.8"/>
+    <path d="M368 144h6m50 0h6M397 118l9 .15M392 174l9 .08" stroke="#58658e" stroke-opacity=".33" stroke-width="1.05"/>
+    <path d="M141 205C172 199 191 185 218 184C245 183 259 193 282 186C301 180 304 166 329 161M514 107C544 103 567 104 586 116C601 126 613 133 644 134" stroke="url(#meridian-ink)" stroke-width=".85" opacity=".49"/>
   </g>
 <g class="artwork artwork--history" fill="none" stroke-linejoin="round" stroke-linecap="round">
   <defs>
@@ -122,15 +146,6 @@ const { mysteryArtwork } = Astro.props;
   <g class="artwork artwork--mysteries">
     <image href={mysteryArtwork} width="800" height="280" />
   </g>
-  <defs>
-    <linearGradient id="atlas-quiet-ink" gradientUnits="userSpaceOnUse" x1="100" x2="700">
-      <stop stop-color="#627db0" stop-opacity="0"/>
-      <stop offset=".26" stop-color="#6c82b6" stop-opacity=".38"/>
-      <stop offset=".54" stop-color="#6a72af" stop-opacity=".49"/>
-      <stop offset=".78" stop-color="#6d72b1" stop-opacity=".36"/>
-      <stop offset="1" stop-color="#777eba" stop-opacity="0"/>
-    </linearGradient>
-  </defs>
 </svg>
 
 <style>

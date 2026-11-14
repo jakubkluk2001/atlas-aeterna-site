@@ -25,7 +25,10 @@ const features = [
   </nav>
 
   <div class="lens-hero">
-    <h1 id="atlas-title" tabindex="-1">Atlas Aeterna</h1>
+    <div class="lens-heading">
+      <h1 id="atlas-title" tabindex="-1">Atlas Aeterna</h1>
+      <p class="lens-tagline">Explore the world and the stories it holds</p>
+    </div>
     <section id="featured-lens" class="lens-stage" aria-label="Featured story">
       <svg class="glass-bed" viewBox="0 0 1200 465" preserveAspectRatio="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
           <defs>
@@ -185,30 +188,50 @@ const features = [
   }
 
   .lens-hero {
+    --lens-width: min(75vw, 77rem, 137vh);
     display: grid;
     justify-items: center;
     align-content: center;
-    gap: clamp(1rem, 3.1vh, 2rem);
-    padding: 2.5rem 1rem clamp(3.25rem, 9vh, 5.5rem);
+    min-inline-size: 0;
+    gap: clamp(1.2rem, 3.2vh, 2.3rem);
+    padding: 2rem 1rem clamp(3.25rem, 11vh, 8rem);
+  }
+
+  .lens-heading {
+    display: grid;
+    justify-items: center;
+    gap: clamp(0.4rem, 1vh, 0.7rem);
+    max-inline-size: 100%;
+    text-align: center;
   }
 
   .lens-hero h1 {
     margin: 0;
-    padding-inline-start: 0.065em;
+    padding-inline-start: 0.022em;
     color: #141724;
     font-family: var(--font-display);
-    font-size: clamp(1.85rem, min(6.45vw, 11vh), 6.6rem);
+    font-size: calc(var(--lens-width) * 0.1125);
     font-weight: 400;
-    letter-spacing: 0.065em;
-    line-height: 1.06;
+    letter-spacing: 0.022em;
+    line-height: 1;
     text-align: center;
     white-space: nowrap;
+  }
+
+  .lens-tagline {
+    margin: 0;
+    color: #30374c;
+    font-size: clamp(0.925rem, 1.42vw, 1.32rem);
+    font-weight: 400;
+    letter-spacing: 0.01em;
+    line-height: 1.4;
+    text-wrap: balance;
   }
 
   .lens-stage {
     position: relative;
     isolation: isolate;
-    inline-size: min(75vw, 77rem, 137vh);
+    inline-size: var(--lens-width);
     aspect-ratio: 1200 / 465;
   }
 
@@ -313,17 +336,13 @@ const features = [
     .section-link span::after { inset-block-start: calc(100% + 0.25rem); }
 
     .lens-hero {
+      --lens-width: min(92vw, calc(100vw - 2rem), 36rem);
       gap: clamp(1.35rem, 4vh, 2rem);
       padding-block-end: max(6rem, 16vh);
     }
 
-    .lens-hero h1 {
-      font-size: clamp(1.55rem, 8.65vw, 3.9rem);
-      letter-spacing: 0.04em;
-    }
-
     .lens-stage {
-      inline-size: min(92vw, 36rem);
+      max-inline-size: 100%;
       aspect-ratio: 1.58;
     }
 
