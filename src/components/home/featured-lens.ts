@@ -1,6 +1,9 @@
 type Section = "history" | "geography" | "mysteries";
 type Feature = Section | "idle";
 
+const holdDelay = 450;
+const holdTolerance = 12;
+
 function isSection(value: string | undefined): value is Section {
   return value === "history" || value === "geography" || value === "mysteries";
 }
@@ -10,19 +13,17 @@ export function initFeaturedLens(home: HTMLElement) {
   if (!lens || home.hasAttribute("data-lens-ready")) return;
 
   const links = [...home.querySelectorAll<HTMLAnchorElement>("a[data-section]")];
-  const previews = [...home.querySelectorAll<HTMLButtonElement>("button[data-preview]")];
   const stories = [...lens.querySelectorAll<HTMLElement>("[data-story]")];
   let feature: Feature = "idle";
   let touchSelection: Feature = "idle";
+  let press: { id: number; x: number; y: number; timer: number } | undefined;
+  let heldLink: HTMLAnchorElement | undefined;
 
   function showFeature(next: Feature) {
     if (feature === next) return;
     feature = next;
     home.dataset.feature = next;
     for (const story of stories) story.hidden = story.dataset.story !== next;
-    for (const preview of previews) {
-      preview.setAttribute("aria-pressed", String(preview.dataset.preview === next));
-    }
   }
 
   function hasKeyboardFocus() {
@@ -30,7 +31,13 @@ export function initFeaturedLens(home: HTMLElement) {
     return focused instanceof HTMLElement
       && home.contains(focused)
       && focused.matches(":focus-visible")
-      && focused.matches("[data-section], [data-preview], [data-feature-link]");
+      && focused.matches("[data-section], [data-feature-link]");
+  }
+
+  function cancelPress() {
+    if (!press) return;
+    window.clearTimeout(press.timer);
+    press = undefined;
   }
 
   for (const link of links) {
@@ -43,27 +50,47 @@ export function initFeaturedLens(home: HTMLElement) {
     link.addEventListener("pointerenter", (event) => {
       if (event.pointerType === "mouse" && !hasKeyboardFocus()) showFeature(section);
     });
-  }
+    link.addEventListener("pointerdown", (event) => {
+      cancelPress();
+      heldLink = undefined;
+      if (!event.isPrimary || event.button !== 0 || !["touch", "pen"].includes(event.pointerType)) return;
 
-  for (const preview of previews) {
-    const section = preview.dataset.preview;
-    if (!isSection(section)) continue;
-
-    const select = () => {
-      touchSelection = section;
-      showFeature(section);
-    };
-
-    preview.addEventListener("pointerdown", (event) => {
-      if (event.pointerType === "touch" || event.pointerType === "pen") select();
+      const timer = window.setTimeout(() => {
+        heldLink = link;
+        touchSelection = section;
+        showFeature(section);
+      }, holdDelay);
+      press = { id: event.pointerId, x: event.clientX, y: event.clientY, timer };
     });
-    preview.addEventListener("click", select);
+
+    link.addEventListener("click", (event) => {
+      // Release after a hold may still generate a pointer click.
+      if (heldLink !== link || event.detail === 0) return;
+      event.preventDefault();
+      heldLink = undefined;
+    });
+
+    link.addEventListener("contextmenu", (event) => {
+      if (press || heldLink === link) event.preventDefault();
+    });
   }
+
+  window.addEventListener("pointermove", (event) => {
+    if (press?.id !== event.pointerId) return;
+    if (Math.hypot(event.clientX - press.x, event.clientY - press.y) > holdTolerance) cancelPress();
+  });
+  for (const type of ["pointerup", "pointercancel"] as const) {
+    window.addEventListener(type, (event) => {
+      if (press?.id === event.pointerId) cancelPress();
+    });
+  }
+  window.addEventListener("scroll", cancelPress, { passive: true });
+  window.addEventListener("blur", cancelPress);
 
   home.addEventListener("pointermove", (event) => {
     if (event.pointerType !== "mouse" || feature === touchSelection || hasKeyboardFocus()) return;
     if (!(event.target instanceof Element)) return;
-    if (event.target.closest("[data-section], [data-preview]")) return;
+    if (event.target.closest("[data-section]")) return;
 
     // Keep the selected drawing available across the gap below its navigation link.
     const bounds = lens.getBoundingClientRect();
@@ -88,9 +115,8 @@ export function initFeaturedLens(home: HTMLElement) {
     if (event.key !== "Escape" || feature === "idle") return;
     const active = document.activeElement;
     if (active && lens.contains(active)) {
-      const preview = previews.find((button) => button.dataset.preview === feature && button.getClientRects().length);
       const section = links.find((link) => link.dataset.section === feature);
-      (preview ?? section)?.focus({ preventScroll: true });
+      section?.focus({ preventScroll: true });
     }
     touchSelection = "idle";
     showFeature("idle");

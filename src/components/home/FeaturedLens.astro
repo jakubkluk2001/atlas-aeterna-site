@@ -18,21 +18,9 @@ const features = [
 <div class="featured-home" data-featured-home data-feature="idle">
   <nav class="section-nav" aria-label="Primary navigation">
     {features.map((feature) => (
-      <div class="section-item">
-        <a class="section-link" href={feature.sectionHref} data-section={feature.id}>
-          <span>{feature.section}</span>
-        </a>
-        <button
-          class="touch-preview"
-          type="button"
-          aria-label={`Preview ${feature.title}`}
-          aria-controls="featured-lens"
-          aria-pressed="false"
-          data-preview={feature.id}
-        >
-          <span>Preview</span>
-        </button>
-      </div>
+      <a class="section-link" href={feature.sectionHref} data-section={feature.id}>
+        <span>{feature.section}</span>
+      </a>
     ))}
   </nav>
 
@@ -155,9 +143,11 @@ const features = [
     padding-block-start: max(clamp(1.1rem, 4.1vh, 2.65rem), env(safe-area-inset-top));
   }
 
-  .section-item {
-    display: grid;
-    justify-items: stretch;
+  [data-lens-ready] .section-link {
+    touch-action: manipulation;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
   }
 
   .section-link {
@@ -192,34 +182,6 @@ const features = [
   .featured-home[data-feature="mysteries"] [data-section="mysteries"] span::after {
     opacity: 1;
     transform: scaleX(1);
-  }
-
-  .touch-preview {
-    display: none;
-    justify-self: center;
-    min-inline-size: 64px;
-    min-block-size: 44px;
-    padding: 0 0.5rem;
-    border: 0;
-    border-radius: 0.45rem;
-    background: transparent;
-    color: #465477;
-    font-size: 0.71rem;
-    cursor: pointer;
-    touch-action: manipulation;
-  }
-
-  .touch-preview span {
-    padding: 0.42rem 0.58rem;
-    border: 1px solid #828cb230;
-    border-radius: 999px;
-    background: #fcfbff60;
-  }
-
-  .touch-preview[aria-pressed="true"] span {
-    border-color: #58658d6b;
-    background: #fdfcffbd;
-    color: #263351;
   }
 
   .lens-hero {
@@ -331,7 +293,7 @@ const features = [
     text-decoration-color: #455687;
   }
 
-  :is(.section-link, .touch-preview, .story-link):focus-visible {
+  :is(.section-link, .story-link):focus-visible {
     outline: 2px solid #455687;
     outline-offset: 3px;
   }
@@ -367,10 +329,6 @@ const features = [
 
     .lens-art { inset: 5% 1% auto; inline-size: 98%; block-size: 67%; }
     .story-captions { grid-template-rows: 1fr 8%; }
-  }
-
-  @media (max-width: 720px), (hover: none), (any-pointer: coarse) {
-    [data-lens-ready] .touch-preview { display: block; }
   }
 
   @media (prefers-reduced-motion: reduce) {
