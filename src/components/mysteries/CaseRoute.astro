@@ -100,5 +100,44 @@ const currentSection = sections[0];
     window.addEventListener("load", scheduleRefresh);
     index.classList.add("is-ready");
     refresh();
+
+    const casePage = index.closest(".case-page");
+    const siteNav = document.querySelector<HTMLElement>(".site-nav");
+    const siteHeader = siteNav?.closest<HTMLElement>(".site-header");
+    const detailTargets = Array.from(casePage?.querySelectorAll<HTMLElement>(
+      '.evidence-section h3[id^="evidence-title-"], article.search-record[id], article.account-record[id]'
+    ) ?? [], target => ({ target, card: target.closest<HTMLElement>("article") ?? target }));
+
+    if (detailTargets.length > 0) {
+      const updateDetailOffsets = () => {
+        const headerTop = siteHeader ? Number.parseFloat(getComputedStyle(siteHeader).top) || 0 : 0;
+        const headerBottom = headerTop + (siteHeader?.offsetHeight ?? 0);
+        const indexTop = Number.parseFloat(getComputedStyle(index).top) || 0;
+        const indexBottom = indexTop + index.offsetHeight;
+        const spacing = 16;
+        const visibleTop = Math.max(headerBottom, indexBottom) + spacing;
+        const visibleHeight = Math.max(0, window.innerHeight - visibleTop - spacing);
+
+        // Keep fragment navigation native. The offset centers the card even when its ID is on its heading.
+        const offsets = detailTargets.map(({ target, card }) => {
+          const bounds = card.getBoundingClientRect();
+          const targetTop = target.getBoundingClientRect().top - bounds.top;
+          const cardTop = visibleTop + Math.max(0, (visibleHeight - bounds.height) / 2);
+          return { target, offset: cardTop + targetTop };
+        });
+        for (const { target, offset } of offsets) {
+          target.style.scrollMarginTop = `${offset}px`;
+        }
+      };
+
+      updateDetailOffsets();
+      window.addEventListener("resize", updateDetailOffsets);
+      if (typeof ResizeObserver === "function") {
+        const observer = new ResizeObserver(updateDetailOffsets);
+        observer.observe(index);
+        if (siteHeader) observer.observe(siteHeader);
+        for (const { card } of detailTargets) observer.observe(card);
+      }
+    }
   }
 </script>
