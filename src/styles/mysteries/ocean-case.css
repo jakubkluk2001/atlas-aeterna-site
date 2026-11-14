@@ -82,16 +82,8 @@ body.section-placeholder-layout:has([data-case-theme="open-ocean"]) {
   --case-focus: #38617a;
 }
 
-.case-page[data-case-theme="open-ocean"] .case-header--long-title h1 {
-  font-size: clamp(3.3rem, 8.7vw, 9.65rem);
-  letter-spacing: -.054em;
-  line-height: .94;
-  text-align: center;
-  text-wrap: balance;
-}
-
 .case-page[data-case-theme="open-ocean"] .case-header {
-  padding-block-start: clamp(10.8rem, 24svh, 15.2rem);
+  padding-block-start: clamp(9rem, 20svh, 14rem);
 }
 
 .case-page[data-case-theme="open-ocean"] .marker-area {
@@ -109,12 +101,5 @@ body.section-placeholder-layout:has([data-case-theme="open-ocean"]) {
   .case-page[data-case-theme="open-ocean"] .case-header {
     padding-block-start: clamp(6.5rem, 15svh, 9rem);
     min-block-size: clamp(26rem, 63svh, 33rem);
-  }
-
-  .case-page[data-case-theme="open-ocean"] .case-header--long-title h1 {
-    width: min(100%, 8.2em);
-    margin-inline: auto;
-    font-size: clamp(2.45rem, 12vw, 5.15rem);
-    letter-spacing: -.047em;
   }
 }

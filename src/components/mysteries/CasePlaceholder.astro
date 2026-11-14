@@ -20,7 +20,12 @@ const sections = createCaseSections([{ title: "Overview", id: "overview" }]);
 
 <BaseLayout sectionPlaceholder title={`${caseFile.title} | Atlas Aeterna`} description={overview}>
   <article class="case-page case-page--placeholder" data-case-theme={caseFile.theme}>
-    <CaseCover id="case-cover" scene={caseFile.theme} title={caseFile.title} titleVariant="long" />
+    <CaseCover
+      id="case-cover"
+      scene={caseFile.theme}
+      title={caseFile.title}
+      titleVariant={slug === "holy-grail" ? "wide" : "long"}
+    />
     <CaseRoute sections={sections} />
 
     <section class="case-intro" id="overview" aria-labelledby="case-overview-title">
@@ -82,16 +87,6 @@ body.section-placeholder-layout:has(.case-page--placeholder) {
   min-block-size: clamp(28rem, 61svh, 42rem);
 }
 
-.case-page[data-case-theme].case-page--placeholder .case-header h1 {
-  inline-size: 100%;
-  max-inline-size: 13ch;
-  margin-inline: auto;
-  font-size: clamp(3rem, 8.5vw, 8.875rem);
-  letter-spacing: -.047em;
-  text-align: center;
-  text-wrap: balance;
-}
-
 .case-page--placeholder .case-index__route {
   justify-self: start;
   inline-size: min(100%, 9rem);
@@ -118,11 +113,6 @@ body.section-placeholder-layout:has(.case-page--placeholder) {
   .case-page[data-case-theme].case-page--placeholder .case-header {
     min-block-size: clamp(22rem, 53svh, 28rem);
     padding-block-start: clamp(5rem, 12svh, 7rem);
-  }
-
-  .case-page[data-case-theme].case-page--placeholder .case-header h1 {
-    max-inline-size: min(100%, 11ch);
-    font-size: clamp(2.35rem, 10.4vw, 4.6rem);
   }
 }
 </style>
