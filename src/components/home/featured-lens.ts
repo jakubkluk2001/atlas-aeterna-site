@@ -3,6 +3,7 @@ type Feature = Section | "idle";
 
 const holdDelay = 450;
 const holdTolerance = 12;
+const previewTimeout = 10_000;
 
 function isSection(value: string | undefined): value is Section {
   return value === "history" || value === "geography" || value === "mysteries";
@@ -16,15 +17,18 @@ export function initFeaturedLens(home: HTMLElement) {
   const stories = [...lens.querySelectorAll<HTMLElement>("[data-story]")];
   let feature: Feature = "idle";
   let touchSelection: Feature = "idle";
+  let resetTimer: number | undefined;
+  let mousePreview = false;
   let press: {
     id: number;
     x: number;
     y: number;
-    timer: number;
+    startedAt: number;
+    link: HTMLAnchorElement;
     section: Section;
-    previousFeature: Feature;
+    alreadySelected: boolean;
   } | undefined;
-  let heldLink: HTMLAnchorElement | undefined;
+  let suppressedClick: HTMLAnchorElement | undefined;
 
   function showFeature(next: Feature) {
     if (feature === next) return;
@@ -41,12 +45,22 @@ export function initFeaturedLens(home: HTMLElement) {
       && focused.matches("[data-section], [data-feature-link]");
   }
 
-  function cancelPress(restorePreview = false) {
+  function selectTouchPreview(section: Section) {
+    touchSelection = section;
+    window.clearTimeout(resetTimer);
+    resetTimer = window.setTimeout(() => {
+      const expired = touchSelection;
+      touchSelection = "idle";
+      if (!press && !mousePreview && !hasKeyboardFocus() && feature === expired) showFeature("idle");
+    }, previewTimeout);
+  }
+
+  function cancelPress() {
     if (!press) return;
-    const { timer, section, previousFeature } = press;
+    const { link, section } = press;
     press = undefined;
-    window.clearTimeout(timer);
-    if (restorePreview && feature === section) showFeature(previousFeature);
+    suppressedClick = link;
+    if (!mousePreview && !hasKeyboardFocus() && feature === section) showFeature(touchSelection);
   }
 
   for (const link of links) {
@@ -57,50 +71,60 @@ export function initFeaturedLens(home: HTMLElement) {
       if (link.matches(":focus-visible")) showFeature(section);
     });
     link.addEventListener("pointerenter", (event) => {
-      if (event.pointerType === "mouse" && !hasKeyboardFocus()) showFeature(section);
+      if (event.pointerType !== "mouse" || hasKeyboardFocus()) return;
+      mousePreview = true;
+      showFeature(section);
     });
     link.addEventListener("pointerdown", (event) => {
       if (!event.isPrimary) return;
-      cancelPress(true);
-      heldLink = undefined;
+      cancelPress();
+      suppressedClick = undefined;
       if (event.button !== 0 || !["touch", "pen"].includes(event.pointerType)) return;
 
-      const previousFeature = feature;
-      const timer = window.setTimeout(() => {
-        press = undefined;
-        heldLink = link;
-        touchSelection = section;
-      }, holdDelay);
-      press = { id: event.pointerId, x: event.clientX, y: event.clientY, timer, section, previousFeature };
+      mousePreview = false;
+      press = {
+        id: event.pointerId,
+        x: event.clientX,
+        y: event.clientY,
+        startedAt: performance.now(),
+        link,
+        section,
+        alreadySelected: touchSelection === section,
+      };
       showFeature(section);
     });
 
     link.addEventListener("click", (event) => {
-      // Release after a hold may still generate a pointer click.
-      if (heldLink !== link || event.detail === 0) return;
+      if (suppressedClick !== link || event.detail === 0) return;
       event.preventDefault();
-      heldLink = undefined;
+      suppressedClick = undefined;
     });
 
     link.addEventListener("contextmenu", (event) => {
-      if (press || heldLink === link) event.preventDefault();
+      if (press?.link === link || suppressedClick === link) event.preventDefault();
     });
   }
 
   window.addEventListener("pointermove", (event) => {
     if (press?.id !== event.pointerId) return;
-    if (Math.hypot(event.clientX - press.x, event.clientY - press.y) > holdTolerance) cancelPress(true);
+    if (Math.hypot(event.clientX - press.x, event.clientY - press.y) > holdTolerance) cancelPress();
   });
-  for (const type of ["pointerup", "pointercancel"] as const) {
-    window.addEventListener(type, (event) => {
-      if (press?.id === event.pointerId) cancelPress(type === "pointercancel");
-    });
-  }
-  window.addEventListener("scroll", () => cancelPress(true), { passive: true });
-  window.addEventListener("blur", () => cancelPress(true));
+  window.addEventListener("pointerup", (event) => {
+    if (press?.id !== event.pointerId) return;
+    const { link, section, startedAt, alreadySelected } = press;
+    press = undefined;
+    // A second quick tap follows the link. A hold always keeps the preview open.
+    if (!alreadySelected || performance.now() - startedAt >= holdDelay) suppressedClick = link;
+    selectTouchPreview(section);
+  });
+  window.addEventListener("pointercancel", (event) => {
+    if (press?.id === event.pointerId) cancelPress();
+  });
+  window.addEventListener("scroll", cancelPress, { passive: true });
+  window.addEventListener("blur", cancelPress);
 
   home.addEventListener("pointermove", (event) => {
-    if (event.pointerType !== "mouse" || feature === touchSelection || hasKeyboardFocus()) return;
+    if (event.pointerType !== "mouse" || hasKeyboardFocus()) return;
     if (!(event.target instanceof Element)) return;
     if (event.target.closest("[data-section]")) return;
 
@@ -110,17 +134,20 @@ export function initFeaturedLens(home: HTMLElement) {
     const left = Math.min(bounds.left, origin?.left ?? bounds.left);
     const right = Math.max(bounds.right, origin?.right ?? bounds.right);
     if (event.clientX < left || event.clientX > right || event.clientY > bounds.bottom) {
+      mousePreview = false;
       showFeature(touchSelection);
     }
   });
 
   home.addEventListener("pointerleave", (event) => {
-    if (event.pointerType === "mouse" && !hasKeyboardFocus()) showFeature(touchSelection);
+    if (event.pointerType !== "mouse") return;
+    mousePreview = false;
+    if (!hasKeyboardFocus()) showFeature(touchSelection);
   });
 
   home.addEventListener("focusout", (event) => {
     if (event.relatedTarget instanceof Node && home.contains(event.relatedTarget)) return;
-    if (!home.matches(":hover")) showFeature(touchSelection);
+    if (!mousePreview) showFeature(touchSelection);
   });
 
   home.addEventListener("keydown", (event) => {
@@ -132,6 +159,8 @@ export function initFeaturedLens(home: HTMLElement) {
       section?.focus({ preventScroll: true });
     }
     touchSelection = "idle";
+    mousePreview = false;
+    window.clearTimeout(resetTimer);
     showFeature("idle");
   });
 
