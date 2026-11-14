@@ -116,7 +116,7 @@ const { title, intro, titleId = "section-title" } = Astro.props;
   @media (max-width: 640px) {
     .section-opening {
       min-block-size: auto;
-      padding-block: 1.05rem 5.5rem;
+      padding-block: 1.05rem 1.75rem;
       gap: 1rem;
     }
 
@@ -129,10 +129,7 @@ const { title, intro, titleId = "section-title" } = Astro.props;
     }
 
     .section-fold {
-      inset-block: auto 0;
-      inline-size: 66%;
-      block-size: 5.5rem;
-      opacity: 0.9;
+      display: none;
     }
   }
 </style>
