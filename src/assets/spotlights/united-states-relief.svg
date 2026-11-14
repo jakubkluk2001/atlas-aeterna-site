@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 335" preserveAspectRatio="none">
+  <defs>
+    <linearGradient id="mountains" x1=".2" y1="0" x2=".8" y2="1">
+      <stop stop-color="#e8edf3"/>
+      <stop offset=".54" stop-color="#a4b6cc"/>
+      <stop offset="1" stop-color="#667d9e"/>
+    </linearGradient>
+    <linearGradient id="basin" x1=".05" y1=".25" x2=".73" y2=".85">
+      <stop stop-color="#66839f"/>
+      <stop offset=".48" stop-color="#526a8a"/>
+      <stop offset="1" stop-color="#334865"/>
+    </linearGradient>
+    <linearGradient id="foreground" x1=".22" y1=".12" x2=".8" y2="1">
+      <stop stop-color="#5f7c9a"/>
+      <stop offset=".51" stop-color="#364d70"/>
+      <stop offset="1" stop-color="#24364f"/>
+    </linearGradient>
+    <linearGradient id="ridge-light" x1="0" x2="1" y1=".26" y2=".75">
+      <stop stop-color="#e9f3ff" stop-opacity=".2"/>
+      <stop offset=".3" stop-color="#eff7ff" stop-opacity=".7"/>
+      <stop offset=".66" stop-color="#c4d7ea" stop-opacity=".26"/>
+      <stop offset="1" stop-color="#e4d7d9" stop-opacity=".51"/>
+    </linearGradient>
+    <linearGradient id="facets" x1=".16" y1=".05" x2=".84" y2="1">
+      <stop stop-color="#f5f8fc" stop-opacity=".59"/>
+      <stop offset="1" stop-color="#f5f8fc" stop-opacity="0"/>
+    </linearGradient>
+    <path id="mountain-line" d="M-25 176 34 157 103 113 143 119 221 63 248 78 320 31 369 58 399 52 459 112 491 105 548 150 608 143 666 172 722 163 788 183 843 173 893 184 949 170 991 178 1058 155 1119 167 1187 146 1259 159 1345 131 1425 144"/>
+    <path id="lower-line" d="M-42 276C76 250 143 219 239 243C320 264 387 288 474 271C565 254 624 224 721 246C800 264 851 291 949 267C1053 241 1093 197 1178 200C1262 205 1314 237 1436 209"/>
+    <clipPath id="lower-clip"><path d="M-42 276C76 250 143 219 239 243C320 264 387 288 474 271C565 254 624 224 721 246C800 264 851 291 949 267C1053 241 1093 197 1178 200C1262 205 1314 237 1436 209V335H-42Z"/></clipPath>
+  </defs>
+  <path d="M-25 176 34 157 103 113 143 119 221 63 248 78 320 31 369 58 399 52 459 112 491 105 548 150 608 143 666 172 722 163 788 183 843 173 893 184 949 170 991 178 1058 155 1119 167 1187 146 1259 159 1345 131 1425 144V335H-25Z" fill="url(#mountains)"/>
+  <use href="#mountain-line" fill="none" stroke="url(#ridge-light)" stroke-width="1.25"/>
+  <path d="m103 113 40 6 78-56-35 56-44 28-30 40-37 17Zm145-35 72-47-21 45 26 19-49 63-35 22 46-69Zm121-20 30-6 60 60 32-7 57 45-41-4-28 24-51-35-26-36Z" fill="url(#facets)"/>
+  <path d="M-26 219 53 202 119 173 185 179 249 159 309 164 374 128 439 154 499 155 568 182 631 189 703 209C777 228 834 216 910 214C999 210 1064 233 1158 220C1260 206 1325 172 1428 185V335H-26Z" fill="url(#basin)"/>
+  <path d="m-26 219 79-17 66-29 66 6 64-20 60 5 65-36 65 26 60 1 69 27 63 7 72 20c74 19 131 7 207 5 89-4 154 19 248 6 102-14 167-48 270-35" fill="none" stroke="url(#ridge-light)" stroke-width=".9" opacity=".72"/>
+  <path d="M-42 276C76 250 143 219 239 243C320 264 387 288 474 271C565 254 624 224 721 246C800 264 851 291 949 267C1053 241 1093 197 1178 200C1262 205 1314 237 1436 209V335H-42Z" fill="url(#foreground)"/>
+  <g clip-path="url(#lower-clip)" fill="none" stroke="url(#ridge-light)" stroke-width="1">
+    <use href="#lower-line"/>
+    <use href="#lower-line" y="9" opacity=".59"/>
+    <use href="#lower-line" y="19" opacity=".43"/>
+    <use href="#lower-line" y="30" opacity=".31"/>
+    <use href="#lower-line" y="42" opacity=".25"/>
+  </g>
+</svg>

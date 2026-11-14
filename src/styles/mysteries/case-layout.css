@@ -29,10 +29,10 @@ body.section-placeholder-layout:has([data-case-theme]) .menu-icon span { backgro
   position: relative;
   isolation: isolate;
   min-inline-size: 0;
-  min-block-size: clamp(35rem, 68svh, 47.5rem);
+  block-size: var(--detail-cover-height);
   display: grid;
   align-items: start;
-  padding-block-start: clamp(9rem, 18svh, 13rem);
+  padding-block-start: var(--detail-title-top);
   scroll-margin-top: 7rem;
 }
 
@@ -75,9 +75,9 @@ body.section-placeholder-layout:has([data-case-theme]) .menu-icon span { backgro
   background-clip: text;
   -webkit-text-fill-color: transparent;
   filter: var(--case-cover-shadow);
-  font-size: clamp(5rem, 15.1vw, 17rem);
+  font-size: var(--detail-title-size, var(--detail-title-reference-size));
   letter-spacing: -0.046em;
-  line-height: 0.96;
+  line-height: var(--detail-title-reference-leading);
 }
 
 .case-page[data-case-theme] .case-index {
@@ -377,17 +377,11 @@ body.section-placeholder-layout:has([data-case-theme]) .menu-icon span { backgro
 }
 
 @media (max-width: 560px) {
-  .case-page[data-case-theme] .case-header {
-    min-block-size: clamp(26rem, 63svh, 33rem);
-    padding-block-start: clamp(5.25rem, 12.2svh, 8rem);
-  }
   .case-page[data-case-theme] .case-header__inner { padding-inline: 5.2vw; }
   .case-page[data-case-theme] .case-header h1 {
     width: 100%;
     max-width: none;
     margin-inline: 0;
-    font-size: clamp(3.25rem, 19vw, 6.5rem);
-    line-height: .88;
   }
   .case-page[data-case-theme] .case-intro { margin-block: 2.85rem 3.15rem; }
   .case-page[data-case-theme] .section-heading h2 { font-size: clamp(1.7rem, 8vw, 2.25rem); }

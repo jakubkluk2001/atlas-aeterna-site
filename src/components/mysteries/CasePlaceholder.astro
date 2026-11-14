@@ -16,6 +16,12 @@ const { slug, overview } = Astro.props;
 const caseFile = mysteryCases.find((entry): entry is Placeholder => entry.slug === slug);
 if (!caseFile) throw new Error(`Unknown placeholder case: ${slug}`);
 const sections = createCaseSections([{ title: "Overview", id: "overview" }]);
+const titleVariants = {
+  "holy-grail": "wide",
+  "nazis-in-antarctica": "stacked",
+  "roswell-incident": "long",
+  "woman-in-white": "long",
+} as const;
 ---
 
 <BaseLayout sectionPlaceholder title={`${caseFile.title} | Atlas Aeterna`} description={overview}>
@@ -24,7 +30,7 @@ const sections = createCaseSections([{ title: "Overview", id: "overview" }]);
       id="case-cover"
       scene={caseFile.theme}
       title={caseFile.title}
-      titleVariant={slug === "holy-grail" ? "wide" : "long"}
+      titleVariant={titleVariants[slug]}
     />
     <CaseRoute sections={sections} />
 
@@ -82,11 +88,6 @@ body.section-placeholder-layout:has(.case-page--placeholder) {
   --case-focus: var(--case-palette-ink);
 }
 
-.case-page[data-case-theme].case-page--placeholder .case-header {
-  padding-block-start: clamp(7.25rem, 17svh, 12rem);
-  min-block-size: clamp(28rem, 61svh, 42rem);
-}
-
 .case-page--placeholder .case-index__route {
   justify-self: start;
   inline-size: min(100%, 9rem);
@@ -106,13 +107,6 @@ body.section-placeholder-layout:has(.case-page--placeholder) {
   .case-page--placeholder .case-index__route {
     justify-self: stretch;
     inline-size: auto;
-  }
-}
-
-@media (max-width: 650px) {
-  .case-page[data-case-theme].case-page--placeholder .case-header {
-    min-block-size: clamp(22rem, 53svh, 28rem);
-    padding-block-start: clamp(5rem, 12svh, 7rem);
   }
 }
 </style>

@@ -1,0 +1,191 @@
+---
+interface Spotlight {
+  country: string;
+  title: string;
+  href: string;
+  flag: string;
+  tone: "rose" | "blue";
+  inDevelopment?: boolean;
+}
+
+interface Props {
+  stories: readonly Spotlight[];
+}
+
+const { stories } = Astro.props;
+---
+
+<section class="spotlight-collection" aria-labelledby="country-spotlights-title">
+  <h2 id="country-spotlights-title">Country Spotlights</h2>
+  <ul class="spotlight-list" role="list">
+    {stories.map(({ country, title, href, flag, tone, inDevelopment }) => (
+      <li>
+        <a class:list={["spotlight-story", `spotlight-story--${tone}`]} href={href}>
+          <div class="spotlight-art">
+            <img src={flag} alt="" />
+          </div>
+          <div class="spotlight-caption">
+            <div class="spotlight-name">
+              <p class="spotlight-country">{country}</p>
+              <h3>{title}</h3>
+              {inDevelopment && <p class="spotlight-status">In development</p>}
+            </div>
+            <span class="spotlight-arrow" aria-hidden="true">→</span>
+          </div>
+        </a>
+      </li>
+    ))}
+  </ul>
+</section>
+
+<style>
+  .spotlight-collection {
+    display: grid;
+    min-inline-size: 0;
+    gap: clamp(0.8rem, 1.25vw, 1rem);
+  }
+
+  h2,
+  h3 {
+    margin: 0;
+    color: #141724;
+    font-family: var(--font-display);
+    font-weight: 400;
+  }
+
+  h2 {
+    display: flex;
+    align-items: center;
+    gap: clamp(0.8rem, 2vw, 1.5rem);
+    font-size: clamp(1.1rem, 2.2vw, 1.55rem);
+    line-height: 1.2;
+  }
+
+  h2::after {
+    content: "";
+    flex: 1;
+    block-size: 1px;
+    background: linear-gradient(90deg, #657ca247, #657ca210);
+  }
+
+  .spotlight-list {
+    display: grid;
+    gap: clamp(0.8rem, 1.65vw, 1.35rem);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .spotlight-story {
+    display: grid;
+    grid-template-columns: minmax(0, 37fr) minmax(0, 63fr);
+    min-block-size: clamp(12.5rem, 24.4vw, 17.5rem);
+    overflow: hidden;
+    color: inherit;
+    border: 1px solid #ffffffe0;
+    border-radius: 1.25rem;
+    background: linear-gradient(113deg, #f9f8fb, #f7f3fa 62%, #ebe8f7);
+    box-shadow: 0 10px 26px #3c436413, inset 0 0 0 1px #6e73901d;
+    text-decoration: none;
+  }
+
+  .spotlight-story--rose {
+    --flag-wash: #f4e4e9;
+    --flag-depth: #ead6e0;
+    --flag-edge: #e9e4ef;
+    --flag-accent: #75475a;
+  }
+
+  .spotlight-story--blue {
+    --flag-wash: #e4eaf6;
+    --flag-depth: #d6dfef;
+    --flag-edge: #e5e3f3;
+    --flag-accent: #394d74;
+  }
+
+  .spotlight-art {
+    display: grid;
+    place-items: center;
+    min-inline-size: 0;
+    background:
+      radial-gradient(ellipse 78% 68% at 40% 34%, #fff, transparent),
+      linear-gradient(140deg, var(--flag-wash), var(--flag-depth) 65%, var(--flag-edge));
+    box-shadow: inset -1px 0 #66637f24;
+  }
+
+  .spotlight-art img {
+    display: block;
+    inline-size: min(63%, 14rem);
+    block-size: auto;
+    border-radius: 0.45rem;
+    box-shadow: 0 12px 24px #3e2c4b24, 0 0 0 1px #52475926;
+  }
+
+  .spotlight-caption {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: clamp(0.65rem, 2vw, 1.45rem);
+    padding: clamp(1.35rem, 4.2vw, 3.1rem);
+  }
+
+  .spotlight-country {
+    margin: 0 0 0.65rem;
+    color: var(--flag-accent);
+    font-size: clamp(0.74rem, 1.32vw, 0.85rem);
+    font-weight: 600;
+    letter-spacing: 0.145em;
+    line-height: 1.4;
+    text-transform: uppercase;
+  }
+
+  h3 {
+    font-size: clamp(1.5rem, 4.1vw, 3.25rem);
+    line-height: 1.08;
+    overflow-wrap: break-word;
+  }
+
+  .spotlight-status {
+    margin: 0.5rem 0 0;
+    color: var(--flag-accent);
+    font-size: 0.82rem;
+    letter-spacing: 0.015em;
+    line-height: 1.45;
+  }
+
+  .spotlight-arrow {
+    display: grid;
+    place-items: center;
+    inline-size: clamp(2rem, 4.45vw, 2.75rem);
+    aspect-ratio: 1;
+    border: 1px solid #6e648538;
+    border-radius: 50%;
+    color: #514460;
+    font-size: 1.25rem;
+    line-height: 1;
+  }
+
+  .spotlight-story:is(:hover, :focus-visible) .spotlight-arrow {
+    border-color: var(--flag-accent);
+    color: var(--flag-accent);
+  }
+
+  .spotlight-story:focus-visible {
+    outline: 2px solid #455687;
+    outline-offset: 3px;
+  }
+
+  @media (max-width: 520px) {
+    .spotlight-story { grid-template-columns: minmax(0, 1fr); }
+
+    .spotlight-art {
+      min-block-size: clamp(7.5rem, 38vw, 10.5rem);
+      box-shadow: inset 0 -1px #66637f24;
+    }
+
+    .spotlight-art img { inline-size: min(46%, 9rem); }
+    .spotlight-caption { padding: 1.1rem; }
+    .spotlight-country { margin-block-end: 0.5rem; }
+    h3 { font-size: clamp(1.4rem, 6.3vw, 1.88rem); }
+  }
+</style>

@@ -1,7 +1,8 @@
 ---
+import unitedStatesFlag from "../assets/flags/united-states.svg?url";
+import CountrySpotlights from "../components/sections/CountrySpotlights.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import SectionOpening from "../components/sections/SectionOpening.astro";
-import SectionPlaceholder from "../components/sections/SectionPlaceholder.astro";
 ---
 
 <BaseLayout
@@ -14,6 +15,15 @@ import SectionPlaceholder from "../components/sections/SectionPlaceholder.astro"
     intro="Explore the places that make up our planet and the natural forces that shape them."
     titleId="placeholder-title"
   >
-    <SectionPlaceholder kind="geography" />
+    <CountrySpotlights stories={[
+      {
+        country: "United States",
+        title: "A World Within",
+        href: "/geography/a-world-within",
+        flag: unitedStatesFlag,
+        tone: "blue",
+        inDevelopment: true,
+      },
+    ]} />
   </SectionOpening>
 </BaseLayout>

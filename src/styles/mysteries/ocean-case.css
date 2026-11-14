@@ -82,10 +82,6 @@ body.section-placeholder-layout:has([data-case-theme="open-ocean"]) {
   --case-focus: #38617a;
 }
 
-.case-page[data-case-theme="open-ocean"] .case-header {
-  padding-block-start: clamp(9rem, 20svh, 14rem);
-}
-
 .case-page[data-case-theme="open-ocean"] .marker-area {
   background: #8aafc43d;
   border-color: #52778f6b;
@@ -97,9 +93,3 @@ body.section-placeholder-layout:has([data-case-theme="open-ocean"]) {
   box-shadow: 0 0 0 5px #eff9ff85, 0 4px 12px #28506b3a;
 }
 
-@media (max-width: 650px) {
-  .case-page[data-case-theme="open-ocean"] .case-header {
-    padding-block-start: clamp(6.5rem, 15svh, 9rem);
-    min-block-size: clamp(26rem, 63svh, 33rem);
-  }
-}

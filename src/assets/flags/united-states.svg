@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1900" height="1000" viewBox="0 0 1900 1000">
+  <defs>
+    <path id="star" d="M0-30.8 6.91-9.52 29.29-9.52 11.19 3.63 18.1 24.92 0 11.76-18.1 24.92-11.19 3.63-29.29-9.52-6.91-9.52Z"/>
+    <g id="six">
+      <use href="#star" x="63.33"/>
+      <use href="#star" x="190"/>
+      <use href="#star" x="316.67"/>
+      <use href="#star" x="443.33"/>
+      <use href="#star" x="570"/>
+      <use href="#star" x="696.67"/>
+    </g>
+    <g id="five">
+      <use href="#star" x="126.67"/>
+      <use href="#star" x="253.33"/>
+      <use href="#star" x="380"/>
+      <use href="#star" x="506.67"/>
+      <use href="#star" x="633.33"/>
+    </g>
+    <linearGradient id="sheen" x1="0" y1=".1" x2="1" y2=".45">
+      <stop stop-color="#fff" stop-opacity=".06"/>
+      <stop offset=".32" stop-color="#fff" stop-opacity=".16"/>
+      <stop offset=".61" stop-color="#fff" stop-opacity="0"/>
+      <stop offset="1" stop-color="#19213d" stop-opacity=".08"/>
+    </linearGradient>
+  </defs>
+  <path fill="#fffdfc" d="M0 0h1900v1000H0z"/>
+  <path fill="#bb2944" d="M0 0h1900v76.923H0zM0 153.846h1900v76.923H0zM0 307.692h1900v76.923H0zM0 461.538h1900v76.923H0zM0 615.384h1900v76.923H0zM0 769.23h1900v76.923H0zM0 923.077h1900V1000H0z"/>
+  <path fill="#354568" d="M0 0h760v538.461H0z"/>
+  <g fill="#fffdfc">
+    <use href="#six" y="53.846"/>
+    <use href="#five" y="107.692"/>
+    <use href="#six" y="161.538"/>
+    <use href="#five" y="215.384"/>
+    <use href="#six" y="269.23"/>
+    <use href="#five" y="323.076"/>
+    <use href="#six" y="376.923"/>
+    <use href="#five" y="430.769"/>
+    <use href="#six" y="484.615"/>
+  </g>
+  <path fill="url(#sheen)" d="M0 0h1900v1000H0z"/>
+</svg>

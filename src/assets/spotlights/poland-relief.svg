@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 335" preserveAspectRatio="none">
+  <defs>
+    <linearGradient id="far" x1=".2" y1="0" x2=".66" y2="1">
+      <stop stop-color="#f3e2e1"/>
+      <stop offset=".6" stop-color="#d9b4b8"/>
+      <stop offset="1" stop-color="#9e6070"/>
+    </linearGradient>
+    <linearGradient id="middle" x1=".28" y1=".02" x2=".69" y2="1">
+      <stop stop-color="#d6a9b0"/>
+      <stop offset=".52" stop-color="#ab6678"/>
+      <stop offset="1" stop-color="#783648"/>
+    </linearGradient>
+    <linearGradient id="near" x1=".28" y1="0" x2=".76" y2=".9">
+      <stop stop-color="#bd8590"/>
+      <stop offset=".34" stop-color="#8e485a"/>
+      <stop offset="1" stop-color="#592a39"/>
+    </linearGradient>
+    <linearGradient id="cut" x1="0" x2="1" y1=".85" y2=".23">
+      <stop stop-color="#ffe9e3" stop-opacity="0"/>
+      <stop offset=".25" stop-color="#ffe9e3" stop-opacity=".45"/>
+      <stop offset=".66" stop-color="#fff2e9" stop-opacity=".76"/>
+      <stop offset="1" stop-color="#f9d9db" stop-opacity=".2"/>
+    </linearGradient>
+    <path id="far-ridge" d="M-32 183C124 185 184 107 284 118C373 129 402 178 509 175C617 172 638 131 736 113C811 99 883 122 942 97C995 75 1002 39 1068 32C1134 25 1171 71 1235 72C1300 73 1336 45 1434 46"/>
+    <path id="middle-ridge" d="M-32 213C101 187 182 174 274 185C384 199 442 237 572 200C667 173 691 139 783 143C859 146 901 168 969 153C1062 132 1088 86 1164 93C1263 102 1291 170 1434 125"/>
+    <path id="near-ridge" d="M-32 278C82 253 154 222 248 235C339 249 419 275 511 248C590 225 629 200 710 206C780 212 829 246 911 228C995 209 1012 154 1087 154C1154 154 1206 191 1280 179C1350 167 1373 130 1434 123"/>
+    <clipPath id="far-clip"><path d="M-32 183C124 185 184 107 284 118C373 129 402 178 509 175C617 172 638 131 736 113C811 99 883 122 942 97C995 75 1002 39 1068 32C1134 25 1171 71 1235 72C1300 73 1336 45 1434 46V335H-32Z"/></clipPath>
+    <clipPath id="near-clip"><path d="M-32 278C82 253 154 222 248 235C339 249 419 275 511 248C590 225 629 200 710 206C780 212 829 246 911 228C995 209 1012 154 1087 154C1154 154 1206 191 1280 179C1350 167 1373 130 1434 123V335H-32Z"/></clipPath>
+  </defs>
+  <path d="M-32 183C124 185 184 107 284 118C373 129 402 178 509 175C617 172 638 131 736 113C811 99 883 122 942 97C995 75 1002 39 1068 32C1134 25 1171 71 1235 72C1300 73 1336 45 1434 46V335H-32Z" fill="url(#far)"/>
+  <g clip-path="url(#far-clip)" stroke="url(#cut)" stroke-width="1" fill="none">
+    <use href="#far-ridge"/>
+    <use href="#far-ridge" y="8" opacity=".49"/>
+    <use href="#far-ridge" y="17" opacity=".35"/>
+    <use href="#far-ridge" y="27" opacity=".32"/>
+    <use href="#far-ridge" y="38" opacity=".27"/>
+  </g>
+  <path d="M-32 213C101 187 182 174 274 185C384 199 442 237 572 200C667 173 691 139 783 143C859 146 901 168 969 153C1062 132 1088 86 1164 93C1263 102 1291 170 1434 125V335H-32Z" fill="url(#middle)"/>
+  <use href="#middle-ridge" stroke="url(#cut)" stroke-width="1.15" fill="none"/>
+  <path d="M-32 278C82 253 154 222 248 235C339 249 419 275 511 248C590 225 629 200 710 206C780 212 829 246 911 228C995 209 1012 154 1087 154C1154 154 1206 191 1280 179C1350 167 1373 130 1434 123V335H-32Z" fill="url(#near)"/>
+  <g clip-path="url(#near-clip)" stroke="url(#cut)" stroke-width="1" fill="none">
+    <use href="#near-ridge"/>
+    <use href="#near-ridge" y="10" opacity=".55"/>
+    <use href="#near-ridge" y="21" opacity=".34"/>
+    <use href="#near-ridge" y="33" opacity=".25"/>
+    <use href="#near-ridge" y="46" opacity=".21"/>
+  </g>
+</svg>

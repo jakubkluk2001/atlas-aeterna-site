@@ -1,0 +1,17 @@
+body.section-placeholder-layout:has(.spotlight-story-page[data-country-theme="united-states"]) {
+  --story-ink: #212b3d;
+  --story-accent: #86465a;
+  --story-paper: radial-gradient(ellipse at 100% 100%, #dbe5ef, transparent 73%), #eef1f5;
+  --story-cover: radial-gradient(ellipse 57% 70% at 50% 40%, #faf8f3, transparent 94%),
+    linear-gradient(130deg, #e5edf4 10%, #edf0f3 60%, #e4d7dc);
+  --story-relief: url("../../assets/spotlights/united-states-relief.svg");
+  --story-nav: linear-gradient(110deg, #fff9, #e8edf5d9);
+  --story-nav-edge: #4d668442;
+  --story-nav-menu: #eef3f8;
+  --story-index: linear-gradient(108deg, #273955, #405775);
+  --story-index-ink: #f8f3f1;
+  --story-index-edge: #b1c5db70;
+  --story-index-marker: #efd4d9;
+  --story-index-shadow: #2433492e;
+  --story-rule: #859bb5;
+}

@@ -1,0 +1,246 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import "../../styles/detail-cover.css";
+
+interface Props {
+  title: string;
+  country: string;
+  theme: string;
+  overview: string;
+  titleVariant?: "long" | "wide" | "single-word";
+}
+
+const { title, country, theme, overview, titleVariant = "long" } = Astro.props;
+---
+
+<BaseLayout sectionPlaceholder title={`${title} | Atlas Aeterna`} description={overview}>
+  <article class="spotlight-story-page" data-country-theme={theme} aria-labelledby="story-title">
+    <header class:list={["spotlight-story-hero", "detail-cover", `detail-cover--${titleVariant}`]}>
+      <div class="spotlight-story-heading">
+        <p class="spotlight-story-country">{country}</p>
+        <h1 id="story-title">{title}</h1>
+      </div>
+    </header>
+
+    <div class="spotlight-story-reader">
+      <nav class="spotlight-story-index" aria-label="Story index">
+        <span class="spotlight-story-index-label" aria-hidden="true">Story index</span>
+        <a href="#overview" aria-current="location">Overview</a>
+      </nav>
+
+      <section id="overview" class="spotlight-story-overview" aria-labelledby="overview-title">
+        <h2 id="overview-title">Overview</h2>
+        <p>{overview}</p>
+      </section>
+      <slot />
+    </div>
+  </article>
+</BaseLayout>
+
+<style is:global>
+  body.section-placeholder-layout:has(.spotlight-story-page) {
+    --text: var(--story-ink);
+    --text-secondary: var(--story-ink);
+    background: var(--story-paper);
+  }
+
+  .section-placeholder-layout:has(.spotlight-story-page) .site-header {
+    padding: max(1.45rem, env(safe-area-inset-top)) 4.7vw 0;
+  }
+
+  .section-placeholder-layout:has(.spotlight-story-page) .site-nav {
+    min-height: 56px;
+    border-color: var(--story-nav-edge);
+    background: var(--story-nav);
+    box-shadow: none;
+  }
+
+  .section-placeholder-layout:has(.spotlight-story-page) .nav-links a:is(:hover, .active) {
+    text-decoration-color: var(--story-accent);
+  }
+
+  .section-placeholder-layout:has(.spotlight-story-page) .site-nav :is(a, button):focus-visible {
+    outline-color: var(--story-accent);
+  }
+
+  @media (max-width: 760px) {
+    .section-placeholder-layout:has(.spotlight-story-page) .site-header {
+      padding-block-start: max(0.85rem, env(safe-area-inset-top));
+    }
+
+    .section-placeholder-layout:has(.spotlight-story-page) .site-nav {
+      min-height: 52px;
+    }
+
+    .section-placeholder-layout:has(.spotlight-story-page) .nav-links {
+      border-color: var(--story-nav-edge);
+      background: var(--story-nav-menu);
+    }
+  }
+</style>
+
+<style>
+  .spotlight-story-page { color: var(--story-ink); }
+
+  .spotlight-story-hero {
+    position: relative;
+    isolation: isolate;
+    display: grid;
+    justify-items: center;
+    align-content: start;
+    min-inline-size: 0;
+    block-size: var(--detail-cover-height);
+    padding: var(--detail-title-top) 4.4vw 0;
+    text-align: center;
+  }
+
+  .spotlight-story-hero::before,
+  .spotlight-story-hero::after {
+    content: "";
+    position: absolute;
+    pointer-events: none;
+  }
+
+  .spotlight-story-hero::before {
+    z-index: -2;
+    inset: -9rem 0 0;
+    background: var(--story-cover);
+  }
+
+  .spotlight-story-hero::after {
+    z-index: -1;
+    inset: auto 0 0;
+    block-size: 39%;
+    background: var(--story-relief) center bottom / 100% 100% no-repeat;
+  }
+
+  .spotlight-story-heading {
+    position: relative;
+    display: grid;
+    place-content: center;
+    max-inline-size: 100%;
+    min-inline-size: 0;
+    min-block-size: calc(var(--detail-title-reference-size) * var(--detail-title-reference-leading));
+  }
+
+  .spotlight-story-country {
+    position: absolute;
+    inset-inline: 0;
+    inset-block-end: calc(100% + clamp(0.75rem, 1.6vw, 1.25rem));
+    margin: 0;
+    color: var(--story-accent);
+    font-size: clamp(0.72rem, 1.38vw, 0.9rem);
+    font-weight: 500;
+    line-height: 1.25;
+    letter-spacing: 0.21em;
+    text-transform: uppercase;
+  }
+
+  h1,
+  h2 {
+    margin: 0;
+    color: var(--story-ink);
+    font-family: var(--font-display);
+    font-weight: 400;
+  }
+
+  h1 {
+    max-inline-size: 100%;
+    font-size: var(--detail-title-size, var(--detail-title-reference-size));
+    line-height: .94;
+    letter-spacing: -.026em;
+    overflow-wrap: break-word;
+    text-wrap: balance;
+  }
+
+  .spotlight-story-reader {
+    inline-size: min(86%, 76rem);
+    margin-inline: auto;
+    padding-block-end: clamp(3.6rem, 9vw, 6rem);
+  }
+
+  .spotlight-story-index {
+    position: relative;
+    display: flex;
+    align-items: center;
+    min-block-size: clamp(3.7rem, 6.9vw, 4.3rem);
+    margin-block-start: -1.7rem;
+    color: var(--story-index-ink);
+    border: 1px solid var(--story-index-edge);
+    border-radius: 0.85rem;
+    background: var(--story-index);
+    box-shadow: 0 8px 15px var(--story-index-shadow);
+  }
+
+  .spotlight-story-index-label {
+    margin-inline-start: clamp(0.85rem, 2.5vw, 1.75rem);
+    padding: 0.65rem clamp(0.8rem, 2vw, 1.5rem) 0.65rem 0;
+    border-inline-end: 1px solid var(--story-index-edge);
+    font-size: clamp(0.69rem, 1.12vw, 0.8rem);
+    line-height: 1.25;
+    letter-spacing: 0.11em;
+    text-transform: uppercase;
+  }
+
+  .spotlight-story-index a {
+    display: grid;
+    justify-items: center;
+    align-content: center;
+    gap: 0.4rem;
+    min-block-size: 44px;
+    margin-inline: 0.25rem;
+    padding: 0.25rem clamp(0.8rem, 2.8vw, 1.5rem);
+    color: var(--story-index-ink);
+    font-size: clamp(0.75rem, 1.2vw, 0.875rem);
+    line-height: 1.2;
+    text-decoration: none;
+  }
+
+  .spotlight-story-index a::before {
+    content: "";
+    inline-size: 0.5rem;
+    block-size: 0.5rem;
+    border-radius: 50%;
+    background: var(--story-index-marker);
+    outline: 1px solid var(--story-index-marker);
+    outline-offset: 2px;
+  }
+
+  .spotlight-story-index a:hover {
+    text-decoration: underline;
+    text-underline-offset: 0.25em;
+  }
+
+  .spotlight-story-index a:focus-visible { outline-color: var(--story-index-ink); }
+
+  .spotlight-story-overview {
+    margin-block-start: clamp(2rem, 5.6vw, 4rem);
+    padding-inline-start: clamp(1rem, 3vw, 2rem);
+    border-inline-start: 1px solid var(--story-rule);
+    scroll-margin-block-start: max(6rem, calc(5rem + env(safe-area-inset-top)));
+  }
+
+  .spotlight-story-overview h2 {
+    margin-block-end: clamp(0.9rem, 2vw, 1.3rem);
+    font-size: clamp(1.6rem, 3vw, 2.65rem);
+    line-height: 1.12;
+  }
+
+  .spotlight-story-overview > p {
+    max-inline-size: 37ch;
+    margin: 0;
+    color: var(--story-ink);
+    font-size: clamp(1.03rem, 2.3vw, 1.51rem);
+    line-height: 1.5;
+    text-wrap: pretty;
+  }
+
+  @media (max-width: 560px) {
+    .spotlight-story-hero { padding-inline: 5.2vw; }
+  }
+
+  @media (max-width: 640px) {
+    .spotlight-story-reader { inline-size: 90%; }
+    .spotlight-story-index a { display: flex; align-items: center; gap: 0.55rem; }
+  }
+</style>
