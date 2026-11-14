@@ -27,6 +27,7 @@ export function initFeaturedLens(home: HTMLElement) {
     link: HTMLAnchorElement;
     section: Section;
     alreadySelected: boolean;
+    moved: boolean;
   } | undefined;
   let suppressedClick: HTMLAnchorElement | undefined;
 
@@ -55,12 +56,15 @@ export function initFeaturedLens(home: HTMLElement) {
     }, previewTimeout);
   }
 
-  function cancelPress() {
+  function finishPress(allowTap = false) {
     if (!press) return;
-    const { link, section } = press;
+    const { link, section, moved, startedAt, alreadySelected } = press;
     press = undefined;
-    suppressedClick = link;
-    if (!mousePreview && !hasKeyboardFocus() && feature === section) showFeature(touchSelection);
+    // Movement ends tap eligibility without dismissing the preview.
+    if (!allowTap || moved || !alreadySelected || performance.now() - startedAt >= holdDelay) {
+      suppressedClick = link;
+    }
+    selectTouchPreview(section);
   }
 
   for (const link of links) {
@@ -77,7 +81,7 @@ export function initFeaturedLens(home: HTMLElement) {
     });
     link.addEventListener("pointerdown", (event) => {
       if (!event.isPrimary) return;
-      cancelPress();
+      finishPress();
       suppressedClick = undefined;
       if (event.button !== 0 || !["touch", "pen"].includes(event.pointerType)) return;
 
@@ -90,6 +94,7 @@ export function initFeaturedLens(home: HTMLElement) {
         link,
         section,
         alreadySelected: touchSelection === section,
+        moved: false,
       };
       showFeature(section);
     });
@@ -107,21 +112,18 @@ export function initFeaturedLens(home: HTMLElement) {
 
   window.addEventListener("pointermove", (event) => {
     if (press?.id !== event.pointerId) return;
-    if (Math.hypot(event.clientX - press.x, event.clientY - press.y) > holdTolerance) cancelPress();
+    if (Math.hypot(event.clientX - press.x, event.clientY - press.y) > holdTolerance) press.moved = true;
   });
   window.addEventListener("pointerup", (event) => {
     if (press?.id !== event.pointerId) return;
-    const { link, section, startedAt, alreadySelected } = press;
-    press = undefined;
-    // A second quick tap follows the link. A hold always keeps the preview open.
-    if (!alreadySelected || performance.now() - startedAt >= holdDelay) suppressedClick = link;
-    selectTouchPreview(section);
+    const withinTapRange = Math.hypot(event.clientX - press.x, event.clientY - press.y) <= holdTolerance;
+    finishPress(withinTapRange);
   });
   window.addEventListener("pointercancel", (event) => {
-    if (press?.id === event.pointerId) cancelPress();
+    if (press?.id === event.pointerId) finishPress();
   });
-  window.addEventListener("scroll", cancelPress, { passive: true });
-  window.addEventListener("blur", cancelPress);
+  window.addEventListener("scroll", () => finishPress(), { passive: true });
+  window.addEventListener("blur", () => finishPress());
 
   home.addEventListener("pointermove", (event) => {
     if (event.pointerType !== "mouse" || hasKeyboardFocus()) return;
@@ -147,12 +149,13 @@ export function initFeaturedLens(home: HTMLElement) {
 
   home.addEventListener("focusout", (event) => {
     if (event.relatedTarget instanceof Node && home.contains(event.relatedTarget)) return;
-    if (!mousePreview) showFeature(touchSelection);
+    if (!press && !mousePreview) showFeature(touchSelection);
   });
 
   home.addEventListener("keydown", (event) => {
     if (event.key !== "Escape" || feature === "idle") return;
-    cancelPress();
+    if (press) suppressedClick = press.link;
+    press = undefined;
     const active = document.activeElement;
     if (active && lens.contains(active)) {
       const section = links.find((link) => link.dataset.section === feature);
