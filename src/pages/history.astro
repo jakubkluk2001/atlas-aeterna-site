@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import SectionOpening from "../components/sections/SectionOpening.astro";
 import SectionPlaceholder from "../components/sections/SectionPlaceholder.astro";
 ---
 
@@ -8,5 +9,11 @@ import SectionPlaceholder from "../components/sections/SectionPlaceholder.astro"
   title="History | Atlas Aeterna"
   description="The history collection of Atlas Aeterna is still in development."
 >
-  <SectionPlaceholder title="History" kind="history" />
+  <SectionOpening
+    title="History"
+    intro="Explore the people, societies, and turning points that shaped the world we know today."
+    titleId="placeholder-title"
+  >
+    <SectionPlaceholder kind="history" />
+  </SectionOpening>
 </BaseLayout>

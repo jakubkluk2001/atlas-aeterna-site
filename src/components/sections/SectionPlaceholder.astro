@@ -2,51 +2,29 @@
 import PlaceholderLens from "./PlaceholderLens.astro";
 
 interface Props {
-  title: "History" | "Geography";
   kind: "history" | "geography";
 }
 
-const { title, kind } = Astro.props;
+const { kind } = Astro.props;
 ---
 
-<section class="placeholder" aria-labelledby="placeholder-title">
-  <div class="content">
-    <h1 id="placeholder-title">{title}</h1>
-    <p>This part of Atlas Aeterna is still in development.</p>
-    <div class="lens"><PlaceholderLens kind={kind} /></div>
-  </div>
-</section>
+<div class="placeholder">
+  <p>This part of Atlas Aeterna is still in development.</p>
+  <div class="lens"><PlaceholderLens kind={kind} /></div>
+</div>
 
 <style>
   .placeholder {
     display: grid;
-    place-items: center;
-    min-block-size: 100%;
-    padding: clamp(2.75rem, 9svh, 5.25rem) clamp(1.1rem, 5vw, 3rem)
-      clamp(3rem, 12svh, 7rem);
-    text-align: center;
-  }
-
-  .content {
-    display: grid;
     justify-items: center;
-    inline-size: 100%;
-  }
-
-  h1 {
-    margin: 0;
-    color: #141724;
-    font-family: var(--font-display);
-    font-size: clamp(2.35rem, 8.4vw, 6rem);
-    font-weight: 400;
-    letter-spacing: 0.045em;
-    line-height: 1.08;
-    overflow-wrap: anywhere;
+    gap: clamp(1rem, 3.5svh, 2.25rem);
+    padding-block: clamp(0.25rem, 1.5svh, 1.25rem) clamp(1rem, 5svh, 3rem);
+    text-align: center;
   }
 
   p {
     max-inline-size: 38rem;
-    margin: clamp(0.95rem, 3.5svh, 1.85rem) 0 0;
+    margin: 0;
     color: #30364b;
     font-size: clamp(1rem, 1.62vw, 1.23rem);
     line-height: 1.55;
@@ -55,13 +33,5 @@ const { title, kind } = Astro.props;
 
   .lens {
     inline-size: min(100%, clamp(19rem, 56vw, 42rem));
-    margin-block-start: clamp(1.65rem, 6svh, 3.6rem);
-  }
-
-  @media (max-width: 520px) {
-    .placeholder {
-      padding-block-start: 2.6rem;
-      padding-block-end: 4.2rem;
-    }
   }
 </style>

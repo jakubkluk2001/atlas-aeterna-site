@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import SectionOpening from "../components/sections/SectionOpening.astro";
 import { mysteryCases, type MysteryCase } from "../data/mystery-cases";
 ---
 
@@ -8,9 +9,11 @@ import { mysteryCases, type MysteryCase } from "../data/mystery-cases";
   title="Mysteries | Atlas Aeterna"
   description="Explore lost treasures, legendary places, unexplained events and enduring mysteries with Atlas Aeterna."
 >
-  <section class="mysteries-index" aria-labelledby="mysteries-title">
-    <h1 id="mysteries-title">Mysteries</h1>
-
+  <SectionOpening
+    title="Mysteries"
+    intro="From lost cities to unexplained sightings, explore the stories that have kept people guessing. Each case traces where the story began, what the evidence supports, and which questions are still open."
+    titleId="mysteries-title"
+  >
     <ul class="case-grid" aria-label="Mystery cases">
       {mysteryCases.map((caseFile: MysteryCase) => {
         const hasPage = caseFile.published || caseFile.routeReady;
@@ -35,30 +38,15 @@ import { mysteryCases, type MysteryCase } from "../data/mystery-cases";
         );
       })}
     </ul>
-  </section>
+  </SectionOpening>
 </BaseLayout>
 
 <style>
-  .mysteries-index {
-    inline-size: min(92%, 82.5rem);
-    margin-inline: auto;
-    padding-block: clamp(3.25rem, 7.1svh, 5.5rem) 4.4rem;
-  }
-
-  h1,
   h2 {
     margin: 0;
     font-family: var(--font-display);
     font-weight: 400;
     color: #141724;
-  }
-
-  h1 {
-    margin-block-end: clamp(1.65rem, 3.15vw, 2.65rem);
-    padding-inline-start: clamp(0.15rem, 0.8vw, 0.75rem);
-    font-size: clamp(2.65rem, 6.25vw, 5.2rem);
-    line-height: 1.03;
-    letter-spacing: 0.045em;
   }
 
   .case-grid {
@@ -172,7 +160,6 @@ import { mysteryCases, type MysteryCase } from "../data/mystery-cases";
   }
 
   @media (max-width: 590px) {
-    .mysteries-index { padding-block-start: 3.25rem; }
     .case-grid { grid-template-columns: 1fr; }
     h2 { font-size: clamp(1.35rem, 5vw, 1.8rem); }
   }

@@ -1,0 +1,138 @@
+---
+interface Props {
+  title: string;
+  intro: string;
+  titleId?: string;
+}
+
+const { title, intro, titleId = "section-title" } = Astro.props;
+---
+
+<section class="section-page" aria-labelledby={titleId}>
+  <header class="section-opening">
+    <h1 id={titleId}>{title}</h1>
+    <p class="section-intro">{intro}</p>
+    <svg class="section-fold" aria-hidden="true" focusable="false" viewBox="0 0 640 360" preserveAspectRatio="none">
+      <defs>
+        <linearGradient id="section-fold-upper" x1=".25" y1=".22" x2=".77" y2=".94">
+          <stop stop-color="#fffffe" stop-opacity=".07"/>
+          <stop offset=".44" stop-color="#f9f8ff" stop-opacity=".61"/>
+          <stop offset=".8" stop-color="#b9bee5" stop-opacity=".72"/>
+          <stop offset="1" stop-color="#a9b0d8" stop-opacity=".42"/>
+        </linearGradient>
+        <linearGradient id="section-fold-lower" x1=".48" y1=".12" x2=".62" y2=".93">
+          <stop stop-color="#b4b7dc" stop-opacity=".48"/>
+          <stop offset=".34" stop-color="#edefff" stop-opacity=".75"/>
+          <stop offset=".73" stop-color="#f5f7ff" stop-opacity=".38"/>
+          <stop offset="1" stop-color="#eceffd" stop-opacity="0"/>
+        </linearGradient>
+        <linearGradient id="section-fold-crease" x1=".04" y1=".87" x2=".94" y2=".24">
+          <stop stop-color="#8396b9" stop-opacity="0"/>
+          <stop offset=".34" stop-color="#8c96be" stop-opacity=".26"/>
+          <stop offset=".7" stop-color="#7d7caa" stop-opacity=".64"/>
+          <stop offset="1" stop-color="#9694bb" stop-opacity="0"/>
+        </linearGradient>
+        <linearGradient id="section-fold-light">
+          <stop stop-color="white" stop-opacity="0"/>
+          <stop offset=".33" stop-color="#fafaff" stop-opacity=".66"/>
+          <stop offset=".59" stop-color="#fff" stop-opacity=".94"/>
+          <stop offset=".84" stop-color="#fff" stop-opacity=".73"/>
+          <stop offset="1" stop-color="#f8f5ff" stop-opacity="0"/>
+        </linearGradient>
+        <radialGradient id="section-fold-fade">
+          <stop offset=".35" stop-color="white"/>
+          <stop offset=".68" stop-color="white" stop-opacity=".87"/>
+          <stop offset="1" stop-color="white" stop-opacity="0"/>
+        </radialGradient>
+        <mask id="section-fold-soft-edge" maskUnits="userSpaceOnUse" x="0" y="0" width="640" height="360">
+          <ellipse cx="339" cy="180" rx="299" ry="175" fill="url(#section-fold-fade)"/>
+        </mask>
+      </defs>
+      <g mask="url(#section-fold-soft-edge)">
+        <path d="M12 216C141 246 206 240 273 210C369 167 406 81 494 46C550 24 589 21 640 26V117C583 111 545 125 509 153C447 201 398 253 300 267C205 282 112 269 12 246Z" fill="url(#section-fold-upper)"/>
+        <path d="M10 243C130 266 204 278 299 262C397 250 449 197 510 150C549 119 590 108 643 114V317C562 297 477 303 404 322C307 346 201 329 131 308L10 276Z" fill="url(#section-fold-lower)"/>
+        <path d="M11 244C126 265 210 280 299 263C397 249 450 196 510 150C549 120 589 109 644 115" fill="none" stroke="url(#section-fold-crease)" stroke-width="1.35"/>
+        <path d="M11 239C127 261 210 276 298 258C394 242 447 191 506 145C546 114 586 104 642 109" fill="none" stroke="url(#section-fold-light)" stroke-width="2.7"/>
+        <path d="M12 248C126 268 211 285 302 269C400 254 453 204 514 157C552 127 592 115 644 121" fill="none" stroke="url(#section-fold-light)" stroke-width=".85" opacity=".63"/>
+        <path d="M32 228C146 252 211 258 290 236C382 211 424 150 486 105C532 72 578 61 632 63" fill="none" stroke="url(#section-fold-light)" stroke-width=".9" opacity=".46"/>
+      </g>
+    </svg>
+  </header>
+  <slot />
+</section>
+
+<style>
+  .section-page {
+    inline-size: min(92%, 82.5rem);
+    margin-inline: auto;
+    padding-block: clamp(1.6rem, 4.65vw, 3.55rem) clamp(2.8rem, 5vw, 4.4rem);
+  }
+
+  .section-opening {
+    --section-opening-min-height: clamp(15rem, 32vw, 21rem);
+    position: relative;
+    isolation: isolate;
+    display: grid;
+    justify-items: start;
+    align-content: start;
+    align-items: start;
+    min-block-size: var(--section-opening-min-height);
+    margin-block-end: clamp(0.25rem, 0.8vw, 0.7rem);
+    padding-block: clamp(1.9rem, 3.4vw, 3.1rem) clamp(2rem, 4.25vw, 2.9rem);
+    gap: clamp(1.15rem, 2.45vw, 1.65rem);
+  }
+
+  h1 {
+    margin: 0;
+    color: #141724;
+    font-family: var(--font-display);
+    font-size: clamp(3rem, 10.4vw, 8rem);
+    font-weight: 400;
+    letter-spacing: 0.022em;
+    line-height: 0.98;
+    overflow-wrap: anywhere;
+  }
+
+  .section-intro {
+    max-inline-size: min(46ch, 50%);
+    margin: 0;
+    color: #252c42;
+    font-size: clamp(0.96rem, 1.75vw, 1.16rem);
+    line-height: 1.6;
+    text-wrap: pretty;
+  }
+
+  .section-fold {
+    position: absolute;
+    z-index: -1;
+    inset-block-start: 0;
+    inset-inline-end: 0;
+    inline-size: 50%;
+    /* Match the opening's minimum height even when longer copy grows the header. */
+    block-size: var(--section-opening-min-height);
+    pointer-events: none;
+  }
+
+  @media (max-width: 640px) {
+    .section-opening {
+      min-block-size: auto;
+      padding-block: 1.05rem 5.5rem;
+      gap: 1rem;
+    }
+
+    h1 {
+      font-size: clamp(2.4rem, 14.15vw, 4.8rem);
+    }
+
+    .section-intro {
+      max-inline-size: 44ch;
+    }
+
+    .section-fold {
+      inset-block: auto 0;
+      inline-size: 66%;
+      block-size: 5.5rem;
+      opacity: 0.9;
+    }
+  }
+</style>
