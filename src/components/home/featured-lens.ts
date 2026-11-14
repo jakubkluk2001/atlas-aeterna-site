@@ -16,7 +16,14 @@ export function initFeaturedLens(home: HTMLElement) {
   const stories = [...lens.querySelectorAll<HTMLElement>("[data-story]")];
   let feature: Feature = "idle";
   let touchSelection: Feature = "idle";
-  let press: { id: number; x: number; y: number; timer: number } | undefined;
+  let press: {
+    id: number;
+    x: number;
+    y: number;
+    timer: number;
+    section: Section;
+    previousFeature: Feature;
+  } | undefined;
   let heldLink: HTMLAnchorElement | undefined;
 
   function showFeature(next: Feature) {
@@ -34,10 +41,12 @@ export function initFeaturedLens(home: HTMLElement) {
       && focused.matches("[data-section], [data-feature-link]");
   }
 
-  function cancelPress() {
+  function cancelPress(restorePreview = false) {
     if (!press) return;
-    window.clearTimeout(press.timer);
+    const { timer, section, previousFeature } = press;
     press = undefined;
+    window.clearTimeout(timer);
+    if (restorePreview && feature === section) showFeature(previousFeature);
   }
 
   for (const link of links) {
@@ -51,16 +60,19 @@ export function initFeaturedLens(home: HTMLElement) {
       if (event.pointerType === "mouse" && !hasKeyboardFocus()) showFeature(section);
     });
     link.addEventListener("pointerdown", (event) => {
-      cancelPress();
+      if (!event.isPrimary) return;
+      cancelPress(true);
       heldLink = undefined;
-      if (!event.isPrimary || event.button !== 0 || !["touch", "pen"].includes(event.pointerType)) return;
+      if (event.button !== 0 || !["touch", "pen"].includes(event.pointerType)) return;
 
+      const previousFeature = feature;
       const timer = window.setTimeout(() => {
+        press = undefined;
         heldLink = link;
         touchSelection = section;
-        showFeature(section);
       }, holdDelay);
-      press = { id: event.pointerId, x: event.clientX, y: event.clientY, timer };
+      press = { id: event.pointerId, x: event.clientX, y: event.clientY, timer, section, previousFeature };
+      showFeature(section);
     });
 
     link.addEventListener("click", (event) => {
@@ -77,15 +89,15 @@ export function initFeaturedLens(home: HTMLElement) {
 
   window.addEventListener("pointermove", (event) => {
     if (press?.id !== event.pointerId) return;
-    if (Math.hypot(event.clientX - press.x, event.clientY - press.y) > holdTolerance) cancelPress();
+    if (Math.hypot(event.clientX - press.x, event.clientY - press.y) > holdTolerance) cancelPress(true);
   });
   for (const type of ["pointerup", "pointercancel"] as const) {
     window.addEventListener(type, (event) => {
-      if (press?.id === event.pointerId) cancelPress();
+      if (press?.id === event.pointerId) cancelPress(type === "pointercancel");
     });
   }
-  window.addEventListener("scroll", cancelPress, { passive: true });
-  window.addEventListener("blur", cancelPress);
+  window.addEventListener("scroll", () => cancelPress(true), { passive: true });
+  window.addEventListener("blur", () => cancelPress(true));
 
   home.addEventListener("pointermove", (event) => {
     if (event.pointerType !== "mouse" || feature === touchSelection || hasKeyboardFocus()) return;
@@ -113,6 +125,7 @@ export function initFeaturedLens(home: HTMLElement) {
 
   home.addEventListener("keydown", (event) => {
     if (event.key !== "Escape" || feature === "idle") return;
+    cancelPress();
     const active = document.activeElement;
     if (active && lens.contains(active)) {
       const section = links.find((link) => link.dataset.section === feature);
