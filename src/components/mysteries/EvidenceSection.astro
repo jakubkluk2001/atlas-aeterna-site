@@ -1,4 +1,6 @@
 ---
+import GlassImage from "../shared/GlassImage.astro";
+import GlassImageRim from "../shared/GlassImageRim.astro";
 import SectionHeading from "./SectionHeading.astro";
 import type { EvidenceItem } from "./types";
 
@@ -54,24 +56,10 @@ const {
         class="evidence-featured"
         aria-labelledby={`evidence-title-${featured.id}`}
       >
-        <div
-          class:list={[
-            "evidence-visual",
-            "evidence-visual--featured",
-            `evidence-visual--${featured.tone}`,
-          ]}
-        >
-          {featured.image ? (
-            <img
-              class:list={[
-                "evidence-image",
-                `evidence-image--${featured.fit}`,
-              ]}
-              src={featured.image}
-              alt={featured.alt}
-              loading="lazy"
-            />
-          ) : (
+        {featured.image ? (
+          <GlassImage src={featured.image} alt={featured.alt} fit={featured.fit} />
+        ) : (
+          <div class:list={["evidence-visual", `evidence-visual--${featured.tone}`]}>
             <div class="evidence-visual__fallback" aria-hidden="true">
               <span class="evidence-visual__grid"></span>
               <span class="evidence-visual__ring evidence-visual__ring--one"></span>
@@ -79,8 +67,9 @@ const {
               <span class="evidence-visual__fallback-number">{featured.number}</span>
               <span class="evidence-visual__fallback-type">{featured.type}</span>
             </div>
-          )}
-        </div>
+            <GlassImageRim />
+          </div>
+        )}
 
         <div class="evidence-featured__content">
           <div class="evidence-label-row">
@@ -122,23 +111,10 @@ const {
             class="evidence-card"
             aria-labelledby={`evidence-title-${item.id}`}
           >
-            <div
-              class:list={[
-                "evidence-visual",
-                `evidence-visual--${item.tone}`,
-              ]}
-            >
-              {item.image ? (
-                <img
-                  class:list={[
-                    "evidence-image",
-                    `evidence-image--${item.fit}`,
-                  ]}
-                  src={item.image}
-                  alt={item.alt}
-                  loading="lazy"
-                />
-              ) : (
+            {item.image ? (
+              <GlassImage src={item.image} alt={item.alt} fit={item.fit} />
+            ) : (
+              <div class:list={["evidence-visual", `evidence-visual--${item.tone}`]}>
                 <div class="evidence-visual__fallback" aria-hidden="true">
                   <span class="evidence-visual__grid"></span>
                   <span class="evidence-visual__ring evidence-visual__ring--one"></span>
@@ -146,8 +122,9 @@ const {
                   <span class="evidence-visual__fallback-number">{item.number}</span>
                   <span class="evidence-visual__fallback-type">{item.type}</span>
                 </div>
-              )}
-            </div>
+                <GlassImageRim />
+              </div>
+            )}
 
             <div class="evidence-card__body">
               <div class="evidence-label-row">
@@ -502,26 +479,6 @@ const {
   }
 
 
-  .evidence-visual::before {
-    content: "";
-
-    position: absolute;
-    inset: 0;
-    z-index: 3;
-
-    background:
-      linear-gradient(
-        116deg,
-        rgba(255, 255, 255, 0.42),
-        transparent 25%,
-        transparent 72%,
-        rgba(255, 255, 255, 0.15)
-      );
-
-    pointer-events: none;
-  }
-
-
   .evidence-visual--blue {
     background:
       radial-gradient(
@@ -599,29 +556,6 @@ const {
         rgba(237, 239, 243, 0.94),
         rgba(244, 243, 242, 0.80)
       );
-  }
-
-
-  .evidence-image {
-    width: 100%;
-    height: 100%;
-
-    position: relative;
-    z-index: 1;
-
-    display: block;
-  }
-
-
-  .evidence-image--cover {
-    object-fit: cover;
-  }
-
-
-  .evidence-image--contain {
-    padding: clamp(24px, 4vw, 48px);
-
-    object-fit: contain;
   }
 
 

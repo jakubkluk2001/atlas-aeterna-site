@@ -1,4 +1,5 @@
 ---
+import GlassImageRim from "../shared/GlassImageRim.astro";
 import SectionHeading from "./SectionHeading.astro";
 import type { KeyFigure } from "./types";
 
@@ -114,6 +115,8 @@ const initialRange = figures.length === 0
                 />
               )}
 
+              <GlassImageRim />
+
               <span class="figure-portrait__number" aria-hidden="true">{figure.number}</span>
             </div>
 
@@ -188,6 +191,8 @@ const initialRange = figures.length === 0
                 data-figure-image
               />
             )}
+
+            <GlassImageRim />
 
             <span class="figure-dialog__number" aria-hidden="true">{figure.number}</span>
           </div>
@@ -742,6 +747,7 @@ const initialRange = figures.length === 0
 
 
   .figure-card {
+    --figure-card-radius: 25px;
     --figure-accent: #7a818f;
     --figure-accent-rgb: 122, 129, 143;
     --figure-accent-soft: rgba(122, 129, 143, 0.10);
@@ -767,7 +773,7 @@ const initialRange = figures.length === 0
       );
 
     border: 1px solid rgba(255, 255, 255, 0.91);
-    border-radius: 25px;
+    border-radius: var(--figure-card-radius);
 
     box-shadow:
       0 16px 38px rgba(50, 62, 88, 0.085),
@@ -859,29 +865,9 @@ const initialRange = figures.length === 0
   }
 
 
-  .figure-portrait::after,
-  .figure-dialog__portrait::after {
-    content: "";
-
-    position: absolute;
-    inset: 0;
-    z-index: 3;
-
-    background:
-      linear-gradient(
-        118deg,
-        rgba(255, 255, 255, 0.34),
-        transparent 24%,
-        transparent 71%,
-        rgba(255, 255, 255, 0.12)
-      ),
-      linear-gradient(
-        to top,
-        rgba(27, 31, 42, 0.12),
-        transparent 31%
-      );
-
-    pointer-events: none;
+  .figure-portrait {
+    --portrait-top-radius: calc(var(--figure-card-radius) - 1px);
+    border-radius: var(--portrait-top-radius) var(--portrait-top-radius) 0 0;
   }
 
 
@@ -1695,7 +1681,7 @@ const initialRange = figures.length === 0
     }
 
     .figure-card {
-      border-radius: 22px;
+      --figure-card-radius: 22px;
     }
 
     .figure-card__body {

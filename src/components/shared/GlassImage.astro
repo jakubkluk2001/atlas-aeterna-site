@@ -1,0 +1,54 @@
+---
+import GlassImageRim from "./GlassImageRim.astro";
+
+interface Props {
+  src: string;
+  alt: string;
+  fit?: "cover" | "contain";
+  position?: string;
+}
+
+const { src, alt, fit = "cover", position } = Astro.props;
+---
+
+<div class="glass-image" data-fit={fit}>
+  <img
+    src={src}
+    alt={alt}
+    loading="lazy"
+    decoding="async"
+    style={position ? { "object-position": position } : undefined}
+  />
+  <GlassImageRim />
+</div>
+
+<style>
+  .glass-image {
+    position: relative;
+    isolation: isolate;
+    width: 100%;
+    min-width: 0;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    border-radius: clamp(18px, 2vw, 24px);
+    background: var(--glass-image-surface);
+    box-shadow:
+      0 0 0 1px color-mix(in srgb, var(--glass-image-depth) 29%, transparent),
+      0 5px 13px color-mix(in srgb, var(--glass-image-depth) 14%, transparent);
+  }
+
+  .glass-image img {
+    position: absolute;
+    display: block;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .glass-image[data-fit="contain"] img {
+    box-sizing: border-box;
+    padding: var(--glass-image-edge-width);
+    object-fit: contain;
+  }
+</style>
